@@ -1,15 +1,19 @@
----
-name: PR templates
-about: A template for when a new pull request is created
-title: ''
-labels: ''
-assignees: ''
+## Description
+<!-- *Please include a summary of the change and which issue number is fixed (e.g. Fixes #1). Please also include relevant motivation and context.* -->
 
----
+## How has this been tested?
+<!-- *Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce.* -->
 
-## Pull Request description
-*Describe the pull request contents in detail, and the solution used*
+## Screenshots
+<!-- *Provide screenshots of what has been implemented. Leave blank if not applicable* -->
 
-### Relevant issue(s):
+## Checklist
+<!-- *(Leave blank if not applicable)* -->
 
-## Include any screenshots if relevant
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my own code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] My changes generate no new warnings
+- [ ] I have added tests unit/integration that prove the changes work
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] I have checked my code and corrected any misspellings
