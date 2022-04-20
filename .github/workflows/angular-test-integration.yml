@@ -1,0 +1,41 @@
+name: Integration tests
+on: pull_request
+
+jobs:
+  test-integration:
+    name: Run integration tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./viral-vtubers-frontend
+    strategy:
+      matrix:
+        machines: [0]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.3.2
+      - name: Run cypress tests
+        uses: cypress-io/github-action@v2.3.6
+        with:
+          start: yarn start
+          browser: chrome
+          record: true
+          parallel: true
+          config: integrationFolder=.cypress/integration,supportFile=.cypress/setup.integration.js
+          wait-on: http://localhost:4200
+        env:
+          CYPRESS_BASE_URL: http://localhost:4200
+          HOST: localhost
+          PORT: 4200
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v2.1.4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ github.sha }}
+          path: cypress/screenshots
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v2.1.4
+        if: failure()
+        with:
+          name: cypress-videos-${{ github.sha }}
+          path: cypress/videos

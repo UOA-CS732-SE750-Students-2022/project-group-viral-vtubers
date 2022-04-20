@@ -1,0 +1,24 @@
+name: Angular unit tests
+on: pull_request
+
+jobs:
+  test-unit:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./viral-vtubers-frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.3.2
+      - name: Load global environment variables
+        run: cat .github/config/global.env >> $GITHUB_ENV
+      - name: Setup node
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Run unit tests
+        run: yarn test --no-watch --no-progress --browsers=ChromeHeadlessCI
