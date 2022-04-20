@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.3.2
-      - name: Load global environment variables
-        run: cat .github/config/global.env >> $GITHUB_ENV
       - name: Setup node
         uses: actions/setup-node@v2.1.2
         with:
