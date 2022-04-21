@@ -5,10 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { SelectViewComponent } from './select-view/select-view.component';
+import { CreateRequestComponent } from './create-request/create-request.component';
 
 const routes:Routes = [
   {path: 'view-requests', component: ViewRequestsComponent},
   {path: 'view-artists', component: ViewArtistsComponent},
+  {path: 'create-request', component: CreateRequestComponent},
   {path: '', component: SelectViewComponent},
 ];
 
@@ -16,7 +18,8 @@ const routes:Routes = [
   declarations: [
     ViewRequestsComponent,
     ViewArtistsComponent,
-    SelectViewComponent
+    SelectViewComponent,
+    CreateRequestComponent
   ],
   imports: [
     CommonModule,
