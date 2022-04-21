@@ -5,7 +5,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ProductsComponent,

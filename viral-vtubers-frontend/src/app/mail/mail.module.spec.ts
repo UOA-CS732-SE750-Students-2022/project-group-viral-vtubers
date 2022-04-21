@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { InboxComponent } from './inbox/inbox.component';
 import { MailModule, routes } from './mail.module';
+
+import { InboxComponent } from './inbox/inbox.component';
 import { NewMailComponent } from './new-mail/new-mail.component';
 import { SentMailComponent } from './sent-mail/sent-mail.component';
 
