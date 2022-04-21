@@ -6,7 +6,7 @@ import { SelectViewComponent } from './select-view/select-view.component';
 import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
-describe('FeatureModule', () => {
+describe('CommissionsModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [CommissionsModule],

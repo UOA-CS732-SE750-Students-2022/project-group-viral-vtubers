@@ -9,7 +9,7 @@ import { LikesComponent } from './likes/likes.component';
 import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 import { CreatorContractsComponent } from './creator-contracts/creator-contracts.component';
 
-describe('FeatureModule', () => {
+describe('MeModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MeModule],

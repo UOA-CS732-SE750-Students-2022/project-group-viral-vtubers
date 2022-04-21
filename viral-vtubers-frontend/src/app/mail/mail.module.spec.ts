@@ -5,7 +5,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { NewMailComponent } from './new-mail/new-mail.component';
 import { SentMailComponent } from './sent-mail/sent-mail.component';
 
-describe('FeatureModule', () => {
+describe('MailModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MailModule],

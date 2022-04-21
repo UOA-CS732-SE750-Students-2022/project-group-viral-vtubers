@@ -5,7 +5,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';
 
-describe('FeatureModule', () => {
+describe('MarketplaceModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MarketplaceModule],
