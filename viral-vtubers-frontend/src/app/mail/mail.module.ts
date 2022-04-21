@@ -28,7 +28,8 @@ const routes: Routes = [
     SentMailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class MailModule { }

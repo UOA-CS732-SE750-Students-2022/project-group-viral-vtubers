@@ -46,7 +46,8 @@ const routes: Routes = [
     EditProfileComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class MeModule { }

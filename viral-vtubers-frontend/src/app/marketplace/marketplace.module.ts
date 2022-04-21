@@ -27,7 +27,8 @@ const routes: Routes = [
     CreateProductComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class MarketplaceModule { }
