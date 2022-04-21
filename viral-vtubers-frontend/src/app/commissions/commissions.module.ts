@@ -7,7 +7,9 @@ import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { SelectViewComponent } from './select-view/select-view.component';
 
 const routes:Routes = [
-  {path: 'view-requests', component: ViewRequestsComponent}
+  {path: 'view-requests', component: ViewRequestsComponent},
+  {path: 'view-artists', component: ViewArtistsComponent},
+  {path: '', component: SelectViewComponent},
 ];
 
 @NgModule({
