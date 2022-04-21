@@ -6,7 +6,7 @@ import { NewMailComponent } from './new-mail/new-mail.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { SentMailComponent } from './sent-mail/sent-mail.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'new',
     component: NewMailComponent,
