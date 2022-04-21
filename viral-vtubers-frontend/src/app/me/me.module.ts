@@ -8,6 +8,7 @@ import { CommissionRequestsComponent } from './commission-requests/commission-re
 import { FollowingComponent } from './following/following.component';
 import { CreatorContractsComponent } from './creator-contracts/creator-contracts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'orders',
     component: CommissionRequestsComponent,
+  },
+  {
+    path: 'uploads',
+    component: ManageUploadsComponent,
   },
   {
     path: 'following',
@@ -43,7 +48,8 @@ const routes: Routes = [
     CommissionRequestsComponent,
     FollowingComponent,
     CreatorContractsComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ManageUploadsComponent
   ],
   imports: [
     CommonModule,
