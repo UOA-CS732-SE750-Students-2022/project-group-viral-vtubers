@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'vrm-viewer',
     component: VrmViewerComponent,
   },
+  {
+    path: 'commissions',
+    loadChildren: () => import('./commissions/commissions.module').then(m => m.CommissionsModule),
+  }
 ];
 
 @NgModule({
