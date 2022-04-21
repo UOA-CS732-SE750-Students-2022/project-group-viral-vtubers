@@ -9,8 +9,8 @@ import { CreateRequestComponent } from './create-request/create-request.componen
 
 const routes: Routes = [
   {path: '', component: SelectViewComponent},
-  {path: 'view-requests', component: ViewRequestsComponent},
-  {path: 'view-artists', component: ViewArtistsComponent},
+  {path: 'requests', component: ViewRequestsComponent},
+  {path: 'artists', component: ViewArtistsComponent},
   {path: 'create-request', component: CreateRequestComponent},
 ];
 

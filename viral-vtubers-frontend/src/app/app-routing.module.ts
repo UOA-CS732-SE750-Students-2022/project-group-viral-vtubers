@@ -14,6 +14,7 @@ const routes: Routes = [
     path: 'vrm-viewer',
     component: VrmViewerComponent,
   },
+  // Modules: Each has nested routes
   {
     path: 'commissions',
     loadChildren: () => import('./commissions/commissions.module').then(m => m.CommissionsModule),
@@ -30,6 +31,7 @@ const routes: Routes = [
     path: 'mail',
     loadChildren: () => import('./mail/mail.module').then(m => m.MailModule),
   },
+  // Plain page components
   {
     path: 'user/:id',
     component: UserProfileComponent,
