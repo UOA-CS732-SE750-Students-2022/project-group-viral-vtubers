@@ -9,12 +9,12 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'vrm-viewer',
     component: VrmViewerComponent,
   },
-  // Modules: Each has nested routes
+  // Modules: Each has nested routes, and is lazy loaded.
   {
     path: 'commissions',
     loadChildren: () => import('./commissions/commissions.module').then(m => m.CommissionsModule),
