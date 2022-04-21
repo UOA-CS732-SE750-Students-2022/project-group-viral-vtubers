@@ -7,7 +7,7 @@ import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { SelectViewComponent } from './select-view/select-view.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
 
-const routes:Routes = [
+const routes: Routes = [
   {path: 'view-requests', component: ViewRequestsComponent},
   {path: 'view-artists', component: ViewArtistsComponent},
   {path: 'create-request', component: CreateRequestComponent},
