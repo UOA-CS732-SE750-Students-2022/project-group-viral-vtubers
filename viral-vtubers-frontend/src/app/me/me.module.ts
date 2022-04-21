@@ -10,7 +10,7 @@ import { CreatorContractsComponent } from './creator-contracts/creator-contracts
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: AccountComponent,
