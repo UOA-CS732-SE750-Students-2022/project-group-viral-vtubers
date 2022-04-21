@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+
 import { AccountComponent } from './account/account.component';
 import { LikesComponent } from './likes/likes.component';
 import { CommissionRequestsComponent } from './commission-requests/commission-requests.component';
