@@ -7,6 +7,10 @@ import { CreateProductComponent } from './create-product/create-product.componen
 
 const routes: Routes = [
   {
+    path: '',
+    component: ProductsComponent,
+  },
+  {
     path: 'product/:id',
     component: ProductDetailsComponent,
   },
@@ -14,10 +18,6 @@ const routes: Routes = [
     path: 'create-product',
     component: CreateProductComponent,
   },
-  {
-    path: '',
-    component: ProductsComponent,
-  }
 ];
 
 @NgModule({

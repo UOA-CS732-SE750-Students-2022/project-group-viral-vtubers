@@ -12,13 +12,13 @@ const routes: Routes = [
     component: NewMailComponent,
   },
   {
-    path: 'inbox',
-    component: InboxComponent,
-  },
-  {
     path: 'sent',
     component: SentMailComponent,
-  }
+  },
+  {
+    path: '',
+    component: InboxComponent,
+  },
 ];
 
 @NgModule({

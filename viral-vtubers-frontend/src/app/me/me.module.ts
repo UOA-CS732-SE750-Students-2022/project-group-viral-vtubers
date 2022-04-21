@@ -11,7 +11,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
-    path: 'account',
+    path: '',
     component: AccountComponent,
   },
   {
