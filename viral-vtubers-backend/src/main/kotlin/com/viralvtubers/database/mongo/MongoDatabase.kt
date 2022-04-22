@@ -1,7 +1,10 @@
 package com.viralvtubers.database.mongo
 
+import com.mongodb.reactivestreams.client.MongoCollection
 import com.viralvtubers.database.Database
-import org.litote.kmongo.KMongo
+import com.viralvtubers.database.model.*
+import org.litote.kmongo.reactivestreams.KMongo
+import org.litote.kmongo.reactivestreams.getCollection
 
 const val DEFAULT_HOST_NAME = "localhost"
 const val DEFAULT_PORT = 27017u
@@ -10,6 +13,12 @@ const val DEFAULT_USERNAME = "admin"
 const val DEFAULT_PASSWORD = "password"
 
 class MongoDatabase(config: Config = Config()) : Database {
+    private val users: MongoCollection<User>
+    private val tags: MongoCollection<Tag>
+    private val services: MongoCollection<Service>
+    private val products: MongoCollection<Product>
+    private val categories: MongoCollection<Category>
+    private val subcategories: MongoCollection<Subcategory>
 
     init {
         val connectionString =
@@ -20,6 +29,12 @@ class MongoDatabase(config: Config = Config()) : Database {
                 config.port.let { pwd -> ":$pwd" })
         val client = KMongo.createClient(connectionString)
         val database = client.getDatabase(DEFAULT_DATABASE_NAME)
+        this.users = database.getCollection()
+        this.tags = database.getCollection()
+        this.services = database.getCollection()
+        this.products = database.getCollection()
+        this.categories = database.getCollection()
+        this.subcategories = database.getCollection()
     }
 
     data class Config(

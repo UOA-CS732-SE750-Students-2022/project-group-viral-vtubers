@@ -68,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>org.litote.kmongo</groupId>
-            <artifactId>kmongo</artifactId>
+            <artifactId>kmongo-coroutine</artifactId>
             <version>4.5.1</version>
         </dependency>
         <dependency>
