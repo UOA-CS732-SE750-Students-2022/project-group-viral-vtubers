@@ -1,16 +1,22 @@
 package com.viralvtubers
 
-import com.viralvtubers.database.mongo.MongoDatabase
+import com.viralvtubers.plugins.configureGraphQL
+import com.viralvtubers.plugins.configureHTTP
+import com.viralvtubers.plugins.configureRouting
+import com.viralvtubers.plugins.configureSecurity
+import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import com.viralvtubers.plugins.*
 
-fun main() {
-    val database = MongoDatabase()
+fun main(args: Array<String>) {
+    embeddedServer(Netty, commandLineEnvironment(args)).start(wait = true)
+}
 
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        configureRouting()
-        configureSecurity()
-        configureHTTP()
-    }.start(wait = true)
+@Suppress("unused") // Referenced in application.conf
+//@kotlin.jvm.JvmOverloads
+fun Application.module(testing: Boolean = false) {
+    configureRouting()
+    configureSecurity()
+    configureHTTP()
+    configureGraphQL()
 }

@@ -9,7 +9,15 @@ const val DEFAULT_DATABASE_NAME = "virtual-vtubers"
 const val DEFAULT_USERNAME = "admin"
 const val DEFAULT_PASSWORD = "password"
 
-class MongoDatabase(config: Config = Config()) : Database {
+data class MongoDBConfig(
+    var host: String = DEFAULT_HOST_NAME,
+    var port: UInt = DEFAULT_PORT,
+    var username: String = DEFAULT_USERNAME,
+    var password: String = DEFAULT_PASSWORD,
+    var databaseName: String = DEFAULT_DATABASE_NAME,
+)
+
+class MongoDatabase(config: MongoDBConfig = MongoDBConfig()) : Database {
 
     init {
         val connectionString =
@@ -21,13 +29,4 @@ class MongoDatabase(config: Config = Config()) : Database {
         val client = KMongo.createClient(connectionString)
         val database = client.getDatabase(DEFAULT_DATABASE_NAME)
     }
-
-    data class Config(
-        var host: String = DEFAULT_HOST_NAME,
-        var port: UInt = DEFAULT_PORT,
-        var username: String = DEFAULT_USERNAME,
-        var password: String = DEFAULT_PASSWORD,
-        var databaseName: String = DEFAULT_DATABASE_NAME,
-    )
-
 }

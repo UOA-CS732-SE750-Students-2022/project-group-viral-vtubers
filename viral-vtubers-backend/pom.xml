@@ -8,25 +8,24 @@
     <name>viral-vtubers-backend</name>
     <description>viral-vtubers-backend</description>
     <properties>
-        <ktor_version>2.0.0-beta-1</ktor_version>
+        <ktor_version>2.0.0</ktor_version>
         <kotlin.code.style>official</kotlin.code.style>
-        <kotlin_version>1.6.0</kotlin_version>
-        <logback_version>1.2.3</logback_version>
+        <kotlin_version>1.6.21</kotlin_version>
+        <logback_version>1.2.11</logback_version>
+        <kgraphql_version>0.17.14</kgraphql_version>
+        <koin_version>3.2.0-beta-1</koin_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>com.viralvtubers.ApplicationKt</main.class>
-        <kotlin.version>1.6.20-RC2</kotlin.version>
     </properties>
     <repositories>
         <repository>
-            <id>ktor_eap</id>
-            <url>https://maven.pkg.jetbrains.space/public/p/ktor/eap</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
     <dependencies>
@@ -56,6 +55,31 @@
             <version>${ktor_version}</version>
         </dependency>
         <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-call-logging-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-content-negotiation-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-default-headers-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-serialization-gson-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-server-default-headers-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback_version}</version>
@@ -73,20 +97,55 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit</artifactId>
+            <artifactId>kotlin-test-junit5</artifactId>
             <version>${kotlin_version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
+            <version>${kotlin_version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
-            <version>${kotlin.version}</version>
+            <version>${kotlin_version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scorpionknifes</groupId>
+            <artifactId>KGraphQL</artifactId>
+            <version>160eb53c33</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scorpionknifes.KGraphQL</groupId>
+            <artifactId>kgraphql-ktor</artifactId>
+            <version>160eb53c33</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.apurebase</groupId>-->
+<!--            <artifactId>kgraphql</artifactId>-->
+<!--            <version>${kgraphql_version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.apurebase</groupId>-->
+<!--            <artifactId>kgraphql-ktor</artifactId>-->
+<!--            <version>${kgraphql_version}</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-core</artifactId>
+            <version>${koin_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.insert-koin</groupId>
+            <artifactId>koin-ktor</artifactId>
+            <version>${koin_version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -102,7 +161,7 @@
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <version>${kotlin.version}</version>
+                <version>${kotlin_version}</version>
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
                 </configuration>
