@@ -8,12 +8,12 @@ import java.util.*
 fun SchemaBuilder.scalarSchema() {
     enum<PriceEnum> {
         description = "PriceType"
-//        value(PriceEnum.HOUR) {
-//            description = "price per hour"
-//        }
-//        value(PriceEnum.EACH) {
-//            description = "price for each"
-//        }
+        value(PriceEnum.HOUR) {
+            description = "price per hour"
+        }
+        value(PriceEnum.EACH) {
+            description = "price for each"
+        }
     }
 
     stringScalar<Date> {

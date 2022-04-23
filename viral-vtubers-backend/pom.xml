@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.viralvtubers</groupId>
@@ -117,6 +118,8 @@
             <version>${kotlin_version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- KGraphQL does not support Ktor 2.0.0, using custom fork -->
+        <!-- For more information read: https://ktor.io/docs/custom-plugins.html -->
         <dependency>
             <groupId>com.github.scorpionknifes</groupId>
             <artifactId>KGraphQL</artifactId>
@@ -127,16 +130,17 @@
             <artifactId>kgraphql-ktor</artifactId>
             <version>160eb53c33</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.apurebase</groupId>-->
-<!--            <artifactId>kgraphql</artifactId>-->
-<!--            <version>${kgraphql_version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.apurebase</groupId>-->
-<!--            <artifactId>kgraphql-ktor</artifactId>-->
-<!--            <version>${kgraphql_version}</version>-->
-<!--        </dependency>-->
+        <!-- Uncomment and remove above to use official KGraphQL -->
+        <!--<dependency>-->
+        <!--    <groupId>com.apurebase</groupId>-->
+        <!--    <artifactId>kgraphql</artifactId>-->
+        <!--    <version>${kgraphql_version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--    <groupId>com.apurebase</groupId>-->
+        <!--    <artifactId>kgraphql-ktor</artifactId>-->
+        <!--    <version>${kgraphql_version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>io.insert-koin</groupId>
             <artifactId>koin-core</artifactId>
