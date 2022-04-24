@@ -5,9 +5,9 @@ enum class PriceEnum {
 }
 
 data class Service(
-  val id: String, 
-  val name: String, 
-  val price: Double, 
+  val id: ID,
+  val name: String,
+  val price: Double,
   val priceType: PriceEnum,
   val description: String
 )
