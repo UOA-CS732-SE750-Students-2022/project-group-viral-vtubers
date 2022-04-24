@@ -21,7 +21,7 @@ fun SchemaBuilder.cartSchema() {
 
         property<List<Product>>("items") {
             resolver { cart ->
-                description = "Get the itesms in a cart"
+                description = "Get the items in a cart"
                 listOf(
                     stubProduct("fake_product_0"),
                     stubProduct("fake_product_1")
