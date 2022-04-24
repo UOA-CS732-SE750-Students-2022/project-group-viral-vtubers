@@ -51,7 +51,7 @@ fun SchemaBuilder.productSchema() {
         }
 
         property<ProductPagination>("products") {
-            resolver { category, cursor: String?, limit: Int? ->
+            resolver { category, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Category"
                 stubProductPagination(
                     listOf(
@@ -78,7 +78,7 @@ fun SchemaBuilder.productSchema() {
         }
 
         property<ProductPagination>("products") {
-            resolver { subcategory, cursor: String?, limit: Int? ->
+            resolver { subcategory, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Subcategory"
                 stubProductPagination(
                     listOf(
@@ -106,7 +106,7 @@ fun SchemaBuilder.productSchema() {
 
     query("category") {
         description = "Get Category"
-        resolver { ->
+        resolver { id: ID ->
             stubCategory("fake_category")
         }
     }

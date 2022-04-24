@@ -1,10 +1,7 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.viralvtubers.graphql.data.ID
-import com.viralvtubers.graphql.data.Order
-import com.viralvtubers.graphql.data.Tag
-import com.viralvtubers.graphql.data.User
+import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddOrderInput
 import com.viralvtubers.graphql.input.EditOrderInput
 import com.viralvtubers.graphql.stubOrder
@@ -33,7 +30,7 @@ fun SchemaBuilder.orderSchema() {
 
     query("orders") {
         description = "Get all Orders"
-        resolver { cursor: String?, limit: Int? ->
+        resolver { filter: ProductFilter?, cursor: String?, limit: Int? ->
             stubOrderPagination(
                 listOf(
                     stubOrder("fake_order_0"),
