@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { CartComponent } from './cart/cart.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { VrmViewerComponent } from './shared/vrm-viewer/vrm-viewer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -57,6 +58,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: SignUpComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   {
     path: '**',

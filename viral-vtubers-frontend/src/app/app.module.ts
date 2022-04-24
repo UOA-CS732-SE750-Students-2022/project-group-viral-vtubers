@@ -9,6 +9,7 @@ import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth/auth.service';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -24,6 +25,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SignInComponent,
     SignUpComponent,
     NotFoundComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
