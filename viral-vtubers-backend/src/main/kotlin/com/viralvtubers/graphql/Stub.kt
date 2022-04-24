@@ -5,7 +5,7 @@ import java.util.*
 
 val stubUser = { id: String ->
     User(
-        id,
+        ID(id),
         "Fake User",
         "fake@user.com",
         "Fake bio",
@@ -17,14 +17,14 @@ val stubUser = { id: String ->
 
 val stubTag = { id: String ->
     Tag(
-        id,
+        ID(id),
         "Fake Tag"
     )
 }
 
 val stubService = { id: String ->
     Service(
-        id,
+        ID(id),
         "Fake Service",
         99.99,
         PriceEnum.HOUR,
@@ -32,9 +32,23 @@ val stubService = { id: String ->
     )
 }
 
-val stubProduct = {id: String ->
+val stubSubcategory = { id: String ->
+    Subcategory(
+        ID(id),
+        "Fake SubCategory"
+    )
+}
+
+val stubCategory = { id: String ->
+    Category(
+        ID(id),
+        "Fake Category"
+    )
+}
+
+val stubProduct = { id: String ->
     Product(
-        id,
+        ID(id),
         "Fake Product",
         "Fake Product Short Description",
         "fakeVRM.vrm",
@@ -42,12 +56,88 @@ val stubProduct = {id: String ->
     )
 }
 
-val stubMail = {id: String ->
+val stubMail = { id: String ->
     Mail(
-        id,
+        ID(id),
         "Fake Mail",
         "Fake Mail Body",
         Date(),
         false,
+    )
+}
+
+val stubProductPagination = { products: List<Product> ->
+    ProductPagination(
+        ProductEdges(
+            "fake_cursor",
+            products
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubUserPagination = { users: List<User> ->
+    UserPagination(
+        UserEdges(
+            "fake_cursor",
+            users
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubOrderPagination = { orders: List<Order> ->
+    OrderPagination(
+        OrderEdges(
+            "fake_cursor",
+            orders
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubOrder = { id: String ->
+    Order(
+        ID(id),
+        "Fake Order",
+        "Fake Order Description",
+        99.99,
+        false,
+    )
+}
+
+val stubCart = { ->
+    Cart(
+        2,
+        99.99
+    )
+}
+
+val stubCarts = {
+    Carts(
+        4,
+        listOf(
+            stubCart(), stubCart()
+        )
+    )
+}
+
+val stubPurchase = { ->
+    Purchase(
+        2,
+        99.99,
+        Date(),
     )
 }

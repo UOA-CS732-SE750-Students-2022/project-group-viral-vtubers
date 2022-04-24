@@ -1,11 +1,17 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import com.viralvtubers.graphql.data.ID
 import com.viralvtubers.graphql.data.PriceEnum
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun SchemaBuilder.scalarSchema() {
+    stringScalar<ID> {
+        deserialize = { id: String -> ID(id) }
+        serialize = ID::value
+    }
+
     enum<PriceEnum> {
         description = "PriceType"
         value(PriceEnum.HOUR) {

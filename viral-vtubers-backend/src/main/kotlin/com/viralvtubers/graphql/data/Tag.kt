@@ -1,7 +1,7 @@
 package com.viralvtubers.graphql.data
 
 data class Tag(
-    val id: String,
+    val id: ID,
     val name: String
 )
 
