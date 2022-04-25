@@ -4,7 +4,7 @@
     "jest": true,
     "browser": true
   },
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": ["projects/**/*", "src/schema/**/*"],
   "overrides": [
     {
       "files": ["*.ts"],
