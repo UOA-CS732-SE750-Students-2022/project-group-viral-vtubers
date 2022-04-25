@@ -5,6 +5,7 @@ import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuard } from './shared/guard/auth.guard';
 import { VrmViewerComponent } from './shared/vrm-viewer/vrm-viewer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -23,6 +24,7 @@ export const routes: Routes = [
       import('./commissions/commissions.module').then(
         (m) => m.CommissionsModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'marketplace',
@@ -30,27 +32,33 @@ export const routes: Routes = [
       import('./marketplace/marketplace.module').then(
         (m) => m.MarketplaceModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'me',
     loadChildren: () => import('./me/me.module').then((m) => m.MeModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'mail',
     loadChildren: () => import('./mail/mail.module').then((m) => m.MailModule),
+    canActivate: [AuthGuard],
   },
   // Plain page components
   {
     path: 'user/:id',
     component: UserProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'feed',
     component: ActivityFeedComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'signin',
