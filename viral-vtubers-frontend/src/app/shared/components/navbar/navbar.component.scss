@@ -1,0 +1,157 @@
+@import "../../../../variables";
+
+.navbar {
+  display: flex;
+  height: 98px;
+  width: calc(100% - 4em);
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2em;
+  padding: 0 2em;
+  border-bottom: 1px;
+
+  a {
+    text-decoration: none;
+    color: $color-kneegrow;
+  }
+}
+
+.dropdown-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+
+  font-family: $font-family-monospace;
+  font-size: $font-size-h4;
+
+  position: absolute;
+  background-color: $color-background;
+  margin-top: 200px;
+  height: 98px;
+  width: calc(100% - 256px);
+  z-index: 1;
+
+  a:hover {
+    background-color: $color-grey-light;
+  }
+
+  a {
+    padding: 40px 50px;
+    float: left;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.3s, opacity 0.3s linear;
+  }
+
+  .dropdown-subcategories {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s linear;
+  }
+}
+
+.navbarBtn {
+  font-family: $font-family-monospace;
+  font-size: $font-size-h4;
+
+  :hover {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.marketplaceBtn:hover .dropdown-content {
+  display: block;
+}
+
+.logoBtn {
+  font-size: 40px;
+  margin: auto;
+}
+
+.profileImg {
+  border-radius: 50%;
+  height: 52px;
+  width: 52px;
+  min-height: 52px;
+  min-width: 52px;
+  border-color: $color-grey-dark;
+  border-style: solid;
+  overflow: hidden;
+
+  img {
+    height: 52px;
+    width: 52px;
+  }
+}
+
+.iconImg {
+  height: 34px;
+  width: 34px;
+}
+
+.iconBtns {
+  display: flex;
+  column-gap: 1em;
+}
+
+.notify {
+  position: relative;
+  background-color: $color-secondary;
+  font-size: $font-size-body-2;
+  width: 20px;
+  height: 20px;
+  color: $color-background;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  margin-left: -20px;
+  margin-right: -10px;
+  margin-top: -10px;
+}
+
+.search {
+  white-space: nowrap;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  border-radius: 8px;
+
+  button {
+    display: block;
+    padding: 2px;
+    background-color: $color-grey-light;
+    border-color: $color-grey-light;
+    height: 40px;
+    width: 52px;
+    border-radius: 0 8px 8px 0;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+
+    img {
+      height: 17.5px;
+      width: 17.5px;
+    }
+  }
+
+  input {
+    padding-left: 10px;
+    box-sizing: border-box;
+    border-radius: 8px 0 0 8px;
+    border-style: solid;
+    border-color: $color-grey-light;
+    font-size: $font-size-body-1;
+    outline: none;
+    height: 40px;
+    border-width: 1px;
+    width: 300px;
+  }
+
+  :hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  ::placeholder {
+    color: $color-grey-light;
+  }
+}
