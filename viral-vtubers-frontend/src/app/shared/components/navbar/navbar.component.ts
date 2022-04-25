@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
   marketplaceShow() {
     console.log('show');
     this.dropdownRef.nativeElement.style.visibility = 'visible';
-    this.dropdownRef.nativeElement.style.opacity = '1';
+    this.dropdownRef.nativeElement.style.opacity = '0.9';
     this.dressRef.nativeElement.style.backgroundColor = undefined;
   }
 
