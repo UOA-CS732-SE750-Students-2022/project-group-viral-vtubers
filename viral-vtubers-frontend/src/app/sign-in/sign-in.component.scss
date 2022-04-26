@@ -156,6 +156,34 @@ $input-width: 420px;
           }
         }
       }
+
+      .action-container .actions {
+        margin-bottom: 5px;
+        align-items: center;
+        font-size: $font-size-body-3;
+        text-transform: capitalize;
+
+        > span {
+          display: flex;
+          align-items: center;
+
+          input {
+            margin: 0;
+            margin-right: 8px;
+            height: 14px;
+            width: 14px;
+          }
+        }
+
+        .remember-me {
+          color: $color-grey-dark;
+        }
+
+        .forgot-password {
+          color: $color-secondary;
+          cursor: pointer;
+        }
+      }
     }
   }
 

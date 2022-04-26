@@ -14,9 +14,13 @@
         <input type="text" placeholder="Email Address" #userEmail required />
         <input type="password" placeholder="Password" #userPassword required />
         <div class="action-container">
-          <div>
-            <span>rememebr me</span>
-            <span routerLink="/forgot-password">Forgot Pasword?</span>
+          <div class="actions">
+            <span class="remember-me"
+              ><input type="checkbox" /> rememebr me</span
+            >
+            <span class="forgot-password" routerLink="/forgot-password"
+              >Forgot Pasword?</span
+            >
           </div>
           <div>
             <input
