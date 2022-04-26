@@ -1,0 +1,159 @@
+@import "../../variables";
+
+.title {
+  position: relative;
+}
+
+h4 {
+  font-size: $font-size-h4;
+  font-weight: 400;
+  line-height: 54px;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.exit-icon {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  left: 100%;
+  top: 0%;
+  margin-bottom: -14px;
+  transform: translate(-100%, -100%);
+  transition: $button-hover-animation;
+  &:hover {
+    opacity: $button-coloured-hover-opacity;
+  }
+}
+
+h5 {
+  font-size: $font-size-h5;
+  font-weight: 400;
+  color: $color-secondary;
+  margin: 0;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid $color-grey-light;
+  margin: 18px 0;
+}
+
+.container {
+  max-width: 1332px;
+  margin: 0 auto;
+  padding: $padding-safe-area;
+}
+
+.cart {
+  border-radius: 10px;
+  border: 1px solid $color-grey-dark;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 32px 64px;
+  margin-bottom: 32px;
+}
+
+.item {
+  display: flex;
+  > img {
+    width: 64px;
+    height: 64px;
+    border: 1px solid $color-grey-light;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  > .item-content {
+    padding-left: 36px;
+    display: flex;
+    flex-grow: 1;
+    right: 0;
+
+    > .item-details {
+      cursor: pointer;
+      flex: 1;
+      > .item-price {
+        margin: 0;
+        color: $color-secondary;
+      }
+      &:hover {
+        .item-name {
+          color: $color-primary;
+        }
+      }
+    }
+
+    .item-name {
+      transition: $button-hover-animation;
+    }
+
+    > .item-buttons {
+      flex: 1;
+      text-align: end;
+      justify-content: space-between;
+
+      > p {
+        height: calc(100% - 20px);
+      }
+
+      > button {
+        color: $color-grey-dark;
+        font-size: $font-size-body-2;
+        background: none !important;
+        border: none;
+        padding: 0 !important;
+        cursor: pointer;
+        transition: $button-hover-animation;
+        &:hover {
+          opacity: $button-coloured-hover-opacity;
+        }
+      }
+    }
+  }
+}
+
+.checkout {
+  text-align: right;
+
+  .checkout-total {
+    font-size: $font-size-h6;
+  }
+
+  button {
+    display: inline-block;
+    background-color: $color-primary;
+    color: $color-background;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: $font-size-body-2;
+    border: 0;
+    padding: 11px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: solid 1px $color-grey-light;
+    cursor: pointer;
+    transition: $button-hover-animation;
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
+  }
+
+  .checkout-price {
+    font-size: $font-size-h6;
+    color: $color-secondary;
+    margin-left: 30px;
+  }
+
+  .checkout-return {
+    text-decoration: none;
+    color: $color-grey-dark;
+    transition: $button-hover-animation;
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
+  }
+}

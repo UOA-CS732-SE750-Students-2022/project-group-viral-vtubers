@@ -8,9 +8,8 @@ describe('SelectViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectViewComponent ]
-    })
-    .compileComponents();
+      declarations: [SelectViewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
