@@ -134,6 +134,7 @@ h5 {
     padding: 11px 20px;
     border-radius: 5px;
     margin-bottom: 10px;
+    border: solid 1px $color-grey-light;
     cursor: pointer;
     transition: $button-hover-animation;
     &:hover {
