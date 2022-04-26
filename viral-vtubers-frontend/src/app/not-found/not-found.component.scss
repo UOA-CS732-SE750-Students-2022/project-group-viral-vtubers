@@ -1,14 +1,14 @@
 @import "../../variables";
 
 .container {
-  height: calc(100vh - 68px);
+  height: calc(100vh - $header-height);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .box {
-  margin-bottom: 68px;
+  margin-bottom: $header-height;
   > p {
     font-size: $font-size-h4;
     color: $color-grey-dark;
@@ -16,9 +16,9 @@
     > a {
       text-decoration: none;
       color: $color-primary;
-      transition: opacity 0.2s ease-in-out;
+      transition: $button-hover-animation;
       &:hover {
-        opacity: 0.8;
+        opacity: $button-coloured-hover-opacity;
       }
     }
   }
