@@ -4,11 +4,11 @@ export const UserFragment = gql`
   fragment UserFragment on User {
     id
     bio
-    completedCommissions
+    numCompletedCommissions
     displayName
     email
-    likes
+    numLikes
     profileImageURI
-    following
+    isFollowing
   }
 `;

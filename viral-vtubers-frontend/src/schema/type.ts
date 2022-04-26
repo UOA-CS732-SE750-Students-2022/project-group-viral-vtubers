@@ -34,29 +34,29 @@ export type AddServiceInput = {
   priceType: PriceEnum;
 };
 
-/** AgeRestriction */
-export enum AgeRestriction {
-  /** all age */
-  AllAge = 'ALL_AGE',
-  /** for adult */
-  ForAdult = 'FOR_ADULT',
-  /** for adult included */
-  ForAdultIncluded = 'FOR_ADULT_INCLUDED'
+/** AgeRestrictionEnum */
+export enum AgeRestrictionEnum {
+  /** all */
+  All = 'ALL',
+  /** NSFW only */
+  NsfwOnly = 'NSFW_ONLY',
+  /** SFW only */
+  SfwOnly = 'SFW_ONLY'
 }
 
 /** Cart */
 export type Cart = {
   __typename?: 'Cart';
   items: Array<Product>;
+  numItems: Scalars['Int'];
   seller: User;
   totalAmount: Scalars['Float'];
-  totalItemCount: Scalars['Int'];
 };
 
 export type Carts = {
   __typename?: 'Carts';
   carts: Array<Cart>;
-  totalItemCount: Scalars['Int'];
+  numItems: Scalars['Int'];
 };
 
 /** Category */
@@ -79,8 +79,8 @@ export type CategoryProductsArgs = {
 export type EditOrderInput = {
   bounty?: InputMaybe<Scalars['Float']>;
   description?: InputMaybe<Scalars['String']>;
-  draft?: InputMaybe<Scalars['Boolean']>;
   id: Scalars['ID'];
+  isDraft?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   tagIds?: InputMaybe<Array<Scalars['String']>>;
 };
@@ -198,8 +198,8 @@ export type Order = {
   applications: Array<User>;
   bounty: Scalars['Float'];
   description: Scalars['String'];
-  draft: Scalars['Boolean'];
   id: Scalars['ID'];
+  isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   tags: Array<Tag>;
 };
@@ -216,8 +216,8 @@ export type OrderPagination = {
   pageInfo: PageInfo;
 };
 
-/** Other */
-export enum Other {
+/** OtherFiltersEnum */
+export enum OtherFiltersEnum {
   /** anime */
   Anime = 'ANIME'
 }
@@ -257,10 +257,10 @@ export type ProductEdges = {
 };
 
 export type ProductFilter = {
-  ageRestriction?: InputMaybe<AgeRestriction>;
+  ageRestriction?: InputMaybe<AgeRestrictionEnum>;
   maxPrice?: InputMaybe<Scalars['Float']>;
   minPrice?: InputMaybe<Scalars['Float']>;
-  other?: InputMaybe<Other>;
+  other?: InputMaybe<OtherFiltersEnum>;
   search?: InputMaybe<Scalars['String']>;
 };
 
@@ -274,10 +274,10 @@ export type ProductPagination = {
 export type Purchase = {
   __typename?: 'Purchase';
   items: Array<Product>;
+  numItems: Scalars['Int'];
   placed: Scalars['DateTime'];
   seller: User;
   totalAmount: Scalars['Float'];
-  totalItemCount: Scalars['Int'];
 };
 
 /** Query object */
@@ -386,13 +386,13 @@ export type Tag = {
 export type User = {
   __typename?: 'User';
   bio: Scalars['String'];
-  completedCommissions: Scalars['Int'];
   displayName: Scalars['String'];
   email: Scalars['String'];
-  following: Scalars['Boolean'];
   id: Scalars['ID'];
   inbox: Array<Mail>;
-  likes: Scalars['Int'];
+  isFollowing: Scalars['Boolean'];
+  numCompletedCommissions: Scalars['Int'];
+  numLikes: Scalars['Int'];
   products: Array<Product>;
   profileImageURI: Scalars['String'];
   sent: Array<Mail>;

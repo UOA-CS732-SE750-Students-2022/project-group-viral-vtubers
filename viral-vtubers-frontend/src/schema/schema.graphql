@@ -11,13 +11,13 @@ scalar DateTime
 "User"
 type User {
   bio: String!
-  completedCommissions: Int!
   displayName: String!
   email: String!
   id: ID!
-  likes: Int!
+  numCompletedCommissions: Int!
+  numLikes: Int!
   profileImageURI: String!
-  following: Boolean!
+  isFollowing: Boolean!
   tags: [Tag!]!
   services: [Service!]!
   products: [Product!]!
@@ -90,24 +90,24 @@ type Mail {
 type Order {
   bounty: Float!
   description: String!
-  draft: Boolean!
   id: ID!
+  isDraft: Boolean!
   name: String!
   tags: [Tag!]!
   applications: [User!]!
 }
 "Cart"
 type Cart {
+  numItems: Int!
   totalAmount: Float!
-  totalItemCount: Int!
   seller: User!
   items: [Product!]!
 }
 "Purchase"
 type Purchase {
+  numItems: Int!
   placed: DateTime!
   totalAmount: Float!
-  totalItemCount: Int!
   seller: User!
   items: [Product!]!
 }
@@ -134,7 +134,7 @@ type OrderEdges {
 ""
 type Carts {
   carts: [Cart!]!
-  totalItemCount: Int!
+  numItems: Int!
 }
 "Query object"
 type Query {
@@ -193,26 +193,26 @@ enum PriceEnum {
   "price for each"
   EACH
 }
-"AgeRestriction"
-enum AgeRestriction {
-  "all age"
-  ALL_AGE
-  "for adult included"
-  FOR_ADULT_INCLUDED
-  "for adult"
-  FOR_ADULT
+"AgeRestrictionEnum"
+enum AgeRestrictionEnum {
+  "SFW only"
+  SFW_ONLY
+  "all"
+  ALL
+  "NSFW only"
+  NSFW_ONLY
 }
-"Other"
-enum Other {
+"OtherFiltersEnum"
+enum OtherFiltersEnum {
   "anime"
   ANIME
 }
 ""
 input ProductFilter {
-  ageRestriction: AgeRestriction
+  ageRestriction: AgeRestrictionEnum
   maxPrice: Float
   minPrice: Float
-  other: Other
+  other: OtherFiltersEnum
   search: String
 }
 ""
@@ -256,8 +256,8 @@ input AddOrderInput {
 input EditOrderInput {
   bounty: Float
   description: String
-  draft: Boolean
   id: ID!
+  isDraft: Boolean
   name: String
   tagIds: [String!]
 }

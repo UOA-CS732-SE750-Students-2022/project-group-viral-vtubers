@@ -9,7 +9,7 @@
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "yarn docs:json && start-storybook -p 6006",
-    "schema": "rover graph introspect http://localhost:8080/graphql > src/graphql/schema.graphql",
+    "schema": "rover graph introspect http://localhost:8080/graphql > src/schema/schema.graphql",
     "generate": "graphql-codegen",
     "prestart": "yarn generate",
     "prebuild": "yarn generate"

@@ -21,18 +21,18 @@ data class ProductEdges(
     val node: List<Product>,
 )
 
-enum class AgeRestriction {
-    ALL_AGE, FOR_ADULT_INCLUDED, FOR_ADULT
+enum class AgeRestrictionEnum {
+    SFW_ONLY, ALL, NSFW_ONLY
 }
 
-enum class Other {
+enum class OtherFiltersEnum {
     ANIME,
 }
 
 data class ProductFilter(
     val search: String?,
-    val ageRestriction: AgeRestriction?,
-    val other: Other?,
+    val ageRestriction: AgeRestrictionEnum?,
+    val other: OtherFiltersEnum?,
     val minPrice: Double?,
     val maxPrice: Double?
 )
