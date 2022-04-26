@@ -1,7 +1,6 @@
 @import "../../variables";
 
 $header-bg-height: 220px;
-$footer-height: 200px;
 $input-width: 420px;
 
 .page-container {
@@ -201,13 +200,4 @@ $input-width: 420px;
       cursor: pointer;
     }
   }
-}
-
-.footer {
-  background-color: #f6f9fa;
-  height: $footer-height;
-  min-height: 100px;
-  width: 100%;
-  flex: 1;
-  z-index: 4;
 }
