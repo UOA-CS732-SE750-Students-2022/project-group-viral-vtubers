@@ -2,7 +2,7 @@
 
 .headerBg {
   background-color: $color-primary-light;
-  height: 290px;
+  height: 220px;
   margin-top: -$header-height;
   overflow: hidden;
   position: relative;
@@ -17,18 +17,18 @@
   width: 450px;
   transform: rotate(1deg);
   left: -20px;
-  top: 160px;
+  bottom: -100px;
 }
 
 .cloud-mid {
   transform: rotate(177deg);
   width: 800px;
   left: 30vw;
-  top: 175px;
+  bottom: -300px;
 }
 
 .cloud-right {
   width: 325px;
   right: -50px;
-  top: 185px;
+  bottom: -80px;
 }
