@@ -2,6 +2,7 @@
 
 $header-bg-height: 220px;
 $footer-height: 200px;
+$input-width: 420px;
 
 .page-container {
   display: flex;
@@ -91,6 +92,50 @@ $footer-height: 200px;
 
     .chibi-container {
       border-right: solid 1px $color-grey-light;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      > input {
+        width: $input-width;
+        height: 40px;
+        border-radius: 3px;
+        border: solid 1px $color-grey-light;
+        margin-bottom: 30px;
+        font-size: $font-size-body-2;
+        font-family: $font-family-poppins;
+        padding: 0 15px;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: $color-primary;
+          outline: none;
+        }
+      }
+
+      .action-container > div {
+        width: $input-width;
+        display: flex;
+        justify-content: space-between;
+
+        .button {
+          width: 185px;
+          height: 38px;
+          text-decoration: none;
+          border: solid 1px $color-grey-light;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: $font-family-poppins;
+          font-size: $font-size-body-2;
+          text-transform: uppercase;
+          font-weight: 500;
+        }
+      }
     }
   }
 

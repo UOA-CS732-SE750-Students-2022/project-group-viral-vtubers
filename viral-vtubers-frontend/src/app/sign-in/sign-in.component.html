@@ -10,21 +10,30 @@
       <div class="half-container chibi-container">
         <img src="../../assets/chibis/chibi_pink.png" />
       </div>
-      <div class="half-container">
+      <div class="half-container form-container">
         <input type="text" placeholder="Email Address" #userEmail required />
         <input type="password" placeholder="Password" #userPassword required />
-        <input
-          type="button"
-          value="Log In"
-          (click)="authService.SignIn(userEmail.value, userPassword.value)"
-        />
-
-        <span routerLink="/forgot-password">Forgot Pasword?</span>
-        <span
-          >Don't have an account?<span routerLink="/register">
-            Sign up</span
-          ></span
-        >
+        <div class="action-container">
+          <div>
+            <span>rememebr me</span>
+            <span routerLink="/forgot-password">Forgot Pasword?</span>
+          </div>
+          <div>
+            <input
+              class="button"
+              type="button"
+              value="Log In"
+              (click)="authService.SignIn(userEmail.value, userPassword.value)"
+            />
+            <a
+              class="button"
+              routerLink="/register"
+              href="location.href='/register'"
+            >
+              No account?
+            </a>
+          </div>
+        </div>
       </div>
     </div>
     <p>
