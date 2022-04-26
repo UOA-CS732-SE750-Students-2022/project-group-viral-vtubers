@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 // google font import
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poppins:wght@300;400;500;600&display=swap");
 @import "./variables";
 
 // global styles
+html,
 body {
   font-family: $font-family-poppins;
   color: $color-kneegrow;
   font-size: 16px;
   margin: 0;
+  height: 100%;
 }
-

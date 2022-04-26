@@ -23,3 +23,12 @@ $font-size-h1: 6rem; // 96 px
 // font families
 $font-family-poppins: "Poppins", sans-serif;
 $font-family-monospace: "Major Mono Display", monospace;
+
+// static element sizes
+$header-height: 68px;
+$footer-height: 200px;
+
+// button styling
+$button-hover-animation: 0.2s ease;
+$button-coloured-hover-opacity: 0.8;
+$button-blank-hover-bg: #fbfbfb;
