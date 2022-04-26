@@ -1,0 +1,9 @@
+<div>
+    <h3>Create Account</h3>
+    <input type="text" placeholder="Display Name" #userName required>
+    <input type="email" placeholder="Email Address" #userEmail required>
+    <input type="password" placeholder="Password" #userPassword required>
+    <input type="button" value="Register" (click)="authService.SignUp(userEmail.value, userPassword.value, userName.value)">
+
+    <span>Already have an account?<span routerLink="/signin"> Log In</span></span>
+</div>

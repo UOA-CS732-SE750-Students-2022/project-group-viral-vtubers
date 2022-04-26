@@ -1,0 +1,7 @@
+schema: ./src/schema/**/*.graphql
+generates:
+  ./src/schema/type.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular

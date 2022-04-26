@@ -1,0 +1,162 @@
+@import "../../../../variables";
+
+.navbar {
+  display: flex;
+  height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2em;
+  padding: 0 2em;
+
+  a {
+    text-decoration: none;
+    color: $color-kneegrow;
+  }
+
+  > a {
+    margin-right: 25px;
+  }
+}
+
+.dropdown-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s linear;
+
+  font-family: $font-family-monospace;
+  font-size: $font-size-h6;
+
+  position: fixed;
+  background-color: $color-background;
+  margin-top: 100px;
+  height: 45px;
+  width: 100%;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+
+  margin-left: -2em;
+
+  a:hover {
+    background-color: $color-grey-light;
+  }
+
+  a {
+    padding: 14px 35px;
+    float: left;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.2s, opacity 0.2s linear;
+  }
+
+  .dropdown-subcategories {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s linear;
+  }
+}
+
+.navbarBtn {
+  font-family: $font-family-monospace;
+  font-size: $font-size-h6;
+
+  :hover {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.marketplaceBtn:hover .dropdown-content {
+  display: block;
+}
+
+.logoBtn {
+  font-size: 26px;
+  margin: auto;
+}
+
+.profileImg {
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  min-height: 35px;
+  min-width: 35px;
+  border: solid 2px $color-grey-dark;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.iconImg {
+  height: 24px;
+  width: 24px;
+}
+
+.iconBtns {
+  display: flex;
+  column-gap: 1em;
+}
+
+.notify {
+  position: relative;
+  background-color: $color-secondary;
+  font-size: $font-size-body-3;
+  width: 18px;
+  height: 18px;
+  color: $color-background;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  margin-left: -24px;
+  margin-top: -7px;
+}
+
+.search {
+  white-space: nowrap;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  border-radius: 8px;
+
+  button {
+    display: block;
+    padding: 2px;
+    background-color: $color-grey-light;
+    border-color: $color-grey-light;
+    height: 40px;
+    width: 52px;
+    border-radius: 0 8px 8px 0;
+    border-width: 1px;
+    border-style: solid;
+    outline: none;
+
+    img {
+      height: 17.5px;
+      width: 17.5px;
+    }
+  }
+
+  input {
+    padding-left: 10px;
+    box-sizing: border-box;
+    border-radius: 8px 0 0 8px;
+    border-style: solid;
+    border-color: $color-grey-light;
+    font-size: $font-size-body-1;
+    outline: none;
+    height: 40px;
+    border-width: 1px;
+    width: 300px;
+  }
+
+  &:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  ::placeholder {
+    color: $color-grey-light;
+  }
+}

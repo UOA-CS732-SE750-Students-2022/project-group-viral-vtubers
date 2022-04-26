@@ -1,0 +1,54 @@
+<nav class="navbar">
+  <div #marketplace class="navbarBtn marketplaceBtn">
+    <a href="#" class="logo" (mouseover)="marketplaceShow()">marketplace</a>
+  </div>
+  <div class="navbarBtn">
+    <a href="#" class="logo">commission</a>
+  </div>
+  <div class="navbarBtn logoBtn">
+    <a href="#" class="logo">Vlogo</a>
+  </div>
+  <div class="search">
+    <input placeholder="老师: 你这样会使得我很尴尬" />
+    <button>
+      <img class="searchIcon" src="assets/icons/SearchIcon.svg" />
+    </button>
+  </div>
+  <div class="profileImg">
+    <img src="https://picsum.photos/200" />
+  </div>
+  <div class="iconBtns">
+    <img class="iconImg" src="assets/icons/CartIcon.svg" />
+    <div class="notify">1</div>
+    <img class="iconImg" src="assets/icons/LanguageIcon.svg" />
+    <img class="iconImg" src="assets/icons/NotificationIcon.svg" />
+    <div class="notify">3</div>
+  </div>
+  <div
+    #dropdown
+    class="dropdown-content"
+    (mouseleave)="marketplaceHide()"
+    (mouseover)="marketplaceShow()"
+  >
+    <a #dress #category (click)="categoryDress()" href="#">{{
+      firstCategory
+    }}</a>
+    <div #otherCategories>
+      <a #wholeModels #category (click)="categoryWholeModels()" href="#"
+        >whole models</a
+      >
+      <a #accessories #category (click)="categoryAccessories()" href="#"
+        >accessories</a
+      >
+      <a #backgrounds #category (click)="categoryBackgrounds()" href="#"
+        >backgrounds</a
+      >
+    </div>
+    <div #subcategories class="dropdown-subcategories">
+      <a href="#">top</a>
+      <a href="#">pants</a>
+      <a href="#">footwear</a>
+      <a href="#">underwear</a>
+    </div>
+  </div>
+</nav>

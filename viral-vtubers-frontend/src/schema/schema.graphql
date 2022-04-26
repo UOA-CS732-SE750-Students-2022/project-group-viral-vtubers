@@ -1,0 +1,263 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+"The Short scalar type represents a signed 16-bit numeric non-fractional value"
+scalar Short
+"The Long scalar type represents a signed 64-bit numeric non-fractional value"
+scalar Long
+""
+scalar DateTime
+"User"
+type User {
+  bio: String!
+  displayName: String!
+  email: String!
+  id: ID!
+  numCompletedCommissions: Int!
+  numLikes: Int!
+  profileImageURI: String!
+  isFollowing: Boolean!
+  tags: [Tag!]!
+  services: [Service!]!
+  products: [Product!]!
+  inbox: [Mail!]!
+  sent: [Mail!]!
+}
+""
+type Tag {
+  id: ID!
+  name: String!
+}
+""
+type Service {
+  description: String!
+  id: ID!
+  name: String!
+  price: Float!
+  priceType: PriceEnum!
+}
+"Product"
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  shortDescription: String!
+  vrm: String!
+  subcategory: Subcategory!
+  images: [String!]!
+  files: [String!]!
+}
+"Category"
+type Subcategory {
+  id: ID!
+  name: String!
+  category: Category!
+  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
+}
+"Category"
+type Category {
+  id: ID!
+  name: String!
+  subcategories: [Subcategory!]!
+  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
+}
+""
+type ProductPagination {
+  edges: ProductEdges!
+  pageInfo: PageInfo!
+}
+""
+type ProductEdges {
+  cursor: String!
+  node: [Product!]!
+}
+""
+type PageInfo {
+  endCursor: String!
+  hasNextPage: Boolean!
+  startCursor: String!
+}
+""
+type Mail {
+  body: String!
+  date: DateTime!
+  id: ID!
+  read: Boolean!
+  title: String!
+}
+"Order"
+type Order {
+  bounty: Float!
+  description: String!
+  id: ID!
+  isDraft: Boolean!
+  name: String!
+  tags: [Tag!]!
+  applications: [User!]!
+}
+"Cart"
+type Cart {
+  numItems: Int!
+  totalAmount: Float!
+  seller: User!
+  items: [Product!]!
+}
+"Purchase"
+type Purchase {
+  numItems: Int!
+  placed: DateTime!
+  totalAmount: Float!
+  seller: User!
+  items: [Product!]!
+}
+""
+type UserPagination {
+  edges: UserEdges!
+  pageInfo: PageInfo!
+}
+""
+type UserEdges {
+  cursor: String!
+  node: [User!]!
+}
+""
+type OrderPagination {
+  edges: OrderEdges!
+  pageInfo: PageInfo!
+}
+""
+type OrderEdges {
+  cursor: String!
+  node: [Order!]!
+}
+""
+type Carts {
+  carts: [Cart!]!
+  numItems: Int!
+}
+"Query object"
+type Query {
+  "Get self"
+  self: User!
+  "Get a single user"
+  user(id: ID!): User!
+  "Get all users"
+  users(cursor: String, limit: Int): UserPagination!
+  "Get Categories"
+  categories: [Category!]!
+  "Get Category"
+  category(id: ID!): Category!
+  "Get Subcategory"
+  subcategory(id: ID!): Subcategory!
+  "Get all Orders"
+  orders(filter: ProductFilter, cursor: String, limit: Int): OrderPagination!
+  "Get an Order by Id"
+  order(id: ID!): Order!
+  "Get current Carts"
+  carts: Carts!
+  "Get past Purchases"
+  purchases: [Purchase!]!
+}
+"Mutation object"
+type Mutation {
+  "Check if the user exist if not create the user"
+  login: User!
+  "Edit self"
+  editSelf(input: EditSelfInput!): User!
+  "Add a service"
+  addService(input: AddServiceInput!): Service!
+  "Edit a service"
+  editService(input: EditServiceInput!): Service!
+  "Send a mail"
+  sendMail(input: SendMailInput!): Mail!
+  "Add an Order"
+  addOrder(input: AddOrderInput!): Order!
+  "Edit an Order"
+  editOrder(input: EditOrderInput!): Order!
+  "Apply to an Order"
+  applyOrder(id: ID!): Order!
+  "Add item to Cart"
+  addToCart(id: ID!): Carts!
+  "Remove item from Cart"
+  removeFromCart(id: ID!): Carts!
+  "Empty items from Cart"
+  emptyCart: Carts!
+  "Checkout item to Cart"
+  checkout: Purchase!
+}
+"PriceType"
+enum PriceEnum {
+  "price per hour"
+  HOUR
+  "price for each"
+  EACH
+}
+"AgeRestrictionEnum"
+enum AgeRestrictionEnum {
+  "SFW only"
+  SFW_ONLY
+  "all"
+  ALL
+  "NSFW only"
+  NSFW_ONLY
+}
+"OtherFiltersEnum"
+enum OtherFiltersEnum {
+  "anime"
+  ANIME
+}
+""
+input ProductFilter {
+  ageRestriction: AgeRestrictionEnum
+  maxPrice: Float
+  minPrice: Float
+  other: OtherFiltersEnum
+  search: String
+}
+""
+input EditSelfInput {
+  bio: String
+  displayName: String
+  profileImageURI: String
+  tagIds: [String!]
+}
+""
+input AddServiceInput {
+  description: String!
+  name: String!
+  price: Float!
+  priceType: PriceEnum!
+}
+""
+input EditServiceInput {
+  description: String
+  id: ID!
+  name: String
+  price: Float
+  priceType: PriceEnum
+}
+""
+input SendMailInput {
+  body: String!
+  receiverUserId: String!
+  title: String!
+}
+""
+input AddOrderInput {
+  bounty: Float!
+  description: String!
+  draft: Boolean!
+  id: ID!
+  name: String!
+  tagIds: [String!]!
+}
+""
+input EditOrderInput {
+  bounty: Float
+  description: String
+  id: ID!
+  isDraft: Boolean
+  name: String
+  tagIds: [String!]
+}

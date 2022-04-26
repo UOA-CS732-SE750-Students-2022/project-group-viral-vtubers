@@ -1,0 +1,143 @@
+package com.viralvtubers.graphql
+
+import com.viralvtubers.graphql.data.*
+import java.util.*
+
+val stubUser = { id: String ->
+    User(
+        ID(id),
+        "Fake User",
+        "fake@user.com",
+        "Fake bio",
+        1,
+        1,
+        "https://picsum.photos/200",
+    )
+}
+
+val stubTag = { id: String ->
+    Tag(
+        ID(id),
+        "Fake Tag"
+    )
+}
+
+val stubService = { id: String ->
+    Service(
+        ID(id),
+        "Fake Service",
+        99.99,
+        PriceEnum.HOUR,
+        "Fake Service Description"
+    )
+}
+
+val stubSubcategory = { id: String ->
+    Subcategory(
+        ID(id),
+        "Fake SubCategory"
+    )
+}
+
+val stubCategory = { id: String ->
+    Category(
+        ID(id),
+        "Fake Category"
+    )
+}
+
+val stubProduct = { id: String ->
+    Product(
+        ID(id),
+        "Fake Product",
+        "Fake Product Short Description",
+        "fakeVRM.vrm",
+        99.99,
+    )
+}
+
+val stubMail = { id: String ->
+    Mail(
+        ID(id),
+        "Fake Mail",
+        "Fake Mail Body",
+        Date(),
+        false,
+    )
+}
+
+val stubProductPagination = { products: List<Product> ->
+    ProductPagination(
+        ProductEdges(
+            "fake_cursor",
+            products
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubUserPagination = { users: List<User> ->
+    UserPagination(
+        UserEdges(
+            "fake_cursor",
+            users
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubOrderPagination = { orders: List<Order> ->
+    OrderPagination(
+        OrderEdges(
+            "fake_cursor",
+            orders
+        ),
+        PageInfo(
+            "fake_start_cursor",
+            "fake_end_cursor",
+            false,
+        ),
+    )
+}
+
+val stubOrder = { id: String ->
+    Order(
+        ID(id),
+        "Fake Order",
+        "Fake Order Description",
+        99.99,
+        false,
+    )
+}
+
+val stubCart = { ->
+    Cart(
+        2,
+        99.99
+    )
+}
+
+val stubCarts = {
+    Carts(
+        4,
+        listOf(
+            stubCart(), stubCart()
+        )
+    )
+}
+
+val stubPurchase = { ->
+    Purchase(
+        2,
+        99.99,
+        Date(),
+    )
+}

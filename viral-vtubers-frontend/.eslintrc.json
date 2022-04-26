@@ -4,7 +4,7 @@
     "jest": true,
     "browser": true
   },
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": ["projects/**/*", "src/schema/**/*"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -16,7 +16,8 @@
         "eslint:recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended"
       ],
       "plugins": ["simple-import-sort"],
       "rules": {
@@ -40,7 +41,6 @@
         "no-empty-function": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@angular-eslint/no-empty-lifecycle-method": "off",
-        "linebreak-style": "off",
         "prettier/prettier": [
           "error",
           {
