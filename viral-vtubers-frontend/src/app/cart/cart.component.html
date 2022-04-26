@@ -1,1 +1,47 @@
-<p>cart works!</p>
+<div class="container">
+  <h4>Trafficking Lolis</h4>
+  <div *ngFor="let i of [1, 2]" class="cart">
+    <div class="title">
+      <h5>Ayumi Sensei</h5>
+      <img src="assets/icons/ExitIcon.svg" alt="Exit Icon" class="exit-icon" />
+    </div>
+    <hr class="divider" />
+    <div class="item">
+      <img src="https://picsum.photos/200" alt="Ayumi Sensei" />
+      <div class="item-content">
+        <div class="item-details">
+          <p class="item-name">Aya 着替B ver0.98</p>
+          <p class="item-price">$29.99 USD</p>
+        </div>
+        <div class="item-buttons">
+          <p class="item-type">Digital</p>
+          <button class="item-remove">Remove</button>
+        </div>
+      </div>
+    </div>
+    <hr class="divider" />
+    <div class="item">
+      <img src="https://picsum.photos/200/400" alt="Ayumi Sensei" />
+      <div class="item-content">
+        <div class="item-details">
+          <p class="item-name">Aya 着替B ver0.98</p>
+          <p class="item-price">$29.99 USD</p>
+        </div>
+        <div class="item-buttons">
+          <p class="item-type">Digital</p>
+          <button class="item-remove">Remove</button>
+        </div>
+      </div>
+    </div>
+    <hr class="divider" />
+    <div class="checkout">
+      <p>
+        <span class="checkout-total">Total: 2 item(s)</span>
+        <span class="checkout-price">$99.98 USD</span>
+      </p>
+      <button class="checkout-button">Checkout</button>
+      <br />
+      <a href="#" class="checkout-return">Continue Shopping ></a>
+    </div>
+  </div>
+</div>
