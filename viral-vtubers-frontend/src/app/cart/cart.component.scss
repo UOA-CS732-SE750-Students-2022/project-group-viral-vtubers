@@ -34,7 +34,8 @@ h5 {
 }
 
 .divider {
-  color: $color-grey-light;
+  border: none;
+  border-top: 1px solid $color-grey-light;
   margin: 18px 0;
 }
 
