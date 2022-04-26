@@ -7,7 +7,7 @@ data class EditOrderInput(
     val name: String?,
     val description: String?,
     val bounty: Double?,
-    val draft: Boolean?,
+    val isDraft: Boolean?,
     val tagIds: List<String>?,
 )
 

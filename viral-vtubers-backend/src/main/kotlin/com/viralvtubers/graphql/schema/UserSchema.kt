@@ -12,7 +12,7 @@ fun SchemaBuilder.userSchema() {
     type<User> {
         description = "User"
 
-        property<Boolean>("following") {
+        property<Boolean>("isFollowing") {
             resolver { user ->
                 description = "Get if current user if following this user"
                 false
