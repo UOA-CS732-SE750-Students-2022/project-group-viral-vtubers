@@ -1,34 +1,35 @@
-<div class="headerBg">
+<div class="header-bg">
   <img class="cloud cloud-left" src="../../../assets/clouds/cloud_big.svg" />
   <img class="cloud cloud-mid" src="../../../assets/clouds/cloud_big.svg" />
   <img class="cloud cloud-right" src="../../../assets/clouds/cloud_smol.svg" />
 </div>
-<div class="contentContainer">
-  <h3>Sign In</h3>
+<div class="page-container">
+  <div class="content-container">
+    <h3>Sign In</h3>
+    <div class="signin-container">
+      <div class="half-container chibi-container">
+        <img src="../../assets/chibis/chibi_pink.png" />
+      </div>
+      <div class="half-container">
+        <input type="text" placeholder="Email Address" #userEmail required />
+        <input type="password" placeholder="Password" #userPassword required />
+        <input
+          type="button"
+          value="Log In"
+          (click)="authService.SignIn(userEmail.value, userPassword.value)"
+        />
 
-  <div class="signInContainer">
-    <div class="halfContainer chibiContainer">
-      <img src="../../assets/chibis/chibi_pink.png" />
+        <span routerLink="/forgot-password">Forgot Pasword?</span>
+        <span
+          >Don't have an account?<span routerLink="/register">
+            Sign up</span
+          ></span
+        >
+      </div>
     </div>
-    <div class="halfContainer">
-      <input type="text" placeholder="Email Address" #userEmail required />
-      <input type="password" placeholder="Password" #userPassword required />
-      <input
-        type="button"
-        value="Log In"
-        (click)="authService.SignIn(userEmail.value, userPassword.value)"
-      />
-
-      <span routerLink="/forgot-password">Forgot Pasword?</span>
-      <span
-        >Don't have an account?<span routerLink="/register">
-          Sign up</span
-        ></span
-      >
-    </div>
+    <p>
+      By signing into ViralVtubers, you agree to our <a>terms and conditions</a>
+    </p>
   </div>
-  <p>
-    By signing into ViralVtubers, you agree to our <a>terms and conditions</a>
-  </p>
+  <div class="footer"></div>
 </div>
-<div class="footer"></div>

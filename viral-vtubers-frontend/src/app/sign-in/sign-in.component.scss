@@ -3,7 +3,15 @@
 $header-bg-height: 220px;
 $footer-height: 200px;
 
-.headerBg {
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - $header-bg-height);
+  width: 100%;
+  background-color: $color-background;
+}
+
+.header-bg {
   background-color: $color-primary-light;
   height: $header-bg-height;
   margin-top: -$header-height;
@@ -36,10 +44,10 @@ $footer-height: 200px;
   }
 }
 
-.contentContainer {
+.content-container {
   background: $color-background;
   width: 80%;
-  height: calc(100% - $header-bg-height - $footer-height);
+  height: calc(100% - $header-bg-height);
   top: 50%;
   margin: auto;
   display: flex;
@@ -57,15 +65,16 @@ $footer-height: 200px;
     z-index: 2;
   }
 
-  .signInContainer {
+  .signin-container {
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: row;
     border-top: solid 1px $color-grey-light;
     margin-top: -105px;
+    min-width: 1100px;
 
-    .halfContainer {
+    .half-container {
       width: 50%;
       display: flex;
       flex-direction: column;
@@ -77,7 +86,7 @@ $footer-height: 200px;
         margin: 30px;
       }
 
-      .signInForm {
+      .signin-form {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -126,7 +135,7 @@ $footer-height: 200px;
       }
     }
 
-    .chibiContainer {
+    .chibi-container {
       border-right: solid 1px $color-grey-light;
     }
   }
@@ -149,5 +158,8 @@ $footer-height: 200px;
 .footer {
   background-color: #f6f9fa;
   height: $footer-height;
+  min-height: 100px;
   width: 100%;
+  flex: 1;
+  z-index: 4;
 }
