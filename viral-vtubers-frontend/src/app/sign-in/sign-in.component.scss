@@ -134,6 +134,26 @@ $input-width: 420px;
           font-size: $font-size-body-2;
           text-transform: uppercase;
           font-weight: 500;
+          border-radius: 3px;
+          cursor: pointer;
+          transition: $button-hover-animation;
+        }
+
+        > input {
+          background-color: $color-primary;
+          color: $color-background;
+
+          &:hover {
+            opacity: $button-coloured-hover-opacity;
+          }
+        }
+
+        > a {
+          color: $color-grey-dark;
+
+          &:hover {
+            background-color: $button-blank-hover-bg;
+          }
         }
       }
     }
