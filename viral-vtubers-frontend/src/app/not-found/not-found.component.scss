@@ -10,9 +10,10 @@
 .box {
   margin-bottom: $header-height;
   > p {
-    font-size: $font-size-h4;
+    font-size: $font-size-h6;
     color: $color-grey-dark;
     text-align: center;
+    margin-top: 50px;
     > a {
       text-decoration: none;
       color: $color-primary;
