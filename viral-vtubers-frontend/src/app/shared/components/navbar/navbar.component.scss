@@ -2,7 +2,7 @@
 
 .navbar {
   display: flex;
-  height: 68px;
+  height: $header-height;
   align-items: center;
   justify-content: space-between;
   column-gap: 2em;
