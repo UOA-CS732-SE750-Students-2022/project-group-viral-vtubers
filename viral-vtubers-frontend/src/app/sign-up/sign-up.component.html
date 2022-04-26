@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <h3>Create Account</h3>
     <input type="text" placeholder="Display Name" #userName required>
     <input type="email" placeholder="Email Address" #userEmail required>
@@ -6,4 +6,58 @@
     <input type="button" value="Register" (click)="authService.SignUp(userEmail.value, userPassword.value, userName.value)">
 
     <span>Already have an account?<span routerLink="/signin"> Log In</span></span>
+</div> -->
+<div class="header-bg">
+  <img class="cloud cloud-left" src="../../../assets/clouds/cloud_big.svg" />
+  <img class="cloud cloud-mid" src="../../../assets/clouds/cloud_big.svg" />
+  <img class="cloud cloud-right" src="../../../assets/clouds/cloud_smol.svg" />
 </div>
+<div class="page-container">
+  <div class="content-container">
+    <h3>Create account</h3>
+    <div class="signin-container">
+      <div class="half-container chibi-container">
+        <img src="../../assets/chibis/chibi_blue.png" />
+      </div>
+      <div class="half-container form-container">
+        <input type="text" placeholder="Display Name" #userName required />
+        <input type="text" placeholder="Email Address" #userEmail required />
+        <input type="password" placeholder="Password" #userPassword required />
+        <div class="action-container">
+          <div class="actions">
+            <span class="remember-me"
+              ><input type="checkbox" /> I would like to subscribe to Vtuber
+              news!</span
+            >
+          </div>
+          <div>
+            <input
+              class="button"
+              type="button"
+              value="Register"
+              (click)="
+                authService.SignUp(
+                  userEmail.value,
+                  userPassword.value,
+                  userName.value
+                )
+              "
+            />
+            <a
+              class="button"
+              routerLink="/register"
+              href="location.href='/signin'"
+            >
+              Got an account?
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>
+      By signing up to ViralVtubers, you agree to our
+      <a>terms and conditions</a>
+    </p>
+  </div>
+</div>
+<app-footer></app-footer>
