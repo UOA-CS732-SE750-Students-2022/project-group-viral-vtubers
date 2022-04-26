@@ -3,18 +3,32 @@
   <img class="cloud cloud-mid" src="../../../assets/clouds/cloud_big.svg" />
   <img class="cloud cloud-right" src="../../../assets/clouds/cloud_smol.svg" />
 </div>
-<div class="signIn">
+<div class="contentContainer">
   <h3>Sign In</h3>
-  <input type="text" placeholder="Email Address" #userEmail required />
-  <input type="password" placeholder="Password" #userPassword required />
-  <input
-    type="button"
-    value="Log In"
-    (click)="authService.SignIn(userEmail.value, userPassword.value)"
-  />
 
-  <span routerLink="/forgot-password">Forgot Pasword?</span>
-  <span
-    >Don't have an account?<span routerLink="/register"> Sign up</span></span
-  >
+  <div class="signInContainer">
+    <div class="halfContainer">
+      <img src="../../assets/chibis/chibi_pink.png" />
+    </div>
+    <div class="halfContainer">
+      <input type="text" placeholder="Email Address" #userEmail required />
+      <input type="password" placeholder="Password" #userPassword required />
+      <input
+        type="button"
+        value="Log In"
+        (click)="authService.SignIn(userEmail.value, userPassword.value)"
+      />
+
+      <span routerLink="/forgot-password">Forgot Pasword?</span>
+      <span
+        >Don't have an account?<span routerLink="/register">
+          Sign up</span
+        ></span
+      >
+    </div>
+  </div>
+  <p>
+    By signing into ViralVtubers, you agree to our <a>terms and conditions</a>
+  </p>
 </div>
+<div class="footer"></div>

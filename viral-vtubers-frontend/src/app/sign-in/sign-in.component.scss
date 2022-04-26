@@ -1,34 +1,127 @@
 @import "../../variables";
 
+$header-bg-height: 220px;
+$footer-height: 200px;
+
 .headerBg {
   background-color: $color-primary-light;
-  height: 220px;
+  height: $header-bg-height;
   margin-top: -$header-height;
   overflow: hidden;
   position: relative;
   z-index: -1;
+
+  .cloud {
+    position: absolute;
+  }
+
+  .cloud-left {
+    width: 450px;
+    transform: rotate(1deg);
+    left: -20px;
+    bottom: -100px;
+  }
+
+  .cloud-mid {
+    transform: rotate(177deg);
+    width: 800px;
+    left: 30vw;
+    bottom: -300px;
+  }
+
+  .cloud-right {
+    width: 325px;
+    right: -50px;
+    bottom: -80px;
+  }
 }
 
-.cloud {
-  position: absolute;
+.contentContainer {
+  background: lightblue;
+  width: 80%;
+  height: calc(100% - $header-bg-height - $footer-height);
+  top: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  > h3 {
+    font-size: $font-size-h4;
+    font-family: $font-family-monospace;
+    text-transform: lowercase;
+    // position: absolute;
+    background-color: $color-background;
+    padding: 20px 50px;
+  }
+
+  .signInContainer {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    .halfContainer {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .signInForm {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .signInFormField {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .signInFormFieldLabel {
+            font-size: $font-size-h6;
+            font-family: $font-family-monospace;
+            text-transform: lowercase;
+            margin-bottom: 10px;
+          }
+
+          .signInFormFieldInput {
+            width: 100%;
+            height: 40px;
+            border: 1px solid $color-grey-dark;
+            border-radius: 5px;
+            padding: 0 10px;
+            font-size: $font-size-body-1;
+            font-family: $font-family-monospace;
+            text-transform: lowercase;
+          }
+        }
+
+        .signInFormButton {
+          width: 100%;
+          height: 40px;
+          border: 1px solid $color-grey-dark;
+          border-radius: 5px;
+          padding: 0 10px;
+          font-size: $font-size-body-1;
+          font-family: $font-family-monospace;
+          text-transform: lowercase;
+          background-color: $color-primary;
+          color: $color-background;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
-.cloud-left {
-  width: 450px;
-  transform: rotate(1deg);
-  left: -20px;
-  bottom: -100px;
-}
-
-.cloud-mid {
-  transform: rotate(177deg);
-  width: 800px;
-  left: 30vw;
-  bottom: -300px;
-}
-
-.cloud-right {
-  width: 325px;
-  right: -50px;
-  bottom: -80px;
+.footer {
+  background-color: #f6f9fa;
+  height: $footer-height;
+  width: 100%;
 }
