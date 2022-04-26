@@ -27,18 +27,19 @@
     display: block;
     margin: 0 auto 24px auto;
     transition: transform 0.8s;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
-  img:hover {
-    transform: scale(1.1);
-  }
-  p {
+  > p {
     margin-top: 28px;
     margin-bottom: 0px;
     font-size: $font-size-h4;
     color: $color-kneegrow;
     text-align: center;
   }
+
   .backgroundText {
     margin: auto;
     position: relative;
