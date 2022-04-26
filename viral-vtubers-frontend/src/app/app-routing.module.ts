@@ -24,7 +24,7 @@ export const routes: Routes = [
       import('./commissions/commissions.module').then(
         (m) => m.CommissionsModule
       ),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'marketplace',

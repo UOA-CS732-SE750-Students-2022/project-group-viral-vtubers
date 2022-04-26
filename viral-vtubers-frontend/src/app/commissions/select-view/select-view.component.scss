@@ -1,0 +1,64 @@
+@import "../../../variables";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: calc(100vh - 98px);
+}
+
+.box {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  max-width: 696px;
+  width: 696px;
+  max-height: 719px;
+  height: 719px;
+  margin: 32px;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: $color-grey-dark;
+  img {
+    z-index: 100;
+    display: block;
+    margin: 0 auto 24px auto;
+    transition: transform 0.8s;
+  }
+
+  img:hover {
+    transform: scale(1.1);
+  }
+  p {
+    margin-top: 28px;
+    margin-bottom: 0px;
+    font-size: $font-size-h4;
+    color: $color-kneegrow;
+    text-align: center;
+  }
+  .backgroundText {
+    margin: auto;
+    position: relative;
+    text-align: center;
+    font-weight: 600;
+    font-size: 200px;
+    color: $color-grey-light;
+    transform-style: flat;
+  }
+  .background {
+    overflow: hidden;
+    z-index: -1;
+    position: absolute;
+    width: 696px;
+    margin-top: 50px;
+  }
+}
+
+.request {
+  .requestText {
+    font-size: 160px !important;
+  }
+}
