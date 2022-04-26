@@ -6,7 +6,9 @@ $footer-height: 200px;
 .page-container {
   display: flex;
   flex-direction: column;
-  height: calc(100% - $header-bg-height);
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100% - $header-bg-height - $footer-height);
   width: 100%;
   background-color: $color-background;
 }
@@ -45,15 +47,14 @@ $footer-height: 200px;
 }
 
 .content-container {
-  background: $color-background;
   width: 80%;
-  height: calc(100% - $header-bg-height);
   top: 50%;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  max-height: 650px;
 
   > h3 {
     font-size: $font-size-h4;
@@ -73,6 +74,7 @@ $footer-height: 200px;
     border-top: solid 1px $color-grey-light;
     margin-top: -105px;
     min-width: 1100px;
+    box-sizing: border-box;
 
     .half-container {
       width: 50%;
@@ -85,54 +87,6 @@ $footer-height: 200px;
         z-index: 3;
         margin: 30px;
       }
-
-      .signin-form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .signInFormField {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-
-          .signInFormFieldLabel {
-            font-size: $font-size-h6;
-            font-family: $font-family-monospace;
-            text-transform: lowercase;
-            margin-bottom: 10px;
-          }
-
-          .signInFormFieldInput {
-            width: 100%;
-            height: 40px;
-            border: 1px solid $color-grey-dark;
-            border-radius: 5px;
-            padding: 0 10px;
-            font-size: $font-size-body-1;
-            font-family: $font-family-monospace;
-            text-transform: lowercase;
-          }
-        }
-
-        .signInFormButton {
-          width: 100%;
-          height: 40px;
-          border: 1px solid $color-grey-dark;
-          border-radius: 5px;
-          padding: 0 10px;
-          font-size: $font-size-body-1;
-          font-family: $font-family-monospace;
-          text-transform: lowercase;
-          background-color: $color-primary;
-          color: $color-background;
-          cursor: pointer;
-        }
-      }
     }
 
     .chibi-container {
@@ -142,10 +96,11 @@ $footer-height: 200px;
 
   > p {
     height: 20px;
-    margin-top: 50px;
+    margin-top: 40px;
     font-size: $font-size-body-3;
     color: $color-grey-dark;
     margin-bottom: 20px;
+    z-index: 5;
 
     > a {
       color: $color-primary;
