@@ -1,0 +1,33 @@
+@import "../../../../variables";
+
+.footer {
+  background-color: #f6f9fa;
+  height: $footer-height;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-media-container {
+  display: flex;
+  column-gap: 45px;
+  height: 40px;
+  align-self: center;
+  margin-right: 150px;
+
+  img {
+    cursor: pointer;
+    transition: $button-hover-animation;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.footer > p {
+  align-self: flex-end;
+  font-size: $font-size-body-3;
+  color: $color-grey-dark;
+  margin-left: 30px;
+}
