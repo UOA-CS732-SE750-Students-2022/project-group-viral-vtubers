@@ -17,6 +17,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { SharedModule } from './shared/shared.module';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
     NotFoundComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
