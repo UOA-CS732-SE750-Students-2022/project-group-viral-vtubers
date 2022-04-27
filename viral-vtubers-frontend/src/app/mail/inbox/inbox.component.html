@@ -13,6 +13,15 @@
     </nav>
   </div>
   <div class="content-container">
-    <div *ngFor="let mail of mails" class="mail-item">{{ mail.title }}</div>
+    <div *ngFor="let mail of mails" class="mail-item">
+      <h4>im the title</h4>
+      <p class="mail-meta">from <span>Author</span> sent some time ago</p>
+      <p class="mail-content">This is the content</p>
+      <div class="actions-container">
+        <button>Reply</button>
+        <button>Mark unread</button>
+        <button>Delete</button>
+      </div>
+    </div>
   </div>
 </div>
