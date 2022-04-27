@@ -58,13 +58,14 @@ $card-padding: 75px;
     }
   }
 
-  > input, > textarea {
+  > input[type=text], > textarea {
     border-radius: 10px;
     border: solid 1px $color-grey-light;
 
     height: 44px;
 
     font-size: $font-size-body-2;
+    font-family: $font-family-poppins;
 
     box-sizing: border-box;
     padding: 0 15px;
@@ -95,6 +96,24 @@ $card-padding: 75px;
   flex: 1;
 
   margin-bottom: 0;
+
+  .content-policy {
+    align-self: flex-end;
+    margin-top: 5px;
+    margin-right: 3px;
+    font-size: $font-size-body-3;
+    color: $color-grey-dark;
+
+    > span {
+      color: $color-primary;
+      cursor: pointer;
+
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+    }
+  }
 }
 
 .send-button {
