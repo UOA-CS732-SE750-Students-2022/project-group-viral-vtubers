@@ -13,3 +13,16 @@ export const MailInboxFragment = gql`
     }
   }
 `;
+
+export const MailOutboxFragment = gql`
+  fragment MailOutboxFragment on Mail {
+    body
+    date
+    id
+    title
+    receiver {
+      id
+      displayName
+    }
+  }
+`;
