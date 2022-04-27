@@ -151,6 +151,11 @@
             <artifactId>koin-ktor</artifactId>
             <version>${koin_version}</version>
         </dependency>
+        <dependency>
+            <groupId>dev.gitlive</groupId>
+            <artifactId>firebase-auth</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
