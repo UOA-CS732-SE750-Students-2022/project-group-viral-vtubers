@@ -493,7 +493,7 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
     override document = LoginDocument;
-    
+
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -513,7 +513,7 @@ export const InboxDocument = gql`
   })
   export class InboxGQL extends Apollo.Query<InboxQuery, InboxQueryVariables> {
     override document = InboxDocument;
-    
+
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -533,7 +533,7 @@ export const OutboxDocument = gql`
   })
   export class OutboxGQL extends Apollo.Query<OutboxQuery, OutboxQueryVariables> {
     override document = OutboxDocument;
-    
+
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -551,7 +551,7 @@ export const SelfDocument = gql`
   })
   export class SelfGQL extends Apollo.Query<SelfQuery, SelfQueryVariables> {
     override document = SelfDocument;
-    
+
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
