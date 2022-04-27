@@ -61,6 +61,23 @@ fun SchemaBuilder.userSchema() {
         }
     }
 
+    type<Mail> {
+        description = "Mail"
+        property<User>("sender") {
+            resolver { mail ->
+                description = "Get sender"
+                stubUser("fake_user")
+            }
+        }
+
+        property<User>("receiver") {
+            resolver { mail ->
+                description = "Get receiver"
+                stubUser("fake_user")
+            }
+        }
+    }
+
     mutation("login") {
         description = "Check if the user exist if not create the user"
         resolver { ->

@@ -1,4 +1,6 @@
 import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -100,12 +102,15 @@ export type EditServiceInput = {
   priceType?: InputMaybe<PriceEnum>;
 };
 
+/** Mail */
 export type Mail = {
   __typename?: 'Mail';
   body: Scalars['String'];
   date: Scalars['DateTime'];
   id: Scalars['ID'];
   read: Scalars['Boolean'];
+  receiver: User;
+  sender: User;
   title: Scalars['String'];
 };
 
@@ -411,3 +416,104 @@ export type UserPagination = {
   edges: UserEdges;
   pageInfo: PageInfo;
 };
+
+export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
+
+export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
+
+export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+
+export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type InboxQuery = { __typename?: 'Query', self: { __typename?: 'User', inbox: Array<{ __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } }> } };
+
+export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SelfQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+
+export const MailInboxFragmentFragmentDoc = gql`
+    fragment MailInboxFragment on Mail {
+  body
+  date
+  id
+  read
+  title
+  sender {
+    id
+    displayName
+  }
+}
+    `;
+export const UserFragmentFragmentDoc = gql`
+    fragment UserFragment on User {
+  id
+  bio
+  numCompletedCommissions
+  displayName
+  email
+  numLikes
+  profileImageURI
+  isFollowing
+}
+    `;
+export const LoginDocument = gql`
+    mutation Login {
+  login {
+    ...UserFragment
+  }
+}
+    ${UserFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
+    override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const InboxDocument = gql`
+    query Inbox {
+  self {
+    inbox {
+      ...MailInboxFragment
+    }
+  }
+}
+    ${MailInboxFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InboxGQL extends Apollo.Query<InboxQuery, InboxQueryVariables> {
+    override document = InboxDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SelfDocument = gql`
+    query Self {
+  self {
+    ...UserFragment
+  }
+}
+    ${UserFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SelfGQL extends Apollo.Query<SelfQuery, SelfQueryVariables> {
+    override document = SelfDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

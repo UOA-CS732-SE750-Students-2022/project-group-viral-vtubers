@@ -78,13 +78,15 @@ type PageInfo {
   hasNextPage: Boolean!
   startCursor: String!
 }
-""
+"Mail"
 type Mail {
   body: String!
   date: DateTime!
   id: ID!
   read: Boolean!
   title: String!
+  sender: User!
+  receiver: User!
 }
 "Order"
 type Order {

@@ -1,7 +1,11 @@
 schema: ./src/schema/**/*.graphql
+documents: "./src/**/*.ts"
 generates:
   ./src/schema/type.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-apollo-angular
+    config:
+      gqlImport: apollo-angular#gql
+      addExplicitOverride: true
