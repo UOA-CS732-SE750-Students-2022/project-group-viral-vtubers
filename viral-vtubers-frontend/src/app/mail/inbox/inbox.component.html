@@ -5,7 +5,9 @@
     [ngClass]="{ unread: !mail.read }"
   >
     <h4>{{ mail.title }}</h4>
-    <p class="mail-meta">from <span>Author</span> sent {{ mail.date }}</p>
+    <p class="mail-meta">
+      from <span>{{ mail.sender.displayName }}</span> sent {{ mail.date }}
+    </p>
     <p class="mail-content">{{ mail.body }}</p>
     <div class="actions-container">
       <button>Reply</button>

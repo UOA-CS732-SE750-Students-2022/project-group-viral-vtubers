@@ -18,7 +18,7 @@ export class InboxComponent implements OnInit {
         read: false,
         title: 'Physics IA questions',
         sender: {
-          displayName: 'Viral Vtubers',
+          displayName: '20pdemau',
           id: 'user0',
         },
       },
@@ -29,7 +29,7 @@ export class InboxComponent implements OnInit {
         read: true,
         title: 'Physics IA:',
         sender: {
-          displayName: 'Viral Vtubers',
+          displayName: 'Shanhara_K',
           id: 'user0',
         },
       },
@@ -40,7 +40,7 @@ export class InboxComponent implements OnInit {
         read: true,
         title: 'User Profile Transparency Update:',
         sender: {
-          displayName: 'Viral Vtubers',
+          displayName: 'reddit',
           id: 'user0',
         },
       },
@@ -51,7 +51,7 @@ export class InboxComponent implements OnInit {
         read: true,
         title: 'Physics IA:',
         sender: {
-          displayName: 'Viral Vtubers',
+          displayName: 'Shanhara_K',
           id: 'user0',
         },
       },
