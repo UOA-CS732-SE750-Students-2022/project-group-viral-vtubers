@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Mail } from 'src/schema/type';
+import { Mail, MailInboxFragmentFragment, User } from 'src/schema/type';
 import * as moment from 'moment';
 @Component({
   selector: 'app-inbox',
@@ -7,7 +7,7 @@ import * as moment from 'moment';
   styleUrls: ['./inbox.component.scss'],
 })
 export class InboxComponent implements OnInit {
-  mails: Mail[];
+  mails: MailInboxFragmentFragment[];
 
   constructor() {
     this.mails = [
@@ -17,6 +17,10 @@ export class InboxComponent implements OnInit {
         id: 'mail0',
         read: false,
         title: 'Physics IA questions',
+        sender: {
+          displayName: 'Viral Vtubers',
+          id: 'user0',
+        },
       },
       {
         body: "Hey, I was going through the IBO subreddit and I saw that your Physics IA was about rotational kinetic energy on a ramp and I'm working on something similar. I was just wondering if you could send me your IA to use as an exemplar since you got a 22. Any help would be appreciated, thanks",
@@ -24,6 +28,10 @@ export class InboxComponent implements OnInit {
         id: 'mail1',
         read: true,
         title: 'Physics IA:',
+        sender: {
+          displayName: 'Viral Vtubers',
+          id: 'user0',
+        },
       },
       {
         body: 'Hello! You are receiving this message because you have followed a user profile in the past.\nStarting on 08/19/2019, we will begin showing some users new followers of their profile. In about 3 months, all users will be able to see all the usernames of their followers, including follows that were done in the past, while the user profile feature was in beta. Please take a moment to check your subscriptions list (where followed users also appear) to ensure that if you follow someone, you are comfortable with them being aware of this.',
@@ -31,6 +39,10 @@ export class InboxComponent implements OnInit {
         id: 'mail2',
         read: true,
         title: 'User Profile Transparency Update:',
+        sender: {
+          displayName: 'Viral Vtubers',
+          id: 'user0',
+        },
       },
       {
         body: "Hey, I was going through the IBO subreddit and I saw that your Physics IA was about rotational kinetic energy on a ramp and I'm working on something similar. I was just wondering if you could send me your IA to use as an exemplar since you got a 22. Any help would be appreciated, thanks",
@@ -38,6 +50,10 @@ export class InboxComponent implements OnInit {
         id: 'mail3',
         read: true,
         title: 'Physics IA:',
+        sender: {
+          displayName: 'Viral Vtubers',
+          id: 'user0',
+        },
       },
       {
         body: 'Hello! You are receiving this message because you have followed a user profile in the past.\nStarting on 08/19/2019, we will begin showing some users new followers of their profile. In about 3 months, all users will be able to see all the usernames of their followers, including follows that were done in the past, while the user profile feature was in beta. Please take a moment to check your subscriptions list (where followed users also appear) to ensure that if you follow someone, you are comfortable with them being aware of this.',
@@ -45,6 +61,10 @@ export class InboxComponent implements OnInit {
         id: 'mail4',
         read: true,
         title: 'User Profile Transparency Update:',
+        sender: {
+          displayName: 'Viral Vtubers',
+          id: 'user0',
+        },
       },
     ].map((mail) => ({ ...mail, date: moment(mail.date).fromNow() }));
   }
