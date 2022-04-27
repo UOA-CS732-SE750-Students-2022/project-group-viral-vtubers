@@ -19,7 +19,6 @@ export const MailOutboxFragment = gql`
     body
     date
     id
-    read
     title
     receiver {
       id

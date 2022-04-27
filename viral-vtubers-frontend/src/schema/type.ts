@@ -419,7 +419,7 @@ export type UserPagination = {
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
-export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
+export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
@@ -436,7 +436,7 @@ export type InboxQuery = { __typename?: 'Query', self: { __typename?: 'User', in
 export type OutboxQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OutboxQuery = { __typename?: 'Query', self: { __typename?: 'User', sent: Array<{ __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, receiver: { __typename?: 'User', id: string, displayName: string } }> } };
+export type OutboxQuery = { __typename?: 'Query', self: { __typename?: 'User', sent: Array<{ __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } }> } };
 
 export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -461,7 +461,6 @@ export const MailOutboxFragmentFragmentDoc = gql`
   body
   date
   id
-  read
   title
   receiver {
     id

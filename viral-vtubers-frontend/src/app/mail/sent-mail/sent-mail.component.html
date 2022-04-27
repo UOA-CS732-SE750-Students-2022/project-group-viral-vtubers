@@ -1,1 +1,9 @@
-<p>sent-mail works!</p>
+<div class="content-container">
+  <div *ngFor="let mail of mails" class="mail-item">
+    <h4>{{ mail.title }}</h4>
+    <p class="mail-meta">
+      to <span>{{ mail.receiver.displayName }}</span> sent {{ mail.date }}
+    </p>
+    <p class="mail-content">{{ mail.body }}</p>
+  </div>
+</div>
