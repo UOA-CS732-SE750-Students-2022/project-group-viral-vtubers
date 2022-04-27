@@ -13,8 +13,6 @@
     </nav>
   </div>
   <div class="content-container">
-    <div class="mail-item">mail item 1</div>
-    <div class="mail-item">mail item 1</div>
-    <div class="mail-item">mail item 1</div>
+    <div *ngFor="let mail of mails" class="mail-item">{{ mail.title }}</div>
   </div>
 </div>
