@@ -52,8 +52,14 @@
     }
   }
 
+  .mail-content {
+    margin-top: 20px;
+  }
+
   .actions-container {
     width: 240px;
+    margin-bottom: -5px;
+
     display: flex;
     justify-content: space-between;
 
@@ -67,6 +73,12 @@
       padding: 0;
 
       color: $color-grey-dark;
+
+      cursor: pointer;
+
+      &:hover {
+        color: $color-primary;
+      }
     }
   }
 }

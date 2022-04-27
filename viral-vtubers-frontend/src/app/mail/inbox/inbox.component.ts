@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Mail } from 'src/schema/type';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
@@ -25,7 +25,7 @@ export class InboxComponent implements OnInit {
         read: false,
         title: 'Physics IA:',
       },
-    ];
+    ].map((mail) => ({ ...mail, date: moment(mail.date).fromNow() }));
   }
 
   ngOnInit(): void {}
