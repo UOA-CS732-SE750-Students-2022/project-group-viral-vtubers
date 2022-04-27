@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Mail, MailInboxFragmentFragment, User } from 'src/schema/type';
 import * as moment from 'moment';
+import { Mail, MailInboxFragmentFragment, User } from 'src/schema/type';
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',

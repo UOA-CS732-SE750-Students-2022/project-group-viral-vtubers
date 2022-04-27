@@ -10,7 +10,7 @@ export class MailComponent implements OnInit {
   activeRoute: string = this.router.url;
 
   constructor(private router: Router) {
-    this.router.events.subscribe((res) => {
+    this.router.events.subscribe(() => {
       this.activeRoute = this.router.url;
     });
   }

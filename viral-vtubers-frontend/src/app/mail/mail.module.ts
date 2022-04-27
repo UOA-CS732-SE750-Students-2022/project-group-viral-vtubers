@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { NewMailComponent } from './new-mail/new-mail.component';
 import { InboxComponent } from './inbox/inbox.component';
-import { SentMailComponent } from './sent-mail/sent-mail.component';
 import { MailComponent } from './mail.component';
+import { NewMailComponent } from './new-mail/new-mail.component';
+import { SentMailComponent } from './sent-mail/sent-mail.component';
 
 export const routes: Routes = [
   {
