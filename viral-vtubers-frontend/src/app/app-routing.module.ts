@@ -42,7 +42,7 @@ export const routes: Routes = [
   {
     path: 'mail',
     loadChildren: () => import('./mail/mail.module').then((m) => m.MailModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   // Plain page components
   {

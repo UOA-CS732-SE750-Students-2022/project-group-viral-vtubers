@@ -1,0 +1,25 @@
+@import "../../../variables";
+
+.inbox-page {
+  background-color: lightblue;
+  height: calc(100% - $header-height);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-container {
+  height: 100%;
+  background-color: lightcoral;
+  width: 265px;
+  padding: 60px;
+  box-sizing: border-box;
+}
+
+.content-container {
+  padding: 60px;
+  box-sizing: border-box;
+  background-color: lightgreen;
+  flex: 1;
+  overflow-y: scroll;
+}
