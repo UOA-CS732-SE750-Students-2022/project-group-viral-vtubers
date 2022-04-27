@@ -3,13 +3,16 @@
     <button routerLink="new">+ new mail</button>
     <nav>
       <ul>
-        <li class="active">
+        <li [ngClass]="{ active: activeRoute === '/mail' }" routerLink="/mail">
           <img src="assets/icons/mail/received.svg" />
           <p>Inbox</p>
         </li>
-        <li>
+        <li
+          [ngClass]="{ active: activeRoute === '/mail/sent' }"
+          routerLink="sent"
+        >
           <img src="assets/icons/mail/sent.svg" />
-          <p routerLink="sent">Sent</p>
+          <p>Sent</p>
         </li>
       </ul>
     </nav>
