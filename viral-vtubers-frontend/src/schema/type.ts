@@ -100,12 +100,15 @@ export type EditServiceInput = {
   priceType?: InputMaybe<PriceEnum>;
 };
 
+/** Mail */
 export type Mail = {
   __typename?: 'Mail';
   body: Scalars['String'];
   date: Scalars['DateTime'];
   id: Scalars['ID'];
   read: Scalars['Boolean'];
+  receiver: User;
+  sender: User;
   title: Scalars['String'];
 };
 
