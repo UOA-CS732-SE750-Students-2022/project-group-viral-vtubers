@@ -53,22 +53,14 @@ type Subcategory {
   id: ID!
   name: String!
   category: Category!
-  products(
-    filter: ProductFilter
-    cursor: String
-    limit: Int
-  ): ProductPagination!
+  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
 }
 "Category"
 type Category {
   id: ID!
   name: String!
   subcategories: [Subcategory!]!
-  products(
-    filter: ProductFilter
-    cursor: String
-    limit: Int
-  ): ProductPagination!
+  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
 }
 ""
 type ProductPagination {
