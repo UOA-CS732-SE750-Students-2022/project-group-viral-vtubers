@@ -49,6 +49,7 @@
 
     > span {
       color: $color-primary;
+      cursor: pointer;
     }
   }
 
@@ -81,4 +82,8 @@
       }
     }
   }
+}
+
+.unread {
+  border: solid 1px $color-secondary;
 }
