@@ -1,7 +1,10 @@
 package com.viralvtubers.database.model
 
+import org.bson.codecs.pojo.annotations.BsonId
+import org.litote.kmongo.Id
+
 data class Product (
-    val id: Id<Product>,
+    @BsonId val id: Id<Product>,
     val name: String,
     val tags: Array<Id<Tag>>,
     val description: String,

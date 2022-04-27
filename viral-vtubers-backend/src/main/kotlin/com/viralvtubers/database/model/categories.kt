@@ -1,5 +1,7 @@
 package com.viralvtubers.database.model
 
+import org.litote.kmongo.Id
+
 data class Subcategory (
     val id: Id<Subcategory>,
     val parent: Category,

@@ -1,6 +1,10 @@
 package com.viralvtubers.database.model
 
+import org.bson.codecs.pojo.annotations.BsonId
+import org.litote.kmongo.Id
+
 data class User (
+    @BsonId val id: Id<User>,
     val name: String,
     val email: String,
     val password: ByteArray,
@@ -8,7 +12,7 @@ data class User (
     val completedCommissions: UInt,
     val specialises: Array<Id<Tag>>,
     val images: Array<ByteArray>,
-    val services: Array<Id<Service>>,
+    val services: Array<Service>,
     val products: Array<Id<Product>>,
 ) {
     override fun equals(other: Any?): Boolean {
@@ -17,7 +21,7 @@ data class User (
 
         other as User
 
-        if (email != other.email) return false
+        if (id != other.id) return false
 
         return true
     }
