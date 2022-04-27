@@ -419,6 +419,8 @@ export type UserPagination = {
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
+export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
+
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
@@ -430,6 +432,11 @@ export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type InboxQuery = { __typename?: 'Query', self: { __typename?: 'User', inbox: Array<{ __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } }> } };
+
+export type OutboxQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type OutboxQuery = { __typename?: 'Query', self: { __typename?: 'User', sent: Array<{ __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, receiver: { __typename?: 'User', id: string, displayName: string } }> } };
 
 export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -444,6 +451,19 @@ export const MailInboxFragmentFragmentDoc = gql`
   read
   title
   sender {
+    id
+    displayName
+  }
+}
+    `;
+export const MailOutboxFragmentFragmentDoc = gql`
+    fragment MailOutboxFragment on Mail {
+  body
+  date
+  id
+  read
+  title
+  receiver {
     id
     displayName
   }
@@ -494,6 +514,26 @@ export const InboxDocument = gql`
   })
   export class InboxGQL extends Apollo.Query<InboxQuery, InboxQueryVariables> {
     override document = InboxDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const OutboxDocument = gql`
+    query Outbox {
+  self {
+    sent {
+      ...MailOutboxFragment
+    }
+  }
+}
+    ${MailOutboxFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class OutboxGQL extends Apollo.Query<OutboxQuery, OutboxQueryVariables> {
+    override document = OutboxDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -1,6 +1,9 @@
 import { gql } from 'apollo-angular';
 
-import { MailInboxFragment } from '../fragments/mail.fragment';
+import {
+  MailInboxFragment,
+  MailOutboxFragment,
+} from '../fragments/mail.fragment';
 
 export const inboxQuery = gql`
   query Inbox {
@@ -11,4 +14,15 @@ export const inboxQuery = gql`
     }
   }
   ${MailInboxFragment}
+`;
+
+export const outboxQuery = gql`
+  query Outbox {
+    self {
+      sent {
+        ...MailOutboxFragment
+      }
+    }
+  }
+  ${MailOutboxFragment}
 `;
