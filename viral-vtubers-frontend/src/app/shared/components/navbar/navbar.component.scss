@@ -160,3 +160,10 @@
     color: $color-grey-light;
   }
 }
+
+@media (max-width: 1130px) {
+  .logoBtn {
+    width: 0;
+    visibility: hidden;
+  }
+}
