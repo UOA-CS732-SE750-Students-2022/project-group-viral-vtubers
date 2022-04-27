@@ -9,13 +9,97 @@
 
 .sidebar-container {
   height: 100%;
-  width: 265px;
-  padding: 60px;
+  padding: 40px 60px;
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  > button {
+    width: 150px;
+    height: 40px;
+
+    border-radius: 3px;
+    border: solid 1px $color-grey-light;
+
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: $font-family-poppins;
+    font-size: $font-size-body-2;
+    font-weight: 500;
+
+    background-color: $color-primary;
+    color: $color-background;
+
+    cursor: pointer;
+    transition: $button-hover-animation;
+
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
+  }
+
+  > nav {
+    margin-top: 35px;
+    flex: 1;
+  }
+
+  > nav > ul {
+    margin: 0;
+    padding: 0;
+
+    width: 265px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+
+    > li {
+      text-decoration: none;
+      list-style: none;
+      margin: 0;
+
+      height: 60px;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+
+      font-size: $font-size-body-1;
+
+      cursor: pointer;
+
+      * {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      &:hover {
+        background-color: #f6f9fa;
+      }
+    }
+
+    .active {
+      background-color: $color-primary-light;
+    }
+  }
+
+  > p {
+    font-size: $font-size-body-3;
+    color: $color-grey-dark;
+
+    cursor: pointer;
+  }
 }
 
 .content-container {
-  padding: 60px;
+  padding: 40px 60px;
   box-sizing: border-box;
   flex: 1;
   overflow-y: scroll;
