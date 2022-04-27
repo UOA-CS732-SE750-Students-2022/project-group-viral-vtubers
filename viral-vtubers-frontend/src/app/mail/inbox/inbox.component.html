@@ -1,37 +1,16 @@
-<div class="inbox-page">
-  <div class="sidebar-container">
-    <button routerLink="new">+ new mail</button>
-    <nav>
-      <ul>
-        <li class="active">
-          <img src="assets/icons/mail/received.svg" />
-          <p>Inbox</p>
-        </li>
-        <li>
-          <img src="assets/icons/mail/sent.svg" />
-          <p routerLink="sent">Sent</p>
-        </li>
-      </ul>
-    </nav>
-    <div class="report-container">
-      <img src="assets/icons/mail/alert.svg" />
-      <p>Report someone</p>
-    </div>
-  </div>
-  <div class="content-container">
-    <div
-      *ngFor="let mail of mails"
-      class="mail-item"
-      [ngClass]="{ unread: !mail.read }"
-    >
-      <h4>{{ mail.title }}</h4>
-      <p class="mail-meta">from <span>Author</span> sent {{ mail.date }}</p>
-      <p class="mail-content">{{ mail.body }}</p>
-      <div class="actions-container">
-        <button>Reply</button>
-        <button>Mark unread</button>
-        <button>Delete</button>
-      </div>
+<div class="content-container">
+  <div
+    *ngFor="let mail of mails"
+    class="mail-item"
+    [ngClass]="{ unread: !mail.read }"
+  >
+    <h4>{{ mail.title }}</h4>
+    <p class="mail-meta">from <span>Author</span> sent {{ mail.date }}</p>
+    <p class="mail-content">{{ mail.body }}</p>
+    <div class="actions-container">
+      <button>Reply</button>
+      <button>Mark unread</button>
+      <button>Delete</button>
     </div>
   </div>
 </div>

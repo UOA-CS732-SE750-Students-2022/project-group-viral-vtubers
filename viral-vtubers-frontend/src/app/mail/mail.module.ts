@@ -5,19 +5,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewMailComponent } from './new-mail/new-mail.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { SentMailComponent } from './sent-mail/sent-mail.component';
+import { MailComponent } from './mail.component';
 
 export const routes: Routes = [
   {
-    path: 'new',
-    component: NewMailComponent,
-  },
-  {
-    path: 'sent',
-    component: SentMailComponent,
-  },
-  {
     path: '',
-    component: InboxComponent,
+    component: MailComponent,
+    children: [
+      {
+        path: 'new',
+        component: NewMailComponent,
+      },
+      {
+        path: 'sent',
+        component: SentMailComponent,
+      },
+      {
+        path: '',
+        component: InboxComponent,
+      },
+    ],
   },
 ];
 
@@ -25,11 +32,9 @@ export const routes: Routes = [
   declarations: [
     NewMailComponent,
     InboxComponent,
-    SentMailComponent
+    SentMailComponent,
+    MailComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
-export class MailModule { }
+export class MailModule {}
