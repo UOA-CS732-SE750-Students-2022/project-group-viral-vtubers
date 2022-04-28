@@ -20,11 +20,11 @@ const val DEFAULT_PASSWORD = "password"
 class MongoDatabase(config: Config = Config()) : Database {
     private val database: com.mongodb.reactivestreams.client.MongoDatabase
 
-    private var users: MongoCollection<User>
-    private var tags: MongoCollection<Tag>
-    private var products: MongoCollection<Product>
-    private var categories: MongoCollection<Category>
-    private var subcategories: MongoCollection<Subcategory>
+    private val users: MongoCollection<User>
+    private val tags: MongoCollection<Tag>
+    private val products: MongoCollection<Product>
+    private val categories: MongoCollection<Category>
+    private val subcategories: MongoCollection<Subcategory>
 
     init {
         val connectionString =
