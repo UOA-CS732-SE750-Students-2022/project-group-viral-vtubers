@@ -1,1 +1,21 @@
-<p>user-profile works!</p>
+<div class="container">
+  <div class="profile-panel">profile panel</div>
+  <div class="content-container">
+    <div class="section services-container">
+      <h1>Services</h1>
+      <div class="services-content">
+        <div class="service-item" *ngFor="let i of [1, 2, 3]">
+          <div class="item-info">
+            <h4>Service Title</h4>
+            <p>Service description...</p>
+          </div>
+          <div class="price-info">price</div>
+        </div>
+      </div>
+    </div>
+    <div class="section products-container">
+      <h1>Latest Lolis</h1>
+      <div class="products-content">content</div>
+    </div>
+  </div>
+</div>

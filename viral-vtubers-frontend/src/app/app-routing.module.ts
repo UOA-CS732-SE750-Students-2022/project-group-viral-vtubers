@@ -48,7 +48,7 @@ export const routes: Routes = [
   {
     path: 'user/:id',
     component: UserProfileComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'cart',
