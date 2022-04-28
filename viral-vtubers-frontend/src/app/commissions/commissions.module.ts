@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SharedModule } from '../shared/shared.module';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { SelectViewComponent } from './select-view/select-view.component';
 import { ViewArtistsComponent } from './view-artists/view-artists.component';
@@ -21,6 +22,6 @@ export const routes: Routes = [
     SelectViewComponent,
     CreateRequestComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
 export class CommissionsModule {}

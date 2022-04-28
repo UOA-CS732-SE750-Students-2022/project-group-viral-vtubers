@@ -1,0 +1,51 @@
+<div class="container">
+  <div
+    *ngFor="let tag of tags"
+    class="tag"
+    [style.borderColor]="tag.color"
+    [style.color]="tag.color"
+    [style.background]="tag.backgroundColor"
+    [@inOutAnimation]
+  >
+    <a *ngIf="!isEdit" [style.color]="tag.color" href="#{{ tag.name }}">
+      <p [style.textDecoration]="isEdit ? null : 'none'">
+        {{ tag.name }}
+      </p>
+    </a>
+    <p
+      (click)="deleteTag(tag)"
+      *ngIf="isEdit"
+      [style.cursor]="'pointer'"
+      [style.textDecoration]="isEdit ? null : 'none'"
+    >
+      {{ tag.name }}<span> &times; </span>
+    </p>
+  </div>
+  <div *ngIf="isEdit" class="plus" (click)="show()">
+    <p><span>+</span></p>
+  </div>
+</div>
+<div class="overlay" *ngIf="newTag" [@inOutAnimation]>
+  <div class="popup">
+    <p class="title">Tags</p>
+    <a class="close" (click)="hide()"> &times; </a>
+    <p>Available Tags:</p>
+    <div class="container">
+      <div
+        *ngFor="let tag of getAllTags()"
+        class="tag"
+        [style.borderColor]="tag.color"
+        [style.color]="tag.color"
+        [style.background]="tag.backgroundColor"
+      >
+        <p
+          (click)="addTag(tag)"
+          [style.cursor]="'pointer'"
+          [style.textDecoration]="'none'"
+        >
+          {{ tag.name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
