@@ -1,5 +1,6 @@
 package com.viralvtubers.graphql.schema
 
+import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
@@ -7,6 +8,7 @@ import com.viralvtubers.graphql.input.AddServiceInput
 import com.viralvtubers.graphql.input.EditSelfInput
 import com.viralvtubers.graphql.input.EditServiceInput
 import com.viralvtubers.graphql.input.SendMailInput
+import io.ktor.server.auth.jwt.*
 
 fun SchemaBuilder.userSchema() {
     type<User> {
@@ -63,7 +65,8 @@ fun SchemaBuilder.userSchema() {
 
     mutation("login") {
         description = "Check if the user exist if not create the user"
-        resolver { ->
+        resolver { ctx: Context ->
+            println(ctx.get<JWTPrincipal>()?.subject)
             stubUser("fake_self")
         }
     }

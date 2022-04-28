@@ -5,6 +5,8 @@ import com.viralvtubers.config
 import com.viralvtubers.database.mongo.MongoDatabase
 import com.viralvtubers.graphql.schema.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 
 fun Application.configureGraphQL() {
     val config = config()
@@ -15,12 +17,14 @@ fun Application.configureGraphQL() {
 
         playground = config.development
 
-//        context { call ->
-//            call.authenticate(requireAdmin = false)?.let {
-//                + runBlocking { getUserProfileOrCreate(it.uid) }
-//                + it
-//            }
-//        }
+        wrap {
+            authenticate(optional = true, build = it)
+        }
+        context { call ->
+            call.authentication.principal<JWTPrincipal>()?.let {
+                +it
+            }
+        }
 
         schema {
             scalarSchema()
