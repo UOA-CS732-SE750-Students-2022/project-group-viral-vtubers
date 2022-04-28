@@ -22,7 +22,21 @@
         <h1>Latest Lolis</h1>
         <button>View all</button>
       </div>
-      <div class="products-content">content</div>
+      <div class="products-content">
+        <div *ngFor="let i of [0, 1, 2, 3, 4]" class="product-item">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDX-YSwROnfQPdcDObZK-8Hh9TO5eo2oiHCg&usqp=CAU"
+            alt="waifu"
+          />
+          <div>
+            <div class="product-info">
+              <h4>Product Title</h4>
+              <p>Product description...</p>
+            </div>
+            <p>Free</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

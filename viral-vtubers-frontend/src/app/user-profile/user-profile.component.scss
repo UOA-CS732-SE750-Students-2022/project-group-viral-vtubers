@@ -32,6 +32,8 @@
 
 .section {
   margin-right: 40px;
+
+  margin-bottom: 40px;
 }
 
 .services-container {
@@ -129,23 +131,105 @@
 
 .products-container {
 
-
   .title-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 20px;
-
     > button {
-      font-size: $font-size-h6;
+      font-size: $font-size-body-1;
       font-weight: 400;
+
       margin: 0;
+      border: none;
+
       color: $color-grey-dark;
       background-color: transparent;
-      border: none;
+
       cursor: pointer;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .products-content {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row wrap;
+
+    column-gap: 2%;
+    row-gap: 20px;
+
+    .product-item {
+      width: 32%;
+
+      border: solid 1px $color-grey-light;
+      box-sizing: border-box;
+
+      border-radius: 5px;
+
+      img {
+        width: 100%;
+        height: width;
+      }
+
+      > div {
+        padding: 10px 15px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .product-info {
+          width: 100%;
+          flex: 1;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          > h4 {
+            font-size: $font-size-body-2;
+            font-weight: 500;
+            margin: 0;
+            margin-top: -5px;
+          }
+
+          > p {
+            font-size: $font-size-body-3;
+            font-weight: 400;
+            margin: 0;
+            color: $color-grey-dark;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+        }
+
+        > p {
+          font-size: $font-size-body-2;
+          font-weight: 500;
+          margin: 0;
+          color: $color-secondary;
+
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+      }
+
+
+
+
     }
   }
 }
@@ -154,6 +238,7 @@
   font-size: $font-size-h4;
   font-family: $font-family-poppins;
   font-weight: 400;
+  margin-top: 0;
 
   margin-bottom: 15px;
 }
