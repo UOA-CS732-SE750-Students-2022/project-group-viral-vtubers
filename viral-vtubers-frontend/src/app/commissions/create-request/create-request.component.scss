@@ -1,0 +1,299 @@
+@import "../../../variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1072px;
+  margin: 0 auto;
+  > input {
+    height: 40px;
+    border-radius: 5px;
+    border: solid 1px $color-grey-light;
+    margin-bottom: 30px;
+    font-size: $font-size-body-2;
+    font-family: $font-family-poppins;
+    padding: 0 15px;
+    box-sizing: border-box;
+    &::placeholder {
+      color: $color-grey-light;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  > .title-input {
+    padding: 2px 15px;
+    font-size: $font-size-h5;
+    color: $color-secondary;
+    margin-bottom: 0px;
+  }
+
+  > .description-input {
+    color: $color-kneegrow;
+    margin-bottom: 55px;
+
+    border-radius: 5px;
+    border: solid 1px $color-grey-light;
+
+    font-size: $font-size-body-3;
+    font-family: $font-family-poppins;
+
+    box-sizing: border-box;
+    padding: 14px 22px;
+
+    &::placeholder {
+      color: $color-grey-light;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+}
+
+.edit-icon {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 0;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 10px;
+
+  border: 2px solid rgba(34, 34, 34, 0.2);
+
+  > img {
+    margin: auto;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+h4 {
+  font-size: $font-size-h4;
+  font-weight: 400;
+  line-height: 54px;
+  margin-bottom: 50px;
+}
+
+h6 {
+  font-size: $font-size-h6;
+  font-weight: 400;
+  margin-top: 40px;
+  margin-bottom: 5px;
+  > a {
+    color: $color-primary;
+    text-decoration: none;
+    cursor: pointer;
+    transition: $button-hover-animation;
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+      text-decoration: underline;
+    }
+  }
+}
+
+.tags {
+  margin-left: -10px;
+  margin-bottom: 36px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: visible;
+  opacity: 1;
+  transition: $button-hover-animation;
+  z-index: 5;
+
+  div {
+    transition: $button-hover-animation;
+    overflow: hidden;
+  }
+
+  .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-background;
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 500px;
+    min-width: 300px;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 1;
+
+    > .title {
+      font-size: $font-size-h5;
+      margin: 0;
+    }
+
+    .close {
+      user-select: none;
+      position: absolute;
+      top: 0;
+      right: 8px;
+      padding: 5px;
+      font-size: $font-size-h5;
+      cursor: pointer;
+      transition: $button-hover-animation;
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+      > img {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+}
+
+.category {
+  user-select: none;
+  cursor: pointer;
+  transition: $button-hover-animation;
+  &:hover {
+    opacity: $button-coloured-hover-opacity;
+  }
+  p {
+    margin: 8px;
+  }
+}
+
+.subcategory {
+  margin-left: 25px;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  padding: 2px 5px;
+  &:hover {
+    background-color: $color-grey-light;
+  }
+}
+
+.chevron-icon {
+  cursor: pointer;
+  display: inline-block;
+  line-height: 0;
+  transition: $button-hover-animation;
+  mask: url(../../../assets/icons/ChevronIcon.svg) no-repeat center;
+
+  > div {
+    margin: auto;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.selection-section {
+  font-size: $font-size-h6;
+  > span {
+    display: inline-block;
+    width: 200px;
+  }
+  > div {
+    margin: 10px 0;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+
+    > input {
+      cursor: pointer;
+    }
+
+    > span {
+      width: 10px;
+    }
+
+    > p {
+      margin: 0 5px;
+    }
+
+    .input-bounty {
+      display: inline;
+      color: $color-kneegrow;
+      text-align: end;
+
+      margin-left: 10px;
+
+      border-radius: 5px;
+      border: solid 1px $color-grey-light;
+
+      font-size: $font-size-body-1;
+      font-family: $font-family-poppins;
+
+      box-sizing: border-box;
+      padding: 9px;
+
+      &::placeholder {
+        color: $color-grey-light;
+      }
+
+      &:focus {
+        border-color: $color-primary;
+        outline: none;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      &[type="number"] {
+        -moz-appearance: textfield;
+      }
+    }
+  }
+}
+
+.save-section {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+  > button {
+    margin: 5px;
+    width: 260px;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-family-poppins;
+    font-size: $font-size-h5;
+    text-transform: none;
+    font-weight: 400;
+    border: 0;
+    border-radius: 10px;
+    padding: 15px 0;
+    cursor: pointer;
+    transition: $button-hover-animation;
+    color: $color-background;
+
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
+  }
+
+  > .save-publish-button {
+    background-color: $color-primary;
+  }
+
+  > .save-draft-button {
+    background-color: $color-secondary;
+  }
+}

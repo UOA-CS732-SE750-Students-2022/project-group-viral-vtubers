@@ -1,1 +1,91 @@
-<p>create-request works!</p>
+<div class="container">
+  <h4>Add/Edit Commision Request</h4>
+  <input class="title-input" placeholder="Loli Gyaru" />
+  <h6>
+    Category: {{ selectedSubCategory?.name }}
+    <div class="edit-icon" (click)="showChange()">
+      <img src="assets/icons/EditIcon.svg" />
+    </div>
+  </h6>
+  <app-tags class="tags"></app-tags>
+  <textarea
+    rows="5"
+    class="description-input"
+    type="text"
+    placeholder="I want to a loli..."
+  ></textarea>
+  <div class="selection-section">
+    <span>Comments</span>
+    <div>
+      <input type="radio" name="comments" [defaultChecked]="true" />
+      <p>ON</p>
+      <span></span>
+      <input type="radio" name="comments" />
+      <p>OFF</p>
+    </div>
+  </div>
+  <div class="selection-section">
+    <span>Bounty</span>
+    <div>
+      <input type="radio" name="bounty" [defaultChecked]="true" />
+      <p>Free</p>
+      <span></span>
+      <input type="radio" name="bounty" />
+      <input class="input-bounty" type="number" name="bounty" />
+      <p>USD</p>
+    </div>
+  </div>
+  <div class="save-section">
+    <button class="save-draft-button">Save a Draft</button>
+    <button class="save-publish-button">Save to Publish</button>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="changePopup" [@inOutAnimation]>
+  <div class="popup">
+    <p class="title">Categories</p>
+    <a class="close" (click)="hideChange()"> &times; </a>
+    <p>Available Categories:</p>
+    <div class="container">
+      <div
+        *ngFor="let category of getAllCategories()"
+        class="category"
+        (click)="openCategory(category)"
+      >
+        <p>
+          {{ category.name }}
+          <span
+            class="chevron-icon"
+            [style.transform]="
+              selectedCategory?.id === category.id
+                ? 'rotate(90deg)'
+                : 'rotate(0deg)'
+            "
+          >
+            <div
+              [style.backgroundColor]="
+                selectedCategory?.id === category.id ? '#fb7299' : '#aaaaaa'
+              "
+              src="assets/icons/ChevronIcon.svg"
+            ></div>
+          </span>
+        </p>
+        <div
+          [style.maxHeight]="
+            selectedCategory?.id === category.id
+              ? 28 * category.subcategories.length + 'px'
+              : '0'
+          "
+        >
+          <div
+            *ngFor="let subcategory of category.subcategories"
+            class="subcategory"
+            (click)="changeCategory(subcategory)"
+          >
+            {{ subcategory.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

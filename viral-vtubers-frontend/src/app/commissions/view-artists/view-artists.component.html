@@ -1,1 +1,15 @@
-<p>view-artists works!</p>
+<div class="container">
+  <div class="carousel-section"></div>
+  <div class="artist-section">
+    <div class="artist" *ngFor="let artist of [1, 2, 3]">
+      <img />
+      <div>
+        <h5>AyumiSensei</h5>
+      </div>
+      <p>Dancing in the rain hehe~</p>
+      <p>Completed <b>183</b> commissions</p>
+      <p>Hourly rate: <b>183</b></p>
+      <app-tags [isEdit]="false"></app-tags>
+    </div>
+  </div>
+</div>

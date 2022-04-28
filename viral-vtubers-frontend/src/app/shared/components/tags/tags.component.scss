@@ -1,0 +1,124 @@
+@import "../../../../variables";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.tag {
+  user-select: none;
+  margin: 5px;
+  padding: 3px 12px;
+  border-radius: 8px;
+  border: 1px solid #e4a324b5;
+  color: #e4a324b5;
+  background-color: #fff3e5;
+  transition: $button-hover-animation;
+  &:hover {
+    opacity: $button-coloured-hover-opacity;
+  }
+  > a {
+    color: #e4a324b5;
+    text-decoration: none;
+  }
+  p {
+    vertical-align: middle;
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+    transition: $button-hover-animation;
+
+    > span {
+      transition: $button-hover-animation;
+      vertical-align: middle;
+      margin: 0;
+      font-size: 0;
+      line-height: 0;
+    }
+    &:hover {
+      span {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+.plus {
+  user-select: none;
+  margin: 5px;
+  padding: 3px 5px;
+  border-radius: 8px;
+  border: 1px solid $color-grey-dark;
+  color: $color-grey-dark;
+  background-color: $color-grey-light;
+  transition: $button-hover-animation;
+  cursor: pointer;
+  &:hover {
+    opacity: $button-coloured-hover-opacity;
+  }
+  > p {
+    margin: 0;
+    font-size: 11px;
+    vertical-align: middle;
+    > span {
+      vertical-align: middle;
+      margin: 0;
+      font-size: 20px;
+      line-height: 0;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: visible;
+  opacity: 1;
+  z-index: 5;
+
+  .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-background;
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 500px;
+    min-width: 300px;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: opacity 500ms;
+    visibility: visible;
+    opacity: 1;
+
+    > .title {
+      font-size: $font-size-h5;
+      margin: 0;
+    }
+
+    .close {
+      user-select: none;
+      position: absolute;
+      top: 0;
+      right: 8px;
+      padding: 5px;
+      font-size: $font-size-h5;
+      cursor: pointer;
+      transition: $button-hover-animation;
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+      > img {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+}

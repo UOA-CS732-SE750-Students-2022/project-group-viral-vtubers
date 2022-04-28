@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
@@ -14,12 +15,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { GraphQLModule } from './graphql.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth/auth.service';
+import { SharedModule } from './shared/shared.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { SharedModule } from './shared/shared.module';
-import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     NotFoundComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +42,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     AngularFireAuthModule,
     GraphQLModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
