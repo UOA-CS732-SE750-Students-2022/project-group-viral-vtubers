@@ -13,10 +13,11 @@
   height: 90%;
   width: 335px;
 
-  margin: 20px 40px;
+  margin: 20px 60px;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   row-gap: 25px;
 
@@ -30,19 +31,62 @@
   }
 
   .profile-info {
-    flex: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
-
-    background-color: lightblue;
-
 
     > h2 {
       font-size: $font-size-h5;
       color: $color-secondary;
       font-weight: 400;
       margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .status-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin: 0;
+
+      > button {
+        height: 30px;
+        padding: 0 15px;
+
+        background: none;
+        color: $color-background;
+        background-color: $color-primary;
+
+        border: solid 1px $color-grey-light;
+        border-radius: 30px;
+
+        text-transform: uppercase;
+        font-size: $font-size-body-2;
+        font-family: $font-family-poppins;
+        font-weight: 500;
+
+        cursor: pointer;
+
+        transition: $button-hover-animation;
+
+        &:hover {
+          opacity: $button-coloured-hover-opacity;
+        }
+      }
+
+      > p {
+        font-size: $font-size-body-2;
+        font-weight: 400;
+        color: $color-grey-dark;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+
+        margin: 10px 0;
+      }
     }
 
     > p {
@@ -70,13 +114,7 @@
         }
       }
     }
-
-
-
-
   }
-
-
 }
 
 .content-container {
@@ -277,6 +315,7 @@
           font-size: $font-size-body-2;
           font-weight: 500;
           margin: 0;
+          margin-left: 5px;
           color: $color-secondary;
 
           display: -webkit-box;
