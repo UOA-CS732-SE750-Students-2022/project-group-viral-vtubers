@@ -75,6 +75,17 @@
         }
       }
 
+      .following {
+        background-color: $color-background;
+        color: $color-primary;
+        border: solid 1px $color-primary;
+      }
+
+      .status-online {
+        background-color: $color-primary;
+        color: $color-background;
+      }
+
       > p {
         font-size: $font-size-body-2;
         font-weight: 400;
