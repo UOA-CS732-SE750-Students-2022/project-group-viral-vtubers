@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
       id: '0',
       bio: 'Hi everyone! My name is Nozomi, and I love to make  vtuber shit. Just hit me up if you want anything made! I specialise in making hair, feet, and breast augmentations. ',
       numCompletedCommissions: 183,
-      displayName: 'AyumiSensei',
+      displayName: 'NozomiSenpai',
       numLikes: 4821,
       profileImageURI:
         'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
@@ -96,6 +96,14 @@ export class UserProfileComponent implements OnInit {
           price: 20.0,
           images: [
             'https://i.pinimg.com/originals/df/c7/4b/dfc74b6867617fc8220fddb0efc9d916.jpg',
+          ],
+        },
+        {
+          id: 'd',
+          name: 'Nozomi is waifu',
+          price: 21.99999,
+          images: [
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDX-YSwROnfQPdcDObZK-8Hh9TO5eo2oiHCg&usqp=CAU',
           ],
         },
       ],

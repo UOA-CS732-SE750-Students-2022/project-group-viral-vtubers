@@ -1,28 +1,25 @@
 <div class="container">
   <div class="profile-panel">
-    <img
-      src="https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png"
-      alt="waifu"
-    />
+    <img src="{{ user.profileImageURI }}" alt="waifu" />
     <div class="profile-info">
-      <h2>NozomiSenpai</h2>
+      <h2>{{ user.displayName }}</h2>
       <div class="status-group">
-        <p>Waking up late everyday~</p>
+        <p>Statuses are not implemented~</p>
         <button>Following</button>
       </div>
-
       <p>
-        Hi everyone! My name is Nozomi, and I love to make vtuber shit. Just hit
-        me up if you want anything made! I specialise in making hair, feet, and
-        breast augmentations.
+        {{ user.bio }}
       </p>
-
       <div class="creator-info">
         <h3>Creator info:</h3>
-        <p>Completed <span>183</span> comissions</p>
-        <p><span>4821</span> total likes</p>
+        <p>
+          Completed <span>{{ user.numCompletedCommissions }}</span> comissions
+        </p>
+        <p>
+          <span>{{ user.numLikes }}</span> total likes
+        </p>
         <p>Specialties:</p>
-        <div class="tags">tags</div>
+        <div class="tags">tags are not implemented</div>
       </div>
     </div>
   </div>
@@ -30,15 +27,18 @@
     <div class="section services-container">
       <h1>Services</h1>
       <div class="services-content">
-        <div class="service-item" *ngFor="let i of [1, 2, 3]">
+        <div class="service-item" *ngFor="let service of user.services">
           <div class="item-info">
-            <h4>Service Title</h4>
+            <h4>{{ service.name }}</h4>
             <div class="description-container">
-              <p>Service description...</p>
+              <p>{{ service.description }}</p>
             </div>
           </div>
           <div class="price-info">
-            <p>19.00 <span>/hr</span></p>
+            <p>
+              ${{ service.price | number: "1.2-2" }}
+              <span>/{{ service.priceType }}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -49,17 +49,17 @@
         <button>View all</button>
       </div>
       <div class="products-content">
-        <div *ngFor="let i of [0, 1, 2, 3, 4]" class="product-item">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDX-YSwROnfQPdcDObZK-8Hh9TO5eo2oiHCg&usqp=CAU"
-            alt="waifu"
-          />
+        <div *ngFor="let product of user.products" class="product-item">
+          <img src="{{ product.images[0] }}" alt="waifu" />
           <div>
             <div class="product-info">
-              <h4>Product Title</h4>
-              <p>Product description...</p>
+              <h4>{{ product.name }}</h4>
+              <p>
+                <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
+                Likes
+              </p>
             </div>
-            <p>Free</p>
+            <p>${{ product.price | number: "1.2-2" }}</p>
           </div>
         </div>
       </div>
