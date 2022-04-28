@@ -38,3 +38,6 @@ out/
 
 ### Java ###
 target/
+
+### Token ###
+firebase-service-account.json
