@@ -1,1 +1,68 @@
-<p>user-profile works!</p>
+<div class="container">
+  <div class="profile-panel">
+    <img src="{{ user.profileImageURI }}" alt="waifu" />
+    <div class="profile-info">
+      <h2>{{ user.displayName }}</h2>
+      <div class="status-group">
+        <p>Statuses are not implemented~</p>
+        <button>Following</button>
+      </div>
+      <p>
+        {{ user.bio }}
+      </p>
+      <div class="creator-info">
+        <h3>Creator info:</h3>
+        <p>
+          Completed <span>{{ user.numCompletedCommissions }}</span> comissions
+        </p>
+        <p>
+          <span>{{ user.numLikes }}</span> total likes
+        </p>
+        <p>Specialties:</p>
+        <div class="tags">tags are not implemented</div>
+      </div>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="section services-container">
+      <h1>Services</h1>
+      <div class="services-content">
+        <div class="service-item" *ngFor="let service of user.services">
+          <div class="item-info">
+            <h4>{{ service.name }}</h4>
+            <div class="description-container">
+              <p>{{ service.description }}</p>
+            </div>
+          </div>
+          <div class="price-info">
+            <p>
+              ${{ service.price | number: "1.2-2" }}
+              <span>/{{ service.priceType }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section products-container">
+      <div class="title-container">
+        <h1>Latest waifus</h1>
+        <button>View all</button>
+      </div>
+      <div class="products-content">
+        <div *ngFor="let product of user.products" class="product-item">
+          <img src="{{ product.images[0] }}" alt="waifu" />
+          <div>
+            <div class="product-info">
+              <h4>{{ product.name }}</h4>
+              <p>
+                <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
+                Likes
+              </p>
+            </div>
+            <p>${{ product.price | number: "1.2-2" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

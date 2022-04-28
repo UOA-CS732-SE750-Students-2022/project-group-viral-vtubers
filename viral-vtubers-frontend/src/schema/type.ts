@@ -423,6 +423,8 @@ export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, da
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
+export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<string> }> };
+
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -480,6 +482,34 @@ export const UserFragmentFragmentDoc = gql`
   isFollowing
 }
     `;
+export const UserProfileFragmentFragmentDoc = gql`
+    fragment UserProfileFragment on User {
+  id
+  bio
+  numCompletedCommissions
+  displayName
+  numLikes
+  profileImageURI
+  isFollowing
+  tags {
+    id
+    name
+  }
+  services {
+    description
+    id
+    name
+    price
+    priceType
+  }
+  products {
+    id
+    name
+    price
+    images
+  }
+}
+    `;
 export const LoginDocument = gql`
     mutation Login {
   login {
@@ -493,7 +523,7 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
     override document = LoginDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -513,7 +543,7 @@ export const InboxDocument = gql`
   })
   export class InboxGQL extends Apollo.Query<InboxQuery, InboxQueryVariables> {
     override document = InboxDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -533,7 +563,7 @@ export const OutboxDocument = gql`
   })
   export class OutboxGQL extends Apollo.Query<OutboxQuery, OutboxQueryVariables> {
     override document = OutboxDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -551,7 +581,7 @@ export const SelfDocument = gql`
   })
   export class SelfGQL extends Apollo.Query<SelfQuery, SelfQueryVariables> {
     override document = SelfDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }

@@ -12,3 +12,32 @@ export const UserFragment = gql`
     isFollowing
   }
 `;
+
+export const UserProfileFragment = gql`
+  fragment UserProfileFragment on User {
+    id
+    bio
+    numCompletedCommissions
+    displayName
+    numLikes
+    profileImageURI
+    isFollowing
+    tags {
+      id
+      name
+    }
+    services {
+      description
+      id
+      name
+      price
+      priceType
+    }
+    products {
+      id
+      name
+      price
+      images
+    }
+  }
+`;
