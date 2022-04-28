@@ -30,6 +30,10 @@
 
 }
 
+.section {
+  margin-right: 40px;
+}
+
 .services-container {
 
   margin-top: 20px;
@@ -39,10 +43,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+    row-gap: 20px;
+    column-gap: 4%;
 
     .service-item {
-      width: 580px;
+      width: 48%;
+      min-width: 250px;
       height: 100px;
 
       border-radius: 5px;
@@ -52,12 +58,12 @@
       box-sizing: border-box;
 
       display: flex;
-
       justify-content: space-between;
-
 
       .item-info {
         flex: 1;
+        display: flex;
+        flex-direction: column;
 
         > h4 {
           font-size: $font-size-body-1;
@@ -66,19 +72,55 @@
           margin-top: -5px;
         }
 
-        > p {
-          font-size: $font-size-body-3;
-          font-weight: 400;
-          margin: 0;
-          color: $color-grey-dark;
+        .description-container {
+          width: 100%;
+          flex: 1;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          > p {
+            font-size: $font-size-body-3;
+            font-weight: 400;
+            margin: 0;
+            color: $color-grey-dark;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
         }
       }
 
       .price-info {
-        background-color: lightgreen;
 
         min-width: 100px;
+        color: $color-secondary;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
 
+        > p {
+          font-size: $font-size-h6;
+          font-weight: 400;
+
+          margin: 0;
+
+          > span {
+            font-size: $font-size-body-3;
+            font-weight: 400;
+            color: $color-grey-dark;
+
+            margin-left: -5px;
+          }
+
+        }
+
+        .priceEach {
+          color: $color-primary;
+        }
       }
 
     }
@@ -86,10 +128,32 @@
 }
 
 .products-container {
+
+
+  .title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    > button {
+      font-size: $font-size-h6;
+      font-weight: 400;
+      margin: 0;
+      color: $color-grey-dark;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .section h1 {
   font-size: $font-size-h4;
   font-family: $font-family-poppins;
   font-weight: 400;
+
+  margin-bottom: 15px;
 }

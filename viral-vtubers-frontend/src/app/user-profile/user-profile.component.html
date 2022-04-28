@@ -7,14 +7,21 @@
         <div class="service-item" *ngFor="let i of [1, 2, 3]">
           <div class="item-info">
             <h4>Service Title</h4>
-            <p>Service description...</p>
+            <div class="description-container">
+              <p>Service description...</p>
+            </div>
           </div>
-          <div class="price-info">price</div>
+          <div class="price-info">
+            <p>19.00 <span>/hr</span></p>
+          </div>
         </div>
       </div>
     </div>
     <div class="section products-container">
-      <h1>Latest Lolis</h1>
+      <div class="title-container">
+        <h1>Latest Lolis</h1>
+        <button>View all</button>
+      </div>
       <div class="products-content">content</div>
     </div>
   </div>
