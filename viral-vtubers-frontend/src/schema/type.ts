@@ -452,6 +452,8 @@ export type User = {
   bio: Scalars['String'];
   displayName: Scalars['String'];
   email: Scalars['String'];
+  followers: Array<User>;
+  following: Array<User>;
   id: Scalars['ID'];
   inbox: Array<Mail>;
   isFollowing: Scalars['Boolean'];
