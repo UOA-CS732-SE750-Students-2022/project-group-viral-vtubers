@@ -167,18 +167,19 @@
       border-radius: 5px;
       border: solid 1px $color-grey-light;
 
-      padding: 20px;
       box-sizing: border-box;
 
       display: flex;
       justify-content: space-between;
+
+      cursor: move;
 
       .item-info {
         flex: 1;
         display: flex;
         flex-direction: column;
 
-        > h4 {
+        h4 {
           font-size: $font-size-body-1;
           font-weight: 500;
           margin: 0;
@@ -198,7 +199,7 @@
           flex-direction: column;
           justify-content: center;
 
-          > p {
+          p {
             font-size: $font-size-body-3;
             font-weight: 400;
             margin: 0;
@@ -350,6 +351,7 @@
         }
       }
     }
+<<<<<<< Updated upstream
   }
 }
 
@@ -369,6 +371,8 @@
 
   &:hover {
     opacity: $button-coloured-hover-opacity;
+=======
+>>>>>>> Stashed changes
   }
 }
 
@@ -521,6 +525,7 @@
     font-size: $font-size-h5;
   }
 }
+<<<<<<< Updated upstream
 
 .overlay {
   position: fixed;
@@ -765,3 +770,5 @@
 .about-me {
   margin-top: 0 !important;
 }
+=======
+>>>>>>> Stashed changes

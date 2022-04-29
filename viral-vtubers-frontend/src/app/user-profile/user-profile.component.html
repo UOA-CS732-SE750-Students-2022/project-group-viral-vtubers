@@ -32,19 +32,32 @@
   <div class="content-container">
     <div class="section services-container">
       <h1>Services</h1>
-      <div class="services-content">
-        <div class="service-item" *ngFor="let service of user.services">
-          <div class="item-info">
-            <h4>{{ service.name }}</h4>
-            <div class="description-container">
-              <p>{{ service.description }}</p>
+      <div class="services-content" cdkDropListGroup>
+        <div
+          class="service-item"
+          *ngFor="let service of user.services; let i = index"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="{ item: service, index: i }"
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+        >
+          <div class="inner" cdkDrag>
+            <div *cdkDragPlaceholder></div>
+            <div class="item-info">
+              <h4>{{ service.name }}</h4>
+              <div class="description-container">
+                <p>{{ service.description }}</p>
+              </div>
             </div>
-          </div>
-          <div class="price-info">
-            <p>
-              ${{ service.price | number: "1.2-2" }}
-              <span>/{{ service.priceType }}</span>
-            </p>
+            <div class="price-info">
+              <p>
+                ${{ service.price | number: "1.2-2" }}
+                <span>/{{ service.priceType }}</span>
+              </p>
+            </div>
+            <div class="remove-btn" (click)="remove(service)">
+              <p>-</p>
+            </div>
           </div>
         </div>
         <div
