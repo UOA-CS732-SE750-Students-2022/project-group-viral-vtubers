@@ -518,6 +518,8 @@ export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio
 
 export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
 
+export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
+
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 
