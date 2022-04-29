@@ -29,6 +29,8 @@ export class UserProfileComponent implements OnInit {
 
   showNewService = false;
 
+  showEditProfile = false;
+
   user: UserProfileFragmentFragment;
 
   constructor() {
@@ -157,6 +159,14 @@ export class UserProfileComponent implements OnInit {
 
   closeNewService() {
     this.showNewService = false;
+  }
+
+  openEditProfile() {
+    this.showEditProfile = true;
+  }
+
+  closeEditProfile() {
+    this.showEditProfile = false;
   }
 
   ngOnInit(): void {}
