@@ -5,7 +5,7 @@ export const ProductDetailFragment = gql`
     id
     name
     numLikes
-    shortDescription
+    description
     titleImage
     images
     subcategory {
@@ -21,6 +21,13 @@ export const ProductDetailFragment = gql`
       displayName
       profileImageURI
       isFollowing
+    }
+    variants {
+      id
+      files
+      fileName
+      name
+      price
     }
   }
 `;

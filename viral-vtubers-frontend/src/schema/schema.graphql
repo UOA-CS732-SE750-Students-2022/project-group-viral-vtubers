@@ -44,20 +44,20 @@ type Service {
 }
 "Product"
 type Product {
+  description: String!
   id: ID!
   name: String!
   numLikes: Int!
-  shortDescription: String!
   titleImage: String!
   variants: [ProductVariant!]!
   vrm: String!
   subcategory: Subcategory!
   images: [String!]!
-  files: [String!]!
   artist: User!
 }
 "Product Variant"
 type ProductVariant {
+  fileName: String!
   files: [String!]!
   id: ID!
   name: String!

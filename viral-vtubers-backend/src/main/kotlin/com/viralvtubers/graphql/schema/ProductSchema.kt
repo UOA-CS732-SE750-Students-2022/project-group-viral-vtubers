@@ -24,13 +24,6 @@ fun SchemaBuilder.productSchema() {
             }
         }
 
-        property<List<String>>("files") {
-            resolver { product ->
-                description = "Get Files of the Product"
-                listOf("fake_0.vrm", "fake_1.vrm")
-            }
-        }
-
         property<User>("artist") {
             resolver { product ->
                 description = "Get the artist who created the Product"

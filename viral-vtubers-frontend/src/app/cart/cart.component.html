@@ -15,7 +15,7 @@
         <div class="item-content">
           <div class="item-details">
             <p class="item-name">{{item.name}}</p>
-            <p class="item-price">${{ item.price | number: "1.2-2" }} USD</p>
+            <p class="item-price">${{ item.variants[0].price | number: "1.2-2" }} USD</p>
           </div>
           <div class="item-buttons">
             <p class="item-type">Digital</p>

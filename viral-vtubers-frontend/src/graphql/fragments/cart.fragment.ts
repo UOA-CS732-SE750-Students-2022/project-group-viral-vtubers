@@ -13,9 +13,11 @@ export const CartsFragment = gql`
       items {
         id
         name
-        price
-        product {
-          titleImage
+        titleImage
+        variants {
+          id
+          name
+          price
         }
       }
     }

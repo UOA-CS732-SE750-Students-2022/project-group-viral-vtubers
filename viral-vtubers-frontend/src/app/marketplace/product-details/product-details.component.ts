@@ -18,7 +18,7 @@ export class ProductDetailsComponent implements OnInit {
       id: 'product-details1',
       name: 'VRoid Outfit - Raiden Shogun/Genshin Impact',
       numLikes: 82,
-      shortDescription: `      ●VRoidの顏(肌・口内)、体(肌)用のテクスチャです。 正式版UVに対応。
+      description: `      ●VRoidの顏(肌・口内)、体(肌)用のテクスチャです。 正式版UVに対応。
       鼻のパーツが複数あるので組み合わせで絵柄を変えることができます。目のパーツは含まれません。(別売り)
       ●使い方 商品画像にも載ってます。 ルック ↓ 影の入り幅-1 影のかたさ1 ●同梱物
       各パーツのPNG 編集用PSD テクスチャ適用済み.vroidファイル
@@ -51,6 +51,22 @@ export class ProductDetailsComponent implements OnInit {
           'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
         isFollowing: true,
       },
+      variants: [
+        {
+          id: 'variant-1',
+          files: ['.vrm'],
+          fileName: 'kawaii_waifu.vrm',
+          name: 'test-model',
+          price: 30.0,
+        },
+        {
+          id: 'variant-2',
+          files: ['.vrm', '.vroid'],
+          fileName: 'kawaii_waifu.zip',
+          name: 'test-model-final',
+          price: 40.0,
+        },
+      ],
     };
     // Set gallery items array
     this.images = [

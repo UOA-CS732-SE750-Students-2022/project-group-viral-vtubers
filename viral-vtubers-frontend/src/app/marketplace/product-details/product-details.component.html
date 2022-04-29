@@ -26,14 +26,14 @@
         <p>{{productDetails.numLikes}}</p>
       </button>
       <div class="prices-container">
-        <div *ngFor="let i of [0, 1]" class="price-details-container">
-          <p>$59.99</p>
+        <div *ngFor="let i of productDetails.variants" class="price-details-container">
+          <p>${{ i.price | number: "1.2-2" }} USD</p>
           <div class="file-info-container">
             <div class="file-info">
-              <p>VRM - Shogun/Genshin Impact</p>
+              <p>{{i.name}}</p>
               <div class="tags-container">
-                <span class="file-type-tag" *ngFor="let tag of tags">
-                  <p>{{ tag }}</p>
+                <span class="file-type-tag" *ngFor="let file of i.files">
+                  <p>{{ file }}</p>
                 </span>
               </div>
             </div>
@@ -41,7 +41,7 @@
               <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>add to cart</h4>
-                <p>kawaii_waifu.vrm</p>
+                <p>{{i.fileName}}</p>
               </div>
             </button>
           </div>
@@ -51,7 +51,7 @@
   </div>
   <div class="description-container">
     <p>
-      {{productDetails.shortDescription}}
+      {{productDetails.description}}
     </p>
   </div>
   <div class="comments-container">Comments here</div>
