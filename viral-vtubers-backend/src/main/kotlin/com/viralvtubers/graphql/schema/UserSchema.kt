@@ -61,6 +61,20 @@ fun SchemaBuilder.userSchema() {
                 listOf(stubMail("fake_mail_0"), stubMail("fake_mail_1"))
             }
         }
+
+        property<List<User>>("following") {
+            resolver { user ->
+                description = "Get users this user is following"
+                listOf(stubUser("fake_user_0"))
+            }
+        }
+
+        property<List<User>>("followers") {
+            resolver { user ->
+                description = "Get users following this user"
+                listOf(stubUser("fake_user_0"), stubUser("fake_user_1"))
+            }
+        }
     }
 
     type<Mail> {

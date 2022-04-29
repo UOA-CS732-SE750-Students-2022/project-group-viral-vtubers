@@ -15,6 +15,8 @@ data class User(
 //  val products: List<Product>,
 //  val inbox: List<Mail>,
 //  val sent: List<Mail>,
+//  val followers: Collection<ID>,
+//  val following: Collection<ID>,
 )
 
 data class UserPagination(
