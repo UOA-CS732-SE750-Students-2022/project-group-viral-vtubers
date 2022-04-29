@@ -477,7 +477,7 @@ export type UserPagination = {
   pageInfo: PageInfo;
 };
 
-export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<string> }> }> };
+export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'Product', id: string, name: string, price: number, titleImage: string }> }> };
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
@@ -521,7 +521,7 @@ export const CartsFragmentFragmentDoc = gql`
       id
       name
       price
-      images
+      titleImage
     }
   }
 }

@@ -17,14 +17,15 @@ export class CartComponent implements OnInit {
           seller: {
             id: 'artist1',
             displayName: 'Flynnie',
-            profileImageURI: 'alt',
+            profileImageURI:
+              'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
           },
           items: [
             {
               id: 'item1',
               name: 'test product',
               price: 29.99,
-              images: ['alt'],
+              titleImage: 'https://picsum.photos/200',
             },
           ],
         },
@@ -34,20 +35,21 @@ export class CartComponent implements OnInit {
           seller: {
             id: 'artist2',
             displayName: 'Vivi',
-            profileImageURI: 'alt',
+            profileImageURI:
+              'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
           },
           items: [
             {
               id: 'item2',
               name: 'chibi art',
               price: 29.99,
-              images: ['alt'],
+              titleImage: 'https://picsum.photos/200',
             },
             {
               id: 'item3',
               name: 'chibi digital plushie',
               price: 10000.04555,
-              images: ['alt'],
+              titleImage: 'https://picsum.photos/200',
             },
           ],
         },
