@@ -45,13 +45,20 @@ type Product {
   id: ID!
   name: String!
   numLikes: Int!
-  price: Float!
   shortDescription: String!
   titleImage: String!
+  variants: [ProductVariant!]!
   vrm: String!
   subcategory: Subcategory!
   images: [String!]!
   files: [String!]!
+}
+""
+type ProductVariant {
+  files: [String!]!
+  id: ID!
+  name: String!
+  price: Float!
 }
 "Category"
 type Subcategory {

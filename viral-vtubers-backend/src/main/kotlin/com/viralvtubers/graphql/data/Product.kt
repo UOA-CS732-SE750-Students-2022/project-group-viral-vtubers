@@ -8,9 +8,15 @@ data class Product(
     val titleImage: String,
 //  val images: List<String>,
     val vrm: String,
-//  val files: List<String>,
-    val price: Double,
     val numLikes: Int,
+    val variants: List<ProductVariant>,
+)
+
+data class ProductVariant(
+    val id: ID,
+    val name: String,
+    val price: Double,
+    val files: List<String>,
 )
 
 data class ProductPagination(
