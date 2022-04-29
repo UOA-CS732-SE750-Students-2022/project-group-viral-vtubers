@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { ProductsComponent } from './products/products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { GalleryModule } from 'ng-gallery';
+
 import { CreateProductComponent } from './create-product/create-product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductsComponent } from './products/products.component';
 
 export const routes: Routes = [
   {
@@ -24,11 +26,8 @@ export const routes: Routes = [
   declarations: [
     ProductsComponent,
     ProductDetailsComponent,
-    CreateProductComponent
+    CreateProductComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, GalleryModule, RouterModule.forChild(routes)],
 })
-export class MarketplaceModule { }
+export class MarketplaceModule {}

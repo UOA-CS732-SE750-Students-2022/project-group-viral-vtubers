@@ -1,8 +1,13 @@
 <div class="container">
   <div class="product-information-container">
     <div class="images-container">
-      <img class="image" src="https://lostone.kirara.ca/card/card_2310_c.png" />
-      <div class="carousell-container">carousell</div>
+      <gallery
+        class="image-display"
+        [items]="images"
+        thumbPosition="bottom"
+        thumbView="contain"
+        imageSize="contain"
+      ></gallery>
     </div>
     <div class="details-container">
       <div class="creator-info">

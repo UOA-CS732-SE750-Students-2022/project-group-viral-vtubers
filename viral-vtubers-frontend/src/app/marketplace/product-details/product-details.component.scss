@@ -264,3 +264,16 @@ $side-margin: 40px;
     margin: 0;
   }
 }
+
+.images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.image-display {
+  background-color: white;
+  flex: 1;
+
+  aspect-ratio: 3/2;
+}
