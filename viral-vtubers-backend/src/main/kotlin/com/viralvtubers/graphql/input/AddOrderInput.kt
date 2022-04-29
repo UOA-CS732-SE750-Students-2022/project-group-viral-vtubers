@@ -9,5 +9,6 @@ data class AddOrderInput(
     val bounty: Double,
     val draft: Boolean,
     val tagIds: List<String>,
+    val image: String,
 )
 

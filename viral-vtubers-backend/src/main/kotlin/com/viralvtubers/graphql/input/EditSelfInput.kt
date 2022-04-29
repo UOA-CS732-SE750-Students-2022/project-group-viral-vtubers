@@ -5,4 +5,5 @@ data class EditSelfInput(
     val bio: String?,
     val profileImageURI: String?,
     val tagIds: List<String>?,
+    val status: String?,
 )
