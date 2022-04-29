@@ -172,7 +172,9 @@
       display: flex;
       justify-content: space-between;
 
-      cursor: move;
+      .drag {
+        cursor: move;
+      }
 
       .item-info {
         flex: 1;
@@ -351,7 +353,6 @@
         }
       }
     }
-<<<<<<< Updated upstream
   }
 }
 
@@ -359,6 +360,7 @@
   cursor: pointer;
   display: flex;
   width: 48%;
+  min-height: 98px;
   justify-content: center;
   align-items: center;
   font-size: $font-size-h4;
@@ -371,8 +373,6 @@
 
   &:hover {
     opacity: $button-coloured-hover-opacity;
-=======
->>>>>>> Stashed changes
   }
 }
 
@@ -492,15 +492,18 @@
   padding: 20px;
   margin: 0px;
   display: flex;
-  cursor: move;
-  position: relative;
+  .drag {
+    cursor: move;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    .remove-btn {
-      opacity: 1;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      .remove-btn {
+        opacity: 1;
+      }
     }
   }
+
+  position: relative;
 }
 
 .remove-btn {
@@ -525,7 +528,6 @@
     font-size: $font-size-h5;
   }
 }
-<<<<<<< Updated upstream
 
 .overlay {
   position: fixed;
@@ -770,5 +772,3 @@
 .about-me {
   margin-top: 0 !important;
 }
-=======
->>>>>>> Stashed changes

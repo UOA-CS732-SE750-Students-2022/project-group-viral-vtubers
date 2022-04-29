@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   PriceEnum,
   Service,
@@ -25,7 +25,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ],
 })
 export class UserProfileComponent implements OnInit {
-  isEdit = true;
+  @Input()
+  isEdit = false;
 
   showNewService = false;
 
