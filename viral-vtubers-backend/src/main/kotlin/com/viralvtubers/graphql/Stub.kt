@@ -56,8 +56,21 @@ val stubProduct = { id: String ->
         "Fake Product Short Description",
         "fakeImage.png",
         "fakeVRM.vrm",
-        99.99,
         12,
+        variants = listOf(
+            ProductVariant(
+                id = ID("productVariant1"),
+                name = "Fake Product Variant 1",
+                price = 10.0,
+                files = listOf("fake_file.vrm")
+            ),
+            ProductVariant(
+                id = ID("productVariant2"),
+                name = "Fake Product Variant 2",
+                price = 20.0,
+                files = listOf("fake_file.vrm", "fake_file.vroid")
+            ),
+        )
     )
 }
 
