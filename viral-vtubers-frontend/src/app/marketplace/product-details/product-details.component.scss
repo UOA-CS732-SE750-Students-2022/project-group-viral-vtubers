@@ -1,0 +1,80 @@
+@import "../../../variables";
+
+$side-margin: 40px;
+
+.container {
+  height: calc(100% - $header-height);
+  width: 100%;
+
+}
+
+.product-information-container {
+  margin: $side-margin;
+
+  background: lightcoral;
+
+}
+
+.description-container {
+  margin: 0 $side-margin;
+
+  box-sizing: border-box;
+  padding: 50px;
+
+  background: lightgreen;
+}
+
+.product-information-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.images-container {
+  background: lightpink;
+
+  width: 900px;
+  max-width: 50%;
+}
+
+.details-container {
+  flex: 1;
+  margin-left: $side-margin;
+
+  .creator-info {
+    display: flex;
+  }
+
+  .price-container {
+    background-color: lightblue;
+
+
+    > p {
+      width: 100%;
+      text-align: right;
+    }
+
+    .file-info-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      background-color: lightcyan;
+
+
+      .file-info {
+        flex: 1;
+
+      }
+
+      > button {
+        display: flex;
+        align-items: center;
+
+
+        > div {
+
+        }
+      }
+    }
+  }
+}
