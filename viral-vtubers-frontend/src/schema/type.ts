@@ -25,8 +25,22 @@ export type AddOrderInput = {
   description: Scalars['String'];
   draft: Scalars['Boolean'];
   id: Scalars['ID'];
+  image: Scalars['String'];
   name: Scalars['String'];
   tagIds: Array<Scalars['String']>;
+};
+
+export type AddProductInput = {
+  files: Array<Scalars['String']>;
+  id: Scalars['ID'];
+  images: Array<Scalars['String']>;
+  name: Scalars['String'];
+  numLikes: Scalars['Int'];
+  price: Scalars['Float'];
+  shortDescription: Scalars['String'];
+  subcategoryId: Scalars['ID'];
+  titleImage: Scalars['String'];
+  vrm: Scalars['String'];
 };
 
 export type AddServiceInput = {
@@ -82,9 +96,23 @@ export type EditOrderInput = {
   bounty?: InputMaybe<Scalars['Float']>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  image?: InputMaybe<Scalars['String']>;
   isDraft?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   tagIds?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type EditProductInput = {
+  files?: InputMaybe<Array<Scalars['String']>>;
+  id: Scalars['ID'];
+  images?: InputMaybe<Array<Scalars['String']>>;
+  name?: InputMaybe<Scalars['String']>;
+  numLikes?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Float']>;
+  shortDescription?: InputMaybe<Scalars['String']>;
+  subcategoryId?: InputMaybe<Scalars['ID']>;
+  titleImage?: InputMaybe<Scalars['String']>;
+  vrm?: InputMaybe<Scalars['String']>;
 };
 
 export type EditSelfInput = {
@@ -119,6 +147,8 @@ export type Mutation = {
   __typename?: 'Mutation';
   /** Add an Order */
   addOrder: Order;
+  /** Add a product */
+  addProduct: Product;
   /** Add a service */
   addService: Service;
   /** Add item to Cart */
@@ -127,8 +157,12 @@ export type Mutation = {
   applyOrder: Order;
   /** Checkout item to Cart */
   checkout: Purchase;
+  /** Delete a product */
+  deleteProduct: Product;
   /** Edit an Order */
   editOrder: Order;
+  /** Edit a product */
+  editProduct: Product;
   /** Edit self */
   editSelf: User;
   /** Edit a service */
@@ -151,6 +185,12 @@ export type MutationAddOrderArgs = {
 
 
 /** Mutation object */
+export type MutationAddProductArgs = {
+  input: AddProductInput;
+};
+
+
+/** Mutation object */
 export type MutationAddServiceArgs = {
   input: AddServiceInput;
 };
@@ -169,8 +209,20 @@ export type MutationApplyOrderArgs = {
 
 
 /** Mutation object */
+export type MutationDeleteProductArgs = {
+  input: EditProductInput;
+};
+
+
+/** Mutation object */
 export type MutationEditOrderArgs = {
   input: EditOrderInput;
+};
+
+
+/** Mutation object */
+export type MutationEditProductArgs = {
+  input: EditProductInput;
 };
 
 
@@ -204,6 +256,7 @@ export type Order = {
   bounty: Scalars['Float'];
   description: Scalars['String'];
   id: Scalars['ID'];
+  image: Scalars['String'];
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   tags: Array<Tag>;
@@ -239,7 +292,8 @@ export enum PriceEnum {
   /** price for each */
   Each = 'EACH',
   /** price per hour */
-  Hour = 'HOUR'
+  Hour = 'HOUR',
+  Poa = 'POA'
 }
 
 /** Product */
@@ -249,9 +303,11 @@ export type Product = {
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
   name: Scalars['String'];
+  numLikes: Scalars['Int'];
   price: Scalars['Float'];
   shortDescription: Scalars['String'];
   subcategory: Subcategory;
+  titleImage: Scalars['String'];
   vrm: Scalars['String'];
 };
 
@@ -383,6 +439,8 @@ export type SubcategoryProductsArgs = {
 
 export type Tag = {
   __typename?: 'Tag';
+  backgroundColor: Scalars['String'];
+  color: Scalars['String'];
   id: Scalars['ID'];
   name: Scalars['String'];
 };
@@ -402,6 +460,7 @@ export type User = {
   profileImageURI: Scalars['String'];
   sent: Array<Mail>;
   services: Array<Service>;
+  status: Scalars['String'];
   tags: Array<Tag>;
 };
 

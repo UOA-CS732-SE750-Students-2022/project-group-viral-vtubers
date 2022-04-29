@@ -17,6 +17,7 @@ type User {
   numCompletedCommissions: Int!
   numLikes: Int!
   profileImageURI: String!
+  status: String!
   isFollowing: Boolean!
   tags: [Tag!]!
   services: [Service!]!
@@ -26,6 +27,8 @@ type User {
 }
 ""
 type Tag {
+  backgroundColor: String!
+  color: String!
   id: ID!
   name: String!
 }
@@ -41,8 +44,10 @@ type Service {
 type Product {
   id: ID!
   name: String!
+  numLikes: Int!
   price: Float!
   shortDescription: String!
+  titleImage: String!
   vrm: String!
   subcategory: Subcategory!
   images: [String!]!
@@ -93,6 +98,7 @@ type Order {
   bounty: Float!
   description: String!
   id: ID!
+  image: String!
   isDraft: Boolean!
   name: String!
   tags: [Tag!]!
@@ -173,6 +179,12 @@ type Mutation {
   editService(input: EditServiceInput!): Service!
   "Send a mail"
   sendMail(input: SendMailInput!): Mail!
+  "Add a product"
+  addProduct(input: AddProductInput!): Product!
+  "Edit a product"
+  editProduct(input: EditProductInput!): Product!
+  "Delete a product"
+  deleteProduct(input: EditProductInput!): Product!
   "Add an Order"
   addOrder(input: AddOrderInput!): Order!
   "Edit an Order"
@@ -194,6 +206,7 @@ enum PriceEnum {
   HOUR
   "price for each"
   EACH
+  POA
 }
 "AgeRestrictionEnum"
 enum AgeRestrictionEnum {
@@ -246,11 +259,38 @@ input SendMailInput {
   title: String!
 }
 ""
+input AddProductInput {
+  files: [String!]!
+  id: ID!
+  images: [String!]!
+  name: String!
+  numLikes: Int!
+  price: Float!
+  shortDescription: String!
+  subcategoryId: ID!
+  titleImage: String!
+  vrm: String!
+}
+""
+input EditProductInput {
+  files: [String!]
+  id: ID!
+  images: [String!]
+  name: String
+  numLikes: Int
+  price: Float
+  shortDescription: String
+  subcategoryId: ID
+  titleImage: String
+  vrm: String
+}
+""
 input AddOrderInput {
   bounty: Float!
   description: String!
   draft: Boolean!
   id: ID!
+  image: String!
   name: String!
   tagIds: [String!]!
 }
@@ -259,6 +299,7 @@ input EditOrderInput {
   bounty: Float
   description: String
   id: ID!
+  image: String
   isDraft: Boolean
   name: String
   tagIds: [String!]
