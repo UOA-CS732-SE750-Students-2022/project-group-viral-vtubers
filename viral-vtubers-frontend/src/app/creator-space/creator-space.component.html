@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="sidebar-container">
+    <button routerLink="add-product">+ New product</button>
+    <nav>
+      <ul>
+        <li
+          [ngClass]="{ active: activeRoute === '/creator' }"
+          routerLink="dashboard"
+        >
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRTvgvgmkWHc3NGsqOJmhj42K_WowBXripNg&usqp=CAU"
+          />
+          <p>Item</p>
+        </li>
+      </ul>
+    </nav>
+    <div class="terms-container">
+      <p>Terms and conditions</p>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
