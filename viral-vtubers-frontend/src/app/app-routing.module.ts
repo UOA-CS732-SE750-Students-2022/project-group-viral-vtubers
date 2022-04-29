@@ -32,7 +32,6 @@ export const routes: Routes = [
       import('./marketplace/marketplace.module').then(
         (m) => m.MarketplaceModule
       ),
-    canActivate: [AuthGuard],
   },
   {
     path: 'me',
