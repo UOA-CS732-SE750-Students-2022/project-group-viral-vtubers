@@ -314,6 +314,7 @@ export enum PriceEnum {
 /** Product */
 export type Product = {
   __typename?: 'Product';
+  artist: User;
   files: Array<Scalars['String']>;
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
@@ -509,6 +510,8 @@ export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, dat
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
+export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, shortDescription: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean } };
+
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
 export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string> }> };
@@ -578,6 +581,30 @@ export const MailOutboxFragmentFragmentDoc = gql`
   receiver {
     id
     displayName
+  }
+}
+    `;
+export const ProductDetailFragmentFragmentDoc = gql`
+    fragment ProductDetailFragment on Product {
+  id
+  name
+  numLikes
+  shortDescription
+  titleImage
+  images
+  subcategory {
+    id
+    name
+    category {
+      id
+      name
+    }
+  }
+  artist {
+    id
+    displayName
+    profileImageURI
+    isFollowing
   }
 }
     `;

@@ -54,6 +54,7 @@ type Product {
   subcategory: Subcategory!
   images: [String!]!
   files: [String!]!
+  artist: User!
 }
 "Product Variant"
 type ProductVariant {

@@ -78,6 +78,12 @@ $side-margin: 40px;
         opacity: $button-coloured-hover-opacity;
       }
     }
+
+    .unfollow-btn {
+      border: solid 1px $color-primary;
+      background-color: white;
+      color: $color-primary;
+    }
   }
 
   > h1 {
@@ -126,6 +132,7 @@ $side-margin: 40px;
       font-family: $font-family-poppins;
       color: $color-grey-dark;
       margin: 0;
+      text-transform: capitalize;
     }
 }
 
