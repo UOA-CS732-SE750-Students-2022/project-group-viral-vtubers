@@ -425,6 +425,8 @@ export type UserFragmentFragment = { __typename?: 'User', id: string, bio: strin
 
 export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<string> }> };
 
+export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
+
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -507,6 +509,20 @@ export const UserProfileFragmentFragmentDoc = gql`
     name
     price
     images
+  }
+}
+    `;
+export const ArtistFragmentFragmentDoc = gql`
+    fragment ArtistFragment on User {
+  id
+  displayName
+  numCompletedCommissions
+  numLikes
+  profileImageURI
+  isFollowing
+  tags {
+    id
+    name
   }
 }
     `;

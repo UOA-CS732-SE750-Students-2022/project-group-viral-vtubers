@@ -1,88 +1,121 @@
 <div class="container">
-  <h4>Add/Edit Commision Request</h4>
-  <input class="title-input" placeholder="Loli Gyaru" />
-  <h6>
-    Category: {{ selectedSubCategory?.name }}
-    <div class="edit-icon" (click)="showChange()">
-      <img src="assets/icons/EditIcon.svg" />
-    </div>
-  </h6>
-  <app-tags class="tags"></app-tags>
-  <textarea
-    rows="5"
-    class="description-input"
-    type="text"
-    placeholder="I want to a loli..."
-  ></textarea>
-  <div class="selection-section">
-    <span>Comments</span>
-    <div>
-      <input type="radio" name="comments" [defaultChecked]="true" />
-      <p>ON</p>
-      <span></span>
-      <input type="radio" name="comments" />
-      <p>OFF</p>
-    </div>
+  <div class="sidebar-container">
+    <nav><ul></ul></nav>
   </div>
-  <div class="selection-section">
-    <span>Bounty</span>
-    <div>
-      <input type="radio" name="bounty" [defaultChecked]="true" />
-      <p>Free</p>
-      <span></span>
-      <input type="radio" name="bounty" />
-      <input class="input-bounty" type="number" name="bounty" />
-      <p>USD</p>
+  <div class="edit-container">
+    <h4>Add/Edit Commision Request</h4>
+    <hr />
+    <div class="edit-side-container">
+      <div class="edit-cover-image">
+        <img src="assets/icons/UploadIcon.svg" alt="upload-icon" />
+        <p class="title">Add a cover image</p>
+        <p>Upload a visualisation of what you would like to commission</p>
+        <input type="file" />
+      </div>
+      <div class="edit-fields">
+        <p>Commission request title</p>
+        <input class="title-input" placeholder="Loli Gyaru" />
+        <p>Category</p>
+        <div class="category-input" *ngIf="selectedSubCategory">
+          Accessories > Underwear
+          <span class="category-change" (click)="showChange()"
+            >Change category</span
+          >
+        </div>
+        <div
+          *ngIf="!selectedSubCategory"
+          class="category-input category-empty-select"
+          (click)="showChange()"
+        >
+          + Select Category
+        </div>
+        <p>Bounty</p>
+        <div class="selection-section">
+          <div>
+            <input type="radio" name="bounty" />
+            <p class="input-dollar-sign">$</p>
+            <input
+              class="input-bounty"
+              type="number"
+              name="bounty"
+              [defaultChecked]="true"
+            />
+            <p>USD</p>
+            <span></span>
+            <input type="radio" name="bounty" />
+            <p>I want the artwork done for free</p>
+          </div>
+        </div>
+        <p class="allow-comments">Allow comments</p>
+        <div class="selection-section">
+          <div>
+            <input type="radio" name="comments" [defaultChecked]="true" />
+            <p>ON</p>
+            <span></span>
+            <input type="radio" name="comments" />
+            <p>OFF</p>
+          </div>
+        </div>
+        <p class="title-tags">Tags</p>
+        <app-tags class="tags"></app-tags>
+      </div>
     </div>
-  </div>
-  <div class="save-section">
-    <button class="save-draft-button">Save a Draft</button>
-    <button class="save-publish-button">Save to Publish</button>
-  </div>
-</div>
+    <textarea
+      rows="8"
+      class="description-input"
+      type="text"
+      placeholder="Describe the artwork that you would like to have done. Please include as much detail as you can to assist the artist in envisioning your request."
+    ></textarea>
 
-<div class="overlay" *ngIf="changePopup" [@inOutAnimation]>
-  <div class="popup">
-    <p class="title">Categories</p>
-    <a class="close" (click)="hideChange()"> &times; </a>
-    <p>Available Categories:</p>
-    <div class="container">
-      <div
-        *ngFor="let category of getAllCategories()"
-        class="category"
-        (click)="openCategory(category)"
-      >
-        <p>
-          {{ category.name }}
-          <span
-            class="chevron-icon"
-            [style.transform]="
+    <div class="save-section">
+      <button class="save-draft-button">SAVE A DRAFT</button>
+      <button class="save-publish-button">CREATE</button>
+    </div>
+  </div>
+
+  <div class="overlay" *ngIf="changePopup" [@inOutAnimation]>
+    <div class="popup">
+      <p class="title">Categories</p>
+      <a class="close" (click)="hideChange()"> &times; </a>
+      <p>Available Categories:</p>
+      <div>
+        <div
+          *ngFor="let category of getAllCategories()"
+          class="category"
+          (click)="openCategory(category)"
+        >
+          <p>
+            {{ category.name }}
+            <span
+              class="chevron-icon"
+              [style.transform]="
+                selectedCategory?.id === category.id
+                  ? 'rotate(90deg)'
+                  : 'rotate(0deg)'
+              "
+            >
+              <div
+                [style.backgroundColor]="
+                  selectedCategory?.id === category.id ? '#fb7299' : '#aaaaaa'
+                "
+                src="assets/icons/ChevronIcon.svg"
+              ></div>
+            </span>
+          </p>
+          <div
+            [style.maxHeight]="
               selectedCategory?.id === category.id
-                ? 'rotate(90deg)'
-                : 'rotate(0deg)'
+                ? 28 * category.subcategories.length + 'px'
+                : '0'
             "
           >
             <div
-              [style.backgroundColor]="
-                selectedCategory?.id === category.id ? '#fb7299' : '#aaaaaa'
-              "
-              src="assets/icons/ChevronIcon.svg"
-            ></div>
-          </span>
-        </p>
-        <div
-          [style.maxHeight]="
-            selectedCategory?.id === category.id
-              ? 28 * category.subcategories.length + 'px'
-              : '0'
-          "
-        >
-          <div
-            *ngFor="let subcategory of category.subcategories"
-            class="subcategory"
-            (click)="changeCategory(subcategory)"
-          >
-            {{ subcategory.name }}
+              *ngFor="let subcategory of category.subcategories"
+              class="subcategory"
+              (click)="changeCategory(subcategory)"
+            >
+              {{ subcategory.name }}
+            </div>
           </div>
         </div>
       </div>
