@@ -234,7 +234,8 @@ $side-margin: 40px;
   column-gap: 15px;
 
   > span {
-    border: solid 1px forestgreen;
+    border: solid 1px rgb(64, 169, 255);
+    background-color: rgb(64, 169, 255, 0.2);
     border-radius: 5px;
     padding: 0 15px;
 
@@ -274,6 +275,14 @@ $side-margin: 40px;
 .image-display {
   background-color: white;
   flex: 1;
+  border: solid 1px $color-grey-light;
+  border-radius: 5px;
 
   aspect-ratio: 3/2;
+}
+
+.comments-container {
+  padding: $side-margin;
+
+  font-size: 200px;
 }

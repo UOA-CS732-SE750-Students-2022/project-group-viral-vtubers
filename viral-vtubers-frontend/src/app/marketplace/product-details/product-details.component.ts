@@ -8,6 +8,7 @@ import { GalleryItem, ImageItem } from 'ng-gallery';
 })
 export class ProductDetailsComponent implements OnInit {
   images: GalleryItem[];
+  tags: string[];
 
   constructor() {
     // Set gallery items array
@@ -34,6 +35,8 @@ export class ProductDetailsComponent implements OnInit {
       }),
       // ... more items
     ];
+
+    this.tags = ['.vrm', '.vroid'];
   }
 
   ngOnInit(): void {}

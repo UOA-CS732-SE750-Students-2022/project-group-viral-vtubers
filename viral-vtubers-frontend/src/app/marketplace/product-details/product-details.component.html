@@ -30,8 +30,8 @@
             <div class="file-info">
               <p>VRM - Shogun/Genshin Impact</p>
               <div class="tags-container">
-                <span class="file-type-tag" *ngFor="let i of [0, 1, 2, 3]">
-                  <p>.vrm</p>
+                <span class="file-type-tag" *ngFor="let tag of tags">
+                  <p>{{ tag }}</p>
                 </span>
               </div>
             </div>
@@ -62,4 +62,5 @@
       ---------------------------------------
     </p>
   </div>
+  <div class="comments-container">Comments here</div>
 </div>
