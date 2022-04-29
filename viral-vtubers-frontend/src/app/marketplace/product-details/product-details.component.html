@@ -2,17 +2,33 @@
   <div class="product-information-container">
     <div class="images-container">images here</div>
     <div class="details-container">
-      <div class="creator-info">creator info flex row</div>
+      <div class="creator-info">
+        <span>
+          <img
+            src="https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png"
+          />NozomiSenpai <button>Follow</button>
+        </span>
+      </div>
+      <h1>VRoid Outfit - Raiden Shogun/Genshin Impact</h1>
+      <p>Accessories > Gloves</p>
+      <button class="heart-button">
+        <img src="assets/icons/hearts/heart-empty-grey.svg" />
+        <p>82</p>
+      </button>
       <div class="prices-container">
         <div *ngFor="let i of [0, 1]" class="price-details-container">
           <p>$59.99</p>
           <div class="file-info-container">
             <div class="file-info">
-              <p>vrm shogun genshin impact</p>
-              <div>tag looking things</div>
+              <p>VRM - Shogun/Genshin Impact</p>
+              <div class="tags-container">
+                <span class="file-type-tag" *ngFor="let i of [0, 1, 2, 3]">
+                  <p>VRM</p>
+                </span>
+              </div>
             </div>
             <button>
-              <img src="assets/icons/hearts/heart-empty-grey.svg" />
+              <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>in cart</h4>
                 <p>kawaii_loli.vrm</p>
