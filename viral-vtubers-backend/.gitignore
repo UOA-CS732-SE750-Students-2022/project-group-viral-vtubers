@@ -39,8 +39,9 @@ out/
 ### Java ###
 target/
 
-### System files ###
+# System files
 .DS_Store
+Thumbs.db
 
 ### Token ###
 firebase-service-account.json

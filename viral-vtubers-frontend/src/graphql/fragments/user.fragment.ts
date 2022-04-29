@@ -41,3 +41,18 @@ export const UserProfileFragment = gql`
     }
   }
 `;
+
+export const ArtistFragment = gql`
+  fragment ArtistFragment on User {
+    id
+    displayName
+    numCompletedCommissions
+    numLikes
+    profileImageURI
+    isFollowing
+    tags {
+      id
+      name
+    }
+  }
+`;

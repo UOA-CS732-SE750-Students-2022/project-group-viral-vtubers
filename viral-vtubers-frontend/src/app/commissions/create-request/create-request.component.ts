@@ -20,8 +20,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateRequestComponent implements OnInit {
   public changePopup = false;
-  public selectedCategory?: any = {};
-  public selectedSubCategory?: any = {};
+  public selectedCategory?: any;
+  public selectedSubCategory?: any;
 
   constructor() {}
 

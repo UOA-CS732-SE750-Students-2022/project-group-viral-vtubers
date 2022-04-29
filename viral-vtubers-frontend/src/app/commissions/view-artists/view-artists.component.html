@@ -1,15 +1,35 @@
 <div class="container">
-  <div class="carousel-section"></div>
+  <div class="carousel-section">
+    <div class="carousel-viewport">
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+    </div>
+    <img src="assets/banners/default.png" />
+  </div>
   <div class="artist-section">
-    <div class="artist" *ngFor="let artist of [1, 2, 3]">
-      <img />
+    <div class="artist" *ngFor="let artist of artists">
+      <img [src]="artist.profileImageURI" />
       <div>
-        <h5>AyumiSensei</h5>
+        <h5>{{ artist.displayName }}</h5>
+
+        <div class="artist-status">
+          <p class="status">Dancing in the rain hehe~</p>
+          <button>{{ artist.isFollowing ? "FOLLOWING" : "FOLLOW" }}</button>
+        </div>
+        <p>
+          Completed <b> {{ artist.numCompletedCommissions }}</b> commissions
+        </p>
+        <p>
+          <span>
+            <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+            <b> {{ artist.numLikes }} </b> Total Likes
+          </span>
+        </p>
+        <app-tags class="app-tags" [isEdit]="false"></app-tags>
       </div>
-      <p>Dancing in the rain hehe~</p>
-      <p>Completed <b>183</b> commissions</p>
-      <p>Hourly rate: <b>183</b></p>
-      <app-tags [isEdit]="false"></app-tags>
     </div>
   </div>
 </div>
