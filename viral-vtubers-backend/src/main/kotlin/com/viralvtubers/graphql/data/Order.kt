@@ -7,6 +7,7 @@ data class Order(
 //  val tags: List<Tag>,
     val bounty: Double,
     val isDraft: Boolean,
+    val image: String,
 //  val applications: List<User>
 )
 

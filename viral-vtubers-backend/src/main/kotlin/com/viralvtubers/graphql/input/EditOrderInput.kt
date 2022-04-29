@@ -9,5 +9,6 @@ data class EditOrderInput(
     val bounty: Double?,
     val isDraft: Boolean?,
     val tagIds: List<String>?,
+    val image: String?,
 )
 

@@ -5,6 +5,7 @@ data class User(
     val displayName: String,
     val email: String,
     val bio: String,
+    val status: String,
     val numCompletedCommissions: Int,
     val numLikes: Int,
 //  val isFollowing: Boolean,

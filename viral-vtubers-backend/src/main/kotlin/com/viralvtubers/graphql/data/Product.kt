@@ -4,11 +4,13 @@ data class Product(
     val id: ID,
     val name: String,
     val shortDescription: String,
-//  val subCategory: SubCategory,
+//  val subcategory: Subcategory,
+    val titleImage: String,
 //  val images: List<String>,
     val vrm: String,
 //  val files: List<String>,
     val price: Double,
+    val numLikes: Int,
 )
 
 data class ProductPagination(
