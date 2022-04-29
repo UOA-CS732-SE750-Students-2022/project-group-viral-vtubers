@@ -1,0 +1,151 @@
+@import "../../../variables";
+
+.container {
+}
+
+@keyframes display {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  5% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.carousel-section {
+  overflow: hidden;
+  margin: 50px 8%;
+  > img {
+    width: 100%;
+    height: auto;
+    opacity: 1;
+  }
+}
+
+.carousel-viewport {
+  position: relative;
+  display: flex;
+
+  > .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    animation: display 40s infinite;
+  }
+  > .carousel-item:nth-child(2) {
+    animation-delay: 8s;
+  }
+  > .carousel-item:nth-child(3) {
+    animation-delay: 16s;
+  }
+  > .carousel-item:nth-child(4) {
+    animation-delay: 24s;
+  }
+  > .carousel-item:nth-child(5) {
+    animation-delay: 32s;
+  }
+}
+
+.artist-section {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+
+  column-gap: 2%;
+  row-gap: 80px;
+  > .artist {
+    display: flex;
+    width: 49%;
+    > img {
+      margin-right: 30px;
+      height: 194px;
+      width: 194px;
+      border-radius: 50%;
+    }
+    > div {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 11px 15px;
+      border: solid 1px $color-grey-light;
+      border-radius: 10px;
+      > .status {
+        color: $color-grey-dark;
+        font-size: $font-size-body-1;
+        margin-bottom: 10px;
+      }
+    }
+    .artist-name {
+      > h5 {
+        display: inline;
+      }
+      img {
+        margin-left: 32px;
+        height: 12px;
+        width: 12px;
+        margin-bottom: -1px;
+      }
+      span {
+        font-size: $font-size-body-3;
+        color: $color-grey-dark;
+      }
+      button {
+        float: right;
+        border-radius: 20px;
+        border: 1px solid $color-primary;
+        width: 122px;
+        color: $color-primary;
+        padding: 6px 0;
+        font-size: $font-size-body-2;
+        font-weight: 500;
+        background: none !important;
+        cursor: pointer;
+        transition: $button-hover-animation;
+        &:hover {
+          opacity: $button-coloured-hover-opacity;
+        }
+      }
+    }
+    h5 {
+      color: $color-secondary;
+      font-size: $font-size-h5;
+      font-weight: 400;
+      margin: 0;
+      margin-bottom: 6px;
+    }
+    p {
+      margin: 0;
+      color: $color-grey-dark;
+      font-size: $font-size-body-2;
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.app-tags {
+  margin: 0 -10px -100px;
+}
+
+@media (max-width: 1600px) {
+  .artist-section > .artist {
+    width: 100%;
+  }
+}

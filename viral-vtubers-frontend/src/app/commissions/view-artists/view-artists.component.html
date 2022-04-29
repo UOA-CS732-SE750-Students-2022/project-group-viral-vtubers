@@ -1,15 +1,30 @@
 <div class="container">
-  <div class="carousel-section"></div>
+  <div class="carousel-section">
+    <div class="carousel-viewport">
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+    </div>
+    <img src="assets/banners/default.png" />
+  </div>
   <div class="artist-section">
-    <div class="artist" *ngFor="let artist of [1, 2, 3]">
-      <img />
+    <div class="artist" *ngFor="let artist of [1, 2, 3, 4, 5, 6, 7, 8]">
+      <img src="https://picsum.photos/400" />
       <div>
-        <h5>AyumiSensei</h5>
+        <div class="artist-name">
+          <h5>AyumiSensei</h5>
+          <span>
+            <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0 Likes
+          </span>
+          <button>FOLLOWING</button>
+        </div>
+        <p class="status">Dancing in the rain hehe~</p>
+        <p>Completed <b>183</b> commissions</p>
+        <p>Hourly rate: <b>183</b></p>
+        <app-tags class="app-tags" [isEdit]="false"></app-tags>
       </div>
-      <p>Dancing in the rain hehe~</p>
-      <p>Completed <b>183</b> commissions</p>
-      <p>Hourly rate: <b>183</b></p>
-      <app-tags [isEdit]="false"></app-tags>
     </div>
   </div>
 </div>
