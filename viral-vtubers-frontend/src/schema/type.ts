@@ -477,6 +477,8 @@ export type UserPagination = {
   pageInfo: PageInfo;
 };
 
+export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<string> }> }> };
+
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
@@ -505,6 +507,25 @@ export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SelfQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
 
+export const CartsFragmentFragmentDoc = gql`
+    fragment CartsFragment on Carts {
+  carts {
+    numItems
+    totalAmount
+    seller {
+      id
+      displayName
+      profileImageURI
+    }
+    items {
+      id
+      name
+      price
+      images
+    }
+  }
+}
+    `;
 export const MailInboxFragmentFragmentDoc = gql`
     fragment MailInboxFragment on Mail {
   body
