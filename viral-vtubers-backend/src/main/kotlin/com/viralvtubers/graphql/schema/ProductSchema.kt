@@ -2,6 +2,8 @@ package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
+import com.viralvtubers.graphql.input.AddProductInput
+import com.viralvtubers.graphql.input.EditProductInput
 import com.viralvtubers.graphql.stubCategory
 import com.viralvtubers.graphql.stubProduct
 import com.viralvtubers.graphql.stubProductPagination
@@ -115,6 +117,27 @@ fun SchemaBuilder.productSchema() {
         description = "Get Subcategory"
         resolver { id: ID ->
             stubSubcategory("fake_subcategory")
+        }
+    }
+
+    mutation("addProduct") {
+        description = "Add a product"
+        resolver { input: AddProductInput ->
+            stubProduct("fake_product")
+        }
+    }
+
+    mutation("editProduct") {
+        description = "Edit a product"
+        resolver { input: EditProductInput ->
+            stubProduct("fake_service")
+        }
+    }
+
+    mutation("deleteProduct") {
+        description = "Delete a product"
+        resolver { input: EditProductInput ->
+            stubProduct("fake_service")
         }
     }
 }

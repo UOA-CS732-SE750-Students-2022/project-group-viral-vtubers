@@ -9,6 +9,7 @@ val stubUser = { id: String ->
         "Fake User",
         "fake@user.com",
         "Fake bio",
+        "Fake status",
         1,
         1,
         "https://picsum.photos/200",
@@ -18,7 +19,9 @@ val stubUser = { id: String ->
 val stubTag = { id: String ->
     Tag(
         ID(id),
-        "Fake Tag"
+        "Fake Tag",
+        "#5FDDEF",
+        "#EEEEEE",
     )
 }
 
@@ -51,8 +54,10 @@ val stubProduct = { id: String ->
         ID(id),
         "Fake Product",
         "Fake Product Short Description",
+        "fakeImage.png",
         "fakeVRM.vrm",
         99.99,
+        12,
     )
 }
 
@@ -115,10 +120,11 @@ val stubOrder = { id: String ->
         "Fake Order Description",
         99.99,
         false,
+        "fakeImage.png",
     )
 }
 
-val stubCart = { ->
+val stubCart = {
     Cart(
         2,
         99.99
@@ -134,7 +140,7 @@ val stubCarts = {
     )
 }
 
-val stubPurchase = { ->
+val stubPurchase = {
     Purchase(
         2,
         99.99,

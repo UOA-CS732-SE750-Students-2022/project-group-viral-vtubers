@@ -1,7 +1,7 @@
 package com.viralvtubers.graphql.data
 
 enum class PriceEnum {
-  HOUR, EACH
+  HOUR, EACH, POA
 }
 
 data class Service(
