@@ -8,16 +8,26 @@ $side-margin: 40px;
 
 .product-information-container {
   margin: 40px $side-margin;
+  margin-bottom: 60px;
 
   display: flex;
   flex-direction: row;
 }
 
 .images-container {
-  background: lightpink;
 
   width: 900px;
-  max-width: 50%;
+  max-width: 45%;
+
+  margin-right: 30px;
+
+  > img {
+    width: 100%;
+    aspect-ratio: 9/6;
+    object-fit: contain;
+
+    border: solid 1px $color-grey-light;
+  }
 }
 
 .details-container {
