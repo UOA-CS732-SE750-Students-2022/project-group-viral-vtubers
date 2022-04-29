@@ -39,6 +39,14 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'creator',
+    loadChildren: () =>
+      import('./creator-space/creator-space.module').then(
+        (m) => m.CreatorSpaceModule
+      ),
+    // canActivate: [AuthGuard],
+  },
+  {
     path: 'mail',
     loadChildren: () => import('./mail/mail.module').then((m) => m.MailModule),
     // canActivate: [AuthGuard],
