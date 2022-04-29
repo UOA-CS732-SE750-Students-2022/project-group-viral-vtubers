@@ -24,6 +24,8 @@ type User {
   products: [Product!]!
   inbox: [Mail!]!
   sent: [Mail!]!
+  following: [User!]!
+  followers: [User!]!
 }
 ""
 type Tag {
