@@ -14,7 +14,9 @@ export const CartsFragment = gql`
         id
         name
         price
-        titleImage
+        product {
+          titleImage
+        }
       }
     }
   }

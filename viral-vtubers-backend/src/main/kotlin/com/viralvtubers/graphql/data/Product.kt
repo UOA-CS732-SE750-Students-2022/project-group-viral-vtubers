@@ -14,6 +14,7 @@ data class Product(
 
 data class ProductVariant(
     val id: ID,
+//    val productId: Product,
     val name: String,
     val price: Double,
     val files: List<String>,

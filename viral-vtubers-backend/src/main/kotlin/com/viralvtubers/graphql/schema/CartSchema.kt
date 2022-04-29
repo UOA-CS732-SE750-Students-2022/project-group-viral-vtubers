@@ -3,7 +3,7 @@ package com.viralvtubers.graphql.schema
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.stubCarts
-import com.viralvtubers.graphql.stubProduct
+import com.viralvtubers.graphql.stubProductVariant
 import com.viralvtubers.graphql.stubPurchase
 import com.viralvtubers.graphql.stubUser
 
@@ -19,12 +19,13 @@ fun SchemaBuilder.cartSchema() {
         }
 
 
-        property<List<Product>>("items") {
+        property<List<ProductVariant>>("items") {
             resolver { cart ->
                 description = "Get the items in a cart"
                 listOf(
-                    stubProduct("fake_product_0"),
-                    stubProduct("fake_product_1")
+                    stubProductVariant("fake_product_variant_0"),
+                    stubProductVariant("fake_product_variant_1"),
+                    stubProductVariant("fake_product_variant_2")
                 )
             }
         }
@@ -41,12 +42,12 @@ fun SchemaBuilder.cartSchema() {
         }
 
 
-        property<List<Product>>("items") {
+        property<List<ProductVariant>>("items") {
             resolver { purchase ->
                 description = "Get the items in a cart"
                 listOf(
-                    stubProduct("fake_product_0"),
-                    stubProduct("fake_product_1")
+                    stubProductVariant("fake_product_variant_0"),
+                    stubProductVariant("fake_product_variant_1")
                 )
             }
         }

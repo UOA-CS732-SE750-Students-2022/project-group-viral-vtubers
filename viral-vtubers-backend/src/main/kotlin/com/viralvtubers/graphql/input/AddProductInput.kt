@@ -13,4 +13,12 @@ data class AddProductInput(
     val files: List<String>,
     val price: Double,
     val numLikes: Int,
+    val variants: List<AddProductVariant>,
+)
+
+data class AddProductVariant(
+    val id: ID,
+    val name: String,
+    val price: Double,
+    val files: List<String>,
 )

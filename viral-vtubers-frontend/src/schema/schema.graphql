@@ -55,12 +55,13 @@ type Product {
   images: [String!]!
   files: [String!]!
 }
-""
+"Product Variant"
 type ProductVariant {
   files: [String!]!
   id: ID!
   name: String!
   price: Float!
+  product: Product!
 }
 "Category"
 type Subcategory {
@@ -118,7 +119,7 @@ type Cart {
   numItems: Int!
   totalAmount: Float!
   seller: User!
-  items: [Product!]!
+  items: [ProductVariant!]!
 }
 "Purchase"
 type Purchase {
@@ -126,7 +127,7 @@ type Purchase {
   placed: DateTime!
   totalAmount: Float!
   seller: User!
-  items: [Product!]!
+  items: [ProductVariant!]!
 }
 ""
 type UserPagination {
@@ -279,20 +280,34 @@ input AddProductInput {
   shortDescription: String!
   subcategoryId: ID!
   titleImage: String!
+  variants: [AddProductVariant!]!
   vrm: String!
 }
 ""
+input AddProductVariant {
+  files: [String!]!
+  id: ID!
+  name: String!
+  price: Float!
+}
+""
 input EditProductInput {
-  files: [String!]
   id: ID!
   images: [String!]
   name: String
   numLikes: Int
-  price: Float
   shortDescription: String
   subcategoryId: ID
   titleImage: String
+  variants: [EditProductVariant!]
   vrm: String
+}
+""
+input EditProductVariant {
+  files: [String!]
+  id: ID
+  name: String
+  price: Float
 }
 ""
 input AddOrderInput {

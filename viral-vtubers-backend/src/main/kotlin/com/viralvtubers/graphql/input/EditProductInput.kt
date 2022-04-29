@@ -10,8 +10,14 @@ data class EditProductInput(
     val titleImage: String?,
     val images: List<String>?,
     val vrm: String?,
-    val files: List<String>?,
-    val price: Double?,
     val numLikes: Int?,
+    val variants: List<EditProductVariant>?,
+)
+
+data class EditProductVariant(
+    val id: ID?,
+    val name: String?,
+    val price: Double?,
+    val files: List<String>?,
 )
 
