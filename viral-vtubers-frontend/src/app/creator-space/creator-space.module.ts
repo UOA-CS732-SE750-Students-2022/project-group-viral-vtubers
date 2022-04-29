@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CreateProductComponent } from './create-product/create-product.component';
+import { CreatorSpaceComponent } from './creator-space.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: CreateProductComponent,
+    component: CreatorSpaceComponent,
     children: [
       {
-        path: 'create-product',
+        path: 'add-product',
         component: CreateProductComponent,
       },
     ],
@@ -18,7 +19,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CreateProductComponent],
+  declarations: [CreateProductComponent, CreatorSpaceComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class CreatorSpaceModule {}
