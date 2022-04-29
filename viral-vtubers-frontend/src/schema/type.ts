@@ -119,6 +119,7 @@ export type EditSelfInput = {
   bio?: InputMaybe<Scalars['String']>;
   displayName?: InputMaybe<Scalars['String']>;
   profileImageURI?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<Scalars['String']>;
   tagIds?: InputMaybe<Array<Scalars['String']>>;
 };
 

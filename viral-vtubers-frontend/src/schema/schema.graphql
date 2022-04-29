@@ -235,6 +235,7 @@ input EditSelfInput {
   bio: String
   displayName: String
   profileImageURI: String
+  status: String
   tagIds: [String!]
 }
 ""
