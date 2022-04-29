@@ -17,6 +17,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.3.0",
+    "@angular/cdk": "^13.3.5",
     "@angular/common": "~13.3.0",
     "@angular/compiler": "~13.3.0",
     "@angular/core": "~13.3.0",
@@ -35,6 +36,7 @@
     "firebase": "^9.6.11",
     "graphql": "^16.4.0",
     "moment": "^2.29.3",
+    "ng-gallery": "^6.0.1",
     "rxjs": "~7.5.0",
     "three": "^0.139.0",
     "tslib": "^2.3.0",

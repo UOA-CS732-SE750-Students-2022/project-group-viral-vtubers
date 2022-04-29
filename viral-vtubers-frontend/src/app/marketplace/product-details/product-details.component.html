@@ -1,1 +1,66 @@
-<p>product-details works!</p>
+<div class="container">
+  <div class="product-information-container">
+    <div class="images-container">
+      <gallery
+        class="image-display"
+        [items]="images"
+        thumbPosition="bottom"
+        thumbView="contain"
+        imageSize="contain"
+      ></gallery>
+    </div>
+    <div class="details-container">
+      <div class="creator-info">
+        <span>
+          <img
+            src="https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png"
+          />NozomiSenpai <button>Follow</button>
+        </span>
+      </div>
+      <h1>VRoid Outfit - Raiden Shogun/Genshin Impact</h1>
+      <p>Accessories > Gloves</p>
+      <button class="heart-button">
+        <img src="assets/icons/hearts/heart-empty-grey.svg" />
+        <p>82</p>
+      </button>
+      <div class="prices-container">
+        <div *ngFor="let i of [0, 1]" class="price-details-container">
+          <p>$59.99</p>
+          <div class="file-info-container">
+            <div class="file-info">
+              <p>VRM - Shogun/Genshin Impact</p>
+              <div class="tags-container">
+                <span class="file-type-tag" *ngFor="let tag of tags">
+                  <p>{{ tag }}</p>
+                </span>
+              </div>
+            </div>
+            <button>
+              <img src="assets/icons/cart-white.svg" />
+              <div>
+                <h4>add to cart</h4>
+                <p>kawaii_waifu.vrm</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="description-container">
+    <p>
+      ●VRoidの顏(肌・口内)、体(肌)用のテクスチャです。 正式版UVに対応。
+      鼻のパーツが複数あるので組み合わせで絵柄を変えることができます。目のパーツは含まれません。(別売り)
+      ●使い方 商品画像にも載ってます。 ルック ↓ 影の入り幅-1 影のかたさ1 ●同梱物
+      各パーツのPNG 編集用PSD テクスチャ適用済み.vroidファイル
+      ●商品画像に使用している素材
+      【VRoid正式版】瞳アイライン眉まつげセットナチュラル　Eye/Eyeline/Eyebrow/Eyelashes
+      https://shiratori.booth.pm/items/3575406
+      ---------------------------------------
+      利用規約はこちら。(必ずお読みください。) Terms of Service.
+      https://i25jt2nk.fanbox.cc/posts/2254038
+      ---------------------------------------
+    </p>
+  </div>
+  <div class="comments-container">Comments here</div>
+</div>
