@@ -3,15 +3,17 @@ package com.viralvtubers.database.model
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
-data class Product (
+data class Product(
     @BsonId val id: Id<Product>,
     val name: String,
-    val tags: Array<Id<Tag>>,
+    val tags: List<Id<Tag>>,
     val description: String,
+    val titleImage: String,
     val subcategory: Id<Subcategory>,
-    val images: Array<ByteArray>,
-    val vrmString: String,
-    val files: Array<String>,
+    val images: List<String>,
+    val vrm: String,
+    val numLikes: UInt,
+    val files: List<String>,
     val price: Float,
 ) {
     override fun equals(other: Any?): Boolean {

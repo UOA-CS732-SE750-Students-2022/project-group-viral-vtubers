@@ -3,13 +3,15 @@ package com.viralvtubers.database.model
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
-data class User (
+data class User(
     @BsonId val id: Id<User>,
-    val name: String,
+    val displayName: String,
     val email: String,
-    val password: ByteArray,
     val bio: String,
-    val completedCommissions: UInt,
+    val numCompletedCommissions: UInt,
+    val numLikes: UInt,
+    val status: String,
+    val profileImageURI: String,
     val specialises: Array<Id<Tag>>,
     val images: Array<ByteArray>,
     val services: Array<Service>,

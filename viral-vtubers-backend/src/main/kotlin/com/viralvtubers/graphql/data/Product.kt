@@ -6,7 +6,7 @@ data class Product(
     val description: String,
 //  val subcategory: Subcategory,
     val titleImage: String,
-//  val images: List<String>,
+    val images: List<String>,
     val vrm: String,
 //  val artist: User,
     val numLikes: Int,
