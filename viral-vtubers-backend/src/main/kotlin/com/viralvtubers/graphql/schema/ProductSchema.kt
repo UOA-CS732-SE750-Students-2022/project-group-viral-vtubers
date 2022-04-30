@@ -1,13 +1,10 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddProductInput
 import com.viralvtubers.graphql.input.EditProductInput
-import com.viralvtubers.graphql.stubCategory
-import com.viralvtubers.graphql.stubProduct
-import com.viralvtubers.graphql.stubProductPagination
-import com.viralvtubers.graphql.stubSubcategory
 
 fun SchemaBuilder.productSchema() {
     type<Product> {
@@ -27,10 +24,10 @@ fun SchemaBuilder.productSchema() {
             }
         }
 
-        property<List<String>>("files") {
+        property<User>("artist") {
             resolver { product ->
-                description = "Get Files of the Product"
-                listOf("fake_0.vrm", "fake_1.vrm")
+                description = "Get the artist who created the Product"
+                stubUser("fake_Ussr")
             }
         }
     }

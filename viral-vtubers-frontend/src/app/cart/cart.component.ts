@@ -24,8 +24,12 @@ export class CartComponent implements OnInit {
             {
               id: 'item1',
               name: 'test product',
-              price: 29.99,
-              titleImage: 'https://picsum.photos/200',
+              price: 39.99,
+              product: {
+                id: 'variant-1',
+                name: 'test product',
+                titleImage: 'https://picsum.photos/200',
+              },
             },
           ],
         },
@@ -43,13 +47,21 @@ export class CartComponent implements OnInit {
               id: 'item2',
               name: 'chibi art',
               price: 29.99,
-              titleImage: 'https://picsum.photos/200',
+              product: {
+                id: 'variant-2',
+                name: 'test product 2',
+                titleImage: 'https://picsum.photos/200',
+              },
             },
             {
               id: 'item3',
               name: 'chibi digital plushie',
               price: 10000.04555,
-              titleImage: 'https://picsum.photos/200',
+              product: {
+                id: 'variant-3',
+                name: 'test product 3',
+                titleImage: 'https://picsum.photos/200',
+              },
             },
           ],
         },

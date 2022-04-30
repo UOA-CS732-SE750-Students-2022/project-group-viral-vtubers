@@ -77,7 +77,13 @@ export class UserProfileComponent implements OnInit {
         {
           id: 'a',
           name: 'Aya 着替B ver0.98',
-          price: 0,
+          variants: [
+            {
+              id: 'v1',
+              name: 'aya',
+              price: 20.0,
+            },
+          ],
           images: [
             'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
           ],
@@ -85,7 +91,13 @@ export class UserProfileComponent implements OnInit {
         {
           id: 'b',
           name: 'S0iRu',
-          price: 19.0,
+          variants: [
+            {
+              id: 'v2',
+              name: 's0ru',
+              price: 15.0,
+            },
+          ],
           images: [
             'https://pbs.twimg.com/profile_images/890968801222590464/zy5R43Sf_400x400.jpg',
           ],
@@ -93,7 +105,13 @@ export class UserProfileComponent implements OnInit {
         {
           id: 'c',
           name: 'ショートボブMk-III',
-          price: 20.0,
+          variants: [
+            {
+              id: 'v3',
+              name: 'yes',
+              price: 20.0,
+            },
+          ],
           images: [
             'https://i.pinimg.com/originals/df/c7/4b/dfc74b6867617fc8220fddb0efc9d916.jpg',
           ],
@@ -101,7 +119,13 @@ export class UserProfileComponent implements OnInit {
         {
           id: 'd',
           name: 'Nozomi is waifu',
-          price: 21.99999,
+          variants: [
+            {
+              id: 'v4',
+              name: 'Nozomi',
+              price: 21.99,
+            },
+          ],
           images: [
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDX-YSwROnfQPdcDObZK-8Hh9TO5eo2oiHCg&usqp=CAU',
           ],

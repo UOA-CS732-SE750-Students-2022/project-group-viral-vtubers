@@ -3,11 +3,12 @@ package com.viralvtubers.graphql.data
 data class Product(
     val id: ID,
     val name: String,
-    val shortDescription: String,
+    val description: String,
 //  val subcategory: Subcategory,
     val titleImage: String,
 //  val images: List<String>,
     val vrm: String,
+//  val artist: User,
     val numLikes: Int,
     val variants: List<ProductVariant>,
 )
@@ -17,6 +18,7 @@ data class ProductVariant(
 //    val productId: Product,
     val name: String,
     val price: Double,
+    val fileName: String,
     val files: List<String>,
 )
 

@@ -62,13 +62,15 @@ val stubProduct = { id: String ->
                 id = ID("productVariant1"),
                 name = "Fake Product Variant 1",
                 price = 10.0,
-                files = listOf("fake_file.vrm")
+                files = listOf(".vrm"),
+                fileName = "fake_file.vrm"
             ),
             ProductVariant(
                 id = ID("productVariant2"),
                 name = "Fake Product Variant 2",
                 price = 20.0,
-                files = listOf("fake_file.vrm", "fake_file.vroid")
+                files = listOf(".vrm", ".vroid"),
+                fileName = "fake_files.zip"
             ),
         )
     )
@@ -79,6 +81,7 @@ fun stubProductVariant(id: String): ProductVariant = ProductVariant(
     name = "Fake Product Variant",
     price = 10.0,
     files = listOf("fake_file.vrm", "fake_file.vroid"),
+    fileName = "fake_file.zip"
 )
 
 val stubMail = { id: String ->

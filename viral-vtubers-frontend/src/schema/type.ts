@@ -314,12 +314,12 @@ export enum PriceEnum {
 /** Product */
 export type Product = {
   __typename?: 'Product';
-  files: Array<Scalars['String']>;
+  artist: User;
+  description: Scalars['String'];
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
   name: Scalars['String'];
   numLikes: Scalars['Int'];
-  shortDescription: Scalars['String'];
   subcategory: Subcategory;
   titleImage: Scalars['String'];
   variants: Array<ProductVariant>;
@@ -349,6 +349,7 @@ export type ProductPagination = {
 /** Product Variant */
 export type ProductVariant = {
   __typename?: 'ProductVariant';
+  fileName: Scalars['String'];
   files: Array<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -503,15 +504,17 @@ export type UserPagination = {
   pageInfo: PageInfo;
 };
 
-export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, product: { __typename?: 'Product', titleImage: string } }> }> };
+export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> }> };
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
+export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, description: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, files: Array<string>, fileName: string, name: string, price: number }> };
+
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
-export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string> }> };
+export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> };
 
 export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
 
@@ -550,6 +553,8 @@ export const CartsFragmentFragmentDoc = gql`
       name
       price
       product {
+        id
+        name
         titleImage
       }
     }
@@ -578,6 +583,37 @@ export const MailOutboxFragmentFragmentDoc = gql`
   receiver {
     id
     displayName
+  }
+}
+    `;
+export const ProductDetailFragmentFragmentDoc = gql`
+    fragment ProductDetailFragment on Product {
+  id
+  name
+  numLikes
+  description
+  titleImage
+  images
+  subcategory {
+    id
+    name
+    category {
+      id
+      name
+    }
+  }
+  artist {
+    id
+    displayName
+    profileImageURI
+    isFollowing
+  }
+  variants {
+    id
+    files
+    fileName
+    name
+    price
   }
 }
     `;
@@ -616,6 +652,11 @@ export const UserProfileFragmentFragmentDoc = gql`
   products {
     id
     name
+    variants {
+      id
+      name
+      price
+    }
     images
   }
 }
