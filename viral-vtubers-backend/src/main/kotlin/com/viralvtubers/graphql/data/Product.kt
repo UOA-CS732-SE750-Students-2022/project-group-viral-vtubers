@@ -8,7 +8,7 @@ data class Product(
     val titleImage: String,
 //  val images: List<String>,
     val vrm: String,
-//  val User artist,
+//  val artist: User,
     val numLikes: Int,
     val variants: List<ProductVariant>,
 )
