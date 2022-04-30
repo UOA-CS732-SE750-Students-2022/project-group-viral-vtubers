@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { CreatorSpaceComponent } from './creator-space.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageCommissionsComponent } from './manage-commissions/manage-commissions.component';
 import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 
@@ -19,12 +20,16 @@ export const routes: Routes = [
         component: CreateProductComponent,
       },
       {
+        path: '',
+        component: DashboardComponent,
+      },
+      {
         path: 'uploads',
-        component: CreateProductComponent,
+        component: ManageUploadsComponent,
       },
       {
         path: 'commissions',
-        component: CreateProductComponent,
+        component: ManageCommissionsComponent,
       },
     ],
   },
@@ -36,6 +41,7 @@ export const routes: Routes = [
     CreatorSpaceComponent,
     ManageUploadsComponent,
     ManageCommissionsComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
