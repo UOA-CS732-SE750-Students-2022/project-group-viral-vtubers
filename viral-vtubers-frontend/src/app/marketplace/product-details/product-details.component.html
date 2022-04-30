@@ -12,25 +12,36 @@
     <div class="details-container">
       <div class="creator-info">
         <span>
-          <img
-            src="{{productDetails.artist.profileImageURI}}"
-          />{{productDetails.artist.displayName}} 
+          <img src="{{ productDetails.artist.profileImageURI }}" />{{
+            productDetails.artist.displayName
+          }}
           <button *ngIf="!productDetails.artist.isFollowing">Follow</button>
-          <button *ngIf="productDetails.artist.isFollowing" class="unfollow-btn">Following</button>
+          <button
+            *ngIf="productDetails.artist.isFollowing"
+            class="unfollow-btn"
+          >
+            Following
+          </button>
         </span>
       </div>
-      <h1>{{productDetails.name}}</h1>
-      <p>{{productDetails.subcategory.category.name}} > {{productDetails.subcategory.name}}</p>
+      <h1>{{ productDetails.name }}</h1>
+      <p>
+        {{ productDetails.subcategory.category.name }} >
+        {{ productDetails.subcategory.name }}
+      </p>
       <button class="heart-button">
         <img src="assets/icons/hearts/heart-empty-grey.svg" />
-        <p>{{productDetails.numLikes}}</p>
+        <p>{{ productDetails.numLikes }}</p>
       </button>
       <div class="prices-container">
-        <div *ngFor="let i of productDetails.variants" class="price-details-container">
+        <div
+          *ngFor="let i of productDetails.variants"
+          class="price-details-container"
+        >
           <p>${{ i.price | number: "1.2-2" }} USD</p>
           <div class="file-info-container">
             <div class="file-info">
-              <p>{{i.name}}</p>
+              <p>{{ i.name }}</p>
               <div class="tags-container">
                 <span class="file-type-tag" *ngFor="let file of i.files">
                   <p>{{ file }}</p>
@@ -41,7 +52,7 @@
               <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>add to cart</h4>
-                <p>{{i.fileName}}</p>
+                <p>{{ i.fileName }}</p>
               </div>
             </button>
           </div>
@@ -51,7 +62,7 @@
   </div>
   <div class="description-container">
     <p>
-      {{productDetails.description}}
+      {{ productDetails.description }}
     </p>
   </div>
   <div class="comments-container">Comments here</div>
