@@ -6,7 +6,7 @@ import org.litote.kmongo.newId
 
 data class Tag(
     @BsonId val id: Id<Tag> = newId(),
-    val name: String
+    val name: String,
     val backgroundColor: String,
     val color: String,
 )
