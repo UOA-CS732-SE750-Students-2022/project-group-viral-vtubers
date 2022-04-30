@@ -74,6 +74,13 @@ val stubProduct = { id: String ->
     )
 }
 
+fun stubProductVariant(id: String): ProductVariant = ProductVariant(
+    id = ID(id),
+    name = "Fake Product Variant",
+    price = 10.0,
+    files = listOf("fake_file.vrm", "fake_file.vroid"),
+)
+
 val stubMail = { id: String ->
     Mail(
         ID(id),

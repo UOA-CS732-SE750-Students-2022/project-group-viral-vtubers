@@ -35,6 +35,17 @@ fun SchemaBuilder.productSchema() {
         }
     }
 
+    type<ProductVariant> {
+        description = "Product Variant"
+
+        property<Product>("product") {
+            resolver {
+                description = "Get the product which variant is a product of"
+                stubProduct("fake_product_10")
+            }
+        }
+    }
+
     type<Category> {
         description = "Category"
 

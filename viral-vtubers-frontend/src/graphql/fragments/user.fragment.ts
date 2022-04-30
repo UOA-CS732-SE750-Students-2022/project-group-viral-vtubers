@@ -36,7 +36,6 @@ export const UserProfileFragment = gql`
     products {
       id
       name
-      price
       images
     }
   }

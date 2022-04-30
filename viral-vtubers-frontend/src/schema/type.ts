@@ -40,7 +40,15 @@ export type AddProductInput = {
   shortDescription: Scalars['String'];
   subcategoryId: Scalars['ID'];
   titleImage: Scalars['String'];
+  variants: Array<AddProductVariant>;
   vrm: Scalars['String'];
+};
+
+export type AddProductVariant = {
+  files: Array<Scalars['String']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
 };
 
 export type AddServiceInput = {
@@ -63,7 +71,7 @@ export enum AgeRestrictionEnum {
 /** Cart */
 export type Cart = {
   __typename?: 'Cart';
-  items: Array<Product>;
+  items: Array<ProductVariant>;
   numItems: Scalars['Int'];
   seller: User;
   totalAmount: Scalars['Float'];
@@ -103,16 +111,22 @@ export type EditOrderInput = {
 };
 
 export type EditProductInput = {
-  files?: InputMaybe<Array<Scalars['String']>>;
   id: Scalars['ID'];
   images?: InputMaybe<Array<Scalars['String']>>;
   name?: InputMaybe<Scalars['String']>;
   numLikes?: InputMaybe<Scalars['Int']>;
-  price?: InputMaybe<Scalars['Float']>;
   shortDescription?: InputMaybe<Scalars['String']>;
   subcategoryId?: InputMaybe<Scalars['ID']>;
   titleImage?: InputMaybe<Scalars['String']>;
+  variants?: InputMaybe<Array<EditProductVariant>>;
   vrm?: InputMaybe<Scalars['String']>;
+};
+
+export type EditProductVariant = {
+  files?: InputMaybe<Array<Scalars['String']>>;
+  id?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Float']>;
 };
 
 export type EditSelfInput = {
@@ -305,10 +319,10 @@ export type Product = {
   images: Array<Scalars['String']>;
   name: Scalars['String'];
   numLikes: Scalars['Int'];
-  price: Scalars['Float'];
   shortDescription: Scalars['String'];
   subcategory: Subcategory;
   titleImage: Scalars['String'];
+  variants: Array<ProductVariant>;
   vrm: Scalars['String'];
 };
 
@@ -332,10 +346,20 @@ export type ProductPagination = {
   pageInfo: PageInfo;
 };
 
+/** Product Variant */
+export type ProductVariant = {
+  __typename?: 'ProductVariant';
+  files: Array<Scalars['String']>;
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  price: Scalars['Float'];
+  product: Product;
+};
+
 /** Purchase */
 export type Purchase = {
   __typename?: 'Purchase';
-  items: Array<Product>;
+  items: Array<ProductVariant>;
   numItems: Scalars['Int'];
   placed: Scalars['DateTime'];
   seller: User;
@@ -479,7 +503,7 @@ export type UserPagination = {
   pageInfo: PageInfo;
 };
 
-export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'Product', id: string, name: string, price: number, titleImage: string }> }> };
+export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, product: { __typename?: 'Product', titleImage: string } }> }> };
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
@@ -487,7 +511,7 @@ export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, da
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
-export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, price: number, images: Array<string> }> };
+export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string> }> };
 
 export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
 
@@ -525,7 +549,9 @@ export const CartsFragmentFragmentDoc = gql`
       id
       name
       price
-      titleImage
+      product {
+        titleImage
+      }
     }
   }
 }
@@ -590,7 +616,6 @@ export const UserProfileFragmentFragmentDoc = gql`
   products {
     id
     name
-    price
     images
   }
 }
