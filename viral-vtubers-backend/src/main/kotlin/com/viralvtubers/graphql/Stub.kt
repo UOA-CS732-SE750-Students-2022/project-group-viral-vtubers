@@ -54,9 +54,10 @@ val stubProduct = { id: String ->
         ID(id),
         "Fake Product",
         "Fake Product Short Description",
-        "fakeImage.png",
-        "fakeVRM.vrm",
-        12,
+        titleImage = "fakeImage.png",
+        images = listOf("fakeImage.png"),
+        vrm = "fakeVRM.vrm",
+        numLikes = 12,
         variants = listOf(
             ProductVariant(
                 id = ID("productVariant1"),
