@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageUploadsComponent } from './manage-uploads.component';
+import { FavouritesComponent } from './favourites.component';
 
-describe('ManageUploadsComponent', () => {
-  let component: ManageUploadsComponent;
-  let fixture: ComponentFixture<ManageUploadsComponent>;
+describe('FavouritesComponent', () => {
+  let component: FavouritesComponent;
+  let fixture: ComponentFixture<FavouritesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageUploadsComponent ]
+      declarations: [ FavouritesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageUploadsComponent);
+    fixture = TestBed.createComponent(FavouritesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
