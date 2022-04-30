@@ -1,12 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { PriceEnum, UserProfileFragmentFragment } from 'src/schema/type';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  PriceEnum,
+  Service,
+  UserProfileFragmentFragment,
+} from 'src/schema/type';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.2s ease', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('0.2s ease', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class UserProfileComponent implements OnInit {
+  @Input()
+  isEdit = false;
+
+  showNewService = false;
+
+  showEditProfile = false;
+
   user: UserProfileFragmentFragment;
 
   constructor() {
@@ -132,6 +157,41 @@ export class UserProfileComponent implements OnInit {
         },
       ],
     };
+  }
+
+  drop(
+    event: CdkDragDrop<{
+      item: any;
+      index: number;
+    }>
+  ) {
+    console.log(event);
+    moveItemInArray(
+      this.user.services,
+      event.previousContainer.data.index,
+      event.container.data.index
+    );
+  }
+
+  remove(service: Service) {
+    console.log(service);
+    this.user.services = this.user.services.filter((s) => s.id !== service.id);
+  }
+
+  openNewService() {
+    this.showNewService = true;
+  }
+
+  closeNewService() {
+    this.showNewService = false;
+  }
+
+  openEditProfile() {
+    this.showEditProfile = true;
+  }
+
+  closeEditProfile() {
+    this.showEditProfile = false;
   }
 
   ngOnInit(): void {}

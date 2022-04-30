@@ -1,11 +1,17 @@
 <div class="container">
   <div class="profile-panel">
-    <img src="{{ user.profileImageURI }}" alt="waifu" />
+    <div class="profile-img">
+      <img src="{{ user.profileImageURI }}" alt="waifu" />
+      <div class="edit-icon" (click)="openEditProfile()" *ngIf="isEdit">
+        <img src="assets/icons/EditIcon.svg" />
+      </div>
+    </div>
     <div class="profile-info">
       <h2>{{ user.displayName }}</h2>
       <div class="status-group">
         <p>Statuses are not implemented~</p>
-        <button>Following</button>
+        <button *ngIf="!isEdit">Following</button>
+        <button (click)="openEditProfile()" *ngIf="isEdit">Edit</button>
       </div>
       <p>
         {{ user.bio }}
@@ -26,20 +32,46 @@
   <div class="content-container">
     <div class="section services-container">
       <h1>Services</h1>
-      <div class="services-content">
-        <div class="service-item" *ngFor="let service of user.services">
-          <div class="item-info">
-            <h4>{{ service.name }}</h4>
-            <div class="description-container">
-              <p>{{ service.description }}</p>
+      <div class="services-content" cdkDropListGroup>
+        <div
+          class="service-item"
+          *ngFor="let service of user.services; let i = index"
+          [class.drag]="isEdit"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListData]="{ item: service, index: i }"
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+        >
+          <div
+            class="inner"
+            cdkDrag
+            [cdkDragDisabled]="!isEdit"
+            [class.drag]="isEdit"
+          >
+            <div *cdkDragPlaceholder></div>
+            <div class="item-info">
+              <h4>{{ service.name }}</h4>
+              <div class="description-container">
+                <p>{{ service.description }}</p>
+              </div>
+            </div>
+            <div class="price-info">
+              <p>
+                ${{ service.price | number: "1.2-2" }}
+                <span>/{{ service.priceType }}</span>
+              </p>
+            </div>
+            <div *ngIf="isEdit" class="remove-btn" (click)="remove(service)">
+              <p>-</p>
             </div>
           </div>
-          <div class="price-info">
-            <p>
-              ${{ service.price | number: "1.2-2" }}
-              <span>/{{ service.priceType }}</span>
-            </p>
-          </div>
+        </div>
+        <div
+          class="section-add"
+          (click)="openNewService()"
+          *ngIf="user.services.length < 6 && isEdit"
+        >
+          +
         </div>
       </div>
     </div>
@@ -64,5 +96,55 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showEditProfile" [@inOutAnimation]>
+  <div class="popup">
+    <div class="profile-container">
+      <div class="profile">
+        <p class="title">Edit Profile</p>
+        <a class="close" (click)="closeEditProfile()"> &times; </a>
+        <p>Specialties <span>4/5</span></p>
+        <div>
+          <app-tags class="app-tags"></app-tags>
+        </div>
+      </div>
+      <div class="profile-img">
+        <img src="{{ user.profileImageURI }}" alt="waifu" />
+        <input type="file" />
+      </div>
+    </div>
+    <p class="about-me">About me</p>
+    <textarea rows="5" placeholder="I am great at creating lolis..."></textarea>
+    <button>SAVE</button>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showNewService" [@inOutAnimation]>
+  <div class="popup">
+    <p class="title">Add/Edit Service</p>
+    <a class="close" (click)="closeNewService()"> &times; </a>
+    <p>Service title</p>
+    <input placeholder="Breast augmentation" />
+    <p>Pricing:</p>
+    <div>
+      <input
+        class="radio"
+        type="radio"
+        name="comments"
+        [defaultChecked]="true"
+      />
+      <span class="price-prefix">$</span>
+      <input class="price-input" type="number" placeholder="69.99" />
+      <select name="price-type">
+        <option value="hour">/hr</option>
+        <option value="each">/ea</option>
+      </select>
+      <input class="radio" type="radio" name="comments" />
+      <span>POA</span>
+    </div>
+    <textarea rows="5" placeholder="I am great at creating lolis..."></textarea>
+    <button>SAVE</button>
   </div>
 </div>
