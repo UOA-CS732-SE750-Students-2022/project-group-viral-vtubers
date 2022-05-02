@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import org.litote.kmongo.Id
 
 interface ProductDatabase {
-    fun getProducts(productIds: Collection<Id<Product>>): Flow<Product>
+    fun getProducts(productIds: List<Id<Product>>): Flow<Product>
 }

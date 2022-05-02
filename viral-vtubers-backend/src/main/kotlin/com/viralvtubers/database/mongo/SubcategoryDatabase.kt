@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 import org.litote.kmongo.Id
 
 interface SubcategoryDatabase {
-    fun getSubcategories(subcategoryIds: Collection<Id<Subcategory>>): Flow<Subcategory>
+    fun getSubcategories(subcategoryIds: List<Id<Subcategory>>): Flow<Subcategory>
 }

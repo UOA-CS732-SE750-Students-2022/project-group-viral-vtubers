@@ -1,12 +1,27 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
+import com.viralvtubers.database.mongo.CategoryDatabase
+import com.viralvtubers.database.mongo.ProductDatabase
+import com.viralvtubers.database.mongo.SubcategoryDatabase
+import com.viralvtubers.database.mongo.UserDatabase
 import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddProductInput
 import com.viralvtubers.graphql.input.EditProductInput
+import com.viralvtubers.mapper.map
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.map
 
-fun SchemaBuilder.productSchema() {
+@OptIn(FlowPreview::class)
+fun SchemaBuilder.productSchema(
+    categoryDatabase: CategoryDatabase,
+    subcategoryDatabase: SubcategoryDatabase,
+    productDatabase: ProductDatabase,
+    userDatabase: UserDatabase,
+) {
     type<Product> {
         description = "Product"
 
@@ -14,6 +29,12 @@ fun SchemaBuilder.productSchema() {
             resolver { product ->
                 description = "Get SubCategory of the Product"
                 stubSubcategory("fake_subcategory")
+                productDatabase.getProducts(listOf(product.id.map()))
+                    .flatMapMerge { productDatabase.getProducts(listOf(it.id)) }
+                    .map { it.subcategory }
+                    .flatMapMerge { subcategoryDatabase.getSubcategories(listOf(it)) }
+                    .map { it.map() }
+                    .first()
             }
         }
 
@@ -28,6 +49,11 @@ fun SchemaBuilder.productSchema() {
             resolver { product ->
                 description = "Get the artist who created the Product"
                 stubUser("fake_Ussr")
+                productDatabase.getProducts(listOf(product.id.map()))
+                    .map { it.artist }
+                    .flatMapMerge { userDatabase.getUsers(listOf(it)) }
+                    .map { it.map() }
+                    .first()
             }
         }
     }
@@ -84,6 +110,10 @@ fun SchemaBuilder.productSchema() {
             resolver { subcategory ->
                 description = "Get Category from a Subcategory"
                 stubCategory("fake_category")
+                subcategoryDatabase.getSubcategories(listOf(subcategory.id.map()))
+                    .map { it.parent }
+                    .map(com.viralvtubers.database.model.Category::map)
+                    .first()
             }
         }
 
@@ -107,25 +137,21 @@ fun SchemaBuilder.productSchema() {
     query("categories") {
         description = "Get Categories"
         resolver { ->
-            listOf(
-                stubCategory("fake_category_0"),
-                stubCategory("fake_category_1")
-            )
+            categoryDatabase.getAllCategories()
+                .map(com.viralvtubers.database.model.Category::map)
         }
     }
 
     query("category") {
         description = "Get Category"
         resolver { id: ID ->
-            stubCategory("fake_category")
+            categoryDatabase.getCategoryIds(listOf(id.map()))
         }
     }
 
     query("subcategory") {
         description = "Get Subcategory"
-        resolver { id: ID ->
-            stubSubcategory("fake_subcategory")
-        }
+        resolver { id: ID -> subcategoryDatabase.getSubcategories(listOf(id.map())) }
     }
 
     mutation("addProduct") {

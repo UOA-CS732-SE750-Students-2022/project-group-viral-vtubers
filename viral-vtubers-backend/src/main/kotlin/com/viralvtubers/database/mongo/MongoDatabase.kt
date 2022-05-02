@@ -10,7 +10,7 @@ const val DEFAULT_USERNAME = "admin"
 const val DEFAULT_PASSWORD = "password"
 
 class MongoDatabase(config: Config = Config()) {
-    private val database: MongoDatabase
+    val database: MongoDatabase
 
     init {
         val connectionString =
