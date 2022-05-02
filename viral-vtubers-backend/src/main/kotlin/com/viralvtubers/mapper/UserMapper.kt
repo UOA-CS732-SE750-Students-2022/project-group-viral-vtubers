@@ -5,7 +5,7 @@ import com.viralvtubers.graphql.data.User
 import org.litote.kmongo.util.idValue
 import com.viralvtubers.database.model.User as UserModel
 
-fun UserModel.toUser() = User(
+fun UserModel.map() = User(
     id = ID(value = id.idValue.toString()),
     displayName = displayName,
     email = email,

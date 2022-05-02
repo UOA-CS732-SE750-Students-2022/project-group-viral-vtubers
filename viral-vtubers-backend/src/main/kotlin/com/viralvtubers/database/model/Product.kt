@@ -6,6 +6,7 @@ import org.litote.kmongo.Id
 data class Product(
     @BsonId val id: Id<Product>,
     val name: String,
+    val artist: Id<User>,
     val tags: List<Id<Tag>>,
     val description: String,
     val titleImage: String,
@@ -13,8 +14,7 @@ data class Product(
     val images: List<String>,
     val vrm: String,
     val numLikes: UInt,
-    val files: List<String>,
-    val price: Float,
+    val variants: List<ProductVariant>,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -31,3 +31,11 @@ data class Product(
         return id.hashCode()
     }
 }
+
+data class ProductVariant(
+    @BsonId val id: Id<ProductVariant>,
+    val price: Double,
+    val name: String,
+    val filename: String,
+    val files: List<String>,
+)

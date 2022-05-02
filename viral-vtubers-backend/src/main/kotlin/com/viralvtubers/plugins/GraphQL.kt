@@ -3,6 +3,9 @@ package com.viralvtubers.plugins
 import com.apurebase.kgraphql.GraphQL
 import com.viralvtubers.config
 import com.viralvtubers.database.mongo.MongoDatabase
+import com.viralvtubers.database.mongo.repositories.asCategoryDatabase
+import com.viralvtubers.database.mongo.repositories.asProductDatabase
+import com.viralvtubers.database.mongo.repositories.asSubcategoryDatabase
 import com.viralvtubers.graphql.schema.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -29,7 +32,11 @@ fun Application.configureGraphQL() {
         schema {
             scalarSchema()
             userSchema()
-            productSchema()
+            productSchema(
+                categoryDatabase = database.asCategoryDatabase(),
+                subcategoryDatabase = database.asSubcategoryDatabase(),
+                productDatabase = database.asProductDatabase(),
+            )
             orderSchema()
             cartSchema()
         }

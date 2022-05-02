@@ -5,5 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import org.litote.kmongo.Id
 
 interface CategoryDatabase {
-    fun getCategoryIds(categoryIds: Collection<Id<Category>>): Flow<Category>
+    fun getCategoryIds(categoryIds: List<Id<Category>>): Flow<Category>
+
+    fun getAllCategories(): Flow<Category>
+
 }

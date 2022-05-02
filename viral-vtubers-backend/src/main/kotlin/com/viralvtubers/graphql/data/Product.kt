@@ -9,7 +9,7 @@ data class Product(
     val images: List<String>,
     val vrm: String,
 //  val artist: User,
-    val numLikes: Int,
+    val numLikes: UInt,
     val variants: List<ProductVariant>,
 )
 
