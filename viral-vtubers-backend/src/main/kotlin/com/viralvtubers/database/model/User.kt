@@ -3,6 +3,7 @@ package com.viralvtubers.database.model
 import org.bson.codecs.pojo.annotations.BsonId
 import org.litote.kmongo.Id
 
+@kotlinx.serialization.Serializable
 data class User(
     @BsonId val id: Id<User>,
     val displayName: String,

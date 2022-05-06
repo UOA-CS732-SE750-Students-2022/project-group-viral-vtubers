@@ -5,15 +5,13 @@ import com.viralvtubers.database.mongo.CategoryDatabase
 import com.viralvtubers.database.mongo.ProductDatabase
 import com.viralvtubers.database.mongo.SubcategoryDatabase
 import com.viralvtubers.database.mongo.UserDatabase
-import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddProductInput
 import com.viralvtubers.graphql.input.EditProductInput
+import com.viralvtubers.graphql.stubProduct
 import com.viralvtubers.mapper.map
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 @OptIn(FlowPreview::class)
 fun SchemaBuilder.productSchema(
@@ -28,7 +26,6 @@ fun SchemaBuilder.productSchema(
         property<Subcategory>("subcategory") {
             resolver { product ->
                 description = "Get SubCategory of the Product"
-                stubSubcategory("fake_subcategory")
                 productDatabase.getProducts(listOf(product.id.map()))
                     .flatMapMerge { productDatabase.getProducts(listOf(it.id)) }
                     .map { it.subcategory }
@@ -48,7 +45,6 @@ fun SchemaBuilder.productSchema(
         property<User>("artist") {
             resolver { product ->
                 description = "Get the artist who created the Product"
-                stubUser("fake_Ussr")
                 productDatabase.getProducts(listOf(product.id.map()))
                     .map { it.artist }
                     .flatMapMerge { userDatabase.getUsers(listOf(it)) }
@@ -64,7 +60,9 @@ fun SchemaBuilder.productSchema(
         property<Product>("product") {
             resolver {
                 description = "Get the product which variant is a product of"
-                stubProduct("fake_product_10")
+                productDatabase.getProductOfProductVariant(it.id.map())
+                    .first()
+                    .map()
             }
         }
     }
@@ -75,30 +73,25 @@ fun SchemaBuilder.productSchema(
         property<List<Subcategory>>("subcategories") {
             resolver { category ->
                 description = "Get SubCategories in a Category"
-                listOf(
-                    stubSubcategory(
-                        "fake_subcategory_0"
-                    ),
-                    stubSubcategory(
-                        "fake_subcategory_1"
-                    ),
-                )
+                categoryDatabase.getCategoryIds(listOf(category.id.map()))
+                    .flatMapMerge { subcategoryDatabase.getSubcategories(it.subcategories) }
+                    .map { it.map() }
+                    .toList()
             }
         }
 
         property<ProductPagination>("products") {
             resolver { category, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Category"
-                stubProductPagination(
-                    listOf(
-                        stubProduct(
-                            "fake_product_0"
-                        ),
-                        stubProduct(
-                            "fake_product_1"
-                        ),
-                    )
-                )
+                val subcategories = categoryDatabase.getCategoryIds(listOf(category.id.map()))
+                    .flatMapMerge { it.subcategories.asFlow() }
+                    .toList()
+                productDatabase.search(
+                    cursor = cursor,
+                    limit = limit,
+                    subcategoryIds = subcategories,
+                    search = filter?.search,
+                ).map()
             }
         }
     }
@@ -109,10 +102,8 @@ fun SchemaBuilder.productSchema(
         property<Category>("category") {
             resolver { subcategory ->
                 description = "Get Category from a Subcategory"
-                stubCategory("fake_category")
-                subcategoryDatabase.getSubcategories(listOf(subcategory.id.map()))
-                    .map { it.parent }
-                    .map(com.viralvtubers.database.model.Category::map)
+                categoryDatabase.getCategoryOfSubcategory(subcategory.id.map())
+                    .map { it.map() }
                     .first()
             }
         }
@@ -120,16 +111,12 @@ fun SchemaBuilder.productSchema(
         property<ProductPagination>("products") {
             resolver { subcategory, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Subcategory"
-                stubProductPagination(
-                    listOf(
-                        stubProduct(
-                            "fake_product_0"
-                        ),
-                        stubProduct(
-                            "fake_product_1"
-                        ),
-                    )
-                )
+                productDatabase.search(
+                    cursor = cursor,
+                    limit = limit,
+                    search = filter?.search,
+                    subcategoryIds = listOf(subcategory.id.map())
+                ).map()
             }
         }
     }
@@ -138,7 +125,8 @@ fun SchemaBuilder.productSchema(
         description = "Get Categories"
         resolver { ->
             categoryDatabase.getAllCategories()
-                .map(com.viralvtubers.database.model.Category::map)
+                .map { it.map() }
+                .toList()
         }
     }
 
@@ -146,18 +134,30 @@ fun SchemaBuilder.productSchema(
         description = "Get Category"
         resolver { id: ID ->
             categoryDatabase.getCategoryIds(listOf(id.map()))
+                .map { it.map() }
+                .first()
         }
     }
 
     query("subcategory") {
         description = "Get Subcategory"
-        resolver { id: ID -> subcategoryDatabase.getSubcategories(listOf(id.map())) }
+        resolver { id: ID -> subcategoryDatabase.getSubcategories(listOf(id.map())).map { it.map() }.toList() }
     }
 
     mutation("addProduct") {
         description = "Add a product"
         resolver { input: AddProductInput ->
-            stubProduct("fake_product")
+            productDatabase.addProduct(
+                name = input.name,
+                artist = input.artist.map(),
+                description = input.shortDescription,
+                subcategoryId = input.subcategoryId.map(),
+                titleImage = input.titleImage,
+                images = input.images,
+                vrm = input.vrm,
+                numLikes = input.numLikes,
+                tags = input.tags.map { it.map() },
+            ).map()
         }
     }
 
@@ -170,8 +170,8 @@ fun SchemaBuilder.productSchema(
 
     mutation("deleteProduct") {
         description = "Delete a product"
-        resolver { input: EditProductInput ->
-            stubProduct("fake_service")
+        resolver { input: ID ->
+            productDatabase.deleteProduct(input.map()).map()
         }
     }
 }

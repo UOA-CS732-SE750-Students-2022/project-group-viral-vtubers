@@ -5,9 +5,16 @@ import com.viralvtubers.graphql.data.Tag
 import org.litote.kmongo.util.idValue
 import com.viralvtubers.database.model.Tag as TagModel
 
-fun TagModel.toTag() = Tag(
+fun TagModel.map() = Tag(
     id = ID(value = id.idValue.toString()),
     name = name,
     backgroundColor = backgroundColor,
     color = color,
+)
+
+fun Tag.map() = TagModel(
+    id = id.map(),
+    name,
+    backgroundColor,
+    color
 )
