@@ -1,5 +1,9 @@
 package com.viralvtubers.mapper
 
+import com.viralvtubers.database.mongo.repositories.Page
+import com.viralvtubers.graphql.data.PageInfo
+import com.viralvtubers.graphql.data.ProductEdges
+import com.viralvtubers.graphql.data.ProductPagination
 import com.viralvtubers.database.model.Product as DataProduct
 import com.viralvtubers.database.model.ProductVariant as DataProductVariant
 import com.viralvtubers.graphql.data.Product as GraphQLProduct
@@ -12,7 +16,7 @@ fun DataProduct.map() = GraphQLProduct(
     titleImage = titleImage,
     images = images,
     vrm = vrm,
-    numLikes = numLikes,
+    numLikes = numLikes.toInt(),
     variants = variants.map { it.map() }
 )
 
@@ -22,4 +26,9 @@ fun DataProductVariant.map() = GraphQLProductVariant(
     price = price,
     fileName = filename,
     files = files,
+)
+
+fun Page<DataProduct>.map() = ProductPagination(
+    edges = ProductEdges(cursor = end.toString(), node = items.map { it.map() }),
+    pageInfo = PageInfo(startCursor = start.toString(), endCursor = end.toString(), hasNextPage = (end - start) != 0),
 )

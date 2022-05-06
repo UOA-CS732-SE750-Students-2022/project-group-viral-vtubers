@@ -6,6 +6,7 @@ import com.viralvtubers.database.mongo.MongoDatabase
 import com.viralvtubers.database.mongo.repositories.asCategoryDatabase
 import com.viralvtubers.database.mongo.repositories.asProductDatabase
 import com.viralvtubers.database.mongo.repositories.asSubcategoryDatabase
+import com.viralvtubers.database.mongo.repositories.asUserDatabase
 import com.viralvtubers.graphql.schema.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -36,6 +37,7 @@ fun Application.configureGraphQL() {
                 categoryDatabase = database.asCategoryDatabase(),
                 subcategoryDatabase = database.asSubcategoryDatabase(),
                 productDatabase = database.asProductDatabase(),
+                userDatabase = database.asUserDatabase(),
             )
             orderSchema()
             cartSchema()

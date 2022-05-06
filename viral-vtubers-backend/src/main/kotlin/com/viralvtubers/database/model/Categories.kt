@@ -2,11 +2,12 @@ package com.viralvtubers.database.model
 
 import org.litote.kmongo.Id
 
-data class Subcategory (
+@kotlinx.serialization.Serializable
+data class Subcategory(
     val id: Id<Subcategory>,
     val parent: Category,
     val name: String,
-    val products: Array<Product>,
+    val products: List<Id<Product>>,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -24,11 +25,12 @@ data class Subcategory (
     }
 }
 
-data class Category (
+@kotlinx.serialization.Serializable
+data class Category(
     val id: Id<Category>,
     val name: String,
-    val subcategories: Array<Subcategory>,
-    val products: Array<Product>,
+    val subcategories: List<Id<Subcategory>>,
+    val products: List<Id<Product>>,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
