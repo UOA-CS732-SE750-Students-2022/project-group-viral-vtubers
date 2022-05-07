@@ -1,16 +1,17 @@
 package com.viralvtubers.database.model
 
-import org.bson.codecs.pojo.annotations.BsonId
+import kotlinx.serialization.Contextual
 import org.litote.kmongo.Id
+import org.litote.kmongo.newId
 
 @kotlinx.serialization.Serializable
-data class Service (
-    @BsonId val id: Id<Service>,
+data class Service(
+    @Contextual override val _id: Id<Service> = newId(),
     val name: String,
     val priceValue: Double,
     val pricePerUnit: PricePerUnit,
     val description: String,
-) {
+) : Model<Service> {
     enum class PricePerUnit {
         // Price per hour
         Hour,

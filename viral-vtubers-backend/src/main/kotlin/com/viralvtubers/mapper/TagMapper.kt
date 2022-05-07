@@ -6,14 +6,14 @@ import org.litote.kmongo.util.idValue
 import com.viralvtubers.database.model.Tag as TagModel
 
 fun TagModel.map() = Tag(
-    id = ID(value = id.idValue.toString()),
+    id = ID(value = _id.idValue.toString()),
     name = name,
     backgroundColor = backgroundColor,
     color = color,
 )
 
 fun Tag.map() = TagModel(
-    id = id.map(),
+    _id = id.map(),
     name,
     backgroundColor,
     color

@@ -11,15 +11,22 @@ data class Product(
 //  val artist: User,
     val numLikes: Int,
     val variants: List<ProductVariant>,
+
+//  ignored fields
+    val subcategoryId: ID,
+    val artistId: ID,
 )
 
 data class ProductVariant(
     val id: ID,
-//    val productId: Product,
+//  val product: Product,
     val name: String,
     val price: Double,
     val fileName: String,
     val files: List<String>,
+
+//  ignored fields
+    val productId: ID,
 )
 
 data class ProductPagination(

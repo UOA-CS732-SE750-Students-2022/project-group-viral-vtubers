@@ -1,49 +1,49 @@
 package com.viralvtubers.database.model
 
+import kotlinx.serialization.Contextual
 import org.litote.kmongo.Id
+import org.litote.kmongo.newId
 
 @kotlinx.serialization.Serializable
 data class Subcategory(
-    val id: Id<Subcategory>,
-    val parent: Category,
+    @Contextual override val _id: Id<Subcategory> = newId(),
+    val categoryId: Id<Category>,
     val name: String,
-    val products: List<Id<Product>>,
-) {
+) : Model<Subcategory> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as Subcategory
 
-        if (id != other.id) return false
+        if (_id != other._id) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id.hashCode()
+        return _id.hashCode()
     }
 }
 
 @kotlinx.serialization.Serializable
 data class Category(
-    val id: Id<Category>,
+    @Contextual override val _id: Id<Category> = newId(),
     val name: String,
-    val subcategories: List<Id<Subcategory>>,
-    val products: List<Id<Product>>,
-) {
+    val subcategoryIds: List<Id<Subcategory>>,
+) : Model<Category> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
         other as Category
 
-        if (id != other.id) return false
+        if (_id != other._id) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id.hashCode()
+        return _id.hashCode()
     }
 }

@@ -1,55 +1,37 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.viralvtubers.database.mongo.CategoryDatabase
-import com.viralvtubers.database.mongo.ProductDatabase
-import com.viralvtubers.database.mongo.SubcategoryDatabase
-import com.viralvtubers.database.mongo.UserDatabase
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddProductInput
 import com.viralvtubers.graphql.input.EditProductInput
-import com.viralvtubers.graphql.stubProduct
-import com.viralvtubers.mapper.map
+import com.viralvtubers.service.CategoryService
+import com.viralvtubers.service.ProductService
+import com.viralvtubers.service.UserService
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
 
 @OptIn(FlowPreview::class)
 fun SchemaBuilder.productSchema(
-    categoryDatabase: CategoryDatabase,
-    subcategoryDatabase: SubcategoryDatabase,
-    productDatabase: ProductDatabase,
-    userDatabase: UserDatabase,
+    productService: ProductService,
+    categoryService: CategoryService,
+    userService: UserService,
 ) {
     type<Product> {
         description = "Product"
 
+        Product::subcategoryId.ignore()
+        Product::artistId.ignore()
+
         property<Subcategory>("subcategory") {
             resolver { product ->
                 description = "Get SubCategory of the Product"
-                productDatabase.getProducts(listOf(product.id.map()))
-                    .flatMapMerge { productDatabase.getProducts(listOf(it.id)) }
-                    .map { it.subcategory }
-                    .flatMapMerge { subcategoryDatabase.getSubcategories(listOf(it)) }
-                    .map { it.map() }
-                    .first()
-            }
-        }
-
-        property<List<String>>("images") {
-            resolver { product ->
-                description = "Get Images of the Product"
-                listOf("fake_0.img", "fake_1.img")
+                categoryService.getSubcategoryById(product.subcategoryId)
             }
         }
 
         property<User>("artist") {
             resolver { product ->
                 description = "Get the artist who created the Product"
-                productDatabase.getProducts(listOf(product.id.map()))
-                    .map { it.artist }
-                    .flatMapMerge { userDatabase.getUsers(listOf(it)) }
-                    .map { it.map() }
-                    .first()
+                userService.getUserId(product.artistId)
             }
         }
     }
@@ -57,12 +39,12 @@ fun SchemaBuilder.productSchema(
     type<ProductVariant> {
         description = "Product Variant"
 
+        ProductVariant::productId.ignore()
+
         property<Product>("product") {
-            resolver {
+            resolver { productVariant ->
                 description = "Get the product which variant is a product of"
-                productDatabase.getProductOfProductVariant(it.id.map())
-                    .first()
-                    .map()
+                productService.getProductId(productVariant.productId)
             }
         }
     }
@@ -73,25 +55,19 @@ fun SchemaBuilder.productSchema(
         property<List<Subcategory>>("subcategories") {
             resolver { category ->
                 description = "Get SubCategories in a Category"
-                categoryDatabase.getCategoryIds(listOf(category.id.map()))
-                    .flatMapMerge { subcategoryDatabase.getSubcategories(it.subcategories) }
-                    .map { it.map() }
-                    .toList()
+                categoryService.getSubcategories(category.id)
             }
         }
 
         property<ProductPagination>("products") {
             resolver { category, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Category"
-                val subcategories = categoryDatabase.getCategoryIds(listOf(category.id.map()))
-                    .flatMapMerge { it.subcategories.asFlow() }
-                    .toList()
-                productDatabase.search(
-                    cursor = cursor,
-                    limit = limit,
-                    subcategoryIds = subcategories,
-                    search = filter?.search,
-                ).map()
+                productService.getCategorySearch(
+                    category.id,
+                    filter,
+                    cursor,
+                    limit
+                )
             }
         }
     }
@@ -99,24 +75,24 @@ fun SchemaBuilder.productSchema(
     type<Subcategory> {
         description = "Category"
 
+        Subcategory::categoryId.ignore()
+
         property<Category>("category") {
             resolver { subcategory ->
                 description = "Get Category from a Subcategory"
-                categoryDatabase.getCategoryOfSubcategory(subcategory.id.map())
-                    .map { it.map() }
-                    .first()
+                categoryService.getCategoryById(subcategory.categoryId)
             }
         }
 
         property<ProductPagination>("products") {
             resolver { subcategory, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Subcategory"
-                productDatabase.search(
-                    cursor = cursor,
-                    limit = limit,
-                    search = filter?.search,
-                    subcategoryIds = listOf(subcategory.id.map())
-                ).map()
+                productService.getSubcategorySearch(
+                    subcategory.id,
+                    filter,
+                    cursor,
+                    limit
+                )
             }
         }
     }
@@ -124,54 +100,42 @@ fun SchemaBuilder.productSchema(
     query("categories") {
         description = "Get Categories"
         resolver { ->
-            categoryDatabase.getAllCategories()
-                .map { it.map() }
-                .toList()
+            categoryService.getAllCategories()
         }
     }
 
     query("category") {
         description = "Get Category"
         resolver { id: ID ->
-            categoryDatabase.getCategoryIds(listOf(id.map()))
-                .map { it.map() }
-                .first()
+            categoryService.getCategoryById(id)
         }
     }
 
     query("subcategory") {
         description = "Get Subcategory"
-        resolver { id: ID -> subcategoryDatabase.getSubcategories(listOf(id.map())).map { it.map() }.toList() }
+        resolver { id: ID ->
+            categoryService.getSubcategoryById(id)
+        }
     }
 
     mutation("addProduct") {
         description = "Add a product"
         resolver { input: AddProductInput ->
-            productDatabase.addProduct(
-                name = input.name,
-                artist = input.artist.map(),
-                description = input.shortDescription,
-                subcategoryId = input.subcategoryId.map(),
-                titleImage = input.titleImage,
-                images = input.images,
-                vrm = input.vrm,
-                numLikes = input.numLikes,
-                tags = input.tags.map { it.map() },
-            ).map()
+            productService.addProduct(input)
         }
     }
 
     mutation("editProduct") {
         description = "Edit a product"
         resolver { input: EditProductInput ->
-            stubProduct("fake_service")
+            productService.editProduct(input)
         }
     }
 
     mutation("deleteProduct") {
         description = "Delete a product"
-        resolver { input: ID ->
-            productDatabase.deleteProduct(input.map()).map()
+        resolver { id: ID ->
+            productService.deleteProduct(id)
         }
     }
 }

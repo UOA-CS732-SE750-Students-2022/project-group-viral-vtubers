@@ -38,7 +38,8 @@ val stubService = { id: String ->
 val stubSubcategory = { id: String ->
     Subcategory(
         ID(id),
-        "Fake SubCategory"
+        "Fake SubCategory",
+        ID("fake_subcategory_id")
     )
 }
 
@@ -64,16 +65,20 @@ val stubProduct = { id: String ->
                 name = "Fake Product Variant 1",
                 price = 10.0,
                 files = listOf(".vrm"),
-                fileName = "fake_file.vrm"
+                fileName = "fake_file.vrm",
+                productId = ID("fake_product_id")
             ),
             ProductVariant(
                 id = ID("productVariant2"),
                 name = "Fake Product Variant 2",
                 price = 20.0,
                 files = listOf(".vrm", ".vroid"),
-                fileName = "fake_files.zip"
+                fileName = "fake_files.zip",
+                productId = ID("fake_product_id")
             ),
-        )
+        ),
+        artistId = ID("fake_artist_id"),
+        subcategoryId = ID("fake_subcategory_id")
     )
 }
 
@@ -82,7 +87,8 @@ fun stubProductVariant(id: String): ProductVariant = ProductVariant(
     name = "Fake Product Variant",
     price = 10.0,
     files = listOf("fake_file.vrm", "fake_file.vroid"),
-    fileName = "fake_file.zip"
+    fileName = "fake_file.zip",
+    productId = ID("fake_product_id")
 )
 
 val stubMail = { id: String ->

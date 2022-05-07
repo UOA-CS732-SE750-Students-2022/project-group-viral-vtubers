@@ -10,25 +10,34 @@ import com.viralvtubers.graphql.data.Product as GraphQLProduct
 import com.viralvtubers.graphql.data.ProductVariant as GraphQLProductVariant
 
 fun DataProduct.map() = GraphQLProduct(
-    id = id.map(),
+    id = _id.map(),
     name = name,
     description = description,
     titleImage = titleImage,
     images = images,
     vrm = vrm,
     numLikes = numLikes.toInt(),
-    variants = variants.map { it.map() }
+    variants = variants.map { it.map() },
+    subcategoryId = subcategory.map(),
+    artistId = artist.map(),
 )
 
 fun DataProductVariant.map() = GraphQLProductVariant(
-    id = id.map(),
+    id = _id.map(),
     name = name,
     price = price,
     fileName = filename,
     files = files,
+    productId = productId.map(),
 )
 
 fun Page<DataProduct>.map() = ProductPagination(
-    edges = ProductEdges(cursor = end.toString(), node = items.map { it.map() }),
-    pageInfo = PageInfo(startCursor = start.toString(), endCursor = end.toString(), hasNextPage = (end - start) != 0),
+    edges = ProductEdges(
+        cursor = end.toString(),
+        node = items.map { it.map() }),
+    pageInfo = PageInfo(
+        startCursor = start.toString(),
+        endCursor = end.toString(),
+        hasNextPage = (end - start) != 0
+    ),
 )
