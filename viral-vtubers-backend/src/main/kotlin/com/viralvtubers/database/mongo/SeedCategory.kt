@@ -56,7 +56,7 @@ suspend fun MongoDatabase.initCategories(
             name = "Background",
             subcategoryIds = listOf(
                 "6276e17c6f9b80b4dfc39b76",
-                "6276e17a8b5045e6e89e4cbe",
+                git     "6276e17a8b5045e6e89e4cbe",
                 "6276e1775b88444da7db6f74",
                 "6276e1747a6ff946dbf839d1"
             ).map { ObjectId(it).toId() }
