@@ -12,6 +12,7 @@ data class AddProductInput(
     val vrm: String,
     val numLikes: Int,
     val tags: List<ID>,
+    val isMature: Boolean,
 )
 
 data class AddProductVariant(

@@ -78,7 +78,8 @@ val stubProduct = { id: String ->
             ),
         ),
         artistId = ID("fake_artist_id"),
-        subcategoryId = ID("fake_subcategory_id")
+        subcategoryId = ID("fake_subcategory_id"),
+        minPrice = 12.0
     )
 }
 
@@ -101,11 +102,13 @@ val stubMail = { id: String ->
     )
 }
 
-val stubProductPagination = { products: List<Product> ->
+val stubProductPagination = { product: Product ->
     ProductPagination(
-        ProductEdges(
-            "fake_cursor",
-            products
+        listOf(
+            ProductEdge(
+                "fake_cursor",
+                product
+            )
         ),
         PageInfo(
             "fake_start_cursor",
@@ -115,11 +118,13 @@ val stubProductPagination = { products: List<Product> ->
     )
 }
 
-val stubUserPagination = { users: List<User> ->
+val stubUserPagination = { user: User ->
     UserPagination(
-        UserEdges(
-            "fake_cursor",
-            users
+        listOf(
+            UserEdge(
+                "fake_cursor",
+                user
+            )
         ),
         PageInfo(
             "fake_start_cursor",
@@ -129,11 +134,13 @@ val stubUserPagination = { users: List<User> ->
     )
 }
 
-val stubOrderPagination = { orders: List<Order> ->
+val stubOrderPagination = { order: Order ->
     OrderPagination(
-        OrderEdges(
-            "fake_cursor",
-            orders
+        listOf(
+            OrderEdge(
+                "fake_cursor",
+                order
+            )
         ),
         PageInfo(
             "fake_start_cursor",

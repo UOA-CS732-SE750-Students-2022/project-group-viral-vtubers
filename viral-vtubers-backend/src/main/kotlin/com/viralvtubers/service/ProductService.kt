@@ -1,9 +1,6 @@
 package com.viralvtubers.service
 
-import com.viralvtubers.graphql.data.ID
-import com.viralvtubers.graphql.data.Product
-import com.viralvtubers.graphql.data.ProductFilter
-import com.viralvtubers.graphql.data.ProductPagination
+import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import org.koin.core.component.KoinComponent
 
@@ -20,6 +17,7 @@ interface ProductService : KoinComponent {
     suspend fun getCategorySearch(
         categoryId: ID,
         filter: ProductFilter?,
+        sort: ProductSort?,
         cursor: String?,
         limit: Int?
     ): ProductPagination
@@ -27,6 +25,7 @@ interface ProductService : KoinComponent {
     suspend fun getSubcategorySearch(
         subcategoryId: ID,
         filter: ProductFilter?,
+        sort: ProductSort?,
         cursor: String?,
         limit: Int?
     ): ProductPagination

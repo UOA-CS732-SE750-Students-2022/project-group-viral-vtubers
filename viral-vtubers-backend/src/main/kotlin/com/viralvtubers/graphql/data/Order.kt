@@ -12,11 +12,11 @@ data class Order(
 )
 
 data class OrderPagination(
-    val edges: OrderEdges,
+    val edges: List<OrderEdge>,
     val pageInfo: PageInfo,
 )
 
-data class OrderEdges(
+data class OrderEdge(
     val cursor: String,
-    val node: List<Order>,
+    val node: Order,
 )

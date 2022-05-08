@@ -59,11 +59,12 @@ fun SchemaBuilder.productSchema(
         }
 
         property<ProductPagination>("products") {
-            resolver { category, filter: ProductFilter?, cursor: String?, limit: Int? ->
+            resolver { category, filter: ProductFilter?, sort: ProductSort?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Category"
                 productService.getCategorySearch(
                     category.id,
                     filter,
+                    sort,
                     cursor,
                     limit
                 )
@@ -84,18 +85,19 @@ fun SchemaBuilder.productSchema(
         }
 
         property<ProductPagination>("products") {
-            resolver { subcategory, filter: ProductFilter?, cursor: String?, limit: Int? ->
+            resolver { subcategory, filter: ProductFilter?, sort: ProductSort?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Subcategory"
                 productService.getSubcategorySearch(
                     subcategory.id,
                     filter,
+                    sort,
                     cursor,
                     limit
                 )
             }
         }
     }
-
+    
     query("categories") {
         description = "Get Categories"
         resolver { ->

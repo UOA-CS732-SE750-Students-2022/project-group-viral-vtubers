@@ -1,11 +1,13 @@
 package com.viralvtubers.database.mongo.repositories
 
-import com.viralvtubers.database.model.Product
-import com.viralvtubers.database.model.ProductVariant
-import com.viralvtubers.database.model.User
+import com.viralvtubers.database.model.*
 import com.viralvtubers.database.mongo.MongoDatabase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
+import org.bson.conversions.Bson
 import org.litote.kmongo.Id
+import org.litote.kmongo.`in`
 import org.litote.kmongo.coroutine.CoroutineCollection
 import org.litote.kmongo.div
 import org.litote.kmongo.eq
@@ -66,6 +68,35 @@ fun MongoDatabase.asProductRepository(): ProductRepository =
             return variants
         }
 
+        override suspend fun getProductOfCategory(
+            categoryId: Id<Category>,
+            vararg filter: Bson,
+            sort: Bson
+        ): Flow<Product> {
+            val subcategoryIds = asSubcategoryRepository()
+                .getByCategoryId(categoryId)
+                .map { it._id }.toList()
+            val result =
+                col.find(
+                    Product::subcategory `in` subcategoryIds,
+                    *filter
+                ).sort(sort)
+            return result.toFlow()
+        }
+
+        override suspend fun getProductOfSubcategory(
+            subcategoryId: Id<Subcategory>,
+            vararg filter: Bson,
+            sort: Bson
+        ): Flow<Product> {
+            val result =
+                col.find(
+                    Product::subcategory eq subcategoryId,
+                    *filter
+                ).sort(sort)
+            return result.toFlow()
+        }
+
 
         override suspend fun deleteVariant(
             productId: Id<Product>,
@@ -90,7 +121,8 @@ fun MongoDatabase.asProductRepository(): ProductRepository =
     }
 
 data class Page<T>(
-    val start: Int,
-    val end: Int,
+    val start: Id<T>?,
+    val end: Id<T>?,
     val items: List<T>,
+    val hasNext: Boolean,
 )

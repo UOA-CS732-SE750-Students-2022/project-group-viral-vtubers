@@ -9,8 +9,8 @@ data class PageInfo(
 )
 
 // SchemaException: Generic types are not supported by GraphQL
-// using normal types instead in respected files e.g. OrderEdges, UserEdges etc
-//data class Edges<T>(
+// using normal types instead in respected files e.g. OrderEdge, UserEdge etc
+//data class Edge<T>(
 //    val cursor: String,
-//    val node: List<T>,
+//    val node: T,
 //)
