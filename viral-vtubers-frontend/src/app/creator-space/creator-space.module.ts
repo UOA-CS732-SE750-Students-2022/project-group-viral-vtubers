@@ -31,6 +31,8 @@ export const routes: Routes = [
       {
         path: 'commissions',
         component: ManageCommissionsComponent,
+      },
+      {
         path: 'sale-history',
         component: SaleHistoryComponent,
       },
