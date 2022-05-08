@@ -7,4 +7,5 @@ import org.litote.kmongo.Id
 
 interface CategoryRepository : Repository<Category> {
     fun getCategoryOfSubcategory(subcategoryId: Id<Subcategory>): Flow<Category>
+    
 }

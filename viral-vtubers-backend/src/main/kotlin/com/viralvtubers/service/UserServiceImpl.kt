@@ -1,5 +1,6 @@
 package com.viralvtubers.service
 
+import com.viralvtubers.database.mongo.repositories.FollowRepository
 import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.database.mongo.repositories.UserRepository
 import com.viralvtubers.graphql.data.*
@@ -13,6 +14,7 @@ import com.viralvtubers.database.model.User as DataUser
 
 class UserServiceImpl(
     private val userRepository: UserRepository,
+    private val followRepository: FollowRepository,
 ) : UserService {
 
     override suspend fun getUserByFirebaseUid(uid: String): User {
@@ -224,5 +226,42 @@ class UserServiceImpl(
         return userRepository.update(update)?.map()
             ?: throw error("self not found")
 
+    }
+
+    override suspend fun isFollowing(userId: ID, followId: ID): Boolean {
+        followRepository.getFollow(userId.map(), followId.map())?.let {
+            return true
+        }
+        return false
+    }
+
+    override suspend fun getFollowing(userId: ID): List<User> {
+        val userIds = followRepository.getFollowing(userId.map()).toList()
+            .map { it.followingId }
+
+        return userRepository.getByIds(userIds).toList().map { it.map() }
+    }
+
+    override suspend fun getFollowers(userId: ID): List<User> {
+        val userIds = followRepository.getFollowers(userId.map()).toList()
+            .map { it.currentId }
+
+        return userRepository.getByIds(userIds).toList().map { it.map() }
+    }
+
+    override suspend fun follow(
+        userId: ID,
+        followId: ID,
+        follow: Boolean
+    ): Boolean {
+        if (follow) {
+            followRepository.addFollow(userId.map(), followId.map())?.let {
+                return true
+            }
+        } else {
+            followRepository.deleteFollow(userId.map(), followId.map())
+                ?: return true
+        }
+        return false
     }
 }

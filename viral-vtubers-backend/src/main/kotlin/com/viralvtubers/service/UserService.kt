@@ -31,4 +31,12 @@ interface UserService : KoinComponent {
     suspend fun editService(userId: ID, input: EditServiceInput): User
 
     suspend fun deleteService(userId: ID, serviceId: ID): User
+
+    suspend fun isFollowing(userId: ID, followId: ID): Boolean
+
+    suspend fun getFollowing(userId: ID): List<User>
+
+    suspend fun getFollowers(userId: ID): List<User>
+
+    suspend fun follow(userId: ID, followId: ID, follow: Boolean): Boolean
 }

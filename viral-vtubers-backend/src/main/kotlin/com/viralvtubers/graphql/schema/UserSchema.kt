@@ -24,9 +24,10 @@ fun SchemaBuilder.userSchema(
         description = "User"
 
         property<Boolean>("isFollowing") {
-            resolver { user ->
+            resolver { user, ctx: Context ->
                 description = "Get if current user if following this user"
-                false
+                val userId = authService.getUserId(ctx)
+                userService.isFollowing(userId, user.id)
             }
         }
 
@@ -71,14 +72,14 @@ fun SchemaBuilder.userSchema(
         property<List<User>>("following") {
             resolver { user ->
                 description = "Get users this user is following"
-                listOf(stubUser("fake_user_0"))
+                userService.getFollowing(user.id)
             }
         }
 
         property<List<User>>("followers") {
             resolver { user ->
                 description = "Get users following this user"
-                listOf(stubUser("fake_user_0"), stubUser("fake_user_1"))
+                userService.getFollowers(user.id)
             }
         }
     }
@@ -187,6 +188,14 @@ fun SchemaBuilder.userSchema(
         description = "Send a mail"
         resolver { input: SendMailInput ->
             stubMail("fake_mail")
+        }
+    }
+
+    mutation("follow") {
+        description = "Follow a user"
+        resolver { ctx: Context, id: ID, follow: Boolean ->
+            val userId = authService.getUserId(ctx)
+            userService.follow(userId, id, follow)
         }
     }
 }
