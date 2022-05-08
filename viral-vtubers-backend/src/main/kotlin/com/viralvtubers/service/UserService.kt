@@ -37,4 +37,6 @@ interface UserService : KoinComponent {
     suspend fun getFollowing(userId: ID): List<User>
 
     suspend fun getFollowers(userId: ID): List<User>
+
+    suspend fun follow(userId: ID, followId: ID, follow: Boolean): Boolean
 }

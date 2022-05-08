@@ -248,4 +248,20 @@ class UserServiceImpl(
 
         return userRepository.getByIds(userIds).toList().map { it.map() }
     }
+
+    override suspend fun follow(
+        userId: ID,
+        followId: ID,
+        follow: Boolean
+    ): Boolean {
+        if (follow) {
+            followRepository.addFollow(userId.map(), followId.map())?.let {
+                return true
+            }
+        } else {
+            followRepository.deleteFollow(userId.map(), followId.map())
+                ?: return true
+        }
+        return false
+    }
 }

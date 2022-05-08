@@ -190,4 +190,12 @@ fun SchemaBuilder.userSchema(
             stubMail("fake_mail")
         }
     }
+
+    mutation("follow") {
+        description = "Follow a user"
+        resolver { ctx: Context, id: ID, follow: Boolean ->
+            val userId = authService.getUserId(ctx)
+            userService.follow(userId, id, follow)
+        }
+    }
 }
