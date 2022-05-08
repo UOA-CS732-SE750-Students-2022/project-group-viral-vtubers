@@ -3,10 +3,7 @@ package com.viralvtubers.plugins
 import com.apurebase.kgraphql.GraphQL
 import com.viralvtubers.config
 import com.viralvtubers.database.mongo.MongoDatabase
-import com.viralvtubers.database.mongo.repositories.asCategoryRepository
-import com.viralvtubers.database.mongo.repositories.asProductRepository
-import com.viralvtubers.database.mongo.repositories.asSubcategoryRepository
-import com.viralvtubers.database.mongo.repositories.asUserRepository
+import com.viralvtubers.database.mongo.repositories.*
 import com.viralvtubers.graphql.schema.*
 import com.viralvtubers.service.*
 import io.ktor.server.application.*
@@ -21,7 +18,10 @@ fun Application.configureGraphQL() {
         database.asSubcategoryRepository()
     )
     val productService = ProductServiceImpl(database.asProductRepository())
-    val userService = UserServiceImpl(database.asUserRepository())
+    val userService = UserServiceImpl(
+        database.asUserRepository(),
+        database.asFollowRepository()
+    )
     val firebaseService = FirebaseServiceImpl()
     val authService = AuthServiceImpl()
 
