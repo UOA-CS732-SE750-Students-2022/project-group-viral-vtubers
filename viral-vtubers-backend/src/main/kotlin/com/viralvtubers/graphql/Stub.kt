@@ -154,14 +154,14 @@ val stubOrder = { id: String ->
     )
 }
 
-val stubCart = {
+val stubCart = { ->
     Cart(
         2,
         99.99
     )
 }
 
-val stubCarts = {
+val stubCarts = { ->
     Carts(
         4,
         listOf(
@@ -170,7 +170,7 @@ val stubCarts = {
     )
 }
 
-val stubPurchase = {
+val stubPurchase = { ->
     Purchase(
         2,
         99.99,

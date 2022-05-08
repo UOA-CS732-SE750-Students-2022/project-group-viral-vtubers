@@ -4,13 +4,19 @@ import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
-import com.viralvtubers.graphql.input.AddServiceInput
-import com.viralvtubers.graphql.input.EditSelfInput
-import com.viralvtubers.graphql.input.EditServiceInput
-import com.viralvtubers.graphql.input.SendMailInput
+import com.viralvtubers.graphql.input.*
+import com.viralvtubers.service.AuthService
+import com.viralvtubers.service.FirebaseService
+import com.viralvtubers.service.ProductService
+import com.viralvtubers.service.UserService
 import io.ktor.server.auth.jwt.*
 
-fun SchemaBuilder.userSchema() {
+fun SchemaBuilder.userSchema(
+    userService: UserService,
+    productService: ProductService,
+    firebaseService: FirebaseService,
+    authService: AuthService,
+) {
     type<User> {
         description = "User"
 
@@ -40,11 +46,8 @@ fun SchemaBuilder.userSchema() {
 
         property<List<Product>>("products") {
             resolver { user ->
-                description = "Get user listed products"
-                listOf(
-                    stubProduct("fake_service_0"),
-                    stubProduct("fake_service_1")
-                )
+                description = "Get user products"
+                productService.getProductsByUserId(user.id)
             }
         }
 
@@ -97,22 +100,43 @@ fun SchemaBuilder.userSchema() {
     mutation("login") {
         description = "Check if the user exist if not create the user"
         resolver { ctx: Context ->
-            println(ctx.get<JWTPrincipal>()?.subject)
-            stubUser("fake_self")
+            val uid = ctx.get<JWTPrincipal>()?.subject
+                ?: throw error("jwt is empty")
+            try {
+                userService.getUserByFirebaseUid(uid)
+            } catch (e: IllegalStateException) {
+                val userRecord = firebaseService.getUser(uid)
+                val user = userService.addUser(
+                    AddUserInput(
+                        firebaseUid = uid,
+                        displayName = userRecord.displayName,
+                        email = userRecord.email,
+                        bio = "",
+                        numCompletedCommissions = 0,
+                        numLikes = 0,
+                        status = "",
+                        profileImageURI = "",
+                        specialises = ArrayList()
+                    )
+                )
+                firebaseService.setCustomClaims(uid, user.id)
+                user
+            }
         }
     }
 
     query("self") {
         description = "Get self"
-        resolver { ->
-            stubUser("fake_self")
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            userService.getUserId(userId)
         }
     }
 
     query("user") {
         description = "Get a single user"
         resolver { id: ID ->
-            stubUser(id.value)
+            userService.getUserId(id)
         }
     }
 
@@ -131,7 +155,7 @@ fun SchemaBuilder.userSchema() {
     mutation("editSelf") {
         description = "Edit self"
         resolver { input: EditSelfInput ->
-            stubUser("fake_self")
+            userService.editSelf(input)
         }
     }
 

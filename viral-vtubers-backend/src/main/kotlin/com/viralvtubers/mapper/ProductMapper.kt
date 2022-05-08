@@ -19,7 +19,7 @@ fun DataProduct.map() = GraphQLProduct(
     numLikes = numLikes.toInt(),
     variants = variants.map { it.map() },
     subcategoryId = subcategory.map(),
-    artistId = artist.map(),
+    artistId = artistId.map(),
 )
 
 fun DataProductVariant.map() = GraphQLProductVariant(

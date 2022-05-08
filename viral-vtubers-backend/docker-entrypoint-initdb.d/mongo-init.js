@@ -4,22 +4,22 @@ print('Start #################################################################')
 
 db = db.getSiblingDB('virtual-vtubers');
 db.createUser(
-  {
-    user: 'admin',
-    pwd: 'password',
-    roles: [{ role: 'readWrite', db: 'virtual-vtubers' }],
-  },
+    {
+        user: 'admin',
+        pwd: 'password',
+        roles: [{role: 'readWrite', db: 'virtual-vtubers'}],
+    },
 );
-db.createCollection('users');
+db.createCollection('user');
 
 db = db.getSiblingDB('virtual-vtubers-test');
 db.createUser(
-  {
-    user: 'admin',
-    pwd: 'password',
-    roles: [{ role: 'readWrite', db: 'virtual-vtubers-test' }],
-  },
+    {
+        user: 'admin',
+        pwd: 'password',
+        roles: [{role: 'readWrite', db: 'virtual-vtubers-test'}],
+    },
 );
-db.createCollection('users');
+db.createCollection('user');
 
 print('END #################################################################');

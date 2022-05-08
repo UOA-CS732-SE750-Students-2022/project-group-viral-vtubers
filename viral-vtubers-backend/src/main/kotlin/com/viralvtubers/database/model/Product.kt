@@ -8,7 +8,7 @@ import org.litote.kmongo.newId
 data class Product(
     @Contextual override val _id: Id<Product> = newId(),
     val name: String,
-    val artist: Id<User>,
+    val artistId: Id<User>,
     val tags: List<@Contextual Id<Tag>>,
     val description: String,
     val titleImage: String,
@@ -25,6 +25,5 @@ data class ProductVariant(
     val productId: Id<Product>,
     val price: Double,
     val name: String,
-    val filename: String,
-    val files: List<String>,
+    val file: String,
 ) : Model<ProductVariant>

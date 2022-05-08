@@ -15,8 +15,8 @@ data class AddProductInput(
 )
 
 data class AddProductVariant(
+    val productId: ID,
     val name: String,
     val price: Double,
-    val filename: String,
-    val files: List<String>,
+    val file: String,
 )

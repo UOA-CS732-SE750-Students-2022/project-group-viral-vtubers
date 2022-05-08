@@ -2,8 +2,7 @@ package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
-import com.viralvtubers.graphql.input.AddProductInput
-import com.viralvtubers.graphql.input.EditProductInput
+import com.viralvtubers.graphql.input.*
 import com.viralvtubers.service.CategoryService
 import com.viralvtubers.service.ProductService
 import com.viralvtubers.service.UserService
@@ -136,6 +135,27 @@ fun SchemaBuilder.productSchema(
         description = "Delete a product"
         resolver { id: ID ->
             productService.deleteProduct(id)
+        }
+    }
+
+    mutation("addProductVariant") {
+        description = "Delete a product variant"
+        resolver { input: AddProductVariant ->
+            productService.addProductVariant(input)
+        }
+    }
+
+    mutation("editProductVariant") {
+        description = "Edit a product variant"
+        resolver { input: EditProductVariant ->
+            productService.editProductVariant(input)
+        }
+    }
+
+    mutation("deleteProductVariant") {
+        description = "Delete a product variant"
+        resolver { input: DeleteProductVariant ->
+            productService.deleteProductVariant(input)
         }
     }
 }

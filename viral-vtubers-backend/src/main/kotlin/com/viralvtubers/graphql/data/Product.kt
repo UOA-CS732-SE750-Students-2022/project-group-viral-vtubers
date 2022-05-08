@@ -22,8 +22,7 @@ data class ProductVariant(
 //  val product: Product,
     val name: String,
     val price: Double,
-    val fileName: String,
-    val files: List<String>,
+    val file: String,
 
 //  ignored fields
     val productId: ID,

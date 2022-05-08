@@ -8,9 +8,7 @@ import com.viralvtubers.database.mongo.repositories.asProductRepository
 import com.viralvtubers.database.mongo.repositories.asSubcategoryRepository
 import com.viralvtubers.database.mongo.repositories.asUserRepository
 import com.viralvtubers.graphql.schema.*
-import com.viralvtubers.service.CategoryServiceImpl
-import com.viralvtubers.service.ProductServiceImpl
-import com.viralvtubers.service.UserServiceImpl
+import com.viralvtubers.service.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -24,6 +22,8 @@ fun Application.configureGraphQL() {
     )
     val productService = ProductServiceImpl(database.asProductRepository())
     val userService = UserServiceImpl(database.asUserRepository())
+    val firebaseService = FirebaseServiceImpl()
+    val authService = AuthServiceImpl()
 
     install(GraphQL) {
         useDefaultPrettyPrinter = true
@@ -41,7 +41,11 @@ fun Application.configureGraphQL() {
 
         schema {
             scalarSchema()
-            userSchema()
+            userSchema(
+                userService = userService,
+                firebaseService = firebaseService,
+                authService = authService,
+            )
             productSchema(
                 categoryService = categoryService,
                 productService = productService,

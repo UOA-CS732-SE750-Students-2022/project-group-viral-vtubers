@@ -12,13 +12,13 @@ data class EditProductInput(
     val vrm: String?,
     val numLikes: Int?,
     val tags: List<ID>?,
-    val variants: List<EditProductVariant>?,
 )
 
 data class EditProductVariant(
-    val id: ID?,
+    val productId: ID,
+    val id: ID,
     val name: String?,
     val price: Double?,
-    val files: List<String>?,
+    val file: String?,
 )
 

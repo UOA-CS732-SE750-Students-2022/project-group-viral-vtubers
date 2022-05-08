@@ -1,12 +1,12 @@
 package com.viralvtubers.service
 
+import com.viralvtubers.database.model.ProductVariant
 import com.viralvtubers.database.mongo.repositories.ProductRepository
 import com.viralvtubers.graphql.data.ID
 import com.viralvtubers.graphql.data.Product
 import com.viralvtubers.graphql.data.ProductFilter
 import com.viralvtubers.graphql.data.ProductPagination
-import com.viralvtubers.graphql.input.AddProductInput
-import com.viralvtubers.graphql.input.EditProductInput
+import com.viralvtubers.graphql.input.*
 import com.viralvtubers.mapper.map
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
@@ -25,6 +25,11 @@ class ProductServiceImpl(
         return productRepository.getByIds(productIds.map {
             it.map()
         }).map { it.map() }.toList()
+    }
+
+    override suspend fun getProductsByUserId(userId: ID): List<Product> {
+        return productRepository.getProductsByUserId(userId.map())
+            .map { it.map() }.toList()
     }
 
     override suspend fun getAllProducts(): List<Product> {
@@ -53,7 +58,7 @@ class ProductServiceImpl(
         val product = DataProduct(
             _id = newId(),
             name = input.name,
-            artist = input.artist.map(),
+            artistId = input.artist.map(),
             tags = input.tags.map { it.map() },
             description = input.description,
             titleImage = input.titleImage,
@@ -74,7 +79,7 @@ class ProductServiceImpl(
         val update = DataProduct(
             _id = product._id,
             name = input.name ?: product.name,
-            artist = product.artist,
+            artistId = product.artistId,
             tags = input.tags?.map { it.map() } ?: product.tags,
             description = input.description ?: product.description,
             titleImage = input.titleImage ?: product.titleImage,
@@ -90,5 +95,42 @@ class ProductServiceImpl(
 
     override suspend fun deleteProduct(productId: ID): Product {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun addProductVariant(input: AddProductVariant): Product {
+        productRepository.addVariant(
+            input.productId.map(),
+            ProductVariant(
+                productId = input.productId.map(),
+                price = input.price,
+                name = input.name,
+                file = input.file,
+            )
+        )
+        return productRepository.getById(input.productId.map())
+            ?.map() ?: throw error("product not found")
+    }
+
+    override suspend fun editProductVariant(input: EditProductVariant): Product {
+        val variant =
+            productRepository.getVariant(input.productId.map(), input.id.map())
+        productRepository.editVariant(
+            input.productId.map(),
+            ProductVariant(
+                _id = input.id.map(),
+                productId = input.productId.map(),
+                price = input.price ?: variant.price,
+                name = input.name ?: variant.name,
+                file = input.file ?: variant.file,
+            )
+        )
+        return productRepository.getById(input.productId.map())
+            ?.map() ?: throw error("product not found")
+    }
+
+    override suspend fun deleteProductVariant(input: DeleteProductVariant): Product {
+        productRepository.deleteVariant(input.productId.map(), input.id.map())
+        return productRepository.getById(input.productId.map())
+            ?.map() ?: throw error("product not found")
     }
 }
