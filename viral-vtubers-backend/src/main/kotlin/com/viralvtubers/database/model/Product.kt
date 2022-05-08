@@ -26,4 +26,5 @@ data class ProductVariant(
     val price: Double,
     val name: String,
     val file: String,
+    val fileTypes: List<String>,
 ) : Model<ProductVariant>

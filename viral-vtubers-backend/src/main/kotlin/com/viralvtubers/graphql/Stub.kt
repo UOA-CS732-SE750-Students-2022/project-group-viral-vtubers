@@ -64,16 +64,16 @@ val stubProduct = { id: String ->
                 id = ID("productVariant1"),
                 name = "Fake Product Variant 1",
                 price = 10.0,
-                files = listOf(".vrm"),
-                fileName = "fake_file.vrm",
+                file = "fake_file.vrm",
+                fileTypes = listOf(".vrm"),
                 productId = ID("fake_product_id")
             ),
             ProductVariant(
                 id = ID("productVariant2"),
                 name = "Fake Product Variant 2",
                 price = 20.0,
-                files = listOf(".vrm", ".vroid"),
-                fileName = "fake_files.zip",
+                file = "fake_files.zip",
+                fileTypes = listOf(".vrm", ".vroid"),
                 productId = ID("fake_product_id")
             ),
         ),
@@ -86,8 +86,8 @@ fun stubProductVariant(id: String): ProductVariant = ProductVariant(
     id = ID(id),
     name = "Fake Product Variant",
     price = 10.0,
-    files = listOf("fake_file.vrm", "fake_file.vroid"),
-    fileName = "fake_file.zip",
+    file = "fake_files.zip",
+    fileTypes = listOf(".vrm", ".vroid"),
     productId = ID("fake_product_id")
 )
 

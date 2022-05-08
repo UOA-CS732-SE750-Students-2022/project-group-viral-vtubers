@@ -105,6 +105,7 @@ class ProductServiceImpl(
                 price = input.price,
                 name = input.name,
                 file = input.file,
+                fileTypes = input.fileTypes,
             )
         )
         return productRepository.getById(input.productId.map())
@@ -122,6 +123,7 @@ class ProductServiceImpl(
                 price = input.price ?: variant.price,
                 name = input.name ?: variant.name,
                 file = input.file ?: variant.file,
+                fileTypes = input.fileTypes ?: variant.fileTypes,
             )
         )
         return productRepository.getById(input.productId.map())

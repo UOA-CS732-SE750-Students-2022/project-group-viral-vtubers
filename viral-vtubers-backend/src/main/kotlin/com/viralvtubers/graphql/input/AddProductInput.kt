@@ -19,4 +19,5 @@ data class AddProductVariant(
     val name: String,
     val price: Double,
     val file: String,
+    val fileTypes: List<String>
 )

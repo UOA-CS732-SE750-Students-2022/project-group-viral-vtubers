@@ -43,6 +43,7 @@ fun Application.configureGraphQL() {
             scalarSchema()
             userSchema(
                 userService = userService,
+                productService = productService,
                 firebaseService = firebaseService,
                 authService = authService,
             )
