@@ -12,4 +12,7 @@ data class Subcategory(
 //  val category: Category,
     val name: String,
 //  val products: List<Product>
+
+//  ignored fields
+    val categoryId: ID,
 )

@@ -1,20 +1,33 @@
 package com.viralvtubers.database.mongo.repositories
 
-import com.mongodb.client.model.Aggregates.match
-import com.mongodb.reactivestreams.client.MongoCollection
-import com.mongodb.reactivestreams.client.MongoDatabase
 import com.viralvtubers.database.model.Product
-import com.viralvtubers.database.mongo.ProductDatabase
+import com.viralvtubers.database.model.ProductVariant
+import com.viralvtubers.database.model.User
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.reactive.asFlow
 import org.litote.kmongo.Id
-import org.litote.kmongo.`in`
-import org.litote.kmongo.reactivestreams.getCollection
 
-class ProductRepository(database: MongoDatabase) : ProductDatabase {
+interface ProductRepository : Repository<Product> {
+    fun getProductOfProductVariant(productVariantId: Id<ProductVariant>): Flow<Product>
 
-    private val products: MongoCollection<Product> = database.getCollection()
+    suspend fun getVariant(
+        productId: Id<Product>,
+        variantId: Id<ProductVariant>
+    ): ProductVariant
 
-    override fun getProducts(productIds: Collection<Id<Product>>): Flow<Product> =
-        this.products.find(match(Product::id `in` productIds)).asFlow()
+    suspend fun addVariant(
+        productId: Id<Product>,
+        variant: ProductVariant
+    ): List<ProductVariant>
+
+    suspend fun editVariant(
+        productId: Id<Product>,
+        variant: ProductVariant
+    ): List<ProductVariant>
+
+    suspend fun deleteVariant(
+        productId: Id<Product>,
+        variantId: Id<ProductVariant>
+    ): List<ProductVariant>
+
+    fun getProductsByUserId(userId: Id<User>): Flow<Product>
 }

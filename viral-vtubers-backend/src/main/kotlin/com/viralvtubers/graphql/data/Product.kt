@@ -6,20 +6,27 @@ data class Product(
     val description: String,
 //  val subcategory: Subcategory,
     val titleImage: String,
-//  val images: List<String>,
+    val images: List<String>,
     val vrm: String,
 //  val artist: User,
     val numLikes: Int,
     val variants: List<ProductVariant>,
+
+//  ignored fields
+    val subcategoryId: ID,
+    val artistId: ID,
 )
 
 data class ProductVariant(
     val id: ID,
-//    val productId: Product,
+//  val product: Product,
     val name: String,
     val price: Double,
-    val fileName: String,
-    val files: List<String>,
+    val file: String,
+    val fileTypes: List<String>,
+
+//  ignored fields
+    val productId: ID,
 )
 
 data class ProductPagination(

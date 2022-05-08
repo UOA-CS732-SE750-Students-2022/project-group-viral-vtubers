@@ -38,7 +38,8 @@ val stubService = { id: String ->
 val stubSubcategory = { id: String ->
     Subcategory(
         ID(id),
-        "Fake SubCategory"
+        "Fake SubCategory",
+        ID("fake_subcategory_id")
     )
 }
 
@@ -54,25 +55,30 @@ val stubProduct = { id: String ->
         ID(id),
         "Fake Product",
         "Fake Product Short Description",
-        "fakeImage.png",
-        "fakeVRM.vrm",
-        12,
+        titleImage = "fakeImage.png",
+        images = listOf("fakeImage.png"),
+        vrm = "fakeVRM.vrm",
+        numLikes = 12,
         variants = listOf(
             ProductVariant(
                 id = ID("productVariant1"),
                 name = "Fake Product Variant 1",
                 price = 10.0,
-                files = listOf(".vrm"),
-                fileName = "fake_file.vrm"
+                file = "fake_file.vrm",
+                fileTypes = listOf(".vrm"),
+                productId = ID("fake_product_id")
             ),
             ProductVariant(
                 id = ID("productVariant2"),
                 name = "Fake Product Variant 2",
                 price = 20.0,
-                files = listOf(".vrm", ".vroid"),
-                fileName = "fake_files.zip"
+                file = "fake_files.zip",
+                fileTypes = listOf(".vrm", ".vroid"),
+                productId = ID("fake_product_id")
             ),
-        )
+        ),
+        artistId = ID("fake_artist_id"),
+        subcategoryId = ID("fake_subcategory_id")
     )
 }
 
@@ -80,8 +86,9 @@ fun stubProductVariant(id: String): ProductVariant = ProductVariant(
     id = ID(id),
     name = "Fake Product Variant",
     price = 10.0,
-    files = listOf("fake_file.vrm", "fake_file.vroid"),
-    fileName = "fake_file.zip"
+    file = "fake_files.zip",
+    fileTypes = listOf(".vrm", ".vroid"),
+    productId = ID("fake_product_id")
 )
 
 val stubMail = { id: String ->
@@ -147,14 +154,14 @@ val stubOrder = { id: String ->
     )
 }
 
-val stubCart = {
+val stubCart = { ->
     Cart(
         2,
         99.99
     )
 }
 
-val stubCarts = {
+val stubCarts = { ->
     Carts(
         4,
         listOf(
@@ -163,7 +170,7 @@ val stubCarts = {
     )
 }
 
-val stubPurchase = {
+val stubPurchase = { ->
     Purchase(
         2,
         99.99,

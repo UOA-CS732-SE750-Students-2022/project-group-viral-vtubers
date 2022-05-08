@@ -5,19 +5,21 @@ import com.viralvtubers.graphql.data.ID
 data class EditProductInput(
     val id: ID,
     val name: String?,
-    val shortDescription: String?,
+    val description: String?,
     val subcategoryId: ID?,
     val titleImage: String?,
     val images: List<String>?,
     val vrm: String?,
     val numLikes: Int?,
-    val variants: List<EditProductVariant>?,
+    val tags: List<ID>?,
 )
 
 data class EditProductVariant(
-    val id: ID?,
+    val productId: ID,
+    val id: ID,
     val name: String?,
     val price: Double?,
-    val files: List<String>?,
+    val file: String?,
+    val fileTypes: List<String>?,
 )
 

@@ -1,33 +1,36 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
-import com.viralvtubers.graphql.input.AddProductInput
-import com.viralvtubers.graphql.input.EditProductInput
+import com.viralvtubers.graphql.input.*
+import com.viralvtubers.service.CategoryService
+import com.viralvtubers.service.ProductService
+import com.viralvtubers.service.UserService
+import kotlinx.coroutines.FlowPreview
 
-fun SchemaBuilder.productSchema() {
+@OptIn(FlowPreview::class)
+fun SchemaBuilder.productSchema(
+    productService: ProductService,
+    categoryService: CategoryService,
+    userService: UserService,
+) {
     type<Product> {
         description = "Product"
+
+        Product::subcategoryId.ignore()
+        Product::artistId.ignore()
 
         property<Subcategory>("subcategory") {
             resolver { product ->
                 description = "Get SubCategory of the Product"
-                stubSubcategory("fake_subcategory")
-            }
-        }
-
-        property<List<String>>("images") {
-            resolver { product ->
-                description = "Get Images of the Product"
-                listOf("fake_0.img", "fake_1.img")
+                categoryService.getSubcategoryById(product.subcategoryId)
             }
         }
 
         property<User>("artist") {
             resolver { product ->
                 description = "Get the artist who created the Product"
-                stubUser("fake_Ussr")
+                userService.getUserId(product.artistId)
             }
         }
     }
@@ -35,10 +38,12 @@ fun SchemaBuilder.productSchema() {
     type<ProductVariant> {
         description = "Product Variant"
 
+        ProductVariant::productId.ignore()
+
         property<Product>("product") {
-            resolver {
+            resolver { productVariant ->
                 description = "Get the product which variant is a product of"
-                stubProduct("fake_product_10")
+                productService.getProductId(productVariant.productId)
             }
         }
     }
@@ -49,29 +54,18 @@ fun SchemaBuilder.productSchema() {
         property<List<Subcategory>>("subcategories") {
             resolver { category ->
                 description = "Get SubCategories in a Category"
-                listOf(
-                    stubSubcategory(
-                        "fake_subcategory_0"
-                    ),
-                    stubSubcategory(
-                        "fake_subcategory_1"
-                    ),
-                )
+                categoryService.getSubcategories(category.id)
             }
         }
 
         property<ProductPagination>("products") {
             resolver { category, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Category"
-                stubProductPagination(
-                    listOf(
-                        stubProduct(
-                            "fake_product_0"
-                        ),
-                        stubProduct(
-                            "fake_product_1"
-                        ),
-                    )
+                productService.getCategorySearch(
+                    category.id,
+                    filter,
+                    cursor,
+                    limit
                 )
             }
         }
@@ -80,25 +74,23 @@ fun SchemaBuilder.productSchema() {
     type<Subcategory> {
         description = "Category"
 
+        Subcategory::categoryId.ignore()
+
         property<Category>("category") {
             resolver { subcategory ->
                 description = "Get Category from a Subcategory"
-                stubCategory("fake_category")
+                categoryService.getCategoryById(subcategory.categoryId)
             }
         }
 
         property<ProductPagination>("products") {
             resolver { subcategory, filter: ProductFilter?, cursor: String?, limit: Int? ->
                 description = "Get Products in a Subcategory"
-                stubProductPagination(
-                    listOf(
-                        stubProduct(
-                            "fake_product_0"
-                        ),
-                        stubProduct(
-                            "fake_product_1"
-                        ),
-                    )
+                productService.getSubcategorySearch(
+                    subcategory.id,
+                    filter,
+                    cursor,
+                    limit
                 )
             }
         }
@@ -107,45 +99,63 @@ fun SchemaBuilder.productSchema() {
     query("categories") {
         description = "Get Categories"
         resolver { ->
-            listOf(
-                stubCategory("fake_category_0"),
-                stubCategory("fake_category_1")
-            )
+            categoryService.getAllCategories()
         }
     }
 
     query("category") {
         description = "Get Category"
         resolver { id: ID ->
-            stubCategory("fake_category")
+            categoryService.getCategoryById(id)
         }
     }
 
     query("subcategory") {
         description = "Get Subcategory"
         resolver { id: ID ->
-            stubSubcategory("fake_subcategory")
+            categoryService.getSubcategoryById(id)
         }
     }
 
     mutation("addProduct") {
         description = "Add a product"
         resolver { input: AddProductInput ->
-            stubProduct("fake_product")
+            productService.addProduct(input)
         }
     }
 
     mutation("editProduct") {
         description = "Edit a product"
         resolver { input: EditProductInput ->
-            stubProduct("fake_service")
+            productService.editProduct(input)
         }
     }
 
     mutation("deleteProduct") {
         description = "Delete a product"
-        resolver { input: EditProductInput ->
-            stubProduct("fake_service")
+        resolver { id: ID ->
+            productService.deleteProduct(id)
+        }
+    }
+
+    mutation("addProductVariant") {
+        description = "Delete a product variant"
+        resolver { input: AddProductVariant ->
+            productService.addProductVariant(input)
+        }
+    }
+
+    mutation("editProductVariant") {
+        description = "Edit a product variant"
+        resolver { input: EditProductVariant ->
+            productService.editProductVariant(input)
+        }
+    }
+
+    mutation("deleteProductVariant") {
+        description = "Delete a product variant"
+        resolver { input: DeleteProductVariant ->
+            productService.deleteProductVariant(input)
         }
     }
 }
