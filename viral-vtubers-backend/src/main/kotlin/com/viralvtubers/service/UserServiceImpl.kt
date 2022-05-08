@@ -1,15 +1,14 @@
 package com.viralvtubers.service
 
+import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.database.mongo.repositories.UserRepository
-import com.viralvtubers.graphql.data.ID
-import com.viralvtubers.graphql.data.User
-import com.viralvtubers.graphql.input.AddUserInput
-import com.viralvtubers.graphql.input.EditSelfInput
-import com.viralvtubers.graphql.input.EditUserInput
+import com.viralvtubers.graphql.data.*
+import com.viralvtubers.graphql.input.*
 import com.viralvtubers.mapper.map
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
-import org.litote.kmongo.newId
+import kotlinx.coroutines.flow.*
+import org.bson.conversions.Bson
+import org.litote.kmongo.*
+import com.viralvtubers.database.model.Service as DataService
 import com.viralvtubers.database.model.User as DataUser
 
 class UserServiceImpl(
@@ -31,8 +30,80 @@ class UserServiceImpl(
             .map { it.map() }.toList()
     }
 
-    override suspend fun getAllUsers(): List<User> {
-        return userRepository.getAll().map { it.map() }.toList()
+    override suspend fun getUsers(
+        currentUserId: ID,
+        filter: UserFilter?,
+        sort: UserSort?,
+        cursor: String?,
+        limit: Int?
+    ): UserPagination {
+        val filterBson = getFilterBson(currentUserId.map(), filter)
+        val sortBson = getSortBson(sort)
+
+        var userFlow = userRepository.getUsers(
+            *filterBson.toTypedArray(),
+            sort = sortBson,
+        ).withIndex()
+
+        if (cursor != null) {
+            val before =
+                userFlow.takeWhile { it.value._id.toString() != cursor }
+
+            val last = before.last()
+
+            userFlow = userFlow.dropWhile { it.index <= last.index }
+        }
+
+        val users = userFlow.take(limit ?: 25).map { it.value }.toList()
+
+        return Page(
+            start = users.firstOrNull()?._id,
+            end = users.lastOrNull()?._id,
+            items = users,
+            hasNext = users.size == (limit ?: 25),
+        ).map()
+
+    }
+
+    private fun getSortBson(sort: UserSort?): Bson {
+        sort ?: return descending(DataUser::numLikes)
+
+        sort.name?.let {
+            return if (it == SortEnum.ASC) ascending(DataUser::displayName)
+            else descending(DataUser::displayName)
+        }
+
+        sort.numLikes?.let {
+            return if (it == SortEnum.ASC) ascending(DataUser::numLikes)
+            else descending(DataUser::numLikes)
+        }
+
+        sort.numCompletedCommissions?.let {
+            return if (it == SortEnum.ASC) ascending(DataUser::numCompletedCommissions)
+            else descending(DataUser::numCompletedCommissions)
+        }
+        return descending(DataUser::numLikes)
+    }
+
+    private fun getFilterBson(
+        userId: Id<DataUser>,
+        filter: UserFilter?
+    ): List<Bson> {
+        filter ?: return java.util.ArrayList()
+
+        val filterBson = java.util.ArrayList<Bson>()
+        filterBson.add(DataUser::_id ne userId) // remove self
+
+        filter.search?.let {
+            filterBson.add(
+                DataUser::displayName regex Regex(
+                    ".*$it.*",
+                    RegexOption.IGNORE_CASE
+                )
+            )
+        }
+
+        return filterBson
     }
 
     override suspend fun addUser(input: AddUserInput): User {
@@ -58,7 +129,7 @@ class UserServiceImpl(
         val user = userRepository.getById(input.id.map())
             ?: throw error("user not found")
         val update = DataUser(
-            _id = newId(),
+            _id = user._id,
             firebaseUid = user.firebaseUid,
             displayName = input.displayName ?: user.displayName,
             email = user.email,
@@ -77,7 +148,81 @@ class UserServiceImpl(
             ?: throw error("user not found")
     }
 
-    override suspend fun editSelf(input: EditSelfInput): User {
-        TODO("Not yet implemented")
+    override suspend fun editSelf(userId: ID, input: EditSelfInput): User {
+        val user = userRepository.getById(userId.map())
+            ?: throw error("self not found")
+        val update = user.copy(
+            displayName = input.displayName ?: user.displayName,
+            bio = input.bio ?: user.bio,
+            status = input.status ?: user.status,
+            profileImageURI = input.status ?: user.status,
+        )
+        userRepository.add(user)
+        return userRepository.update(update)?.map()
+            ?: throw error("self not found")
+    }
+
+    override suspend fun addService(
+        userId: ID,
+        input: AddServiceInput
+    ): User {
+        val user = userRepository.getById(userId.map())
+            ?: throw error("self not found")
+
+        val services = ArrayList(user.services)
+        services.add(
+            DataService(
+                name = input.name,
+                priceValue = input.price,
+                pricePerUnit = input.priceType.map(),
+                description = input.description
+            )
+        )
+
+        val update = user.copy(services = services)
+        userRepository.add(user)
+        return userRepository.update(update)?.map()
+            ?: throw error("self not found")
+    }
+
+    override suspend fun editService(
+        userId: ID,
+        input: EditServiceInput
+    ): User {
+        val user = userRepository.getById(userId.map())
+            ?: throw error("self not found")
+
+        val services = ArrayList(user.services)
+        val index = services.indexOfFirst { it._id.map() == input.id }
+        val service = services[index]
+
+        val updatedService = service.copy(
+            name = input.name ?: service.name,
+            priceValue = input.price ?: service.priceValue,
+            pricePerUnit = input.priceType?.map() ?: service.pricePerUnit,
+            description = input.description ?: service.description
+        )
+
+        services[index] = updatedService
+
+        val update = user.copy(services = services)
+        userRepository.add(user)
+        return userRepository.update(update)?.map()
+            ?: throw error("self not found")
+    }
+
+    override suspend fun deleteService(userId: ID, serviceId: ID): User {
+        val user = userRepository.getById(userId.map())
+            ?: throw error("self not found")
+
+        val services = ArrayList(user.services)
+        val index = services.indexOfFirst { it._id.map() == serviceId }
+        services.removeAt(index)
+
+        val update = user.copy(services = services)
+        userRepository.add(user)
+        return userRepository.update(update)?.map()
+            ?: throw error("self not found")
+
     }
 }

@@ -11,6 +11,7 @@ data class Product(
 //  val artist: User,
     val numLikes: Int,
     val variants: List<ProductVariant>,
+    val minPrice: Double,
 
 //  ignored fields
     val subcategoryId: ID,
@@ -30,13 +31,13 @@ data class ProductVariant(
 )
 
 data class ProductPagination(
-    val edges: ProductEdges,
+    val edges: List<ProductEdge>,
     val pageInfo: PageInfo,
 )
 
-data class ProductEdges(
+data class ProductEdge(
     val cursor: String,
-    val node: List<Product>,
+    val node: Product,
 )
 
 enum class AgeRestrictionEnum {
@@ -54,3 +55,10 @@ data class ProductFilter(
     val minPrice: Double?,
     val maxPrice: Double?
 )
+
+data class ProductSort(
+    val name: SortEnum?,
+    val createdDate: SortEnum?,
+    val price: SortEnum?,
+)
+

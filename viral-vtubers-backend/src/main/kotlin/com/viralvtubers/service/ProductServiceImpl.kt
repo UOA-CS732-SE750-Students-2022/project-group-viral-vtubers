@@ -1,17 +1,17 @@
 package com.viralvtubers.service
 
 import com.viralvtubers.database.model.ProductVariant
+import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.database.mongo.repositories.ProductRepository
-import com.viralvtubers.graphql.data.ID
-import com.viralvtubers.graphql.data.Product
-import com.viralvtubers.graphql.data.ProductFilter
-import com.viralvtubers.graphql.data.ProductPagination
+import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import com.viralvtubers.mapper.map
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
-import org.litote.kmongo.newId
+import kotlinx.coroutines.flow.*
+import org.bson.conversions.Bson
+import org.litote.kmongo.*
+import java.util.*
 import com.viralvtubers.database.model.Product as DataProduct
+
 
 class ProductServiceImpl(
     private val productRepository: ProductRepository
@@ -39,19 +39,139 @@ class ProductServiceImpl(
     override suspend fun getCategorySearch(
         categoryId: ID,
         filter: ProductFilter?,
+        sort: ProductSort?,
         cursor: String?,
         limit: Int?
     ): ProductPagination {
-        TODO("Not yet implemented")
+        val filterBson = getFilterBson(filter)
+        val sortBson = getSortBson(sort)
+
+        var productFlow = productRepository.getProductOfCategory(
+            categoryId.map(),
+            *filterBson.toTypedArray(),
+            sort = sortBson,
+        ).withIndex()
+
+        if (cursor != null) {
+            val before =
+                productFlow.takeWhile { it.value._id.toString() != cursor }
+
+            val last = before.last()
+
+            productFlow = productFlow.dropWhile { it.index < last.index }
+        }
+
+        val products = productFlow.take(limit ?: 25).map { it.value }.toList()
+
+        return Page(
+            start = products.firstOrNull()?._id,
+            end = products.lastOrNull()?._id,
+            items = products,
+            hasNext = products.size == (limit ?: 25),
+        ).map()
     }
 
     override suspend fun getSubcategorySearch(
         subcategoryId: ID,
         filter: ProductFilter?,
+        sort: ProductSort?,
         cursor: String?,
         limit: Int?
     ): ProductPagination {
-        TODO("Not yet implemented")
+        val filterBson = getFilterBson(filter)
+        val sortBson = getSortBson(sort)
+
+        var productFlow = productRepository.getProductOfSubcategory(
+            subcategoryId.map(),
+            *filterBson.toTypedArray(),
+            sort = sortBson,
+        ).withIndex()
+
+        if (cursor != null) {
+            val before =
+                productFlow.takeWhile { it.value._id.toString() != cursor }
+
+            val last = before.last()
+
+            productFlow = productFlow.dropWhile { it.index <= last.index }
+        }
+
+        val products = productFlow.take(limit ?: 25).map { it.value }.toList()
+
+        return Page(
+            start = products.firstOrNull()?._id,
+            end = products.lastOrNull()?._id,
+            items = products,
+            hasNext = products.size == (limit ?: 25),
+        ).map()
+    }
+
+    private fun getSortBson(sort: ProductSort?): Bson {
+        sort ?: return descending(DataProduct::createdDate)
+
+        sort.name?.let {
+            return if (it == SortEnum.ASC) ascending(DataProduct::name)
+            else descending(DataProduct::name)
+        }
+
+        sort.createdDate?.let {
+            return if (it == SortEnum.ASC) ascending(DataProduct::createdDate)
+            else descending(DataProduct::createdDate)
+        }
+
+        sort.price?.let {
+            return if (it == SortEnum.ASC) ascending(DataProduct::minPrice)
+            else descending(DataProduct::minPrice)
+        }
+        return descending(DataProduct::createdDate)
+    }
+
+    private fun getFilterBson(filter: ProductFilter?): List<Bson> {
+        filter ?: return ArrayList()
+
+        val filterBson = ArrayList<Bson>()
+
+        filter.search?.let {
+            filterBson.add(
+                DataProduct::name regex Regex(
+                    ".*$it.*",
+                    RegexOption.IGNORE_CASE
+                )
+            )
+        }
+
+        filter.ageRestriction?.let {
+            if (it == AgeRestrictionEnum.NSFW_ONLY) {
+                filterBson.add(
+                    DataProduct::isMature eq true
+                )
+            } else if (it == AgeRestrictionEnum.SFW_ONLY) {
+                filterBson.add(
+                    DataProduct::isMature eq false
+                )
+            } else {
+                // do nothing
+            }
+        }
+
+        filter.other?.let {
+            // TODO
+        }
+
+        filter.minPrice?.let {
+            filterBson.add(
+                DataProduct::minPrice gte it
+            )
+        }
+
+        filter.maxPrice?.let {
+            filterBson.add(
+                DataProduct::minPrice lte it
+            )
+        }
+
+
+        return filterBson
     }
 
     override suspend fun addProduct(input: AddProductInput): Product {
@@ -67,6 +187,9 @@ class ProductServiceImpl(
             vrm = input.vrm,
             numLikes = input.numLikes,
             variants = ArrayList(),
+            isMature = input.isMature,
+            minPrice = 0.0,
+            createdDate = Date(),
         )
         productRepository.add(product)
         return productRepository.getById(product._id)
@@ -88,6 +211,9 @@ class ProductServiceImpl(
             vrm = input.vrm ?: product.vrm,
             numLikes = input.numLikes ?: product.numLikes,
             variants = ArrayList(),
+            isMature = product.isMature,
+            minPrice = product.minPrice,
+            createdDate = product.createdDate,
         )
         return productRepository.update(update)?.map()
             ?: throw error("product not found")
@@ -108,8 +234,12 @@ class ProductServiceImpl(
                 fileTypes = input.fileTypes,
             )
         )
-        return productRepository.getById(input.productId.map())
+
+        val product = productRepository.getById(input.productId.map())
             ?.map() ?: throw error("product not found")
+
+        updateProductMinPrice(product.id)
+        return product
     }
 
     override suspend fun editProductVariant(input: EditProductVariant): Product {
@@ -126,13 +256,32 @@ class ProductServiceImpl(
                 fileTypes = input.fileTypes ?: variant.fileTypes,
             )
         )
-        return productRepository.getById(input.productId.map())
+        val product = productRepository.getById(input.productId.map())
             ?.map() ?: throw error("product not found")
+
+        updateProductMinPrice(product.id)
+        return product
     }
 
     override suspend fun deleteProductVariant(input: DeleteProductVariant): Product {
         productRepository.deleteVariant(input.productId.map(), input.id.map())
-        return productRepository.getById(input.productId.map())
+        val product = productRepository.getById(input.productId.map())
             ?.map() ?: throw error("product not found")
+
+        updateProductMinPrice(product.id)
+        return product
+    }
+
+    private suspend fun updateProductMinPrice(productId: ID) {
+        // Update the product min price after modifying variant list
+        val product = productRepository.getById(productId.map())
+            ?: throw error("product not found")
+
+        val minPrice = product.variants.maxOf { it.price }
+
+        val update = product.copy(minPrice = minPrice)
+
+        productRepository.update(update)?.map()
+            ?: throw error("product not found")
     }
 }

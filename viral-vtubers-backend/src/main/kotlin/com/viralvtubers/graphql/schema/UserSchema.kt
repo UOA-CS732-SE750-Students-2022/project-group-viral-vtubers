@@ -2,9 +2,12 @@ package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.viralvtubers.graphql.*
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
+import com.viralvtubers.graphql.stubMail
+import com.viralvtubers.graphql.stubService
+import com.viralvtubers.graphql.stubTag
+import com.viralvtubers.graphql.stubUser
 import com.viralvtubers.service.AuthService
 import com.viralvtubers.service.FirebaseService
 import com.viralvtubers.service.ProductService
@@ -142,34 +145,41 @@ fun SchemaBuilder.userSchema(
 
     query("users") {
         description = "Get all users"
-        resolver { cursor: String?, limit: Int? ->
-            stubUserPagination(
-                listOf(
-                    stubUser("fake_user_0"),
-                    stubUser("fake_user_1")
-                )
-            )
+        resolver { ctx: Context, filter: UserFilter?, sort: UserSort?, cursor: String?, limit: Int? ->
+            val userId = authService.getUserId(ctx)
+            userService.getUsers(userId, filter, sort, cursor, limit)
         }
     }
 
     mutation("editSelf") {
         description = "Edit self"
-        resolver { input: EditSelfInput ->
-            userService.editSelf(input)
+        resolver { ctx: Context, input: EditSelfInput ->
+            val userId = authService.getUserId(ctx)
+            userService.editSelf(userId, input)
         }
     }
 
     mutation("addService") {
         description = "Add a service"
-        resolver { input: AddServiceInput ->
-            stubService("fake_service")
+        resolver { ctx: Context, input: AddServiceInput ->
+            val userId = authService.getUserId(ctx)
+            userService.addService(userId, input)
         }
     }
 
     mutation("editService") {
         description = "Edit a service"
-        resolver { input: EditServiceInput ->
-            stubService("fake_service")
+        resolver { ctx: Context, input: EditServiceInput ->
+            val userId = authService.getUserId(ctx)
+            userService.editService(userId, input)
+        }
+    }
+
+    mutation("deleteService") {
+        description = "Delete a service"
+        resolver { ctx: Context, id: ID ->
+            val userId = authService.getUserId(ctx)
+            userService.deleteService(userId, id)
         }
     }
 

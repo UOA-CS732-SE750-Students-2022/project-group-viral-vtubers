@@ -19,12 +19,24 @@ data class User(
 //  val following: Collection<ID>,
 )
 
+
+data class UserFilter(
+    val search: String?,
+)
+
+data class UserSort(
+    val name: SortEnum?,
+    val numLikes: SortEnum?,
+    val numCompletedCommissions: SortEnum?,
+)
+
+
 data class UserPagination(
-    val edges: UserEdges,
+    val edges: List<UserEdge>,
     val pageInfo: PageInfo,
 )
 
-data class UserEdges(
+data class UserEdge(
     val cursor: String,
-    val node: List<User>,
+    val node: User,
 )

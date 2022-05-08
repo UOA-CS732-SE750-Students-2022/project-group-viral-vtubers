@@ -32,10 +32,7 @@ fun SchemaBuilder.orderSchema() {
         description = "Get all Orders"
         resolver { filter: ProductFilter?, cursor: String?, limit: Int? ->
             stubOrderPagination(
-                listOf(
-                    stubOrder("fake_order_0"),
-                    stubOrder("fake_order_1")
-                )
+                stubOrder("fake_order_0"),
             )
         }
     }

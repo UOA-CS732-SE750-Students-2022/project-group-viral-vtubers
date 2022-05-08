@@ -1,10 +1,7 @@
 package com.viralvtubers.graphql.schema
 
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
-import com.viralvtubers.graphql.data.AgeRestrictionEnum
-import com.viralvtubers.graphql.data.ID
-import com.viralvtubers.graphql.data.OtherFiltersEnum
-import com.viralvtubers.graphql.data.PriceEnum
+import com.viralvtubers.graphql.data.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,6 +38,16 @@ fun SchemaBuilder.scalarSchema() {
         description = "OtherFiltersEnum"
         value(OtherFiltersEnum.ANIME) {
             description = "anime"
+        }
+    }
+
+    enum<SortEnum> {
+        description = "SortEnum"
+        value(SortEnum.ASC) {
+            description = "asc"
+        }
+        value(SortEnum.DESC) {
+            description = "desc"
         }
     }
 
