@@ -11,7 +11,8 @@ data class Order(
 //  val applications: List<User>
 
 //  ignore fields
-    val tags: List<ID>
+    val tags: List<ID>,
+    val applications: List<ID>
 )
 
 data class OrderPagination(
@@ -22,4 +23,16 @@ data class OrderPagination(
 data class OrderEdge(
     val cursor: String,
     val node: Order,
+)
+
+data class OrderFilter(
+    val search: String?,
+    val minBounty: Double?,
+    val maxBounty: Double?
+)
+
+data class OrderSort(
+    val name: SortEnum?,
+    val createdDate: SortEnum?,
+    val bounty: SortEnum?,
 )

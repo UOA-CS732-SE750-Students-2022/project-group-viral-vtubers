@@ -40,8 +40,7 @@ class MailServiceImpl(
             isRead = false,
         )
 
-        return mailRepository.upsert(mail)?.map()
-            ?: throw error("receiver not found")
+        return mailRepository.add(mail).map()
     }
 
     override suspend fun getInbox(userId: ID): List<Mail> {

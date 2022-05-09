@@ -162,6 +162,7 @@ val stubOrder = { id: String ->
         99.99,
         false,
         "fakeImage.png",
+        ArrayList(),
         ArrayList()
     )
 }
