@@ -13,6 +13,7 @@ val stubUser = { id: String ->
         1,
         1,
         "https://picsum.photos/200",
+        ArrayList()
     )
 }
 
@@ -79,7 +80,8 @@ val stubProduct = { id: String ->
         ),
         artistId = ID("fake_artist_id"),
         subcategoryId = ID("fake_subcategory_id"),
-        minPrice = 12.0
+        minPrice = 12.0,
+        tags = ArrayList()
     )
 }
 
@@ -160,6 +162,7 @@ val stubOrder = { id: String ->
         99.99,
         false,
         "fakeImage.png",
+        ArrayList()
     )
 }
 

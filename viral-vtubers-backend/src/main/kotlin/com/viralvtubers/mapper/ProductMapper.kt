@@ -20,7 +20,8 @@ fun DataProduct.map() = GraphQLProduct(
     variants = variants.map { it.map() },
     subcategoryId = subcategory.map(),
     artistId = artistId.map(),
-    minPrice = 12.0
+    minPrice = 12.0,
+    tags = tags.map { it.map() }
 )
 
 fun DataProductVariant.map() = GraphQLProductVariant(

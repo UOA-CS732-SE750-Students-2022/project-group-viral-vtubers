@@ -5,6 +5,7 @@ import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import com.viralvtubers.service.CategoryService
 import com.viralvtubers.service.ProductService
+import com.viralvtubers.service.TagService
 import com.viralvtubers.service.UserService
 import kotlinx.coroutines.FlowPreview
 
@@ -13,12 +14,21 @@ fun SchemaBuilder.productSchema(
     productService: ProductService,
     categoryService: CategoryService,
     userService: UserService,
+    tagService: TagService,
 ) {
     type<Product> {
         description = "Product"
 
         Product::subcategoryId.ignore()
         Product::artistId.ignore()
+        Product::tags.ignore()
+
+        property<List<Tag>>("tags") {
+            resolver { user ->
+                description = "Get product tags"
+                tagService.getTagsByIds(user.tags)
+            }
+        }
 
         property<Subcategory>("subcategory") {
             resolver { product ->
@@ -97,7 +107,7 @@ fun SchemaBuilder.productSchema(
             }
         }
     }
-    
+
     query("categories") {
         description = "Get Categories"
         resolver { ->

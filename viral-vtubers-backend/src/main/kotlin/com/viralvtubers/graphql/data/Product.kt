@@ -16,6 +16,7 @@ data class Product(
 //  ignored fields
     val subcategoryId: ID,
     val artistId: ID,
+    val tags: List<ID>
 )
 
 data class ProductVariant(

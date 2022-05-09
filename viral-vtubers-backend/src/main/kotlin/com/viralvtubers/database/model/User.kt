@@ -15,6 +15,6 @@ data class User(
     val numLikes: Int,
     val status: String,
     val profileImageURI: String,
-    val specialises: List<Id<Tag>>,
+    val tags: List<Id<Tag>>,
     val services: List<Service>,
 ) : Model<User>

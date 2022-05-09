@@ -6,17 +6,19 @@ import com.viralvtubers.graphql.input.AddOrderInput
 import com.viralvtubers.graphql.input.EditOrderInput
 import com.viralvtubers.graphql.stubOrder
 import com.viralvtubers.graphql.stubOrderPagination
-import com.viralvtubers.graphql.stubTag
 import com.viralvtubers.graphql.stubUser
+import com.viralvtubers.service.TagService
 
-fun SchemaBuilder.orderSchema() {
+fun SchemaBuilder.orderSchema(tagService: TagService) {
     type<Order> {
         description = "Order"
+
+        Order::tags.ignore()
 
         property<List<Tag>>("tags") {
             resolver { order ->
                 description = "Get Tags of the Order"
-                listOf(stubTag("fake_tag_0"), stubTag("fake_tag_1"))
+                tagService.getTagsByIds(order.tags)
             }
         }
 

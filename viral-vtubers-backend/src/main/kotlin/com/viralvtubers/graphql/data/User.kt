@@ -17,6 +17,9 @@ data class User(
 //  val sent: List<Mail>,
 //  val followers: Collection<ID>,
 //  val following: Collection<ID>,
+
+//  ignore fields
+    val tags: List<ID>
 )
 
 
