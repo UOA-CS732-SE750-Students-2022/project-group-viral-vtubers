@@ -8,7 +8,7 @@ import java.util.*
 
 @kotlinx.serialization.Serializable(with = DateSerializer::class)
 data class Order(
-    @Contextual override val _id: Id<Product> = newId(),
+    @Contextual override val _id: Id<Order> = newId(),
     val name: String,
     val description: String,
     val bounty: Double,
@@ -17,4 +17,4 @@ data class Order(
     val tags: List<Id<User>>,
     val applications: List<Id<User>>,
     val createdDate: Date,
-) : Model<Product>
+) : Model<Order>

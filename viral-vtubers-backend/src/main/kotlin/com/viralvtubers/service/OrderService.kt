@@ -10,7 +10,7 @@ interface OrderService {
         sort: OrderSort?,
         cursor: String?,
         limit: Int?
-    ): ProductPagination
+    ): OrderPagination
 
     suspend fun getOrder(id: ID): Order
 
