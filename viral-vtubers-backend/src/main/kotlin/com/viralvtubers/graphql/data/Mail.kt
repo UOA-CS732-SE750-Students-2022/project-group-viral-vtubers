@@ -9,5 +9,9 @@ data class Mail(
     val title: String,
     val body: String,
     val date: Date,
-    val read: Boolean,
+    val isRead: Boolean,
+
+//  ignored fields
+    val senderId: ID,
+    val receiverId: ID,
 )

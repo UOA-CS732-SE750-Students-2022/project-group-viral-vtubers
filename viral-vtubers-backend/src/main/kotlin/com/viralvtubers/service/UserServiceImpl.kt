@@ -27,6 +27,11 @@ class UserServiceImpl(
             ?: throw error("user not found")
     }
 
+    override suspend fun getUserByName(name: String): User {
+        return userRepository.getByName(name)?.map()
+            ?: throw error("user not found")
+    }
+
     override suspend fun getUserIds(userIds: List<ID>): List<User> {
         return userRepository.getByIds(userIds.map { it.map() })
             .map { it.map() }.toList()

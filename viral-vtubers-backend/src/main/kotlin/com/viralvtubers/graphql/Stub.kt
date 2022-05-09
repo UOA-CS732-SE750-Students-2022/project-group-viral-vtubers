@@ -99,6 +99,8 @@ val stubMail = { id: String ->
         "Fake Mail Body",
         Date(),
         false,
+        ID("fake_sender_id"),
+        ID("fake_receiver_id"),
     )
 }
 
