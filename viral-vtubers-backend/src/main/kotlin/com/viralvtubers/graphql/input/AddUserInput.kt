@@ -11,5 +11,5 @@ data class AddUserInput(
     val numLikes: Int,
     val status: String,
     val profileImageURI: String,
-    val specialises: List<ID>,
+    val tags: List<ID>,
 )

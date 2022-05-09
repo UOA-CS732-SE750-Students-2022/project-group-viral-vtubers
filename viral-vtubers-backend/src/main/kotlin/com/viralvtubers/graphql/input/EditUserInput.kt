@@ -10,5 +10,5 @@ data class EditUserInput(
     val numLikes: Int?,
     val status: String?,
     val profileImageURI: String?,
-    val specialises: List<ID>?
+    val tags: List<ID>?
 )

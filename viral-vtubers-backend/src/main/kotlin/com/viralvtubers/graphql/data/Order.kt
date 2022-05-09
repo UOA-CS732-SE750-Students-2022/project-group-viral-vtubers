@@ -9,6 +9,9 @@ data class Order(
     val isDraft: Boolean,
     val image: String,
 //  val applications: List<User>
+
+//  ignore fields
+    val tags: List<ID>
 )
 
 data class OrderPagination(

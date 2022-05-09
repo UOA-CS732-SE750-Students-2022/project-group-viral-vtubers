@@ -5,7 +5,6 @@ import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import com.viralvtubers.graphql.stubService
-import com.viralvtubers.graphql.stubTag
 import com.viralvtubers.service.*
 import io.ktor.server.auth.jwt.*
 
@@ -15,9 +14,12 @@ fun SchemaBuilder.userSchema(
     firebaseService: FirebaseService,
     authService: AuthService,
     mailService: MailService,
+    tagService: TagService,
 ) {
     type<User> {
         description = "User"
+
+        User::tags.ignore()
 
         property<Boolean>("isFollowing") {
             resolver { user, ctx: Context ->
@@ -30,7 +32,7 @@ fun SchemaBuilder.userSchema(
         property<List<Tag>>("tags") {
             resolver { user ->
                 description = "Get user tags"
-                listOf(stubTag("fake_tag_0"), stubTag("fake_tag_1"))
+                tagService.getTagsByIds(user.tags)
             }
         }
 
@@ -120,7 +122,7 @@ fun SchemaBuilder.userSchema(
                         numLikes = 0,
                         status = "",
                         profileImageURI = "",
-                        specialises = ArrayList()
+                        tags = ArrayList()
                     )
                 )
                 firebaseService.setCustomClaims(uid, user.id)

@@ -14,6 +14,7 @@ fun UserModel.map() = User(
     numCompletedCommissions = numCompletedCommissions.toInt(),
     numLikes = numLikes.toInt(),
     profileImageURI = profileImageURI,
+    tags = tags.map { it.map() }
 )
 
 fun ServiceModel.map() = Service(

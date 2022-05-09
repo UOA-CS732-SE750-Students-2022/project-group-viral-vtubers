@@ -20,8 +20,9 @@ fun Application.configureGraphQL() {
     val productService = ProductServiceImpl(database.asProductRepository())
     val userService = UserServiceImpl(
         database.asUserRepository(),
-        database.asFollowRepository()
+        database.asFollowRepository(),
     )
+    val tagService = TagServiceImpl(database.asTagRepository())
     val firebaseService = FirebaseServiceImpl()
     val authService = AuthServiceImpl()
     val mailService = MailServiceImpl(
@@ -50,14 +51,16 @@ fun Application.configureGraphQL() {
                 productService = productService,
                 firebaseService = firebaseService,
                 authService = authService,
-                mailService = mailService
+                mailService = mailService,
+                tagService = tagService,
             )
             productSchema(
                 categoryService = categoryService,
                 productService = productService,
                 userService = userService,
+                tagService = tagService,
             )
-            orderSchema()
+            orderSchema(tagService = tagService)
             cartSchema()
         }
     }

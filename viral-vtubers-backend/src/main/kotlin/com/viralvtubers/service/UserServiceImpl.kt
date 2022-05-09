@@ -124,7 +124,7 @@ class UserServiceImpl(
             numLikes = input.numLikes,
             status = input.status,
             profileImageURI = input.profileImageURI,
-            specialises = input.specialises.map { it.map() },
+            tags = input.tags.map { it.map() },
             services = ArrayList()
         )
         userRepository.add(user)
@@ -146,8 +146,8 @@ class UserServiceImpl(
             numLikes = input.numLikes ?: user.numLikes,
             status = input.status ?: user.status,
             profileImageURI = input.status ?: user.status,
-            specialises = input.specialises?.map { it.map() }
-                ?: user.specialises,
+            tags = input.tags?.map { it.map() }
+                ?: user.tags,
             services = user.services
         )
         userRepository.add(user)
