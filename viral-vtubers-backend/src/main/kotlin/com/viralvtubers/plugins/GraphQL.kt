@@ -29,6 +29,7 @@ fun Application.configureGraphQL() {
         database.asMailRepository(),
         database.asUserRepository()
     )
+    val orderService = OrderServiceImpl(database.asOrderRepository())
 
     install(GraphQL) {
         useDefaultPrettyPrinter = true
@@ -60,7 +61,12 @@ fun Application.configureGraphQL() {
                 userService = userService,
                 tagService = tagService,
             )
-            orderSchema(tagService = tagService)
+            orderSchema(
+                orderService = orderService,
+                tagService = tagService,
+                userService = userService,
+                authService = authService,
+            )
             cartSchema()
         }
     }
