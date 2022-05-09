@@ -1,6 +1,7 @@
 <div class="container">
   <div class="history-container">
     <h4>Sale History</h4>
+    <div class="title-underscore"></div>
     <div class="sales-container">
       <div class="sale-headers">
         <h5 class="sale-heading product-col">Product</h5>
@@ -8,14 +9,19 @@
         <h5 class="sale-heading date-col">Transaction Date</h5>
         <h5 class="sale-heading price-col">Price</h5>
       </div>
-      <hr class="divider" />
+      <hr class="divider" id="first-divider" />
       <div class="sale-items" *ngFor="let i of [0, 1, 2, 3]">
         <div class="sale-item">
           <div class="product-col">
             <img src="https://picsum.photos/200?1" class="product-img" />
             <div class="item-names">
               <h5>VROID Outfit - Raiden Shogun/Genshin Impact</h5>
-              <h6>VRM - Shogun/Genshin Impact</h6>
+              <h6>
+                VRM - Shogun/Genshin Impact Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Iusto provident ab modi quos
+                nesciunt voluptatum ut esse quo, possimus est impedit. Neque,
+                ipsum ex voluptates tempore labore beatae nemo incidunt?
+              </h6>
             </div>
           </div>
 
@@ -23,7 +29,7 @@
             <img src="https://picsum.photos/200?2" />
             <h5>Baka</h5>
           </div>
-          <h5 class="date-col">12-12-2000 5:30pm (any longish format)</h5>
+          <h5 class="date-col">12-12-2000 5:30pm</h5>
           <h5 class="price-col">$69.99</h5>
         </div>
         <hr class="divider" />
