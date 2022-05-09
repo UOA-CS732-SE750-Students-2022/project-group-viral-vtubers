@@ -10,6 +10,8 @@ interface UserService : KoinComponent {
 
     suspend fun getUserId(userId: ID): User
 
+    suspend fun getUserByName(name: String): User
+
     suspend fun getUserIds(userIds: List<ID>): List<User>
 
     suspend fun getUsers(

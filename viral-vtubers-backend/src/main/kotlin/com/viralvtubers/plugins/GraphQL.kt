@@ -24,6 +24,10 @@ fun Application.configureGraphQL() {
     )
     val firebaseService = FirebaseServiceImpl()
     val authService = AuthServiceImpl()
+    val mailService = MailServiceImpl(
+        database.asMailRepository(),
+        database.asUserRepository()
+    )
 
     install(GraphQL) {
         useDefaultPrettyPrinter = true
@@ -46,6 +50,7 @@ fun Application.configureGraphQL() {
                 productService = productService,
                 firebaseService = firebaseService,
                 authService = authService,
+                mailService = mailService
             )
             productSchema(
                 categoryService = categoryService,

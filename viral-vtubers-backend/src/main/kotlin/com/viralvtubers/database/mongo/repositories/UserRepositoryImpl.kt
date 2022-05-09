@@ -21,5 +21,9 @@ fun MongoDatabase.asUserRepository(): UserRepository = object : UserRepository {
             ).sort(sort)
         return result.toFlow()
     }
+
+    override suspend fun getByName(name: String): User? {
+        return col.findOne(User::displayName eq name)
+    }
 }
 

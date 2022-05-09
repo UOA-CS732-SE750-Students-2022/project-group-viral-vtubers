@@ -11,4 +11,6 @@ interface UserRepository : Repository<User> {
         vararg filter: Bson,
         sort: Bson
     ): Flow<User>
+
+    suspend fun getByName(name: String): User?
 }

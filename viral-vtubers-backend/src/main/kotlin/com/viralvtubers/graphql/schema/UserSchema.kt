@@ -4,14 +4,9 @@ import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
-import com.viralvtubers.graphql.stubMail
 import com.viralvtubers.graphql.stubService
 import com.viralvtubers.graphql.stubTag
-import com.viralvtubers.graphql.stubUser
-import com.viralvtubers.service.AuthService
-import com.viralvtubers.service.FirebaseService
-import com.viralvtubers.service.ProductService
-import com.viralvtubers.service.UserService
+import com.viralvtubers.service.*
 import io.ktor.server.auth.jwt.*
 
 fun SchemaBuilder.userSchema(
@@ -19,6 +14,7 @@ fun SchemaBuilder.userSchema(
     productService: ProductService,
     firebaseService: FirebaseService,
     authService: AuthService,
+    mailService: MailService,
 ) {
     type<User> {
         description = "User"
@@ -58,14 +54,14 @@ fun SchemaBuilder.userSchema(
         property<List<Mail>>("inbox") {
             resolver { user ->
                 description = "Get user inbox"
-                listOf(stubMail("fake_mail_0"), stubMail("fake_mail_1"))
+                mailService.getInbox(user.id)
             }
         }
 
         property<List<Mail>>("sent") {
             resolver { user ->
                 description = "Get user sent mails"
-                listOf(stubMail("fake_mail_0"), stubMail("fake_mail_1"))
+                mailService.getSent(user.id)
             }
         }
 
@@ -86,17 +82,21 @@ fun SchemaBuilder.userSchema(
 
     type<Mail> {
         description = "Mail"
+
+        Mail::senderId.ignore()
+        Mail::receiverId.ignore()
+
         property<User>("sender") {
             resolver { mail ->
                 description = "Get sender"
-                stubUser("fake_user")
+                userService.getUserId(mail.senderId)
             }
         }
 
         property<User>("receiver") {
             resolver { mail ->
                 description = "Get receiver"
-                stubUser("fake_user")
+                userService.getUserId(mail.receiverId)
             }
         }
     }
@@ -144,11 +144,26 @@ fun SchemaBuilder.userSchema(
         }
     }
 
+    query("userByName") {
+        description = "Get a single user by name"
+        resolver { name: String ->
+            userService.getUserByName(name)
+        }
+    }
+
     query("users") {
         description = "Get all users"
         resolver { ctx: Context, filter: UserFilter?, sort: UserSort?, cursor: String?, limit: Int? ->
             val userId = authService.getUserId(ctx)
             userService.getUsers(userId, filter, sort, cursor, limit)
+        }
+    }
+
+    query("mail") {
+        description = "Get mail"
+        resolver { ctx: Context, id: ID ->
+            val userId = authService.getUserId(ctx)
+            mailService.getMail(userId, id)
         }
     }
 
@@ -186,8 +201,17 @@ fun SchemaBuilder.userSchema(
 
     mutation("sendMail") {
         description = "Send a mail"
-        resolver { input: SendMailInput ->
-            stubMail("fake_mail")
+        resolver { ctx: Context, input: SendMailInput ->
+            val userId = authService.getUserId(ctx)
+            mailService.sendMail(userId, input)
+        }
+    }
+
+    mutation("editMail") {
+        description = "Edit a mail"
+        resolver { ctx: Context, input: EditMailInput ->
+            val userId = authService.getUserId(ctx)
+            mailService.editMail(userId, input)
         }
     }
 
