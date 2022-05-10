@@ -690,6 +690,13 @@ export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayN
 
 export type UserBlurbFragmentFragment = { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string };
 
+export type EditSelfMutationVariables = Exact<{
+  input: EditSelfInput;
+}>;
+
+
+export type EditSelfMutation = { __typename?: 'Mutation', editSelf: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -855,6 +862,24 @@ export const UserBlurbFragmentFragmentDoc = gql`
   profileImageURI
 }
     `;
+export const EditSelfDocument = gql`
+    mutation EditSelf($input: EditSelfInput!) {
+  editSelf(input: $input) {
+    ...UserFragment
+  }
+}
+    ${UserFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EditSelfGQL extends Apollo.Mutation<EditSelfMutation, EditSelfMutationVariables> {
+    override document = EditSelfDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const LoginDocument = gql`
     mutation Login {
   login {
