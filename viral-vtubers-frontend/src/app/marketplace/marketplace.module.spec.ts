@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
 import { MarketplaceModule, routes } from './marketplace.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ProductsComponent } from './products/products.component';
 
 describe('MarketplaceModule', () => {
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('MarketplaceModule', () => {
   });
 
   it('should contain route for /', () => {
-    const expectedRoute = { path: '', component: ProductsComponent };
+    const expectedRoute = { path: '', component: BrowseProductsComponent };
     expect(routes).toContain(expectedRoute);
   });
 
