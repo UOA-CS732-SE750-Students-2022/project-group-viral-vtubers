@@ -12,6 +12,8 @@ fun OrderModel.map() = Order(
     bounty = bounty,
     isDraft = isDraft,
     image = image,
+    ownerId = ownerId.map(),
+    artistId = artistId?.map(),
     tags = tags.map { it.map() },
     applications = applications.map { it.map() }
 )

@@ -9,10 +9,26 @@ data class Order(
     val isDraft: Boolean,
     val image: String,
 //  val applications: List<User>
+//  val owner: User,
+//  val artist: User?,
 
 //  ignore fields
+    val ownerId: ID,
+    val artistId: ID?,
+
     val tags: List<ID>,
     val applications: List<ID>
+)
+
+data class MyOrder(
+    val active: List<Order>,
+    val past: List<Order>
+)
+
+data class MyCommission(
+    val pending: List<Order>,
+    val won: List<Order>,
+    val lost: List<Order>,
 )
 
 data class OrderPagination(

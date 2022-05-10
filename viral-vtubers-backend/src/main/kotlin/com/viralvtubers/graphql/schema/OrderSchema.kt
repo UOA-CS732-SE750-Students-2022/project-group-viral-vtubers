@@ -21,6 +21,24 @@ fun SchemaBuilder.orderSchema(
 
         Order::tags.ignore()
         Order::applications.ignore()
+        Order::ownerId.ignore()
+        Order::artistId.ignore()
+
+        property<User>("owner") {
+            resolver { order ->
+                description = "Get owner of the Order"
+                userService.getUserId(order.ownerId)
+            }
+        }
+
+        property<User?>("artist") {
+            resolver { order ->
+                description = "Get owner of the Order"
+                order.artistId?.let {
+                    userService.getUserId(order.ownerId)
+                }
+            }
+        }
 
         property<List<Tag>>("tags") {
             resolver { order ->
@@ -48,6 +66,22 @@ fun SchemaBuilder.orderSchema(
         description = "Get an Order by Id"
         resolver { id: ID ->
             orderService.getOrder(id)
+        }
+    }
+
+    query("myOrders") {
+        description = "Get myOrders by user"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            orderService.getMyOrders(userId)
+        }
+    }
+
+    query("myCommissions") {
+        description = "Get an Order by Id"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            orderService.getMyCommissions(userId)
         }
     }
 

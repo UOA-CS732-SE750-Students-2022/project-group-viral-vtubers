@@ -16,5 +16,7 @@ data class Order(
     val image: String,
     val tags: List<Id<User>>,
     val applications: List<Id<User>>,
+    val ownerId: Id<User>,
+    val artistId: Id<User>?,
     val createdDate: Date,
 ) : Model<Order>

@@ -1,5 +1,7 @@
 package com.viralvtubers.service
 
+import com.viralvtubers.database.model.Apply
+import com.viralvtubers.database.mongo.repositories.ApplyRepository
 import com.viralvtubers.database.mongo.repositories.OrderRepository
 import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.graphql.data.*
@@ -15,7 +17,8 @@ import java.util.*
 import com.viralvtubers.database.model.Order as OrderModel
 
 class OrderServiceImpl(
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val applyRepository: ApplyRepository
 ) : OrderService {
     override suspend fun getOrderSearch(
         filter: OrderFilter?,
@@ -109,6 +112,8 @@ class OrderServiceImpl(
             image = order.image,
             tags = order.tagIds.map { ObjectId(it).toId() },
             applications = ArrayList(),
+            ownerId = userId.map(),
+            artistId = null,
             createdDate = Date(),
         )
 
@@ -119,6 +124,10 @@ class OrderServiceImpl(
         val orderModel = orderRepository.getById(order.id.map())
             ?: throw Exception("order not found")
 
+        orderModel.artistId?.let {
+            throw Exception("order has an artist, cannot edit")
+        }
+
         val update = orderModel.copy(
             name = order.name ?: orderModel.name,
             description = order.description ?: orderModel.description,
@@ -126,6 +135,7 @@ class OrderServiceImpl(
             isDraft = order.isDraft ?: orderModel.isDraft,
             image = order.image ?: orderModel.image,
             tags = order.tagIds?.map { ObjectId(it).toId() } ?: orderModel.tags,
+            artistId = order.artistId?.map() ?: orderModel.artistId,
         )
 
         return orderRepository.update(update)?.map()
@@ -158,8 +168,41 @@ class OrderServiceImpl(
             applications = orderModel.applications + userId.map(),
         )
 
+        applyRepository.add(
+            Apply(
+                orderId = orderId.map(),
+                userId = userId.map(),
+            )
+        )
+
         return orderRepository.update(update)?.map()
             ?: throw Exception("order not found")
     }
 
+    override suspend fun getMyOrders(userId: ID): MyOrder {
+        val orders =
+            orderRepository.getOrderByUser(userId.map()).toList()
+                .map { it.map() }
+
+        val group = orders.groupBy({ it.artistId == null }, { it })
+
+        return MyOrder(
+            active = group[false] ?: emptyList(),
+            past = group[true] ?: emptyList(),
+        )
+    }
+
+    override suspend fun getMyCommissions(userId: ID): MyCommission {
+        val orderIds = applyRepository.getApplyByUser(userId.map()).toList()
+            .map { it.orderId }
+
+        val orders = orderRepository.getByIds(orderIds).toList()
+        return MyCommission(
+            pending = orders.filter { it.artistId == null }.map { it.map() },
+            won = orders.filter { it.artistId?.map() == userId }
+                .map { it.map() },
+            lost = orders.filter { it.artistId?.map() ?: userId != userId }
+                .map { it.map() },
+        )
+    }
 }

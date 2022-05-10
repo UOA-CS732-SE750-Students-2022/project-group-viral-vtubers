@@ -21,4 +21,8 @@ interface OrderService {
     suspend fun deleteOrder(userId: ID, orderId: ID): Order
 
     suspend fun applyOrder(userId: ID, orderId: ID): Order
+
+    suspend fun getMyOrders(userId: ID): MyOrder
+
+    suspend fun getMyCommissions(userId: ID): MyCommission
 }
