@@ -43,7 +43,7 @@
             <div class="file-info">
               <p>{{ i.name }}</p>
               <div class="tags-container">
-                <span class="file-type-tag" *ngFor="let file of i.files">
+                <span class="file-type-tag" *ngFor="let file of i.fileTypes">
                   <p>{{ file }}</p>
                 </span>
               </div>
@@ -52,7 +52,7 @@
               <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>add to cart</h4>
-                <p>{{ i.fileName }}</p>
+                <p>{{ i.file }}</p>
               </div>
             </button>
           </div>

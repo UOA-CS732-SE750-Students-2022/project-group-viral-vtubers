@@ -2,7 +2,7 @@
   <div
     *ngFor="let mail of mails"
     class="mail-item"
-    [ngClass]="{ unread: !mail.read }"
+    [ngClass]="{ unread: !mail.isRead }"
   >
     <h4>{{ mail.title }}</h4>
     <p class="mail-meta">

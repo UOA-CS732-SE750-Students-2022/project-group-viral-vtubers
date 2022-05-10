@@ -23,32 +23,32 @@ export type Scalars = {
 export type AddOrderInput = {
   bounty: Scalars['Float'];
   description: Scalars['String'];
-  draft: Scalars['Boolean'];
   id: Scalars['ID'];
   image: Scalars['String'];
+  isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   tagIds: Array<Scalars['String']>;
 };
 
 export type AddProductInput = {
-  files: Array<Scalars['String']>;
-  id: Scalars['ID'];
+  artist: Scalars['ID'];
+  description: Scalars['String'];
   images: Array<Scalars['String']>;
+  isMature: Scalars['Boolean'];
   name: Scalars['String'];
   numLikes: Scalars['Int'];
-  price: Scalars['Float'];
-  shortDescription: Scalars['String'];
   subcategoryId: Scalars['ID'];
+  tags: Array<Scalars['ID']>;
   titleImage: Scalars['String'];
-  variants: Array<AddProductVariant>;
   vrm: Scalars['String'];
 };
 
 export type AddProductVariant = {
-  files: Array<Scalars['String']>;
-  id: Scalars['ID'];
+  file: Scalars['String'];
+  fileTypes: Array<Scalars['String']>;
   name: Scalars['String'];
   price: Scalars['Float'];
+  productId: Scalars['ID'];
 };
 
 export type AddServiceInput = {
@@ -77,12 +77,6 @@ export type Cart = {
   totalAmount: Scalars['Float'];
 };
 
-export type Carts = {
-  __typename?: 'Carts';
-  carts: Array<Cart>;
-  numItems: Scalars['Int'];
-};
-
 /** Category */
 export type Category = {
   __typename?: 'Category';
@@ -98,9 +92,21 @@ export type CategoryProductsArgs = {
   cursor?: InputMaybe<Scalars['String']>;
   filter?: InputMaybe<ProductFilter>;
   limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<ProductSort>;
+};
+
+export type DeleteProductVariant = {
+  id: Scalars['ID'];
+  productId: Scalars['ID'];
+};
+
+export type EditMailInput = {
+  id: Scalars['ID'];
+  isRead?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type EditOrderInput = {
+  artistId?: InputMaybe<Scalars['ID']>;
   bounty?: InputMaybe<Scalars['Float']>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -111,22 +117,24 @@ export type EditOrderInput = {
 };
 
 export type EditProductInput = {
+  description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   images?: InputMaybe<Array<Scalars['String']>>;
   name?: InputMaybe<Scalars['String']>;
   numLikes?: InputMaybe<Scalars['Int']>;
-  shortDescription?: InputMaybe<Scalars['String']>;
   subcategoryId?: InputMaybe<Scalars['ID']>;
+  tags?: InputMaybe<Array<Scalars['ID']>>;
   titleImage?: InputMaybe<Scalars['String']>;
-  variants?: InputMaybe<Array<EditProductVariant>>;
   vrm?: InputMaybe<Scalars['String']>;
 };
 
 export type EditProductVariant = {
-  files?: InputMaybe<Array<Scalars['String']>>;
-  id?: InputMaybe<Scalars['ID']>;
+  file?: InputMaybe<Scalars['String']>;
+  fileTypes?: InputMaybe<Array<Scalars['String']>>;
+  id: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Float']>;
+  productId: Scalars['ID'];
 };
 
 export type EditSelfInput = {
@@ -151,7 +159,7 @@ export type Mail = {
   body: Scalars['String'];
   date: Scalars['DateTime'];
   id: Scalars['ID'];
-  read: Scalars['Boolean'];
+  isRead: Scalars['Boolean'];
   receiver: User;
   sender: User;
   title: Scalars['String'];
@@ -164,30 +172,44 @@ export type Mutation = {
   addOrder: Order;
   /** Add a product */
   addProduct: Product;
+  /** Delete a product variant */
+  addProductVariant: Product;
   /** Add a service */
-  addService: Service;
+  addService: User;
   /** Add item to Cart */
-  addToCart: Carts;
+  addToCart: Array<Cart>;
   /** Apply to an Order */
   applyOrder: Order;
   /** Checkout item to Cart */
-  checkout: Purchase;
+  checkout: Array<Cart>;
+  /** Edit an Order */
+  deleteOrder: Order;
   /** Delete a product */
   deleteProduct: Product;
+  /** Delete a product variant */
+  deleteProductVariant: Product;
+  /** Delete a service */
+  deleteService: User;
+  /** Edit a mail */
+  editMail: Array<Mail>;
   /** Edit an Order */
   editOrder: Order;
   /** Edit a product */
   editProduct: Product;
+  /** Edit a product variant */
+  editProductVariant: Product;
   /** Edit self */
   editSelf: User;
   /** Edit a service */
-  editService: Service;
+  editService: User;
   /** Empty items from Cart */
-  emptyCart: Carts;
+  emptyCart: Array<Cart>;
+  /** Follow a user */
+  follow: Scalars['Boolean'];
   /** Check if the user exist if not create the user */
   login: User;
   /** Remove item from Cart */
-  removeFromCart: Carts;
+  removeFromCart: Array<Cart>;
   /** Send a mail */
   sendMail: Mail;
 };
@@ -206,6 +228,12 @@ export type MutationAddProductArgs = {
 
 
 /** Mutation object */
+export type MutationAddProductVariantArgs = {
+  input: AddProductVariant;
+};
+
+
+/** Mutation object */
 export type MutationAddServiceArgs = {
   input: AddServiceInput;
 };
@@ -213,7 +241,8 @@ export type MutationAddServiceArgs = {
 
 /** Mutation object */
 export type MutationAddToCartArgs = {
-  id: Scalars['ID'];
+  productId: Scalars['ID'];
+  variantId: Scalars['ID'];
 };
 
 
@@ -224,8 +253,38 @@ export type MutationApplyOrderArgs = {
 
 
 /** Mutation object */
+export type MutationCheckoutArgs = {
+  sellerId?: InputMaybe<Scalars['ID']>;
+};
+
+
+/** Mutation object */
+export type MutationDeleteOrderArgs = {
+  id: Scalars['ID'];
+};
+
+
+/** Mutation object */
 export type MutationDeleteProductArgs = {
-  input: EditProductInput;
+  id: Scalars['ID'];
+};
+
+
+/** Mutation object */
+export type MutationDeleteProductVariantArgs = {
+  input: DeleteProductVariant;
+};
+
+
+/** Mutation object */
+export type MutationDeleteServiceArgs = {
+  id: Scalars['ID'];
+};
+
+
+/** Mutation object */
+export type MutationEditMailArgs = {
+  input: EditMailInput;
 };
 
 
@@ -242,6 +301,12 @@ export type MutationEditProductArgs = {
 
 
 /** Mutation object */
+export type MutationEditProductVariantArgs = {
+  input: EditProductVariant;
+};
+
+
+/** Mutation object */
 export type MutationEditSelfArgs = {
   input: EditSelfInput;
 };
@@ -254,8 +319,22 @@ export type MutationEditServiceArgs = {
 
 
 /** Mutation object */
-export type MutationRemoveFromCartArgs = {
+export type MutationEmptyCartArgs = {
+  sellerId?: InputMaybe<Scalars['ID']>;
+};
+
+
+/** Mutation object */
+export type MutationFollowArgs = {
+  follow: Scalars['Boolean'];
   id: Scalars['ID'];
+};
+
+
+/** Mutation object */
+export type MutationRemoveFromCartArgs = {
+  productId: Scalars['ID'];
+  variantId: Scalars['ID'];
 };
 
 
@@ -264,29 +343,56 @@ export type MutationSendMailArgs = {
   input: SendMailInput;
 };
 
+export type MyCommission = {
+  __typename?: 'MyCommission';
+  lost: Array<Order>;
+  pending: Array<Order>;
+  won: Array<Order>;
+};
+
+export type MyOrder = {
+  __typename?: 'MyOrder';
+  active: Array<Order>;
+  past: Array<Order>;
+};
+
 /** Order */
 export type Order = {
   __typename?: 'Order';
   applications: Array<User>;
+  artist?: Maybe<User>;
   bounty: Scalars['Float'];
   description: Scalars['String'];
   id: Scalars['ID'];
   image: Scalars['String'];
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
+  owner: User;
   tags: Array<Tag>;
 };
 
-export type OrderEdges = {
-  __typename?: 'OrderEdges';
+export type OrderEdge = {
+  __typename?: 'OrderEdge';
   cursor: Scalars['String'];
-  node: Array<Order>;
+  node: Order;
+};
+
+export type OrderFilter = {
+  maxBounty?: InputMaybe<Scalars['Float']>;
+  minBounty?: InputMaybe<Scalars['Float']>;
+  search?: InputMaybe<Scalars['String']>;
 };
 
 export type OrderPagination = {
   __typename?: 'OrderPagination';
-  edges: OrderEdges;
+  edges: Array<OrderEdge>;
   pageInfo: PageInfo;
+};
+
+export type OrderSort = {
+  bounty?: InputMaybe<SortEnum>;
+  createdDate?: InputMaybe<SortEnum>;
+  name?: InputMaybe<SortEnum>;
 };
 
 /** OtherFiltersEnum */
@@ -318,18 +424,20 @@ export type Product = {
   description: Scalars['String'];
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
+  minPrice: Scalars['Float'];
   name: Scalars['String'];
   numLikes: Scalars['Int'];
   subcategory: Subcategory;
+  tags: Array<Tag>;
   titleImage: Scalars['String'];
   variants: Array<ProductVariant>;
   vrm: Scalars['String'];
 };
 
-export type ProductEdges = {
-  __typename?: 'ProductEdges';
+export type ProductEdge = {
+  __typename?: 'ProductEdge';
   cursor: Scalars['String'];
-  node: Array<Product>;
+  node: Product;
 };
 
 export type ProductFilter = {
@@ -342,15 +450,21 @@ export type ProductFilter = {
 
 export type ProductPagination = {
   __typename?: 'ProductPagination';
-  edges: ProductEdges;
+  edges: Array<ProductEdge>;
   pageInfo: PageInfo;
+};
+
+export type ProductSort = {
+  createdDate?: InputMaybe<SortEnum>;
+  name?: InputMaybe<SortEnum>;
+  price?: InputMaybe<SortEnum>;
 };
 
 /** Product Variant */
 export type ProductVariant = {
   __typename?: 'ProductVariant';
-  fileName: Scalars['String'];
-  files: Array<Scalars['String']>;
+  file: Scalars['String'];
+  fileTypes: Array<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
   price: Scalars['Float'];
@@ -360,22 +474,31 @@ export type ProductVariant = {
 /** Purchase */
 export type Purchase = {
   __typename?: 'Purchase';
+  id: Scalars['ID'];
   items: Array<ProductVariant>;
   numItems: Scalars['Int'];
   placed: Scalars['DateTime'];
   seller: User;
+  sellerId: Scalars['ID'];
   totalAmount: Scalars['Float'];
+  variants: Array<Scalars['ID']>;
 };
 
 /** Query object */
 export type Query = {
   __typename?: 'Query';
   /** Get current Carts */
-  carts: Carts;
+  carts: Array<Cart>;
   /** Get Categories */
   categories: Array<Category>;
   /** Get Category */
   category: Category;
+  /** Get mail */
+  mail: Mail;
+  /** Get an Order by Id */
+  myCommissions: MyCommission;
+  /** Get myOrders by user */
+  myOrders: MyOrder;
   /** Get an Order by Id */
   order: Order;
   /** Get all Orders */
@@ -388,6 +511,8 @@ export type Query = {
   subcategory: Subcategory;
   /** Get a single user */
   user: User;
+  /** Get a single user by name */
+  userByName: User;
   /** Get all users */
   users: UserPagination;
 };
@@ -395,6 +520,12 @@ export type Query = {
 
 /** Query object */
 export type QueryCategoryArgs = {
+  id: Scalars['ID'];
+};
+
+
+/** Query object */
+export type QueryMailArgs = {
   id: Scalars['ID'];
 };
 
@@ -408,8 +539,9 @@ export type QueryOrderArgs = {
 /** Query object */
 export type QueryOrdersArgs = {
   cursor?: InputMaybe<Scalars['String']>;
-  filter?: InputMaybe<ProductFilter>;
+  filter?: InputMaybe<OrderFilter>;
   limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<OrderSort>;
 };
 
 
@@ -426,9 +558,17 @@ export type QueryUserArgs = {
 
 
 /** Query object */
+export type QueryUserByNameArgs = {
+  name: Scalars['String'];
+};
+
+
+/** Query object */
 export type QueryUsersArgs = {
   cursor?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<UserFilter>;
   limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<UserSort>;
 };
 
 export type SendMailInput = {
@@ -446,6 +586,14 @@ export type Service = {
   priceType: PriceEnum;
 };
 
+/** SortEnum */
+export enum SortEnum {
+  /** asc */
+  Asc = 'ASC',
+  /** desc */
+  Desc = 'DESC'
+}
+
 /** Category */
 export type Subcategory = {
   __typename?: 'Subcategory';
@@ -461,6 +609,7 @@ export type SubcategoryProductsArgs = {
   cursor?: InputMaybe<Scalars['String']>;
   filter?: InputMaybe<ProductFilter>;
   limit?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<ProductSort>;
 };
 
 export type Tag = {
@@ -492,25 +641,35 @@ export type User = {
   tags: Array<Tag>;
 };
 
-export type UserEdges = {
-  __typename?: 'UserEdges';
+export type UserEdge = {
+  __typename?: 'UserEdge';
   cursor: Scalars['String'];
-  node: Array<User>;
+  node: User;
+};
+
+export type UserFilter = {
+  search?: InputMaybe<Scalars['String']>;
 };
 
 export type UserPagination = {
   __typename?: 'UserPagination';
-  edges: UserEdges;
+  edges: Array<UserEdge>;
   pageInfo: PageInfo;
 };
 
-export type CartsFragmentFragment = { __typename?: 'Carts', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> }> };
+export type UserSort = {
+  name?: InputMaybe<SortEnum>;
+  numCompletedCommissions?: InputMaybe<SortEnum>;
+  numLikes?: InputMaybe<SortEnum>;
+};
 
-export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
+export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> };
+
+export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, isRead: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
-export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, description: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, files: Array<string>, fileName: string, name: string, price: number }> };
+export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, description: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, fileTypes: Array<string>, file: string, name: string, price: number }> };
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
@@ -528,7 +687,7 @@ export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Us
 export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type InboxQuery = { __typename?: 'Query', self: { __typename?: 'User', inbox: Array<{ __typename?: 'Mail', body: string, date: any, id: string, read: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } }> } };
+export type InboxQuery = { __typename?: 'Query', self: { __typename?: 'User', inbox: Array<{ __typename?: 'Mail', body: string, date: any, id: string, isRead: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } }> } };
 
 export type OutboxQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -540,26 +699,26 @@ export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SelfQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
 
-export const CartsFragmentFragmentDoc = gql`
-    fragment CartsFragment on Carts {
-  carts {
-    numItems
-    totalAmount
-    seller {
-      id
-      displayName
-      profileImageURI
-    }
-    items {
+export const CartFragmentFragmentDoc = gql`
+    fragment CartFragment on Cart {
+  numItems
+  totalAmount
+  seller {
+    id
+    displayName
+    profileImageURI
+  }
+  items {
+    id
+    name
+    price
+    product {
       id
       name
-      price
-      product {
-        id
-        name
-        titleImage
-      }
+      titleImage
     }
+    file
+    fileTypes
   }
 }
     `;
@@ -568,7 +727,7 @@ export const MailInboxFragmentFragmentDoc = gql`
   body
   date
   id
-  read
+  isRead
   title
   sender {
     id
@@ -612,8 +771,8 @@ export const ProductDetailFragmentFragmentDoc = gql`
   }
   variants {
     id
-    files
-    fileName
+    fileTypes
+    file
     name
     price
   }

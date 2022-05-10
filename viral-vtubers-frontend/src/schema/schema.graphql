@@ -46,19 +46,21 @@ type Service {
 type Product {
   description: String!
   id: ID!
+  images: [String!]!
+  minPrice: Float!
   name: String!
   numLikes: Int!
   titleImage: String!
   variants: [ProductVariant!]!
   vrm: String!
+  tags: [Tag!]!
   subcategory: Subcategory!
-  images: [String!]!
   artist: User!
 }
 "Product Variant"
 type ProductVariant {
-  fileName: String!
-  files: [String!]!
+  file: String!
+  fileTypes: [String!]!
   id: ID!
   name: String!
   price: Float!
@@ -69,24 +71,24 @@ type Subcategory {
   id: ID!
   name: String!
   category: Category!
-  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
+  products(filter: ProductFilter, sort: ProductSort, cursor: String, limit: Int): ProductPagination!
 }
 "Category"
 type Category {
   id: ID!
   name: String!
   subcategories: [Subcategory!]!
-  products(filter: ProductFilter, cursor: String, limit: Int): ProductPagination!
+  products(filter: ProductFilter, sort: ProductSort, cursor: String, limit: Int): ProductPagination!
 }
 ""
 type ProductPagination {
-  edges: ProductEdges!
+  edges: [ProductEdge!]!
   pageInfo: PageInfo!
 }
 ""
-type ProductEdges {
+type ProductEdge {
   cursor: String!
-  node: [Product!]!
+  node: Product!
 }
 ""
 type PageInfo {
@@ -99,7 +101,7 @@ type Mail {
   body: String!
   date: DateTime!
   id: ID!
-  read: Boolean!
+  isRead: Boolean!
   title: String!
   sender: User!
   receiver: User!
@@ -112,6 +114,8 @@ type Order {
   image: String!
   isDraft: Boolean!
   name: String!
+  owner: User!
+  artist: User
   tags: [Tag!]!
   applications: [User!]!
 }
@@ -124,36 +128,46 @@ type Cart {
 }
 "Purchase"
 type Purchase {
+  id: ID!
+  items: [ID!]!
   numItems: Int!
   placed: DateTime!
+  sellerId: ID!
   totalAmount: Float!
+  variants: [ID!]!
   seller: User!
   items: [ProductVariant!]!
 }
 ""
 type UserPagination {
-  edges: UserEdges!
+  edges: [UserEdge!]!
   pageInfo: PageInfo!
 }
 ""
-type UserEdges {
+type UserEdge {
   cursor: String!
-  node: [User!]!
+  node: User!
 }
 ""
 type OrderPagination {
-  edges: OrderEdges!
+  edges: [OrderEdge!]!
   pageInfo: PageInfo!
 }
 ""
-type OrderEdges {
+type OrderEdge {
   cursor: String!
-  node: [Order!]!
+  node: Order!
 }
 ""
-type Carts {
-  carts: [Cart!]!
-  numItems: Int!
+type MyOrder {
+  active: [Order!]!
+  past: [Order!]!
+}
+""
+type MyCommission {
+  lost: [Order!]!
+  pending: [Order!]!
+  won: [Order!]!
 }
 "Query object"
 type Query {
@@ -161,8 +175,12 @@ type Query {
   self: User!
   "Get a single user"
   user(id: ID!): User!
+  "Get a single user by name"
+  userByName(name: String!): User!
   "Get all users"
-  users(cursor: String, limit: Int): UserPagination!
+  users(filter: UserFilter, sort: UserSort, cursor: String, limit: Int): UserPagination!
+  "Get mail"
+  mail(id: ID!): Mail!
   "Get Categories"
   categories: [Category!]!
   "Get Category"
@@ -170,11 +188,15 @@ type Query {
   "Get Subcategory"
   subcategory(id: ID!): Subcategory!
   "Get all Orders"
-  orders(filter: ProductFilter, cursor: String, limit: Int): OrderPagination!
+  orders(filter: OrderFilter, sort: OrderSort, cursor: String, limit: Int): OrderPagination!
   "Get an Order by Id"
   order(id: ID!): Order!
+  "Get myOrders by user"
+  myOrders: MyOrder!
+  "Get an Order by Id"
+  myCommissions: MyCommission!
   "Get current Carts"
-  carts: Carts!
+  carts: [Cart!]!
   "Get past Purchases"
   purchases: [Purchase!]!
 }
@@ -185,31 +207,45 @@ type Mutation {
   "Edit self"
   editSelf(input: EditSelfInput!): User!
   "Add a service"
-  addService(input: AddServiceInput!): Service!
+  addService(input: AddServiceInput!): User!
   "Edit a service"
-  editService(input: EditServiceInput!): Service!
+  editService(input: EditServiceInput!): User!
+  "Delete a service"
+  deleteService(id: ID!): User!
   "Send a mail"
   sendMail(input: SendMailInput!): Mail!
+  "Edit a mail"
+  editMail(input: EditMailInput!): [Mail!]!
+  "Follow a user"
+  follow(id: ID!, follow: Boolean!): Boolean!
   "Add a product"
   addProduct(input: AddProductInput!): Product!
   "Edit a product"
   editProduct(input: EditProductInput!): Product!
   "Delete a product"
-  deleteProduct(input: EditProductInput!): Product!
+  deleteProduct(id: ID!): Product!
+  "Delete a product variant"
+  addProductVariant(input: AddProductVariant!): Product!
+  "Edit a product variant"
+  editProductVariant(input: EditProductVariant!): Product!
+  "Delete a product variant"
+  deleteProductVariant(input: DeleteProductVariant!): Product!
   "Add an Order"
   addOrder(input: AddOrderInput!): Order!
   "Edit an Order"
   editOrder(input: EditOrderInput!): Order!
+  "Edit an Order"
+  deleteOrder(id: ID!): Order!
   "Apply to an Order"
   applyOrder(id: ID!): Order!
   "Add item to Cart"
-  addToCart(id: ID!): Carts!
+  addToCart(productId: ID!, variantId: ID!): [Cart!]!
   "Remove item from Cart"
-  removeFromCart(id: ID!): Carts!
+  removeFromCart(productId: ID!, variantId: ID!): [Cart!]!
   "Empty items from Cart"
-  emptyCart: Carts!
+  emptyCart(sellerId: ID): [Cart!]!
   "Checkout item to Cart"
-  checkout: Purchase!
+  checkout(sellerId: ID): [Cart!]!
 }
 "PriceType"
 enum PriceEnum {
@@ -233,6 +269,13 @@ enum OtherFiltersEnum {
   "anime"
   ANIME
 }
+"SortEnum"
+enum SortEnum {
+  "asc"
+  ASC
+  "desc"
+  DESC
+}
 ""
 input ProductFilter {
   ageRestriction: AgeRestrictionEnum
@@ -240,6 +283,34 @@ input ProductFilter {
   minPrice: Float
   other: OtherFiltersEnum
   search: String
+}
+""
+input ProductSort {
+  createdDate: SortEnum
+  name: SortEnum
+  price: SortEnum
+}
+""
+input UserFilter {
+  search: String
+}
+""
+input UserSort {
+  name: SortEnum
+  numCompletedCommissions: SortEnum
+  numLikes: SortEnum
+}
+""
+input OrderFilter {
+  maxBounty: Float
+  minBounty: Float
+  search: String
+}
+""
+input OrderSort {
+  bounty: SortEnum
+  createdDate: SortEnum
+  name: SortEnum
 }
 ""
 input EditSelfInput {
@@ -271,57 +342,70 @@ input SendMailInput {
   title: String!
 }
 ""
-input AddProductInput {
-  files: [String!]!
+input EditMailInput {
   id: ID!
+  isRead: Boolean
+}
+""
+input AddProductInput {
+  artist: ID!
+  description: String!
   images: [String!]!
+  isMature: Boolean!
   name: String!
   numLikes: Int!
-  price: Float!
-  shortDescription: String!
   subcategoryId: ID!
+  tags: [ID!]!
   titleImage: String!
-  variants: [AddProductVariant!]!
   vrm: String!
 }
 ""
-input AddProductVariant {
-  files: [String!]!
-  id: ID!
-  name: String!
-  price: Float!
-}
-""
 input EditProductInput {
+  description: String
   id: ID!
   images: [String!]
   name: String
   numLikes: Int
-  shortDescription: String
   subcategoryId: ID
+  tags: [ID!]
   titleImage: String
-  variants: [EditProductVariant!]
   vrm: String
 }
 ""
+input AddProductVariant {
+  file: String!
+  fileTypes: [String!]!
+  name: String!
+  price: Float!
+  productId: ID!
+}
+""
 input EditProductVariant {
-  files: [String!]
-  id: ID
+  file: String
+  fileTypes: [String!]
+  id: ID!
   name: String
   price: Float
+  productId: ID!
+}
+""
+input DeleteProductVariant {
+  id: ID!
+  productId: ID!
 }
 ""
 input AddOrderInput {
   bounty: Float!
   description: String!
-  draft: Boolean!
   id: ID!
   image: String!
+  isDraft: Boolean!
   name: String!
   tagIds: [String!]!
 }
 ""
 input EditOrderInput {
+  artistId: ID
   bounty: Float
   description: String
   id: ID!

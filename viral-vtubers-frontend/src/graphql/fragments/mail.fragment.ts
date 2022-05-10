@@ -5,7 +5,7 @@ export const MailInboxFragment = gql`
     body
     date
     id
-    read
+    isRead
     title
     sender {
       id

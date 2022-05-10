@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartsFragmentFragment } from 'src/schema/type';
+import { CartFragmentFragment } from 'src/schema/type';
 
 @Component({
   selector: 'app-cart',
@@ -7,7 +7,7 @@ import { CartsFragmentFragment } from 'src/schema/type';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  carts: CartsFragmentFragment;
+  carts: { carts: CartFragmentFragment[] };
   constructor() {
     this.carts = {
       carts: [
@@ -30,6 +30,8 @@ export class CartComponent implements OnInit {
                 name: 'test product',
                 titleImage: 'https://picsum.photos/200',
               },
+              file: 'test.vrm',
+              fileTypes: ['.vrm'],
             },
           ],
         },
@@ -52,6 +54,8 @@ export class CartComponent implements OnInit {
                 name: 'test product 2',
                 titleImage: 'https://picsum.photos/200',
               },
+              file: 'test.vrm',
+              fileTypes: ['.vrm'],
             },
             {
               id: 'item3',
@@ -62,6 +66,8 @@ export class CartComponent implements OnInit {
                 name: 'test product 3',
                 titleImage: 'https://picsum.photos/200',
               },
+              file: 'test.vrm',
+              fileTypes: ['.vrm'],
             },
           ],
         },

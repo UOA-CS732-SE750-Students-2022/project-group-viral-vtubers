@@ -54,15 +54,15 @@ export class ProductDetailsComponent implements OnInit {
       variants: [
         {
           id: 'variant-1',
-          files: ['.vrm'],
-          fileName: 'kawaii_waifu.vrm',
+          fileTypes: ['.vrm'],
+          file: 'kawaii_waifu.vrm',
           name: 'test-model',
           price: 30.0,
         },
         {
           id: 'variant-2',
-          files: ['.vrm', '.vroid'],
-          fileName: 'kawaii_waifu.zip',
+          fileTypes: ['.vrm', '.vroid'],
+          file: 'kawaii_waifu.zip',
           name: 'test-model-final',
           price: 40.0,
         },
