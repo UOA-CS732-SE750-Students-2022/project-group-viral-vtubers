@@ -5,7 +5,8 @@
       <div class="product-info">
         <h4>{{ product.name }}</h4>
         <p>
-          <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0 Likes
+          <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+          {{ product.numLikes }} Likes
         </p>
       </div>
       <p>${{ product.minPrice | number: "1.2-2" }}</p>
