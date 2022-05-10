@@ -16,7 +16,7 @@
   flex-direction: column;
   align-items: flex-start;
 
-  > button {
+  > .button-creator {
     height: 40px;
 
     text-decoration: none;
@@ -91,6 +91,33 @@
 
     .active {
       background-color: $color-primary-light;
+    }
+  }
+
+  .button-logout {
+    margin-bottom: 30px;
+
+    color: red;
+    font-size: $font-size-body-2;
+    text-transform: uppercase;
+    text-align: center;
+
+    width: 100%;
+
+    font-family: $font-family-poppins;
+    font-size: $font-size-body-2;
+    font-weight: 500;
+
+    background: none;
+    border: none;
+
+    color: $color-secondary;
+
+    cursor: pointer;
+    transition: $button-hover-animation;
+
+    &:hover {
+      transform: scale(1.05);
     }
   }
 
