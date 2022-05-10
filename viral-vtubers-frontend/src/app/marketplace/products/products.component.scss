@@ -10,6 +10,7 @@
 
 .products-content {
   width: 100%;
+  contain: layout inline-size;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -87,5 +88,17 @@
         overflow: hidden;
       }
     }
+  }
+}
+
+@media (min-width: 1251px) {
+  .products-content {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1801px) {
+  .products-content {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
