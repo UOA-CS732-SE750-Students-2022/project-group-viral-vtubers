@@ -20,19 +20,6 @@ export class AccountComponent implements OnInit {
 
     this.following = [
       {
-        id: 'user0',
-        displayName: 'Shanhara_K',
-        status: 'Developer | Designer | Artist | Musician | Writer',
-        profileImageURI:
-          'https://cutewallpaper.org/26/beautiful-anime-wallpaper-square/1037312739.jpg',
-      },
-      {
-        id: 'user1',
-        displayName: 'HiruNya',
-        status: 'I like feet and stuff',
-        profileImageURI: 'https://www.1999.co.jp/itbig60/10607393.jpg',
-      },
-      {
         id: 'user2',
         displayName: 'pvtsnowman',
         status: 'Hello world I am a snowman',
@@ -52,6 +39,19 @@ export class AccountComponent implements OnInit {
         status: 'I am a duck and I go quack... sometimes',
         profileImageURI:
           'https://cdn.drawception.com/drawings/636765/PaXyd7mlXQ.png',
+      },
+      {
+        id: 'user0',
+        displayName: 'Shanhara_K',
+        status: 'Developer | Designer | Artist | Musician | Writer',
+        profileImageURI:
+          'https://cutewallpaper.org/26/beautiful-anime-wallpaper-square/1037312739.jpg',
+      },
+      {
+        id: 'user1',
+        displayName: 'HiruNya',
+        status: 'I like feet and stuff',
+        profileImageURI: 'https://www.1999.co.jp/itbig60/10607393.jpg',
       },
     ];
 

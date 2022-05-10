@@ -4,11 +4,11 @@
 <div class="account-info-container">
   <div class="info">
     <h6>Name</h6>
-    <p>NozomiSenpai</p>
+    <p>{{ name }}</p>
   </div>
   <div class="info">
     <h6>Email</h6>
-    <p>nozomi.senpai@gmail.com</p>
+    <p>{{ email }}</p>
   </div>
 </div>
 
@@ -17,15 +17,12 @@
     <h2>Followers</h2>
     <hr />
     <div class="list">
-      <div
-        *ngFor="let i of [0, 1, 2, 4, 5, 6, 7, 8, 9, 2, 34, 5, 32, 4, 52, 2]"
-        class="list-item"
-      >
-        <img src="https://picsum.photos/100/100" />
+      <div *ngFor="let person of followers" class="list-item">
+        <img src="{{ person.profileImageURI }}" />
 
         <div class="person-info">
-          <h6>NozomiSenpai</h6>
-          <p>Dancing in the rain~</p>
+          <h6>{{ person.displayName }}</h6>
+          <p>{{ person.status }}</p>
         </div>
       </div>
     </div>
@@ -34,11 +31,11 @@
     <h2>Following</h2>
     <hr />
     <div class="list">
-      <div *ngFor="let i of [0, 1, 2]" class="list-item">
-        <img src="https://picsum.photos/100/100" />
+      <div *ngFor="let person of following" class="list-item">
+        <img src="{{ person.profileImageURI }}" />
         <div class="person-info">
-          <h6>NozomiSenpai</h6>
-          <p>Dancing in the rain~</p>
+          <h6>{{ person.displayName }}</h6>
+          <p>{{ person.status }}</p>
         </div>
       </div>
     </div>
