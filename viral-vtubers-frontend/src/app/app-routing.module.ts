@@ -65,7 +65,7 @@ export const routes: Routes = [
   {
     path: 'feed',
     component: ActivityFeedComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'signin',
