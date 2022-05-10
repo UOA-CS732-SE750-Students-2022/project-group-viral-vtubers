@@ -1,1 +1,14 @@
-<p>products works!</p>
+<div class="products-content">
+  <div *ngFor="let product of products" class="product-item">
+    <img src="{{ product.titleImage }}" alt="waifu" />
+    <div>
+      <div class="product-info">
+        <h4>{{ product.name }}</h4>
+        <p>
+          <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0 Likes
+        </p>
+      </div>
+      <p>${{ product.minPrice | number: "1.2-2" }}</p>
+    </div>
+  </div>
+</div>
