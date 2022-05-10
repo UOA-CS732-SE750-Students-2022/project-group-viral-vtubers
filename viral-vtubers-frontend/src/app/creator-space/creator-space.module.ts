@@ -9,6 +9,7 @@ import { CreatorSpaceComponent } from './creator-space.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageCommissionsComponent } from './manage-commissions/manage-commissions.component';
 import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
+import { SaleHistoryComponent } from './sale-history/sale-history.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
         path: 'commissions',
         component: ManageCommissionsComponent,
       },
+      {
+        path: 'sale-history',
+        component: SaleHistoryComponent,
+      },
     ],
   },
 ];
@@ -42,6 +47,7 @@ export const routes: Routes = [
     ManageUploadsComponent,
     ManageCommissionsComponent,
     DashboardComponent,
+    SaleHistoryComponent,
   ],
   imports: [
     CommonModule,
