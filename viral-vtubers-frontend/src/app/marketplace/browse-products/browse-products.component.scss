@@ -10,14 +10,12 @@
 
 .products-content {
   width: 100%;
-  contain: layout inline-size;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: flex-start;
 
-  column-gap: 2%;
-  row-gap: 20px;
+  column-gap: 25px;
 
   .product-item {
     border: solid 1px $color-grey-light;

@@ -3,10 +3,10 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
+  templateUrl: './browse-products.component.html',
+  styleUrls: ['./browse-products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class BrowseProductsComponent implements OnInit {
   @Input()
   public products: Array<ProductBlurbFragmentFragment> = [
     {
