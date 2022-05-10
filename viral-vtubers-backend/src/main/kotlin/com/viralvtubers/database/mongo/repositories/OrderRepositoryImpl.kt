@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import org.bson.conversions.Bson
 import org.litote.kmongo.Id
 import org.litote.kmongo.coroutine.CoroutineCollection
+import org.litote.kmongo.descending
 import org.litote.kmongo.eq
 
 fun MongoDatabase.asOrderRepository(): OrderRepository =
@@ -25,7 +26,8 @@ fun MongoDatabase.asOrderRepository(): OrderRepository =
         }
 
         override suspend fun getOrderByUser(userId: Id<User>): Flow<Order> {
-            return col.find(Order::ownerId eq userId).toFlow()
+            return col.find(Order::ownerId eq userId)
+                .sort(descending(Order::createdDate)).toFlow()
         }
     }
 

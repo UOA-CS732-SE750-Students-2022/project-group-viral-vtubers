@@ -206,6 +206,8 @@ export type Mutation = {
   emptyCart: Array<Cart>;
   /** Follow a user */
   follow: Scalars['Boolean'];
+  /** Like a product */
+  likeProduct: Product;
   /** Check if the user exist if not create the user */
   login: User;
   /** Remove item from Cart */
@@ -332,6 +334,13 @@ export type MutationFollowArgs = {
 
 
 /** Mutation object */
+export type MutationLikeProductArgs = {
+  id: Scalars['ID'];
+  like: Scalars['Boolean'];
+};
+
+
+/** Mutation object */
 export type MutationRemoveFromCartArgs = {
   productId: Scalars['ID'];
   variantId: Scalars['ID'];
@@ -424,6 +433,7 @@ export type Product = {
   description: Scalars['String'];
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
+  isLiked: Scalars['Boolean'];
   minPrice: Scalars['Float'];
   name: Scalars['String'];
   numLikes: Scalars['Int'];
@@ -631,6 +641,7 @@ export type User = {
   id: Scalars['ID'];
   inbox: Array<Mail>;
   isFollowing: Scalars['Boolean'];
+  likedProduct: Array<Product>;
   numCompletedCommissions: Scalars['Int'];
   numLikes: Scalars['Int'];
   products: Array<Product>;

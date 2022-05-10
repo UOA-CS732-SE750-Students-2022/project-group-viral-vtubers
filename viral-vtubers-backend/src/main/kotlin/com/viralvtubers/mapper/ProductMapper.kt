@@ -16,7 +16,6 @@ fun DataProduct.map() = GraphQLProduct(
     titleImage = titleImage,
     images = images,
     vrm = vrm,
-    numLikes = numLikes,
     variants = variants.map { it.map() },
     subcategoryId = subcategory.map(),
     artistId = artistId.map(),

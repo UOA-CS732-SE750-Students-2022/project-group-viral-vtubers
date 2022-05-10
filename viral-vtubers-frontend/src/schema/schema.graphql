@@ -15,24 +15,18 @@ type User {
   email: String!
   id: ID!
   numCompletedCommissions: Int!
-  numLikes: Int!
   profileImageURI: String!
+  services: [Service!]!
   status: String!
   isFollowing: Boolean!
   tags: [Tag!]!
-  services: [Service!]!
   products: [Product!]!
   inbox: [Mail!]!
   sent: [Mail!]!
   following: [User!]!
   followers: [User!]!
-}
-""
-type Tag {
-  backgroundColor: String!
-  color: String!
-  id: ID!
-  name: String!
+  numLikes: Int!
+  likedProduct: [Product!]!
 }
 ""
 type Service {
@@ -42,6 +36,13 @@ type Service {
   price: Float!
   priceType: PriceEnum!
 }
+""
+type Tag {
+  backgroundColor: String!
+  color: String!
+  id: ID!
+  name: String!
+}
 "Product"
 type Product {
   description: String!
@@ -49,13 +50,14 @@ type Product {
   images: [String!]!
   minPrice: Float!
   name: String!
-  numLikes: Int!
   titleImage: String!
   variants: [ProductVariant!]!
   vrm: String!
   tags: [Tag!]!
   subcategory: Subcategory!
   artist: User!
+  isLiked: Boolean!
+  numLikes: Int!
 }
 "Product Variant"
 type ProductVariant {
@@ -230,6 +232,8 @@ type Mutation {
   editProductVariant(input: EditProductVariant!): Product!
   "Delete a product variant"
   deleteProductVariant(input: DeleteProductVariant!): Product!
+  "Like a product"
+  likeProduct(id: ID!, like: Boolean!): Product!
   "Add an Order"
   addOrder(input: AddOrderInput!): Order!
   "Edit an Order"

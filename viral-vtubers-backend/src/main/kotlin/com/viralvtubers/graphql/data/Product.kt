@@ -9,9 +9,10 @@ data class Product(
     val images: List<String>,
     val vrm: String,
 //  val artist: User,
-    val numLikes: Int,
+//  val numLikes: Int,
     val variants: List<ProductVariant>,
     val minPrice: Double,
+//  val isLike: Boolean,
 
 //  ignored fields
     val subcategoryId: ID,

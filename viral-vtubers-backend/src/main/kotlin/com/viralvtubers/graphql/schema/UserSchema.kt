@@ -4,7 +4,6 @@ import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
-import com.viralvtubers.graphql.stubService
 import com.viralvtubers.service.*
 import io.ktor.server.auth.jwt.*
 
@@ -33,16 +32,6 @@ fun SchemaBuilder.userSchema(
             resolver { user ->
                 description = "Get user tags"
                 tagService.getTagsByIds(user.tags)
-            }
-        }
-
-        property<List<Service>>("services") {
-            resolver { user ->
-                description = "Get user services"
-                listOf(
-                    stubService("fake_service_0"),
-                    stubService("fake_service_1")
-                )
             }
         }
 
@@ -78,6 +67,20 @@ fun SchemaBuilder.userSchema(
             resolver { user ->
                 description = "Get users following this user"
                 userService.getFollowers(user.id)
+            }
+        }
+
+        property<Int>("numLikes") {
+            resolver { user ->
+                description = "Get numLikes of this user"
+                productService.getNumLikesByUser(user.id)
+            }
+        }
+
+        property<List<Product>>("likedProduct") {
+            resolver { user ->
+                description = "Get products this user liked"
+                productService.getLikedProduct(user.id)
             }
         }
     }

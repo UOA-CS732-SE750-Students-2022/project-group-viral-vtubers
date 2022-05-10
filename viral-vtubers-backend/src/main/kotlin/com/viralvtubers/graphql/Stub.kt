@@ -11,8 +11,8 @@ val stubUser = { id: String ->
         "Fake bio",
         "Fake status",
         1,
-        1,
         "https://picsum.photos/200",
+        ArrayList(),
         ArrayList()
     )
 }
@@ -59,7 +59,6 @@ val stubProduct = { id: String ->
         titleImage = "fakeImage.png",
         images = listOf("fakeImage.png"),
         vrm = "fakeVRM.vrm",
-        numLikes = 12,
         variants = listOf(
             ProductVariant(
                 id = ID("productVariant1"),

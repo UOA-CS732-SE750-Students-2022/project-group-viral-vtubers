@@ -43,4 +43,16 @@ interface ProductService : KoinComponent {
     suspend fun editProductVariant(input: EditProductVariant): Product
 
     suspend fun deleteProductVariant(input: DeleteProductVariant): Product
+
+    suspend fun checkIsLiked(productId: ID, userId: ID): Boolean
+
+    suspend fun getNumLikes(productId: ID): Int
+
+    suspend fun getNumLikesByUser(userId: ID): Int
+
+    suspend fun getLikedProduct(userId: ID): List<Product>
+
+    suspend fun likeProduct(productId: ID, userId: ID): Product
+
+    suspend fun unlikeProduct(productId: ID, userId: ID): Product
 }
