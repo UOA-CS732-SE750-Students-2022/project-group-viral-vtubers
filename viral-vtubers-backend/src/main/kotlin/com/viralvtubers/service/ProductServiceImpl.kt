@@ -1,6 +1,8 @@
 package com.viralvtubers.service
 
+import com.viralvtubers.database.model.Like
 import com.viralvtubers.database.model.ProductVariant
+import com.viralvtubers.database.mongo.repositories.LikeRepository
 import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.database.mongo.repositories.ProductRepository
 import com.viralvtubers.graphql.data.*
@@ -14,7 +16,8 @@ import com.viralvtubers.database.model.Product as DataProduct
 
 
 class ProductServiceImpl(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val likeRepository: LikeRepository
 ) : ProductService {
     override suspend fun getProductId(productId: ID): Product {
         return productRepository.getById(productId.map())?.map()
@@ -197,7 +200,7 @@ class ProductServiceImpl(
             subcategory = input.subcategoryId.map(),
             images = input.images,
             vrm = input.vrm,
-            numLikes = input.numLikes,
+            numLikes = 0,
             variants = ArrayList(),
             isMature = input.isMature,
             minPrice = 0.0,
@@ -221,7 +224,7 @@ class ProductServiceImpl(
             subcategory = input.subcategoryId?.map() ?: product.subcategory,
             images = input.images ?: product.images,
             vrm = input.vrm ?: product.vrm,
-            numLikes = input.numLikes ?: product.numLikes,
+            numLikes = product.numLikes,
             variants = ArrayList(),
             isMature = product.isMature,
             minPrice = product.minPrice,
@@ -295,5 +298,61 @@ class ProductServiceImpl(
 
         productRepository.update(update)?.map()
             ?: throw error("product not found")
+    }
+
+    override suspend fun checkIsLiked(productId: ID, userId: ID): Boolean {
+        return likeRepository.findByUserAndProduct(
+            userId.map(),
+            productId.map()
+        ) != null
+    }
+
+    override suspend fun getNumLikes(productId: ID): Int {
+        return likeRepository.findByProduct(productId.map()).count()
+    }
+
+    override suspend fun getNumLikesByUser(userId: ID): Int {
+        return likeRepository.findByUser(userId.map()).count()
+    }
+
+    override suspend fun getLikedProduct(userId: ID): List<Product> {
+        val productIds = likeRepository.findByUser(userId.map()).toList()
+            .map { it.productId }
+        return productRepository.getByIds(productIds).toList().map { it.map() }
+    }
+
+    override suspend fun likeProduct(productId: ID, userId: ID): Product {
+        val product = getProductId(productId)
+        likeRepository.add(
+            Like(
+                currentId = userId.map(),
+                productId = productId.map(),
+                artistId = product.artistId.map(),
+                createdDate = Date(),
+            )
+        )
+
+        val productData = productRepository.getById(productId.map())
+            ?: throw error("product not found")
+        val update = productData.copy(numLikes = productData.numLikes + 1)
+        return productRepository.update(update)?.map()
+            ?: throw error("product not found")
+
+        return getProductId(productId)
+    }
+
+    override suspend fun unlikeProduct(productId: ID, userId: ID): Product {
+        val like =
+            likeRepository.findByUserAndProduct(userId.map(), productId.map())
+                ?: throw error("like not found")
+        likeRepository.delete(like._id)
+
+        val productData = productRepository.getById(productId.map())
+            ?: throw error("product not found")
+        val update = productData.copy(numLikes = productData.numLikes - 1)
+        return productRepository.update(update)?.map()
+            ?: throw error("product not found")
+
+        return getProductId(productId)
     }
 }

@@ -24,8 +24,8 @@ export const ProductDetailFragment = gql`
     }
     variants {
       id
-      files
-      fileName
+      fileTypes
+      file
       name
       price
     }

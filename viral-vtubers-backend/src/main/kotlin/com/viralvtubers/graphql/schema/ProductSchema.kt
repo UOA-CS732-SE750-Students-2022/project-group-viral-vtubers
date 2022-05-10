@@ -1,20 +1,17 @@
 package com.viralvtubers.graphql.schema
 
+import com.apurebase.kgraphql.Context
 import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
-import com.viralvtubers.service.CategoryService
-import com.viralvtubers.service.ProductService
-import com.viralvtubers.service.TagService
-import com.viralvtubers.service.UserService
-import kotlinx.coroutines.FlowPreview
+import com.viralvtubers.service.*
 
-@OptIn(FlowPreview::class)
 fun SchemaBuilder.productSchema(
     productService: ProductService,
     categoryService: CategoryService,
     userService: UserService,
     tagService: TagService,
+    authService: AuthService,
 ) {
     type<Product> {
         description = "Product"
@@ -41,6 +38,21 @@ fun SchemaBuilder.productSchema(
             resolver { product ->
                 description = "Get the artist who created the Product"
                 userService.getUserId(product.artistId)
+            }
+        }
+
+        property<Boolean>("isLiked") {
+            resolver { product, ctx: Context ->
+                description = "Get the artist who created the Product"
+                val userId = authService.getUserId(ctx)
+                productService.checkIsLiked(product.id, userId)
+            }
+        }
+
+        property<Int>("numLikes") {
+            resolver { product ->
+                description = "Get the artist who created the Product"
+                productService.getNumLikes(product.id)
             }
         }
     }
@@ -168,6 +180,19 @@ fun SchemaBuilder.productSchema(
         description = "Delete a product variant"
         resolver { input: DeleteProductVariant ->
             productService.deleteProductVariant(input)
+        }
+    }
+
+
+    mutation("likeProduct") {
+        description = "Like a product"
+        resolver { ctx: Context, id: ID, like: Boolean ->
+            val userId = authService.getUserId(ctx)
+            if (like) {
+                productService.likeProduct(id, userId)
+            } else {
+                productService.unlikeProduct(id, userId)
+            }
         }
     }
 }

@@ -12,7 +12,6 @@ data class User(
     val email: String,
     val bio: String,
     val numCompletedCommissions: Int,
-    val numLikes: Int,
     val status: String,
     val profileImageURI: String,
     val tags: List<Id<Tag>>,

@@ -73,23 +73,18 @@ class UserServiceImpl(
     }
 
     private fun getSortBson(sort: UserSort?): Bson {
-        sort ?: return descending(DataUser::numLikes)
+        sort ?: return descending(DataUser::displayName)
 
         sort.name?.let {
             return if (it == SortEnum.ASC) ascending(DataUser::displayName)
             else descending(DataUser::displayName)
         }
 
-        sort.numLikes?.let {
-            return if (it == SortEnum.ASC) ascending(DataUser::numLikes)
-            else descending(DataUser::numLikes)
-        }
-
         sort.numCompletedCommissions?.let {
             return if (it == SortEnum.ASC) ascending(DataUser::numCompletedCommissions)
             else descending(DataUser::numCompletedCommissions)
         }
-        return descending(DataUser::numLikes)
+        return descending(DataUser::displayName)
     }
 
     private fun getFilterBson(
@@ -121,7 +116,6 @@ class UserServiceImpl(
             email = input.email,
             bio = input.bio,
             numCompletedCommissions = input.numCompletedCommissions,
-            numLikes = input.numLikes,
             status = input.status,
             profileImageURI = input.profileImageURI,
             tags = input.tags.map { it.map() },
@@ -143,7 +137,6 @@ class UserServiceImpl(
             bio = input.bio ?: user.bio,
             numCompletedCommissions = input.numCompletedCommissions
                 ?: user.numCompletedCommissions,
-            numLikes = input.numLikes ?: user.numLikes,
             status = input.status ?: user.status,
             profileImageURI = input.status ?: user.status,
             tags = input.tags?.map { it.map() }

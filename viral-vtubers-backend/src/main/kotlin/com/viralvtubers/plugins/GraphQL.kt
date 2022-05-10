@@ -17,7 +17,10 @@ fun Application.configureGraphQL() {
         database.asCategoryRepository(),
         database.asSubcategoryRepository()
     )
-    val productService = ProductServiceImpl(database.asProductRepository())
+    val productService = ProductServiceImpl(
+        database.asProductRepository(),
+        database.asLikeRepository()
+    )
     val userService = UserServiceImpl(
         database.asUserRepository(),
         database.asFollowRepository(),
@@ -68,6 +71,7 @@ fun Application.configureGraphQL() {
                 productService = productService,
                 userService = userService,
                 tagService = tagService,
+                authService = authService,
             )
             orderSchema(
                 orderService = orderService,
