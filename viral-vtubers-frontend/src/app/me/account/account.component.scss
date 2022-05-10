@@ -1,0 +1,145 @@
+@import "../../../variables";
+
+:host {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-right: 40px;
+}
+
+h1 {
+  font-size: $font-size-h6;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h1 + hr {
+  border: solid 1px $color-primary;
+  margin: 0;
+  width: 50px;
+}
+
+.account-info-container {
+  border-top: solid 1px $color-grey-light;
+  border-bottom: solid 1px $color-grey-light;
+
+  padding: 34px 0;
+  margin: 50px 0;
+  width: 700px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+
+  .info {
+    margin-left: 10px;
+
+    h6 {
+      font-size: $font-size-body-2;
+      font-weight: 400;
+
+      margin: 0;
+    }
+
+    p {
+      font-size: $font-size-body-3;
+      color: $color-grey-dark;
+
+      margin: 0;
+      margin-top: 5px;
+    }
+  }
+}
+
+.follow-info-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+
+  flex: 1;
+  margin-bottom: 40px;
+
+  column-gap: 50px;
+
+  overflow: auto;
+
+  h2 {
+    font-size: $font-size-body-1;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  h2 + hr {
+    border: solid 1px $color-primary;
+    width: 30px;
+    margin: 0;
+  }
+
+  .follow-wrapper {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list {
+    margin-left: 10px;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+    flex: 1;
+    overflow-y: auto;
+
+    .list-item {
+      display: flex;
+      flex-direction: row;
+
+      cursor: pointer;
+
+      &:hover {
+        h6 {
+          color: $color-primary;
+        }
+      }
+
+      > img {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 100%;
+        border: solid 1px $color-grey-light;
+
+        margin-right: 15px;
+      }
+
+      .person-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        h6 {
+          margin: 0;
+
+          font-weight: 400;
+          font-size: $font-size-body-2;
+        }
+
+        p {
+          margin: 0;
+
+          font-size: $font-size-body-3;
+
+          color: $color-grey-dark;
+        }
+      }
+    }
+  }
+}

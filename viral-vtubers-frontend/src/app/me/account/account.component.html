@@ -1,1 +1,43 @@
-<p>account works!</p>
+<h1>Account</h1>
+<hr />
+
+<div class="account-info-container">
+  <div class="info">
+    <h6>Name</h6>
+    <p>{{ name }}</p>
+  </div>
+  <div class="info">
+    <h6>Email</h6>
+    <p>{{ email }}</p>
+  </div>
+</div>
+
+<div class="follow-info-container">
+  <div class="follow-wrapper">
+    <h2>Followers</h2>
+    <hr />
+    <div class="list">
+      <div *ngFor="let person of followers" class="list-item">
+        <img src="{{ person.profileImageURI }}" />
+
+        <div class="person-info">
+          <h6>{{ person.displayName }}</h6>
+          <p>{{ person.status }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="follow-wrapper">
+    <h2>Following</h2>
+    <hr />
+    <div class="list">
+      <div *ngFor="let person of following" class="list-item">
+        <img src="{{ person.profileImageURI }}" />
+        <div class="person-info">
+          <h6>{{ person.displayName }}</h6>
+          <p>{{ person.status }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

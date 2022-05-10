@@ -518,6 +518,8 @@ export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio
 
 export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
 
+export type UserBlurbFragmentFragment = { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string };
+
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -673,6 +675,14 @@ export const ArtistFragmentFragmentDoc = gql`
     id
     name
   }
+}
+    `;
+export const UserBlurbFragmentFragmentDoc = gql`
+    fragment UserBlurbFragment on User {
+  id
+  displayName
+  status
+  profileImageURI
 }
     `;
 export const LoginDocument = gql`

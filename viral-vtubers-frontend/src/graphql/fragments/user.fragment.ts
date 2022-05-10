@@ -60,3 +60,12 @@ export const ArtistFragment = gql`
     }
   }
 `;
+
+export const UserBlurbFragment = gql`
+  fragment UserBlurbFragment on User {
+    id
+    displayName
+    status
+    profileImageURI
+  }
+`;

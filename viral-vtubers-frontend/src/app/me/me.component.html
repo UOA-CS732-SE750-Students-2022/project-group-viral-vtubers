@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="sidebar-container">
+    <button class="button-creator" routerLink="/creator">
+      <img src="assets/icons/brush-secondary.svg" /> Creator Space >>
+    </button>
+    <nav>
+      <ul>
+        <li [ngClass]="{ active: activeRoute === '/me' }" routerLink="/me">
+          <img src="assets/icons/account.svg" />
+          <p>Account</p>
+        </li>
+        <li
+          [ngClass]="{ active: activeRoute === '/me/orders' }"
+          routerLink="orders"
+        >
+          <img src="assets/icons/order.svg" />
+          <p>Commission Orders</p>
+        </li>
+        <li
+          [ngClass]="{ active: activeRoute === '/me/favourites' }"
+          routerLink="favourites"
+        >
+          <img src="assets/icons/hearts/heart-filled-black.svg" />
+          <p>Favourites</p>
+        </li>
+      </ul>
+    </nav>
+
+    <button class="button-logout">Log out</button>
+    <div class="report-container">
+      <img src="assets/icons/mail/alert.svg" />
+      <p>Terms and conditions</p>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

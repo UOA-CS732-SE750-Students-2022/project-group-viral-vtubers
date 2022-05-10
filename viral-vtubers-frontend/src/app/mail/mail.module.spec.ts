@@ -19,16 +19,22 @@ describe('MailModule', () => {
 
   it('should contain route for /', () => {
     const expectedRoute = { path: '', component: InboxComponent };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 
   it('should contain route for /sent', () => {
     const expectedRoute = { path: 'sent', component: SentMailComponent };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 
   it('should contain route for /new', () => {
     const expectedRoute = { path: 'new', component: NewMailComponent };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 });

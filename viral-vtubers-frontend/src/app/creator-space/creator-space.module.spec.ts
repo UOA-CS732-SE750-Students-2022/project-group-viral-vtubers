@@ -2,6 +2,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { CreateProductComponent } from './create-product/create-product.component';
 import { CreatorSpaceModule, routes } from './creator-space.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ManageCommissionsComponent } from './manage-commissions/manage-commissions.component';
+import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 
 describe('CommissionsModule', () => {
   beforeEach(() => {
@@ -17,9 +20,41 @@ describe('CommissionsModule', () => {
 
   it('should contain route for /create-product', () => {
     const expectedRoute = {
-      path: 'create-product',
+      path: 'add-product',
       component: CreateProductComponent,
     };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
+  });
+
+  it('should contain route for /', () => {
+    const expectedRoute = {
+      path: '',
+      component: DashboardComponent,
+    };
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
+  });
+
+  it('should contain route for /uploads', () => {
+    const expectedRoute = {
+      path: 'uploads',
+      component: ManageUploadsComponent,
+    };
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
+  });
+
+  it('should contain route for /commissions', () => {
+    const expectedRoute = {
+      path: 'commissions',
+      component: ManageCommissionsComponent,
+    };
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 });

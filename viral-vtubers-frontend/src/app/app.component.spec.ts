@@ -1,15 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { AppComponent } from './app.component';
-
 import { routes } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -60,5 +59,4 @@ describe('AppComponent', () => {
     const expectedRoute = { path: '**', component: NotFoundComponent };
     expect(routes).toContain(expectedRoute);
   });
-
 });

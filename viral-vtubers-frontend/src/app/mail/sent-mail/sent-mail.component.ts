@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { Mail, MailOutboxFragmentFragment, User } from 'src/schema/type';
+import { MailOutboxFragmentFragment } from 'src/schema/type';
 @Component({
   selector: 'app-sent-mail',
   templateUrl: './sent-mail.component.html',
