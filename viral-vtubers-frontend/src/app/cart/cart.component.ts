@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
           seller: {
             id: 'artist1',
             displayName: 'Flynnie',
+            status: 'Hello',
             profileImageURI:
               'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
           },
@@ -41,6 +42,7 @@ export class CartComponent implements OnInit {
           seller: {
             id: 'artist2',
             displayName: 'Vivi',
+            status: 'Hello',
             profileImageURI:
               'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
           },
