@@ -692,6 +692,36 @@ export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayN
 
 export type UserBlurbFragmentFragment = { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string };
 
+export type AddToCartMutationVariables = Exact<{
+  productId: Scalars['ID'];
+  variantId: Scalars['ID'];
+}>;
+
+
+export type AddToCartMutation = { __typename?: 'Mutation', addToCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+
+export type RemoveFromCartMutationVariables = Exact<{
+  productId: Scalars['ID'];
+  variantId: Scalars['ID'];
+}>;
+
+
+export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+
+export type EmptyCartMutationVariables = Exact<{
+  sellerId?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type EmptyCartMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+
+export type CheckoutMutationVariables = Exact<{
+  sellerId?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type CheckoutMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+
 export type EditSelfMutationVariables = Exact<{
   input: EditSelfInput;
 }>;
@@ -873,6 +903,78 @@ export const UserBlurbFragmentFragmentDoc = gql`
   profileImageURI
 }
     `;
+export const AddToCartDocument = gql`
+    mutation AddToCart($productId: ID!, $variantId: ID!) {
+  addToCart(productId: $productId, variantId: $variantId) {
+    ...CartFragment
+  }
+}
+    ${CartFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AddToCartGQL extends Apollo.Mutation<AddToCartMutation, AddToCartMutationVariables> {
+    override document = AddToCartDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const RemoveFromCartDocument = gql`
+    mutation removeFromCart($productId: ID!, $variantId: ID!) {
+  removeFromCart(productId: $productId, variantId: $variantId) {
+    ...CartFragment
+  }
+}
+    ${CartFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class RemoveFromCartGQL extends Apollo.Mutation<RemoveFromCartMutation, RemoveFromCartMutationVariables> {
+    override document = RemoveFromCartDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EmptyCartDocument = gql`
+    mutation emptyCart($sellerId: ID) {
+  emptyCart(sellerId: $sellerId) {
+    ...CartFragment
+  }
+}
+    ${CartFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EmptyCartGQL extends Apollo.Mutation<EmptyCartMutation, EmptyCartMutationVariables> {
+    override document = EmptyCartDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CheckoutDocument = gql`
+    mutation checkout($sellerId: ID) {
+  emptyCart(sellerId: $sellerId) {
+    ...CartFragment
+  }
+}
+    ${CartFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CheckoutGQL extends Apollo.Mutation<CheckoutMutation, CheckoutMutationVariables> {
+    override document = CheckoutDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const EditSelfDocument = gql`
     mutation EditSelf($input: EditSelfInput!) {
   editSelf(input: $input) {
