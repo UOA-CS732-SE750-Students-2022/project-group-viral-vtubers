@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GalleryModule } from 'ng-gallery';
 
+import { SharedModule } from '../shared/shared.module';
+import { BrowseProductsComponent } from './browse-products/browse-products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ProductsComponent } from './products/products.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent,
+    component: BrowseProductsComponent,
   },
   {
     path: 'product/:id',
@@ -18,7 +19,12 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductsComponent, ProductDetailsComponent],
-  imports: [CommonModule, GalleryModule, RouterModule.forChild(routes)],
+  declarations: [BrowseProductsComponent, ProductDetailsComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    GalleryModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class MarketplaceModule {}

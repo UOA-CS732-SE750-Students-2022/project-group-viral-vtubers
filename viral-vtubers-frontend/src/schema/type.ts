@@ -676,13 +676,15 @@ export type UserSort = {
 
 export type ItemFragmentFragment = { __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } };
 
-export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } };
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, isRead: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
 export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, description: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, fileTypes: Array<string>, file: string, name: string, price: number }> };
+
+export type ProductBlurbFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, titleImage: string, minPrice: number };
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
@@ -698,7 +700,7 @@ export type AddToCartMutationVariables = Exact<{
 }>;
 
 
-export type AddToCartMutation = { __typename?: 'Mutation', addToCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+export type AddToCartMutation = { __typename?: 'Mutation', addToCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type RemoveFromCartMutationVariables = Exact<{
   productId: Scalars['ID'];
@@ -706,21 +708,21 @@ export type RemoveFromCartMutationVariables = Exact<{
 }>;
 
 
-export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type EmptyCartMutationVariables = Exact<{
   sellerId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type EmptyCartMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+export type EmptyCartMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type CheckoutMutationVariables = Exact<{
   sellerId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CheckoutMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+export type CheckoutMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type EditSelfMutationVariables = Exact<{
   input: EditSelfInput;
@@ -737,7 +739,7 @@ export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Us
 export type CartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartQuery = { __typename?: 'Query', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+export type CartQuery = { __typename?: 'Query', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -768,16 +770,12 @@ export const ItemFragmentFragmentDoc = gql`
   fileTypes
 }
     `;
-export const UserFragmentFragmentDoc = gql`
-    fragment UserFragment on User {
+export const UserBlurbFragmentFragmentDoc = gql`
+    fragment UserBlurbFragment on User {
   id
-  bio
-  numCompletedCommissions
   displayName
-  email
-  numLikes
+  status
   profileImageURI
-  isFollowing
 }
     `;
 export const CartFragmentFragmentDoc = gql`
@@ -788,11 +786,11 @@ export const CartFragmentFragmentDoc = gql`
     ...ItemFragment
   }
   seller {
-    ...UserFragment
+    ...UserBlurbFragment
   }
 }
     ${ItemFragmentFragmentDoc}
-${UserFragmentFragmentDoc}`;
+${UserBlurbFragmentFragmentDoc}`;
 export const MailInboxFragmentFragmentDoc = gql`
     fragment MailInboxFragment on Mail {
   body
@@ -849,6 +847,27 @@ export const ProductDetailFragmentFragmentDoc = gql`
   }
 }
     `;
+export const ProductBlurbFragmentFragmentDoc = gql`
+    fragment ProductBlurbFragment on Product {
+  id
+  name
+  numLikes
+  titleImage
+  minPrice
+}
+    `;
+export const UserFragmentFragmentDoc = gql`
+    fragment UserFragment on User {
+  id
+  bio
+  numCompletedCommissions
+  displayName
+  email
+  numLikes
+  profileImageURI
+  isFollowing
+}
+    `;
 export const UserProfileFragmentFragmentDoc = gql`
     fragment UserProfileFragment on User {
   id
@@ -893,14 +912,6 @@ export const ArtistFragmentFragmentDoc = gql`
     id
     name
   }
-}
-    `;
-export const UserBlurbFragmentFragmentDoc = gql`
-    fragment UserBlurbFragment on User {
-  id
-  displayName
-  status
-  profileImageURI
 }
     `;
 export const AddToCartDocument = gql`

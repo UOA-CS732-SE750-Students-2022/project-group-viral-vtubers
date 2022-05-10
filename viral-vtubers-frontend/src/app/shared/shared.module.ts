@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductsGridComponent } from './components/products-grid/products-grid.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { VrmViewerComponent } from './vrm-viewer/vrm-viewer.component';
 
@@ -12,6 +13,7 @@ import { VrmViewerComponent } from './vrm-viewer/vrm-viewer.component';
     FooterComponent,
     NavbarComponent,
     TagsComponent,
+    ProductsGridComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -19,6 +21,7 @@ import { VrmViewerComponent } from './vrm-viewer/vrm-viewer.component';
     NavbarComponent,
     TagsComponent,
     FooterComponent,
+    ProductsGridComponent,
   ],
 })
 export class SharedModule {}

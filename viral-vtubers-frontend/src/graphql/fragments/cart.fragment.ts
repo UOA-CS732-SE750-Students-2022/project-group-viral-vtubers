@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-import { UserFragment } from './user.fragment';
+import { UserBlurbFragment } from './user.fragment';
 
 export const ItemFragment = gql`
   fragment ItemFragment on ProductVariant {
@@ -25,9 +25,9 @@ export const CartFragment = gql`
       ...ItemFragment
     }
     seller {
-      ...UserFragment
+      ...UserBlurbFragment
     }
   }
   ${ItemFragment}
-  ${UserFragment}
+  ${UserBlurbFragment}
 `;

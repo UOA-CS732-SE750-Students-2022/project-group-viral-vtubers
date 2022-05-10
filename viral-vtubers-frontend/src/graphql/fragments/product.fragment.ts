@@ -31,3 +31,13 @@ export const ProductDetailFragment = gql`
     }
   }
 `;
+
+export const ProductBlurbFragment = gql`
+  fragment ProductBlurbFragment on Product {
+    id
+    name
+    numLikes
+    titleImage
+    minPrice
+  }
+`;

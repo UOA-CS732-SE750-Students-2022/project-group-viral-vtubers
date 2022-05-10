@@ -1,0 +1,8 @@
+@import "../../../variables";
+
+:host {
+  height: calc(100% - $header-height);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
