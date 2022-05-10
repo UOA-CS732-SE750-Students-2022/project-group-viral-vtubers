@@ -10,7 +10,7 @@
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "yarn docs:json && start-storybook -p 6006",
     "schema": "rover graph introspect http://localhost:8080/graphql > src/schema/schema.graphql",
-    "generate": "cd src/schema && del type.ts && cd ../../ && graphql-codegen",
+    "generate": "graphql-codegen --overwrite",
     "prestart": "yarn generate",
     "prebuild": "yarn generate"
   },
