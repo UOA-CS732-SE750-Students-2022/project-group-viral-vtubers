@@ -15,6 +15,17 @@
 
     border-radius: 5px;
 
+    cursor: pointer;
+    transition: $button-hover-animation;
+
+    &:hover {
+      border: solid 1px $color-primary;
+
+      h4 {
+        color: $color-primary;
+      }
+    }
+
     img {
       width: 100%;
       max-height: width;
