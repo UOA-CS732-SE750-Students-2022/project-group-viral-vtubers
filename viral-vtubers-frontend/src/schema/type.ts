@@ -674,7 +674,9 @@ export type UserSort = {
   numLikes?: InputMaybe<SortEnum>;
 };
 
-export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, seller: { __typename?: 'User', id: string, displayName: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> };
+export type ItemFragmentFragment = { __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } };
+
+export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
 
 export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, isRead: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } };
 
@@ -702,6 +704,11 @@ export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
 
+export type CartQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CartQuery = { __typename?: 'Query', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } }> };
+
 export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -717,29 +724,45 @@ export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type SelfQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
 
+export const ItemFragmentFragmentDoc = gql`
+    fragment ItemFragment on ProductVariant {
+  id
+  name
+  price
+  product {
+    id
+    name
+    titleImage
+  }
+  file
+  fileTypes
+}
+    `;
+export const UserFragmentFragmentDoc = gql`
+    fragment UserFragment on User {
+  id
+  bio
+  numCompletedCommissions
+  displayName
+  email
+  numLikes
+  profileImageURI
+  isFollowing
+}
+    `;
 export const CartFragmentFragmentDoc = gql`
     fragment CartFragment on Cart {
   numItems
   totalAmount
-  seller {
-    id
-    displayName
-    profileImageURI
-  }
   items {
-    id
-    name
-    price
-    product {
-      id
-      name
-      titleImage
-    }
-    file
-    fileTypes
+    ...ItemFragment
+  }
+  seller {
+    ...UserFragment
   }
 }
-    `;
+    ${ItemFragmentFragmentDoc}
+${UserFragmentFragmentDoc}`;
 export const MailInboxFragmentFragmentDoc = gql`
     fragment MailInboxFragment on Mail {
   body
@@ -794,18 +817,6 @@ export const ProductDetailFragmentFragmentDoc = gql`
     name
     price
   }
-}
-    `;
-export const UserFragmentFragmentDoc = gql`
-    fragment UserFragment on User {
-  id
-  bio
-  numCompletedCommissions
-  displayName
-  email
-  numLikes
-  profileImageURI
-  isFollowing
 }
     `;
 export const UserProfileFragmentFragmentDoc = gql`
@@ -893,6 +904,24 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
     override document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CartDocument = gql`
+    query Cart {
+  carts {
+    ...CartFragment
+  }
+}
+    ${CartFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CartGQL extends Apollo.Query<CartQuery, CartQueryVariables> {
+    override document = CartDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
