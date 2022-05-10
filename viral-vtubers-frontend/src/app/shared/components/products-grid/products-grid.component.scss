@@ -7,7 +7,7 @@
   grid-template-columns: repeat(4, 1fr);
   align-items: flex-start;
 
-  column-gap: 25px;
+  gap: 25px;
 
   .product-item {
     border: solid 1px $color-grey-light;
