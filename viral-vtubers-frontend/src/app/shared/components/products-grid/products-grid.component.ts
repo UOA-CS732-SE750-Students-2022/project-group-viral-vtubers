@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -10,7 +11,11 @@ export class ProductsGridComponent implements OnInit {
   @Input()
   public products: Array<ProductBlurbFragmentFragment> = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  nagivateToProduct(id: string) {
+    this.router.navigateByUrl(`/products/${id}`);
+  }
 }

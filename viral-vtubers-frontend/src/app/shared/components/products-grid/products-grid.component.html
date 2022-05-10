@@ -1,5 +1,9 @@
 <div class="products-content">
-  <div *ngFor="let product of products" class="product-item">
+  <div
+    *ngFor="let product of products"
+    class="product-item"
+    (click)="nagivateToProduct(product.id)"
+  >
     <img src="{{ product.titleImage }}" alt="waifu" />
     <div>
       <div class="product-info">
