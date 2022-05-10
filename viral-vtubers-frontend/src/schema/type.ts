@@ -682,6 +682,8 @@ export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, da
 
 export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, description: string, titleImage: string, images: Array<string>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, fileTypes: Array<string>, file: string, name: string, price: number }> };
 
+export type ProductBlurbFragmentFragment = { __typename?: 'Product', id: string, name: string, numLikes: number, titleImage: string, minPrice: number };
+
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
 export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> };
@@ -794,6 +796,15 @@ export const ProductDetailFragmentFragmentDoc = gql`
     name
     price
   }
+}
+    `;
+export const ProductBlurbFragmentFragmentDoc = gql`
+    fragment ProductBlurbFragment on Product {
+  id
+  name
+  numLikes
+  titleImage
+  minPrice
 }
     `;
 export const UserFragmentFragmentDoc = gql`
