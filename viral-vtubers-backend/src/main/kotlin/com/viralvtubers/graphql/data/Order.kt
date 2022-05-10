@@ -20,6 +20,17 @@ data class Order(
     val applications: List<ID>
 )
 
+data class MyOrder(
+    val active: List<Order>,
+    val past: List<Order>
+)
+
+data class MyCommission(
+    val pending: List<Order>,
+    val won: List<Order>,
+    val lost: List<Order>,
+)
+
 data class OrderPagination(
     val edges: List<OrderEdge>,
     val pageInfo: PageInfo,

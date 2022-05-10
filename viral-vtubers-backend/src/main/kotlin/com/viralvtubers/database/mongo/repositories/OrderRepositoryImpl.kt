@@ -1,10 +1,13 @@
 package com.viralvtubers.database.mongo.repositories
 
 import com.viralvtubers.database.model.Order
+import com.viralvtubers.database.model.User
 import com.viralvtubers.database.mongo.MongoDatabase
 import kotlinx.coroutines.flow.Flow
 import org.bson.conversions.Bson
+import org.litote.kmongo.Id
 import org.litote.kmongo.coroutine.CoroutineCollection
+import org.litote.kmongo.eq
 
 fun MongoDatabase.asOrderRepository(): OrderRepository =
     object : OrderRepository {
@@ -19,6 +22,10 @@ fun MongoDatabase.asOrderRepository(): OrderRepository =
                     *filter
                 ).sort(sort)
             return result.toFlow()
+        }
+
+        override suspend fun getOrderByUser(userId: Id<User>): Flow<Order> {
+            return col.find(Order::ownerId eq userId).toFlow()
         }
     }
 

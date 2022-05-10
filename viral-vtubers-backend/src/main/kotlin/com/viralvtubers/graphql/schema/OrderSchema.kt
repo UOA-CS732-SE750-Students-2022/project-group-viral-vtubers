@@ -69,6 +69,22 @@ fun SchemaBuilder.orderSchema(
         }
     }
 
+    query("myOrders") {
+        description = "Get myOrders by user"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            orderService.getMyOrders(userId)
+        }
+    }
+
+    query("myCommissions") {
+        description = "Get an Order by Id"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            orderService.getMyCommissions(userId)
+        }
+    }
+
     mutation("addOrder") {
         description = "Add an Order"
         resolver { ctx: Context, input: AddOrderInput ->

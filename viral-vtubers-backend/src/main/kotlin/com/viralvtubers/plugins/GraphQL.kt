@@ -29,7 +29,10 @@ fun Application.configureGraphQL() {
         database.asMailRepository(),
         database.asUserRepository()
     )
-    val orderService = OrderServiceImpl(database.asOrderRepository())
+    val orderService = OrderServiceImpl(
+        database.asOrderRepository(),
+        database.asApplyRepository()
+    )
     val cartService = CartServiceImpl(
         database.asCartRepository(),
         database.asPurchaseRepository(),
