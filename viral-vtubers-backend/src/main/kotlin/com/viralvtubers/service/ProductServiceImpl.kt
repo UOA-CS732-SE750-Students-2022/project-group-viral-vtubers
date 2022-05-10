@@ -71,6 +71,18 @@ class ProductServiceImpl(
         ).map()
     }
 
+    override suspend fun getProductVariant(
+        productId: ID,
+        variantId: ID
+    ): com.viralvtubers.graphql.data.ProductVariant {
+        val product = productRepository.getById(productId.map()) ?: throw error(
+            "product not found"
+        )
+
+        return product.variants.firstOrNull { it._id.map() == variantId }?.map()
+            ?: throw error("variant not found")
+    }
+
     override suspend fun getSubcategorySearch(
         subcategoryId: ID,
         filter: ProductFilter?,

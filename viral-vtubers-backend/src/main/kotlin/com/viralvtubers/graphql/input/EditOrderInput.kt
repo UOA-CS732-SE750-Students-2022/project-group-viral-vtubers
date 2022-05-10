@@ -10,5 +10,6 @@ data class EditOrderInput(
     val isDraft: Boolean?,
     val tagIds: List<String>?,
     val image: String?,
+    val artistId: ID?,
 )
 

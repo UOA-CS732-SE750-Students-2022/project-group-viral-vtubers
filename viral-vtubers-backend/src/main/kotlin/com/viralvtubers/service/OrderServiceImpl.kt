@@ -109,6 +109,8 @@ class OrderServiceImpl(
             image = order.image,
             tags = order.tagIds.map { ObjectId(it).toId() },
             applications = ArrayList(),
+            ownerId = userId.map(),
+            artistId = null,
             createdDate = Date(),
         )
 
@@ -119,6 +121,10 @@ class OrderServiceImpl(
         val orderModel = orderRepository.getById(order.id.map())
             ?: throw Exception("order not found")
 
+        orderModel.artistId?.let {
+            throw Exception("order has an artist, cannot edit")
+        }
+
         val update = orderModel.copy(
             name = order.name ?: orderModel.name,
             description = order.description ?: orderModel.description,
@@ -126,6 +132,7 @@ class OrderServiceImpl(
             isDraft = order.isDraft ?: orderModel.isDraft,
             image = order.image ?: orderModel.image,
             tags = order.tagIds?.map { ObjectId(it).toId() } ?: orderModel.tags,
+            artistId = order.artistId?.map() ?: orderModel.artistId,
         )
 
         return orderRepository.update(update)?.map()

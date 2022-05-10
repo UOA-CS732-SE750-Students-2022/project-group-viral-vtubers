@@ -162,31 +162,9 @@ val stubOrder = { id: String ->
         99.99,
         false,
         "fakeImage.png",
+        ID("fake_owner"),
+        ID("fake_artist"),
         ArrayList(),
         ArrayList()
-    )
-}
-
-val stubCart = { ->
-    Cart(
-        2,
-        99.99
-    )
-}
-
-val stubCarts = { ->
-    Carts(
-        4,
-        listOf(
-            stubCart(), stubCart()
-        )
-    )
-}
-
-val stubPurchase = { ->
-    Purchase(
-        2,
-        99.99,
-        Date(),
     )
 }

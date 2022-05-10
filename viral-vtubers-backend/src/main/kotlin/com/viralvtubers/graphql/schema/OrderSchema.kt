@@ -21,6 +21,24 @@ fun SchemaBuilder.orderSchema(
 
         Order::tags.ignore()
         Order::applications.ignore()
+        Order::ownerId.ignore()
+        Order::artistId.ignore()
+
+        property<User>("owner") {
+            resolver { order ->
+                description = "Get owner of the Order"
+                userService.getUserId(order.ownerId)
+            }
+        }
+
+        property<User?>("artist") {
+            resolver { order ->
+                description = "Get owner of the Order"
+                order.artistId?.let {
+                    userService.getUserId(order.ownerId)
+                }
+            }
+        }
 
         property<List<Tag>>("tags") {
             resolver { order ->

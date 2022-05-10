@@ -8,6 +8,8 @@ import org.koin.core.component.KoinComponent
 interface ProductService : KoinComponent {
     suspend fun getProductId(productId: ID): Product
 
+    suspend fun getProductVariant(productId: ID, variantId: ID): ProductVariant
+
     suspend fun getProductIds(productIds: List<ID>): List<Product>
 
     suspend fun getProductsByUserId(userId: ID): List<Product>
