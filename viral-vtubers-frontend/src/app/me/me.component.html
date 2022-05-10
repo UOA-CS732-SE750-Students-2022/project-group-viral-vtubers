@@ -1,1 +1,32 @@
-<p>me works!</p>
+<div class="container">
+  <div class="sidebar-container">
+    <button routerLink="new">+ CHANGE THIS</button>
+    <nav>
+      <ul>
+        <li [ngClass]="{ active: activeRoute === '/me' }" routerLink="/me">
+          <img src="assets/icons/mail/received.svg" />
+          <p>Account</p>
+        </li>
+        <li
+          [ngClass]="{ active: activeRoute === '/me/orders' }"
+          routerLink="orders"
+        >
+          <img src="assets/icons/mail/sent.svg" />
+          <p>My Commission Requests</p>
+        </li>
+        <li
+          [ngClass]="{ active: activeRoute === '/me/favourites' }"
+          routerLink="favourites"
+        >
+          <img src="assets/icons/mail/sent.svg" />
+          <p>Favourites</p>
+        </li>
+      </ul>
+    </nav>
+    <div class="report-container">
+      <img src="assets/icons/mail/alert.svg" />
+      <p>Terms and conditions</p>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
