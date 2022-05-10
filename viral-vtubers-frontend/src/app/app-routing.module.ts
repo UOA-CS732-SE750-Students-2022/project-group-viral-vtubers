@@ -36,7 +36,7 @@ export const routes: Routes = [
   {
     path: 'me',
     loadChildren: () => import('./me/me.module').then((m) => m.MeModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'creator',

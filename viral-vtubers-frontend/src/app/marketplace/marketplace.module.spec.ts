@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CreateProductComponent } from './create-product/create-product.component';
 import { MarketplaceModule, routes } from './marketplace.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsComponent } from './products/products.component';

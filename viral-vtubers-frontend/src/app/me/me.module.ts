@@ -10,15 +10,21 @@ import { MeComponent } from './me.component';
 export const routes: Routes = [
   {
     path: '',
-    component: AccountComponent,
-  },
-  {
-    path: 'orders',
-    component: CommissionRequestsComponent,
-  },
-  {
-    path: 'favourites',
-    component: FavouritesComponent,
+    component: MeComponent,
+    children: [
+      {
+        path: '',
+        component: AccountComponent,
+      },
+      {
+        path: 'orders',
+        component: CommissionRequestsComponent,
+      },
+      {
+        path: 'favourites',
+        component: FavouritesComponent,
+      },
+    ],
   },
 ];
 

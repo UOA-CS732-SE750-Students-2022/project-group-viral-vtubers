@@ -19,7 +19,9 @@ describe('MeModule', () => {
 
   it('should contain route for /', () => {
     const expectedRoute = { path: '', component: AccountComponent };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 
   it('should contain route for /orders', () => {
@@ -27,7 +29,9 @@ describe('MeModule', () => {
       path: 'orders',
       component: CommissionRequestsComponent,
     };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 
   it('should contain route for /favourites', () => {
@@ -35,6 +39,8 @@ describe('MeModule', () => {
       path: 'favourites',
       component: FavouritesComponent,
     };
-    expect(routes).toContain(expectedRoute);
+    expect(routes.find((r) => r.path === '')?.children).toContain(
+      expectedRoute
+    );
   });
 });
