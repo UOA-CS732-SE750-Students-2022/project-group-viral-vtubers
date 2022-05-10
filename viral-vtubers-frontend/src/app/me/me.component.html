@@ -1,6 +1,8 @@
 <div class="container">
   <div class="sidebar-container">
-    <button routerLink="new">+ CHANGE THIS</button>
+    <button routerLink="/creator">
+      <img src="assets/icons/brush-secondary.svg" /> Creator Space >>
+    </button>
     <nav>
       <ul>
         <li [ngClass]="{ active: activeRoute === '/me' }" routerLink="/me">

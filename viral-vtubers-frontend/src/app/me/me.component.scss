@@ -14,34 +14,36 @@
 
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   > button {
-    width: 150px;
     height: 40px;
 
-    border-radius: 3px;
-    border: solid 1px $color-grey-light;
-
     text-decoration: none;
-    text-align: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
 
     display: flex;
-    justify-content: center;
     align-items: center;
 
     font-family: $font-family-poppins;
     font-size: $font-size-body-2;
     font-weight: 500;
 
-    background-color: $color-primary;
-    color: $color-background;
+    background: none;
+    border: none;
+
+    color: $color-secondary;
 
     cursor: pointer;
     transition: $button-hover-animation;
 
     &:hover {
       opacity: $button-coloured-hover-opacity;
+      transform: scale(1.05) translateX(20px);
+    }
+
+    > img {
+      margin-right: 10px;
     }
   }
 
