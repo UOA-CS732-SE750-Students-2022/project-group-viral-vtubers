@@ -14,10 +14,9 @@
         <div>
           <div class="product-info">
             <h4>{{ product.name }}</h4>
-            <p>
-              <img src="assets/icons/hearts/heart-filled-secondary.svg" />
-              {{ product.numLikes }} Likes
-            </p>
+          </div>
+          <div class="edit-icon">
+            <img src="assets/icons/EditIcon.svg" />
           </div>
         </div>
       </div>
@@ -38,12 +37,11 @@
         <div>
           <div class="product-info">
             <h4>{{ product.name }}</h4>
-            <p>
-              <img src="assets/icons/hearts/heart-filled-secondary.svg" />
-              {{ product.numLikes }} Likes
-            </p>
+            <p>${{ product.minPrice | number: "1.2-2" }}</p>
           </div>
-          <p>${{ product.minPrice | number: "1.2-2" }}</p>
+          <div class="edit-icon">
+            <img src="assets/icons/EditIcon.svg" />
+          </div>
         </div>
       </div>
     </div>

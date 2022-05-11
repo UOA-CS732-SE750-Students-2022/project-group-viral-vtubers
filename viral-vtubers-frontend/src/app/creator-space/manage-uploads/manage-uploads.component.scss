@@ -61,7 +61,7 @@ h1 + hr {
       }
     }
 
-    img {
+    > img {
       width: 100%;
       max-height: width;
       aspect-ratio: 1;
@@ -97,36 +97,48 @@ h1 + hr {
         }
 
         > p {
-          font-size: $font-size-body-3;
-          font-weight: 400;
+          font-size: $font-size-body-2;
+          font-weight: 500;
           margin: 0;
-          color: $color-grey-dark;
+          color: $color-secondary;
 
           display: -webkit-box;
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
 
-          > img {
-            height: 12px;
-            width: 12px;
+        > img {
+          height: 12px;
+          width: 12px;
 
-            margin-bottom: -1px;
-          }
+          margin-bottom: -1px;
         }
       }
 
-      > p {
-        font-size: $font-size-body-2;
-        font-weight: 500;
-        margin: 0;
-        margin-left: 5px;
-        color: $color-secondary;
+      .edit-icon {
+        height: 24px;
+        width: 24px;
 
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        border-radius: 50%;
+        border: 2px solid rgba(34, 34, 34, 0.2);
+        border-style: outset;
+
+        background-color: $color-background;
+        background-clip: padding-box;
+        transition: $button-hover-animation;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        > img {
+          height: 50%;
+        }
       }
     }
   }
