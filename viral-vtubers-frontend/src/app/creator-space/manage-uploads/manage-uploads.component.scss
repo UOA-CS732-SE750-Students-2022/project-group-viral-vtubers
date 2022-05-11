@@ -54,11 +54,7 @@ h1 + hr {
     transition: $button-hover-animation;
 
     &:hover {
-      border: solid 1px $color-primary;
-
-      h4 {
-        color: $color-primary;
-      }
+      border: solid 1px $color-secondary;
     }
 
     > img {

@@ -19,7 +19,10 @@
               <h4 class="noName">Untitled product</h4>
             </ng-template>
           </div>
-          <div class="edit-icon">
+          <div
+            class="edit-icon"
+            (click)="editProduct(product.id); $event.stopPropagation()"
+          >
             <img src="assets/icons/EditIcon.svg" />
           </div>
         </div>
@@ -43,7 +46,10 @@
             <h4>{{ product.name }}</h4>
             <p>${{ product.minPrice | number: "1.2-2" }}</p>
           </div>
-          <div class="edit-icon">
+          <div
+            class="edit-icon"
+            (click)="editProduct(product.id); $event.stopPropagation()"
+          >
             <img src="assets/icons/EditIcon.svg" />
           </div>
         </div>

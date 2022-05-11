@@ -96,4 +96,10 @@ export class ManageUploadsComponent implements OnInit {
   nagivateToProduct(id: string) {
     this.router.navigateByUrl(`/products/${id}`);
   }
+
+  editProduct(id: string) {
+    this.router.navigateByUrl(`/creator/add-product`, {
+      state: { productId: id },
+    });
+  }
 }
