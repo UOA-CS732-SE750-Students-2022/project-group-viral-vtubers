@@ -1,44 +1,59 @@
-<div class="sidebar-container">
-  <div class="sidebar-header">
-    <h3>Filter</h3>
-    <p>Reset</p>
-  </div>
+<div class="page-header"><h1>Clothes > Dresses</h1></div>
+<div class="content-container">
+  <div class="sidebar-container">
+    <div class="sidebar-header">
+      <h3>Filter</h3>
+      <p>Reset</p>
+    </div>
 
-  <div class="filter-container">
-    <h5>Category</h5>
-    <div class="select-wrapper">
-      <select>
-        <option>All</option>
-      </select>
+    <div class="filter-container">
+      <h5>Category</h5>
+      <div class="select-wrapper">
+        <select>
+          <option>All</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-container">
+      <h5>Subcategory</h5>
+      <div class="select-wrapper">
+        <select>
+          <option>All</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-container">
+      <h5>Age Restriction</h5>
+      <div class="select-wrapper">
+        <select>
+          <option>All</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="slider-container">
+      <h5>Price</h5>
+      <ngx-slider
+        [(value)]="minValue"
+        [(highValue)]="maxValue"
+        [options]="options"
+      ></ngx-slider>
     </div>
   </div>
 
-  <div class="filter-container">
-    <h5>Subcategory</h5>
-    <div class="select-wrapper">
-      <select>
-        <option>All</option>
+  <div class="products-container">
+    <div class="config-container">
+      <p>Total {{ products.length }} items</p>
+      <select [(ngModel)]="selectedSortOption">
+        <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
+          {{ sortOp.name }}
+        </option>
       </select>
     </div>
-  </div>
-
-  <div class="filter-container">
-    <h5>Age Restriction</h5>
-    <div class="select-wrapper">
-      <select>
-        <option>All</option>
-      </select>
+    <div class="grid-container">
+      <app-products-grid [products]="products"></app-products-grid>
     </div>
-  </div>
-
-  <div class="slider-container">
-    <h5>Price</h5>
-    <ngx-slider
-      [(value)]="minValue"
-      [(highValue)]="maxValue"
-      [options]="options"
-    ></ngx-slider>
   </div>
 </div>
-
-<app-products-grid [products]="products"></app-products-grid>

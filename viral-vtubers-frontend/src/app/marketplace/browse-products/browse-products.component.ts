@@ -27,6 +27,12 @@ export class BrowseProductsComponent implements OnInit {
     },
   };
 
+  sortOptions: sortBy[] = [
+    { id: 'newest', name: 'Time added (newest) ' },
+    { id: 'oldest', name: 'Time added (oldest) ' },
+  ];
+  selectedSortOption: sortBy = this.sortOptions[0];
+
   constructor() {
     this.products = [
       {
@@ -105,4 +111,9 @@ export class BrowseProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+}
+
+interface sortBy {
+  id: string;
+  name: string;
 }
