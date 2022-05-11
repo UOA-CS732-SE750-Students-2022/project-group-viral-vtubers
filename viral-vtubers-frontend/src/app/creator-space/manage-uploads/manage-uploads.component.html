@@ -1,8 +1,8 @@
 <h1>Manage Uploads</h1>
 <hr />
 
-<div class="content-container">
-  <h3>Upload Drafts</h3>
+<h3 *ngIf="drafts.length > 0">Upload Drafts</h3>
+<div class="content-container" *ngIf="drafts.length > 0">
   <div class="grid-container">
     <div class="products-content">
       <div
@@ -31,8 +31,8 @@
   </div>
 </div>
 
-<div class="content-container">
-  <h3>My Uploads</h3>
+<h3>My Uploads</h3>
+<div class="content-container" *ngIf="uploads.length > 0; else empty">
   <div class="grid-container">
     <div class="products-content">
       <div
@@ -57,3 +57,13 @@
     </div>
   </div>
 </div>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_pink.png" />
+    <p>
+      No uploads yet... Let's
+      <a routerLink="/creator/add-product">get uploading</a>!
+    </p>
+  </div>
+</ng-template>

@@ -27,16 +27,16 @@ h1 + hr {
   margin-bottom: 40px;
 }
 
+h3 {
+  font-size: $font-size-body-1;
+  font-weight: 400;
+  margin-top: 0;
+}
+
 .content-container {
   width: 100%;
 
   margin-bottom: 40px;
-
-  h3 {
-    font-size: $font-size-body-1;
-    font-weight: 400;
-    margin-top: 0;
-  }
 }
 
 .products-content {
@@ -147,6 +147,35 @@ h1 + hr {
         > img {
           height: 50%;
         }
+      }
+    }
+  }
+}
+
+.empty {
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    a {
+      color: $color-secondary;
+      text-decoration: none;
+      transition: $button-hover-animation;
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
       }
     }
   }
