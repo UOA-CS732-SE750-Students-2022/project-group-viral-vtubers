@@ -1,0 +1,36 @@
+@import "../../../variables";
+
+:host {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-right: 40px;
+}
+
+h1 {
+  font-size: $font-size-h6;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h1 + hr {
+  border: solid 1px $color-secondary;
+  margin: 0;
+  width: 50px;
+}
+
+.content-container {
+  width: 100%;
+  margin-right: 40px;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: $font-size-body-1;
+    font-weight: 400;
+  }
+}
