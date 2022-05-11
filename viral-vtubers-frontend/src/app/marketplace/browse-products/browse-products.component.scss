@@ -87,6 +87,15 @@ $bar-dimension: 3px;
 
 ::ng-deep {
   .slider-container {
+    margin-top: 12px;
+
+    h5 {
+      font-size: $font-size-body-2;
+      font-weight: 400;
+
+      margin-bottom: 7px;
+    }
+
     .ngx-slider {
       .ngx-slider-pointer {
         background-color: $color-background;
@@ -118,6 +127,10 @@ $bar-dimension: 3px;
       .ngx-slider-bubble {
         font-family: $font-family-poppins;
         font-size: $font-size-body-3;
+      }
+
+      .ngx-slider-selection {
+        background-color: $color-secondary;
       }
     }
   }
