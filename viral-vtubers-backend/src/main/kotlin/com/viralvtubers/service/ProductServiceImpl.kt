@@ -86,6 +86,39 @@ class ProductServiceImpl(
             ?: throw error("variant not found")
     }
 
+    override suspend fun getSearch(
+        filter: ProductFilter?,
+        sort: ProductSort?,
+        cursor: String?,
+        limit: Int?
+    ): ProductPagination {
+        val filterBson = getFilterBson(filter)
+        val sortBson = getSortBson(sort)
+
+        var productFlow = productRepository.getProducts(
+            *filterBson.toTypedArray(),
+            sort = sortBson,
+        ).withIndex()
+
+        if (cursor != null) {
+            val before =
+                productFlow.takeWhile { it.value._id.toString() != cursor }
+
+            val last = before.last()
+
+            productFlow = productFlow.dropWhile { it.index <= last.index }
+        }
+
+        val products = productFlow.take(limit ?: 25).map { it.value }.toList()
+
+        return Page(
+            start = products.firstOrNull()?._id,
+            end = products.lastOrNull()?._id,
+            items = products,
+            hasNext = products.size == (limit ?: 25),
+        ).map()
+    }
+
     override suspend fun getSubcategorySearch(
         subcategoryId: ID,
         filter: ProductFilter?,

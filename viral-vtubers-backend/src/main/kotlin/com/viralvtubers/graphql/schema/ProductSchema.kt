@@ -120,6 +120,18 @@ fun SchemaBuilder.productSchema(
         }
     }
 
+    query("products") {
+        description = "Get all products"
+        resolver { filter: ProductFilter?, sort: ProductSort?, cursor: String?, limit: Int? ->
+            productService.getSearch(
+                filter,
+                sort,
+                cursor,
+                limit
+            )
+        }
+    }
+
     query("categories") {
         description = "Get Categories"
         resolver { ->

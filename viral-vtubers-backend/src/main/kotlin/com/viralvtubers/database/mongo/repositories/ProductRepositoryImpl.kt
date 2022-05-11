@@ -68,6 +68,17 @@ fun MongoDatabase.asProductRepository(): ProductRepository =
             return variants
         }
 
+        override suspend fun getProducts(
+            vararg filter: Bson,
+            sort: Bson
+        ): Flow<Product> {
+            val result =
+                col.find(
+                    *filter
+                ).sort(sort)
+            return result.toFlow()
+        }
+
         override suspend fun getProductOfCategory(
             categoryId: Id<Category>,
             vararg filter: Bson,
