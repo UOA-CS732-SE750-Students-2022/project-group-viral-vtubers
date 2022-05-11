@@ -21,7 +21,11 @@ h1 + hr {
   margin: 0;
   width: 50px;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.content-container {
+  height: 100%;
 }
 
 .config-container {
@@ -55,4 +59,33 @@ h1 + hr {
 .grid-container {
   width: 100%;
   flex: 1;
+}
+
+.empty {
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+      transition: $button-hover-animation;
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+    }
+  }
 }

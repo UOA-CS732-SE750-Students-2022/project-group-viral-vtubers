@@ -1,13 +1,24 @@
 <h1>My Favourites</h1>
 <hr />
 
-<div class="config-container">
-  <p>Total 241 items</p>
-  <select [(ngModel)]="selectedSortOption">
-    <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
-      {{ sortOp.name }}
-    </option>
-  </select>
+<div class="content-container" *ngIf="products.length > 0; else empty">
+  <div class="config-container">
+    <p>Total 241 items</p>
+    <select [(ngModel)]="selectedSortOption">
+      <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
+        {{ sortOp.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="grid-container">
+    <app-products-grid></app-products-grid>
+  </div>
 </div>
 
-<div class="grid-container">grid</div>
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_blue.png" />
+    <p>No favourites yet... Let's <a href="/marketplace">start browsing</a>!</p>
+  </div>
+</ng-template>

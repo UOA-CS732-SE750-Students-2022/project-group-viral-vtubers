@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
   selector: 'app-favourites',
@@ -12,7 +13,11 @@ export class FavouritesComponent implements OnInit {
   ];
   selectedSortOption: sortBy = this.sortOptions[0];
 
-  constructor() {}
+  products: ProductBlurbFragmentFragment[];
+
+  constructor() {
+    this.products = [];
+  }
 
   ngOnInit(): void {}
 }

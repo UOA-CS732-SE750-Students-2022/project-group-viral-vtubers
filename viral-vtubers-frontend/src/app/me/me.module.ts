@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SharedModule } from '../shared/shared.module';
 import { AccountComponent } from './account/account.component';
 import { CommissionRequestsComponent } from './commission-requests/commission-requests.component';
 import { FavouritesComponent } from './favourites/favourites.component';
@@ -36,6 +37,11 @@ export const routes: Routes = [
     FavouritesComponent,
     MeComponent,
   ],
-  imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class MeModule {}
