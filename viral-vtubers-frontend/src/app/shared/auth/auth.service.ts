@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  SignIn(email: string, password: string) {
+  signIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string, displayName: string) {
+  signUp(email: string, password: string, displayName: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
@@ -61,7 +61,7 @@ export class AuthService {
           return;
         }
         // send Verification Mail, update profile with displayName, and set userData
-        this.SendVerificationMail();
+        this.sendVerificationMail();
         await user.updateProfile({
           displayName: displayName,
         });
@@ -73,7 +73,7 @@ export class AuthService {
   }
 
   // Send email verification when new user signs up
-  SendVerificationMail() {
+  sendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: firebase.User | null) => u?.sendEmailVerification())
       .then(() => {
@@ -82,7 +82,7 @@ export class AuthService {
   }
 
   // Reset Forgotten password
-  ForgotPassword(passwordResetEmail: string) {
+  forgotPassword(passwordResetEmail: string) {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
@@ -108,7 +108,7 @@ export class AuthService {
   }
 
   // Sign out
-  SignOut() {
+  signOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       localStorage.removeItem('token');
@@ -117,3 +117,8 @@ export class AuthService {
     });
   }
 }
+
+type subcategoryType = {
+  id: string;
+  name: string;
+};

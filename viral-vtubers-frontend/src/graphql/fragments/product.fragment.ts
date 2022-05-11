@@ -6,6 +6,7 @@ export const ProductDetailFragment = gql`
   fragment ProductDetailFragment on Product {
     id
     name
+    isLiked
     numLikes
     description
     titleImage
@@ -43,6 +44,7 @@ export const ProductBlurbFragment = gql`
   fragment ProductBlurbFragment on Product {
     id
     name
+    isLiked
     numLikes
     titleImage
     minPrice

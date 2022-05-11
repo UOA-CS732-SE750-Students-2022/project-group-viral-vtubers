@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 import { ProductDetailFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -17,11 +18,11 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private userService: UserService,
     private route: ActivatedRoute
   ) {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
-      console.log(id);
       if (!id) {
         return;
       }
@@ -43,4 +44,17 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  follow(artistId: string): void {
+    console.log(artistId);
+    this.userService.follow(artistId, true).subscribe();
+  }
+
+  unfollow(artistId: string): void {
+    this.userService.follow(artistId, false).subscribe();
+  }
+
+  like(productId: string, isLiked: boolean): void {
+    this.productService.likeProduct(productId, !isLiked).subscribe();
+  }
 }

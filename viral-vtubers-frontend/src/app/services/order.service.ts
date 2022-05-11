@@ -20,26 +20,18 @@ import {
 })
 export class OrderService {
   order$?: Observable<OrderFragmentFragment>;
-  myCommissions$: Observable<MyCommissionsFragmentFragment>;
-  myOrders$: Observable<MyOrdersFragmentFragment>;
+  myCommissions$?: Observable<MyCommissionsFragmentFragment>;
+  myOrders$?: Observable<MyOrdersFragmentFragment>;
 
   constructor(
     private orderGQL: OrderGQL,
-
     private myCommissionsGQL: MyCommissionsGQL,
     private myOrdersGQL: MyOrdersGQL,
     private addOrderGQL: AddOrderGQL,
     private editOrderGQL: EditOrderGQL,
     private deleteOrderGQL: DeleteOrderGQL,
     private applyOrderGQL: ApplyOrderGQL
-  ) {
-    this.myCommissions$ = this.myCommissionsGQL
-      .watch()
-      .valueChanges.pipe(map((res) => res.data.myCommissions));
-    this.myOrders$ = this.myOrdersGQL
-      .watch()
-      .valueChanges.pipe(map((res) => res.data.myOrders));
-  }
+  ) {}
 
   getOrder(orderId: string) {
     this.order$ = this.orderGQL
@@ -50,10 +42,16 @@ export class OrderService {
   }
 
   myCommissions() {
+    this.myCommissions$ = this.myCommissionsGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.myCommissions));
     return { query: this.myCommissionsGQL, order$: this.order$ };
   }
 
   myOrders() {
+    this.myOrders$ = this.myOrdersGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.myOrders));
     return { query: this.myOrdersGQL, order$: this.order$ };
   }
 

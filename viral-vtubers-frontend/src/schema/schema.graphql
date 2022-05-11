@@ -131,12 +131,9 @@ type Cart {
 "Purchase"
 type Purchase {
   id: ID!
-  items: [ID!]!
   numItems: Int!
   placed: DateTime!
-  sellerId: ID!
   totalAmount: Float!
-  variants: [ID!]!
   seller: User!
   items: [ProductVariant!]!
 }
@@ -223,7 +220,7 @@ type Mutation {
   "Edit a mail"
   editMail(input: EditMailInput!): [Mail!]!
   "Follow a user"
-  follow(id: ID!, follow: Boolean!): Boolean!
+  follow(id: ID!, follow: Boolean!): User!
   "Add a product"
   addProduct(input: AddProductInput!): Product!
   "Edit a product"

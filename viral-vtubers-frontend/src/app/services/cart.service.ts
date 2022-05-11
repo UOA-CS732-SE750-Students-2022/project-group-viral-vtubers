@@ -13,7 +13,7 @@ import {
   providedIn: 'root',
 })
 export class CartService {
-  carts$: Observable<CartFragmentFragment[]>;
+  carts$?: Observable<CartFragmentFragment[]>;
 
   constructor(
     private cartGQL: CartGQL,
@@ -21,13 +21,12 @@ export class CartService {
     private removeFromCartGQL: RemoveFromCartGQL,
     private emptyCartGQL: EmptyCartGQL,
     private checkoutGQL: CheckoutGQL
-  ) {
+  ) {}
+
+  getCarts() {
     this.carts$ = this.cartGQL
       .watch()
       .valueChanges.pipe(map((res) => res.data.carts));
-  }
-
-  getCarts() {
     return { query: this.cartGQL, carts$: this.carts$ };
   }
 

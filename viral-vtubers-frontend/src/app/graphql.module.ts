@@ -10,8 +10,10 @@ import { ReadFieldFunction } from '@apollo/client/cache/core/types/common';
 import {
   ApolloClientOptions,
   ApolloLink,
+  from,
   InMemoryCache,
 } from '@apollo/client/core';
+import { onError } from '@apollo/client/link/error';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { ProductPagination } from 'src/schema/type';
@@ -107,10 +109,21 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     return forward(operation);
   });
 
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      );
+
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
   const link = middleware.concat(httpLink.create({ uri }));
 
   return {
-    link: link,
+    link: from([errorLink, link]),
     cache: cache,
   };
 }

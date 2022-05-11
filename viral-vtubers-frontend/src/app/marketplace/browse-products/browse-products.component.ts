@@ -198,6 +198,46 @@ export class BrowseProductsComponent implements OnInit {
       this.categoryBlurb = params.get('categoryBlurb') ?? undefined;
       this.subcategoryBlurb = params.get('subcategoryBlurb') ?? undefined;
 
+      if (this.categoryBlurb) {
+        const categoryId = blurbService.getCategoryId(this.categoryBlurb);
+        const categoryFilter = this.categoryFilters.find(
+          (category) => category.id === categoryId
+        );
+        if (!categoryFilter) {
+          this.categoryBlurb = undefined;
+          this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+          return;
+        }
+        this.selectedCategoryFilter = categoryFilter;
+        this.selectedSubCategoryFilter = categoryFilter.subcategories[0];
+      }
+
+      if (this.categoryBlurb && this.subcategoryBlurb) {
+        const categoryId = blurbService.getCategoryId(this.categoryBlurb);
+        const subcategoryId = blurbService.getSubcategoryId(
+          this.categoryBlurb,
+          this.subcategoryBlurb
+        );
+        const categoryFilter = this.categoryFilters.find(
+          (category) => category.id === categoryId
+        );
+        if (!categoryFilter) {
+          this.categoryBlurb = undefined;
+          this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+          return;
+        }
+        const subcategoryFilter = categoryFilter.subcategories.find(
+          (subcategory) => subcategory.id === subcategoryId
+        );
+        if (!subcategoryFilter) {
+          this.subcategoryBlurb = undefined;
+          this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+          return;
+        }
+
+        this.selectedSubCategoryFilter = subcategoryFilter;
+      }
+
       this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
     });
   }

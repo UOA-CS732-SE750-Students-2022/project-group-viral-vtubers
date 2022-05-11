@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  LikeProductGQL,
   ProductDetailFragmentFragment,
   ProductFilter,
   ProductGQL,
@@ -24,7 +25,8 @@ export class ProductService {
     private productGQL: ProductGQL,
     private productsGQL: ProductsGQL,
     private productsCategoryGQL: ProductsCategoryGQL,
-    private productsSubcategoryGQL: ProductsSubategoryQueryGQL
+    private productsSubcategoryGQL: ProductsSubategoryQueryGQL,
+    private likeProductGQL: LikeProductGQL
   ) {}
 
   getProduct(productId: string) {
@@ -79,5 +81,9 @@ export class ProductService {
       query: this.productsSubcategoryGQL,
       products$: this.subcategoryProducts$,
     };
+  }
+
+  likeProduct(productId: string, like: boolean) {
+    return this.likeProductGQL.mutate({ id: productId, like });
   }
 }

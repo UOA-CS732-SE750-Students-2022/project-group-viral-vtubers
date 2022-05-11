@@ -5,7 +5,6 @@ import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthGuard } from './shared/guard/auth.guard';
 import { VrmViewerComponent } from './shared/vrm-viewer/vrm-viewer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';

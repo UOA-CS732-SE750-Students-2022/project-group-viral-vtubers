@@ -1,11 +1,16 @@
+import { animate, style, transition, trigger } from '@angular/animations';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import {
   PriceEnum,
   Service,
   UserProfileFragmentFragment,
 } from 'src/schema/type';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { animate, style, transition, trigger } from '@angular/animations';
+
+import { UserService } from '../services/user.service';
+import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -32,131 +37,27 @@ export class UserProfileComponent implements OnInit {
 
   showEditProfile = false;
 
-  user: UserProfileFragmentFragment;
+  user$?: Observable<UserProfileFragmentFragment>;
 
-  constructor() {
-    this.user = {
-      id: '0',
-      bio: 'Hi everyone! My name is Nozomi, and I love to make  vtuber shit. Just hit me up if you want anything made! I specialise in making hair, feet, and breast augmentations. ',
-      numCompletedCommissions: 183,
-      displayName: 'NozomiSenpai',
-      numLikes: 4821,
-      profileImageURI:
-        'https://pbs.twimg.com/profile_images/510880770668261376/vdt4yfOx_400x400.png',
-      isFollowing: true,
-      tags: [
-        {
-          id: '0',
-          name: 'colouring',
-        },
-        {
-          id: '1',
-          name: 'hair',
-        },
-        {
-          id: '2',
-          name: 'feet',
-        },
-      ],
-      services: [
-        {
-          description: 'I can make your hair look good!',
-          id: '0',
-          name: 'Hair modding',
-          price: 10.9999,
-          priceType: PriceEnum.Each,
-        },
-        {
-          description: 'Feet modelling',
-          id: '1',
-          name: 'I will model your feet for you . Simple as that. ',
-          price: 9.5,
-          priceType: PriceEnum.Hour,
-        },
-        {
-          description:
-            'Bring your character to life! I am just gonna type normally now, it’s my new lorem ipsum.',
-          id: '2',
-          name: 'Character from scratch',
-          price: 19.9999,
-          priceType: PriceEnum.Hour,
-        },
-        {
-          description:
-            'Make your boobs bigger! Or smaller if you are Hiru. Definitely a fair price. Buy it, I dare you. Do it! Come on...',
-          id: '3',
-          name: 'Breast augmentation',
-          price: 20000,
-          priceType: PriceEnum.Each,
-        },
-        {
-          description:
-            'Name anything and I’ll make if for you! Just hit me up, and we’ll figure out something.',
-          id: '4',
-          name: 'Anything at all',
-          price: 20000,
-          priceType: PriceEnum.Each,
-        },
-      ],
-      products: [
-        {
-          id: 'a',
-          name: 'Aya 着替B ver0.98',
-          variants: [
-            {
-              id: 'v1',
-              name: 'aya',
-              price: 20.0,
-            },
-          ],
-          images: [
-            'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-          ],
-        },
-        {
-          id: 'b',
-          name: 'S0iRu',
-          variants: [
-            {
-              id: 'v2',
-              name: 's0ru',
-              price: 15.0,
-            },
-          ],
-          images: [
-            'https://pbs.twimg.com/profile_images/890968801222590464/zy5R43Sf_400x400.jpg',
-          ],
-        },
-        {
-          id: 'c',
-          name: 'ショートボブMk-III',
-          variants: [
-            {
-              id: 'v3',
-              name: 'yes',
-              price: 20.0,
-            },
-          ],
-          images: [
-            'https://i.pinimg.com/originals/df/c7/4b/dfc74b6867617fc8220fddb0efc9d916.jpg',
-          ],
-        },
-        {
-          id: 'd',
-          name: 'Nozomi is waifu',
-          variants: [
-            {
-              id: 'v4',
-              name: 'Nozomi',
-              price: 21.99,
-            },
-          ],
-          images: [
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDX-YSwROnfQPdcDObZK-8Hh9TO5eo2oiHCg&usqp=CAU',
-          ],
-        },
-      ],
-    };
+  services: Service[] = [];
+
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (!id) {
+        return;
+      }
+
+      const userProfile = this.userService.getUserProfile(id);
+      this.user$ = userProfile.userProfile$;
+      this.user$.subscribe(({ services }) => {
+        this.services = services;
+      });
+    });
   }
 
   drop(
@@ -165,9 +66,8 @@ export class UserProfileComponent implements OnInit {
       index: number;
     }>
   ) {
-    console.log(event);
     moveItemInArray(
-      this.user.services,
+      this.services,
       event.previousContainer.data.index,
       event.container.data.index
     );
@@ -175,7 +75,7 @@ export class UserProfileComponent implements OnInit {
 
   remove(service: Service) {
     console.log(service);
-    this.user.services = this.user.services.filter((s) => s.id !== service.id);
+    this.services = this.services.filter((s) => s.id !== service.id);
   }
 
   openNewService() {

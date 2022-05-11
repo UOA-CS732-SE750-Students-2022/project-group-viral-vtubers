@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="user$ | async as user; else loading">
   <div class="profile-panel">
     <div class="profile-img">
       <img src="{{ user.profileImageURI }}" alt="waifu" />
@@ -35,7 +35,7 @@
       <div class="services-content" cdkDropListGroup>
         <div
           class="service-item"
-          *ngFor="let service of user.services; let i = index"
+          *ngFor="let service of services; let i = index"
           [class.drag]="isEdit"
           (cdkDropListDropped)="drop($event)"
           [cdkDropListData]="{ item: service, index: i }"
@@ -69,7 +69,7 @@
         <div
           class="section-add"
           (click)="openNewService()"
-          *ngIf="user.services.length < 6 && isEdit"
+          *ngIf="services.length < 6 && isEdit"
         >
           +
         </div>
@@ -111,7 +111,7 @@
         </div>
       </div>
       <div class="profile-img">
-        <img src="{{ user.profileImageURI }}" alt="waifu" />
+        <img src="{{ (user$ | async)?.profileImageURI }}" alt="waifu" />
         <input type="file" />
       </div>
     </div>
@@ -148,3 +148,7 @@
     <button>SAVE</button>
   </div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

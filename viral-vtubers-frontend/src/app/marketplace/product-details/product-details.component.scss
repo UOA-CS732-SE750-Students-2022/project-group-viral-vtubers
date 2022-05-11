@@ -15,7 +15,6 @@ $side-margin: 40px;
 }
 
 .images-container {
-
   width: 900px;
   max-width: 45%;
 
@@ -43,6 +42,15 @@ $side-margin: 40px;
       align-items: center;
 
       cursor: pointer;
+    }
+
+    a {
+      display: flex;
+      color: $color-kneegrow;
+      text-decoration: none;
+      &:hover {
+        color: $color-secondary;
+      }
     }
 
     img {
@@ -119,6 +127,14 @@ $side-margin: 40px;
       transform: scale(1.05);
     }
 
+    &.active {
+      color: $color-secondary !important;
+      border-color: $color-secondary !important;
+      p {
+        color: $color-secondary !important;
+      }
+    }
+
     img {
       height: 30px;
       width: 30px;
@@ -134,7 +150,7 @@ $side-margin: 40px;
       margin: 0;
       text-transform: capitalize;
     }
-}
+  }
 
   .price-details-container {
     padding-top: 15px;
