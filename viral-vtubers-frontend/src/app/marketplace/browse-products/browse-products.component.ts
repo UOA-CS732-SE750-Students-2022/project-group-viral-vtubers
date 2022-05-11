@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -9,7 +10,59 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
 export class BrowseProductsComponent implements OnInit {
   products: Array<ProductBlurbFragmentFragment>;
 
+  minValue = 0;
+  maxValue = 800;
+  options: Options = {
+    floor: 0,
+    ceil: 800,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '<b>Min:</b> $' + value;
+        case LabelType.High:
+          return '<b>Max:</b> $' + value;
+        default:
+          return '$' + value;
+      }
+    },
+  };
+
+  sortOptions: selectItem[] = [
+    { id: 'newest', name: 'Time added (newest) ' },
+    { id: 'oldest', name: 'Time added (oldest) ' },
+    { id: 'price', name: 'Price (lowest to highest) ' },
+    { id: 'price-reverse', name: 'Price (highest to lowest) ' },
+    { id: 'likes', name: 'Number of likes ' },
+  ];
+  selectedSortOption: selectItem = this.sortOptions[0];
+
+  title = 'All Products';
+
+  // TODO these are placeholder filter options, replace with real ones when linking.
+  categoryFilters: selectItem[] = [
+    { id: 'all', name: 'All' },
+    { id: 'clothing', name: 'Clothing' },
+    { id: 'accessories', name: 'Accessories' },
+    { id: 'whole', name: 'Whole Models' },
+    { id: 'backgrounds', name: 'Backgrounds' },
+  ];
+  selectedCategoryFilter: selectItem = this.categoryFilters[0];
+
+  // TODO these are placeholder filter options, replace with real ones when linking.
+  subCategoryFilters: selectItem[] = [{ id: 'all', name: 'All' }];
+  selectedSubCategoryFilter: selectItem = this.subCategoryFilters[0];
+
+  // TODO these are placeholder filter options, replace with real ones when linking.
+  ageRestrictionFilters: selectItem[] = [
+    { id: 'all', name: 'All' },
+    { id: 'adult', name: 'Adult only' },
+    { id: 'sfw', name: 'SFW only' },
+  ];
+  selectedAgeRestrictionFilter: selectItem = this.ageRestrictionFilters[0];
+
   constructor() {
+    // TODO: set title: this.title = ... (category > subcategory)
+
     this.products = [
       {
         id: '1',
@@ -25,7 +78,7 @@ export class BrowseProductsComponent implements OnInit {
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
-          'https://pbs.twimg.com/profile_images/890968801222590464/zy5R43Sf_400x400.jpg',
+          'https://cdn.discordapp.com/attachments/973434166576291860/973838486966788126/unknown.png',
       },
       {
         id: '1',
@@ -33,7 +86,7 @@ export class BrowseProductsComponent implements OnInit {
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
-          'https://i.pinimg.com/originals/df/c7/4b/dfc74b6867617fc8220fddb0efc9d916.jpg',
+          'https://lovelive-as-global.com/assets/img/member/ms/name_nozomi_visual2.png',
       },
       {
         id: '1',
@@ -87,4 +140,17 @@ export class BrowseProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  resetFilters() {
+    this.selectedCategoryFilter = this.categoryFilters[0];
+    this.selectedSubCategoryFilter = this.subCategoryFilters[0];
+    this.selectedAgeRestrictionFilter = this.ageRestrictionFilters[0];
+    this.minValue = 0;
+    this.maxValue = 800;
+  }
+}
+
+interface selectItem {
+  id: string;
+  name: string;
 }

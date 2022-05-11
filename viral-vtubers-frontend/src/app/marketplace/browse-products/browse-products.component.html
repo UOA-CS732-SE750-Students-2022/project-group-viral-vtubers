@@ -1,1 +1,70 @@
-<app-products-grid [products]="products"></app-products-grid>
+<div class="page-header">
+  <h1>{{ title }}</h1>
+</div>
+<div class="content-container">
+  <div class="sidebar-container">
+    <div class="sidebar-header">
+      <h3>Filter</h3>
+      <p (click)="resetFilters()">Reset</p>
+    </div>
+
+    <div class="filter-container">
+      <h5>Category</h5>
+      <div class="select-wrapper">
+        <select [(ngModel)]="selectedCategoryFilter">
+          <option *ngFor="let option of categoryFilters" [ngValue]="option">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-container">
+      <h5>Subcategory</h5>
+      <div class="select-wrapper">
+        <select [(ngModel)]="selectedSubCategoryFilter">
+          <option *ngFor="let option of subCategoryFilters" [ngValue]="option">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-container">
+      <h5>Age Restriction</h5>
+      <div class="select-wrapper">
+        <select [(ngModel)]="selectedAgeRestrictionFilter">
+          <option
+            *ngFor="let option of ageRestrictionFilters"
+            [ngValue]="option"
+          >
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="slider-container">
+      <h5>Price</h5>
+      <ngx-slider
+        [(value)]="minValue"
+        [(highValue)]="maxValue"
+        [options]="options"
+      ></ngx-slider>
+    </div>
+  </div>
+
+  <div class="products-container">
+    <div class="config-container">
+      <p>Total {{ products.length }} items</p>
+      <select [(ngModel)]="selectedSortOption">
+        <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
+          {{ sortOp.name }}
+        </option>
+      </select>
+    </div>
+    <div class="grid-container">
+      <app-products-grid [products]="products"></app-products-grid>
+    </div>
+  </div>
+</div>

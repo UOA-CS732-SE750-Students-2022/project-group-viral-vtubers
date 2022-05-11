@@ -114,3 +114,9 @@
     grid-template-columns: repeat(6, 1fr);
   }
 }
+
+@media (min-width: 2501px) {
+  .products-content {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
