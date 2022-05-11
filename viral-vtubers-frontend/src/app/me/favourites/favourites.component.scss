@@ -32,11 +32,18 @@ h1 + hr {
 
   width: 100%;
 
+  font-size: $font-size-body-2;
+
   select {
     border: none;
     background: none;
 
+    padding: 0 5px;
+
     color: $color-grey-dark;
+
+    font-family: $font-family-poppins;
+    font-size: $font-size-body-2;
 
     * {
       background: none;

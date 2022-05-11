@@ -3,9 +3,10 @@
 
 <div class="config-container">
   <p>Total 241 items</p>
-  <select name="sort-by" id="sort-by">
-    <option value="newest">Time added (newest)</option>
-    <option value="newest">Time added (oldest)</option>
+  <select [(ngModel)]="selectedSortOption">
+    <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
+      {{ sortOp.name }}
+    </option>
   </select>
 </div>
 
