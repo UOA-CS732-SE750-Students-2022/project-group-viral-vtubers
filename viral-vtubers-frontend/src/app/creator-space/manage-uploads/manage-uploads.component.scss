@@ -53,8 +53,12 @@ h1 + hr {
     cursor: pointer;
     transition: $button-hover-animation;
 
-    &:hover {
+    &.draft-item:hover {
       border: solid 1px $color-secondary;
+    }
+
+    &.upload-item:hover {
+      border: solid 1px $color-primary;
     }
 
     > img {

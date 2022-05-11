@@ -7,8 +7,8 @@
     <div class="products-content">
       <div
         *ngFor="let product of drafts"
-        class="product-item"
-        (click)="nagivateToProduct(product.id)"
+        class="product-item draft-item"
+        (click)="editProduct(product.id); $event.stopPropagation()"
       >
         <img src="{{ product.titleImage }}" alt="waifu" />
         <div>
@@ -37,7 +37,7 @@
     <div class="products-content">
       <div
         *ngFor="let product of uploads"
-        class="product-item"
+        class="product-item upload-item"
         (click)="nagivateToProduct(product.id)"
       >
         <img src="{{ product.titleImage }}" alt="waifu" />
