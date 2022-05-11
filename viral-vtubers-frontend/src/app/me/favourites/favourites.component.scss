@@ -1,0 +1,100 @@
+@import "../../../variables";
+
+:host {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  overflow-y: scroll;
+}
+
+h1 {
+  font-size: $font-size-h6;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h1 + hr {
+  border: solid 1px $color-primary;
+  margin: 0;
+  width: 50px;
+
+  margin-bottom: 20px;
+}
+
+.content-container {
+  height: 100%;
+  width: 100%;
+
+  padding-right: 40px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.config-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  font-size: $font-size-body-2;
+
+  select {
+    border: none;
+    background: none;
+
+    padding: 0 5px;
+
+    color: $color-grey-dark;
+
+    font-family: $font-family-poppins;
+    font-size: $font-size-body-2;
+
+    * {
+      background: none;
+      color: $color-grey-dark;
+    }
+  }
+}
+
+.grid-container {
+  width: 100%;
+  flex: 1;
+
+  padding-bottom: 40px;
+}
+
+.empty {
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+      transition: $button-hover-animation;
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+    }
+  }
+}
