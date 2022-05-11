@@ -16,7 +16,248 @@ export class FavouritesComponent implements OnInit {
   products: ProductBlurbFragmentFragment[];
 
   constructor() {
-    this.products = [];
+    this.products = [
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+      {
+        id: '1',
+        name: 'Aya 着替B ver0.98',
+        minPrice: 12.99,
+        numLikes: 29,
+        titleImage:
+          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
+      },
+    ];
   }
 
   ngOnInit(): void {}
