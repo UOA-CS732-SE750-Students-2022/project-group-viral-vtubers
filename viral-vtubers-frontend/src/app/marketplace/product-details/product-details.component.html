@@ -1,9 +1,12 @@
-<div class="container">
+<div
+  class="container"
+  *ngIf="productDetails$ | async as productDetails; else loading"
+>
   <div class="product-information-container">
     <div class="images-container">
       <gallery
         class="image-display"
-        [items]="images"
+        [items]="(images$ | async) ?? []"
         thumbPosition="bottom"
         thumbView="contain"
         imageSize="contain"
@@ -67,3 +70,7 @@
   </div>
   <div class="comments-container">Comments here</div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

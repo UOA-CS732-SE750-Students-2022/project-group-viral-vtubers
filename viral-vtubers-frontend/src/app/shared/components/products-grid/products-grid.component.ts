@@ -16,6 +16,6 @@ export class ProductsGridComponent implements OnInit {
   ngOnInit(): void {}
 
   nagivateToProduct(id: string) {
-    this.router.navigateByUrl(`/products/${id}`);
+    this.router.navigateByUrl(`marketplace/product/${id}`);
   }
 }

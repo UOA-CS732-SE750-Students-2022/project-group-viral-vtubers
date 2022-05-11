@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 import {
   EditSelfGQL,
   EditSelfInput,
+  LoginGQL,
   SelfGQL,
   UserFragmentFragment,
 } from 'src/schema/type';
@@ -13,7 +14,11 @@ import {
 export class UserService {
   self$: Observable<UserFragmentFragment>;
 
-  constructor(private selfGQL: SelfGQL, private editSelfGQL: EditSelfGQL) {
+  constructor(
+    private selfGQL: SelfGQL,
+    private editSelfGQL: EditSelfGQL,
+    private loginGQL: LoginGQL
+  ) {
     this.self$ = this.selfGQL
       .watch()
       .valueChanges.pipe(map((res) => res.data.self));
@@ -25,5 +30,9 @@ export class UserService {
 
   editSelf(input: EditSelfInput) {
     return this.editSelfGQL.mutate({ input });
+  }
+
+  login() {
+    return this.loginGQL.mutate();
   }
 }

@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
+import { map, Observable } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
+import { BlurbService } from 'src/app/shared/blurb/blurb.service';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -8,7 +12,7 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
   styleUrls: ['./browse-products.component.scss'],
 })
 export class BrowseProductsComponent implements OnInit {
-  products: Array<ProductBlurbFragmentFragment>;
+  products$: Observable<ProductBlurbFragmentFragment[]>;
 
   minValue = 0;
   maxValue = 800;
@@ -60,83 +64,53 @@ export class BrowseProductsComponent implements OnInit {
   ];
   selectedAgeRestrictionFilter: selectItem = this.ageRestrictionFilters[0];
 
-  constructor() {
-    // TODO: set title: this.title = ... (category > subcategory)
+  constructor(
+    private productService: ProductService,
+    private blurbService: BlurbService,
+    private route: ActivatedRoute
+  ) {
+    const products = this.productService.getProducts();
+    const productsCategory = this.productService.getProductsCategory();
+    const productsSubCategory = this.productService.getProductsSubcategory();
 
-    this.products = [
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://cdn.discordapp.com/attachments/973434166576291860/973838486966788126/unknown.png',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://lovelive-as-global.com/assets/img/member/ms/name_nozomi_visual2.png',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://c4.wallpaperflare.com/wallpaper/229/65/146/anime-love-live-nozomi-tojo-wallpaper-preview.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNvuGoYH3SjULe-zItrAlyS7MaJPoR0wsjRZWKHbNXsfAU0bHLrRF4j1tP93k7jyhbnqk&usqp=CAU',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPoAqbxmqSwl8qjS9Ad3BTjTsBwZCzvhJ7Jw&usqp=CAU',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://64.media.tumblr.com/2c1330e52fe9a1f22729be266f37477f/tumblr_np0da4RvDz1uwhadvo3_400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://64.media.tumblr.com/256c6a85096830310954813172b8e266/tumblr_np0da4RvDz1uwhadvo1_250.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyF3bjSJt9T-dHmFcPiRWfPx9gDCOOGCGz8LoY6AJ1snM-mJNFKZLYa7xiQCVwM42Mf-E&usqp=CAU',
-      },
-    ];
+    this.products$ = products.products$.pipe(
+      map((p) => p.edges.map((e) => e.node))
+    );
+    products.query.fetch();
+
+    this.route.paramMap.subscribe((params) => {
+      const categoryBlurb = params.get('categoryBlurb');
+      const subcategoryBlurb = params.get('subcategoryBlurb');
+
+      if (!categoryBlurb && !subcategoryBlurb) {
+        this.products$ = products.products$.pipe(
+          map((p) => p.edges.map((e) => e.node))
+        );
+        products.query.fetch();
+        return;
+      }
+      if (categoryBlurb && !subcategoryBlurb) {
+        this.products$ = productsCategory.products$.pipe(
+          map((p) => p.edges.map((e) => e.node))
+        );
+        productsCategory.query.fetch({
+          categoryId: blurbService.getCategoryId(categoryBlurb),
+        });
+        return;
+      }
+      if (subcategoryBlurb && categoryBlurb) {
+        this.products$ = productsSubCategory.products$.pipe(
+          map((p) => p.edges.map((e) => e.node))
+        );
+        productsSubCategory.query.fetch({
+          subcategoryId: blurbService.getSubcategoryId(
+            categoryBlurb,
+            subcategoryBlurb
+          ),
+        });
+        return;
+      }
+    });
   }
 
   ngOnInit(): void {}

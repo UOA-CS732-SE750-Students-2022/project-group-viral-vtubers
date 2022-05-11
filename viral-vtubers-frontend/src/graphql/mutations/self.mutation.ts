@@ -10,3 +10,12 @@ export const editSelfMutation = gql`
   }
   ${UserFragment}
 `;
+
+export const loginMutation = gql`
+  mutation Login {
+    login {
+      ...UserFragment
+    }
+  }
+  ${UserFragment}
+`;

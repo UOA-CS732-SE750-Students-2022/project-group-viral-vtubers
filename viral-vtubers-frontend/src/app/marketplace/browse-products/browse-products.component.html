@@ -1,7 +1,10 @@
 <div class="page-header">
   <h1>{{ title }}</h1>
 </div>
-<div class="content-container">
+<div
+  class="content-container"
+  *ngIf="products$ | async as products; else loading"
+>
   <div class="sidebar-container">
     <div class="sidebar-header">
       <h3>Filter</h3>
@@ -68,3 +71,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

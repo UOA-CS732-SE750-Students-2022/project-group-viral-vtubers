@@ -183,6 +183,10 @@ type Query {
   users(filter: UserFilter, sort: UserSort, cursor: String, limit: Int): UserPagination!
   "Get mail"
   mail(id: ID!): Mail!
+  "Get all products"
+  products(filter: ProductFilter, sort: ProductSort, cursor: String, limit: Int): ProductPagination!
+  "Get a product"
+  product(id: ID!): Product!
   "Get Categories"
   categories: [Category!]!
   "Get Category"

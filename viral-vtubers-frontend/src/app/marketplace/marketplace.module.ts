@@ -18,6 +18,14 @@ export const routes: Routes = [
     path: 'product/:id',
     component: ProductDetailsComponent,
   },
+  {
+    path: ':categoryBlurb',
+    component: BrowseProductsComponent,
+  },
+  {
+    path: ':categoryBlurb/:subcategoryBlurb',
+    component: BrowseProductsComponent,
+  },
 ];
 
 @NgModule({
