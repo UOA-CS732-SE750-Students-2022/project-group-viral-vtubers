@@ -259,15 +259,13 @@ class UserServiceImpl(
         userId: ID,
         followId: ID,
         follow: Boolean
-    ): Boolean {
+    ): User {
         if (follow) {
-            followRepository.addFollow(userId.map(), followId.map())?.let {
-                return true
-            }
+            followRepository.addFollow(userId.map(), followId.map())
         } else {
             followRepository.deleteFollow(userId.map(), followId.map())
-                ?: return true
         }
-        return false
+        return userRepository.getById(followId.map())?.map()
+            ?: throw error("user not found")
     }
 }
