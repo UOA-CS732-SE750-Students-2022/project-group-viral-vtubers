@@ -21,9 +21,9 @@ fun SchemaBuilder.productSchema(
         Product::tags.ignore()
 
         property<List<Tag>>("tags") {
-            resolver { user ->
+            resolver { product ->
                 description = "Get product tags"
-                tagService.getTagsByIds(user.tags)
+                tagService.getTagsByIds(product.tags)
             }
         }
 
@@ -44,8 +44,12 @@ fun SchemaBuilder.productSchema(
         property<Boolean>("isLiked") {
             resolver { product, ctx: Context ->
                 description = "Get the artist who created the Product"
-                val userId = authService.getUserId(ctx)
-                productService.checkIsLiked(product.id, userId)
+                try {
+                    val userId = authService.getUserId(ctx)
+                    productService.checkIsLiked(product.id, userId)
+                } catch (e: Exception) {
+                    false
+                }
             }
         }
 
@@ -129,6 +133,13 @@ fun SchemaBuilder.productSchema(
                 cursor,
                 limit
             )
+        }
+    }
+
+    query("product") {
+        description = "Get a product"
+        resolver { id: ID ->
+            productService.getProductId(id)
         }
     }
 
