@@ -23,7 +23,7 @@ export class ManageUploadsComponent implements OnInit {
       },
       {
         id: '1',
-        name: 'Aya 着替B ver0.98',
+        name: '',
         minPrice: 12.99,
         numLikes: 29,
         titleImage:

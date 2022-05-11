@@ -96,6 +96,10 @@ h1 + hr {
           overflow: hidden;
         }
 
+        .noName {
+          color: $color-grey-dark;
+        }
+
         > p {
           font-size: $font-size-body-2;
           font-weight: 500;

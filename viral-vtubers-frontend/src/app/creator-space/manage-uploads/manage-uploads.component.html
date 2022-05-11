@@ -13,7 +13,11 @@
         <img src="{{ product.titleImage }}" alt="waifu" />
         <div>
           <div class="product-info">
-            <h4>{{ product.name }}</h4>
+            <h4 *ngIf="product.name; else noName">{{ product.name }}</h4>
+
+            <ng-template #noName>
+              <h4 class="noName">Untitled product</h4>
+            </ng-template>
           </div>
           <div class="edit-icon">
             <img src="assets/icons/EditIcon.svg" />
