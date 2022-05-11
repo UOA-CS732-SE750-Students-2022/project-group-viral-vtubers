@@ -14,8 +14,6 @@
 
   display: flex;
   flex-direction: column;
-
-  background-color: lightblue;
 }
 
 .sidebar-header {
@@ -29,6 +27,8 @@
   h3 {
     font-size: $font-size-h6;
     font-weight: 400;
+
+    margin: 0;
   }
 
   p {
@@ -36,6 +36,14 @@
     font-weight: 400;
 
     font-size: $font-size-body-2;
+
+    cursor: pointer;
+
+    transition: $button-hover-animation;
+
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
   }
 }
 
@@ -45,5 +53,31 @@
   h5 {
     font-size: $font-size-body-2;
     font-weight: 400;
+
+    margin-bottom: 0;
+  }
+
+  .select-wrapper {
+    padding-left: 10px;
+    box-sizing: border-box;
+  }
+
+  select {
+    background: none;
+    border: none;
+
+    color: $color-grey-dark;
+
+    border-bottom: solid 1px $color-grey-light;
+
+    padding: 5px 5px;
+    margin: 5px 0;
+
+    width: 100%;
+
+    font-size: $font-size-body-3;
+    font-family: $font-family-poppins;
+
+    cursor: pointer;
   }
 }
