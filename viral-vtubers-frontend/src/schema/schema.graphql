@@ -296,6 +296,7 @@ input ProductFilter {
 input ProductSort {
   createdDate: SortEnum
   name: SortEnum
+  numLikes: SortEnum
   price: SortEnum
 }
 ""

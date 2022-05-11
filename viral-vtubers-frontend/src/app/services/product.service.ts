@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
   ProductDetailFragmentFragment,
+  ProductFilter,
   ProductGQL,
   ProductPaginationFragmentFragment,
   ProductsCategoryGQL,
   ProductsGQL,
+  ProductSort,
   ProductsSubategoryQueryGQL,
 } from 'src/schema/type';
 
@@ -14,7 +16,7 @@ import {
 })
 export class ProductService {
   product$?: Observable<ProductDetailFragmentFragment>;
-  products$: Observable<ProductPaginationFragmentFragment>;
+  products$?: Observable<ProductPaginationFragmentFragment>;
   categoryProducts$?: Observable<ProductPaginationFragmentFragment>;
   subcategoryProducts$?: Observable<ProductPaginationFragmentFragment>;
 
@@ -23,11 +25,7 @@ export class ProductService {
     private productsGQL: ProductsGQL,
     private productsCategoryGQL: ProductsCategoryGQL,
     private productsSubcategoryGQL: ProductsSubategoryQueryGQL
-  ) {
-    this.products$ = productsGQL
-      .watch()
-      .valueChanges.pipe(map((result) => result.data.products));
-  }
+  ) {}
 
   getProduct(productId: string) {
     this.product$ = this.productGQL
@@ -37,13 +35,27 @@ export class ProductService {
     return { query: this.productGQL, product$: this.product$ };
   }
 
-  getProducts() {
+  getProducts(
+    filter?: ProductFilter,
+    sort?: ProductSort,
+    cursor?: string,
+    limit?: number
+  ) {
+    this.products$ = this.productsGQL
+      .watch({ filter, sort, cursor, limit })
+      .valueChanges.pipe(map((result) => result.data.products));
     return { query: this.productsGQL, products$: this.products$ };
   }
 
-  getProductsCategory(categoryId: string) {
+  getProductsCategory(
+    categoryId: string,
+    filter?: ProductFilter,
+    sort?: ProductSort,
+    cursor?: string,
+    limit?: number
+  ) {
     this.categoryProducts$ = this.productsCategoryGQL
-      .watch({ categoryId: categoryId })
+      .watch({ categoryId, filter, sort, cursor, limit })
       .valueChanges.pipe(map((result) => result.data.category.products));
 
     return {
@@ -52,9 +64,15 @@ export class ProductService {
     };
   }
 
-  getProductsSubcategory(subcategoryId: string) {
+  getProductsSubcategory(
+    subcategoryId: string,
+    filter?: ProductFilter,
+    sort?: ProductSort,
+    cursor?: string,
+    limit?: number
+  ) {
     this.subcategoryProducts$ = this.productsSubcategoryGQL
-      .watch({ subcategoryId: subcategoryId })
+      .watch({ subcategoryId: subcategoryId, filter, sort, cursor, limit })
       .valueChanges.pipe(map((result) => result.data.subcategory.products));
 
     return {

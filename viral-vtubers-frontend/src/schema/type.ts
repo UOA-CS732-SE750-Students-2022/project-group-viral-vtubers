@@ -467,6 +467,7 @@ export type ProductPagination = {
 export type ProductSort = {
   createdDate?: InputMaybe<SortEnum>;
   name?: InputMaybe<SortEnum>;
+  numLikes?: InputMaybe<SortEnum>;
   price?: InputMaybe<SortEnum>;
 };
 

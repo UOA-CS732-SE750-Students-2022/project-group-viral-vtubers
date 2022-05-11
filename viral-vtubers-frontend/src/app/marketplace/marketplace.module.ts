@@ -12,15 +12,18 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 export const routes: Routes = [
   {
     path: '',
-    component: BrowseProductsComponent,
-  },
-  {
-    path: 'product/:id',
-    component: ProductDetailsComponent,
+    redirectTo: '/marketplace/all/',
+    pathMatch: 'full',
   },
   {
     path: ':categoryBlurb',
-    component: BrowseProductsComponent,
+    redirectTo: '/marketplace/:categoryBlurb/',
+    pathMatch: 'full',
+  },
+
+  {
+    path: 'product/:id',
+    component: ProductDetailsComponent,
   },
   {
     path: ':categoryBlurb/:subcategoryBlurb',
