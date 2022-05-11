@@ -84,6 +84,12 @@ class UserServiceImpl(
             return if (it == SortEnum.ASC) ascending(DataUser::numCompletedCommissions)
             else descending(DataUser::numCompletedCommissions)
         }
+
+        sort.numLikes?.let {
+            return if (it == SortEnum.ASC) ascending(DataUser::numLikes)
+            else descending(DataUser::numLikes)
+        }
+
         return descending(DataUser::displayName)
     }
 
@@ -119,7 +125,8 @@ class UserServiceImpl(
             status = input.status,
             profileImageURI = input.profileImageURI,
             tags = input.tags.map { it.map() },
-            services = ArrayList()
+            services = ArrayList(),
+            numLikes = 0
         )
         userRepository.add(user)
         return userRepository.getById(user._id)
@@ -141,7 +148,8 @@ class UserServiceImpl(
             profileImageURI = input.status ?: user.status,
             tags = input.tags?.map { it.map() }
                 ?: user.tags,
-            services = user.services
+            services = user.services,
+            numLikes = user.numLikes
         )
         userRepository.add(user)
         return userRepository.update(update)?.map()

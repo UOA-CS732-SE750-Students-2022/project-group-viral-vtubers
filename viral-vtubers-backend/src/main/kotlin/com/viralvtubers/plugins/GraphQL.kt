@@ -19,7 +19,8 @@ fun Application.configureGraphQL() {
     )
     val productService = ProductServiceImpl(
         database.asProductRepository(),
-        database.asLikeRepository()
+        database.asLikeRepository(),
+        database.asUserRepository()
     )
     val userService = UserServiceImpl(
         database.asUserRepository(),
