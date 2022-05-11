@@ -8,7 +8,7 @@
     [@inOutAnimation]
   >
     <a *ngIf="!isEdit" [style.color]="tag.color" href="#{{ tag.name }}">
-      <p [style.textDecoration]="isEdit ? null : 'none'">
+      <p [style.textDecoration]="isEdit ? null : 'none'" data-test-id="tag-name">
         {{ tag.name }}
       </p>
     </a>
