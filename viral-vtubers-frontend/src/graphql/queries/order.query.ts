@@ -23,7 +23,7 @@ export const myOrders = gql`
 `;
 
 export const myCommissions = gql`
-  query MyCommisions {
+  query MyCommissions {
     myCommissions {
       ...MyCommissionsFragment
     }

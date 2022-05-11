@@ -40,7 +40,7 @@ export const MyOrdersFragment = gql`
   ${OrderFragment}
 `;
 
-export const MyCommisionsFragment = gql`
+export const MyCommissionsFragment = gql`
   fragment MyCommissionsFragment on MyCommission {
     lost {
       ...OrderFragment
