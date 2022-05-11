@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>{{ title }}</h1>
+  <h1 data-test-id="title">{{ title }}</h1>
 </div>
 <div class="content-container">
   <div class="sidebar-container">
@@ -17,6 +17,7 @@
             selectedCategoryFilter === categoryFilters[0] ? '' : 'selected'
           "
           (ngModelChange)="onCategoryFiltersChange($event)"
+          data-test-id="categoryFilters"
         >
           <option *ngFor="let option of categoryFilters" [ngValue]="option">
             {{ option.name }}
@@ -38,6 +39,7 @@
           "
           [disabled]="selectedCategoryFilter === categoryFilters[0]"
           (ngModelChange)="onSubcategoryFiltersChange($event)"
+          data-test-id="subCategoryFilters"
         >
           <option
             *ngFor="let option of selectedCategoryFilter.subcategories"
@@ -60,6 +62,7 @@
               : 'selected'
           "
           (ngModelChange)="onAgeRestrictionFiltersChange($event)"
+          data-test-id="ageRestrictionFilters"
         >
           <option
             *ngFor="let option of ageRestrictionFilters"
@@ -92,6 +95,7 @@
       <select
         [(ngModel)]="selectedSortOption"
         (ngModelChange)="onSortChange($event)"
+        data-test-id="sortOptions"
       >
         <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
           {{ sortOp.name }}
