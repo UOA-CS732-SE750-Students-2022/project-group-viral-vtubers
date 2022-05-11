@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -8,6 +9,23 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
 })
 export class BrowseProductsComponent implements OnInit {
   products: Array<ProductBlurbFragmentFragment>;
+
+  minValue = 0;
+  maxValue = 800;
+  options: Options = {
+    floor: 0,
+    ceil: 800,
+    translate: (value: number, label: LabelType): string => {
+      switch (label) {
+        case LabelType.Low:
+          return '<b>Min price:</b> $' + value;
+        case LabelType.High:
+          return '<b>Max price:</b> $' + value;
+        default:
+          return '$' + value;
+      }
+    },
+  };
 
   constructor() {
     this.products = [
