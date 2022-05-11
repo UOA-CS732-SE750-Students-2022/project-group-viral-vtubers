@@ -23,17 +23,19 @@ h1 + hr {
   border: solid 1px $color-secondary;
   margin: 0;
   width: 50px;
+
+  margin-bottom: 40px;
 }
 
 .content-container {
   width: 100%;
 
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   h3 {
     font-size: $font-size-body-1;
     font-weight: 400;
+    margin-top: 0;
   }
 }
 
