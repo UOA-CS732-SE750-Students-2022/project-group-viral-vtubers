@@ -3,7 +3,7 @@
 
 <div class="content-container" *ngIf="products.length > 0; else empty">
   <div class="config-container">
-    <p>Total 241 items</p>
+    <p>Total {{ products.length }} items</p>
     <select [(ngModel)]="selectedSortOption">
       <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
         {{ sortOp.name }}
