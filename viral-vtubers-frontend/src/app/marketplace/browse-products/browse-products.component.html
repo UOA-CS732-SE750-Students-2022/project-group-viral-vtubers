@@ -31,11 +31,13 @@
     </div>
   </div>
 
-  <ngx-slider
-    [(value)]="minValue"
-    [(highValue)]="maxValue"
-    [options]="options"
-  ></ngx-slider>
+  <div class="slider-container">
+    <ngx-slider
+      [(value)]="minValue"
+      [(highValue)]="maxValue"
+      [options]="options"
+    ></ngx-slider>
+  </div>
 </div>
 
 <app-products-grid [products]="products"></app-products-grid>

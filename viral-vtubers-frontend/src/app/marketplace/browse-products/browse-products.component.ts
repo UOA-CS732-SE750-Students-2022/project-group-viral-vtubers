@@ -18,9 +18,9 @@ export class BrowseProductsComponent implements OnInit {
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
-          return '<b>Min price:</b> $' + value;
+          return '<b>Min:</b> $' + value;
         case LabelType.High:
-          return '<b>Max price:</b> $' + value;
+          return '<b>Max:</b> $' + value;
         default:
           return '$' + value;
       }

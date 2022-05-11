@@ -81,3 +81,44 @@
     cursor: pointer;
   }
 }
+
+$handle-size: 15px;
+$bar-dimension: 3px;
+
+::ng-deep {
+  .slider-container {
+    .ngx-slider {
+      .ngx-slider-pointer {
+        background-color: $color-background;
+        height: $handle-size;
+        width: $handle-size;
+        top: -$handle-size / 2 + $bar-dimension / 2;
+
+        border: 0.1px solid #dddddd;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+        transition: 0.1s ease-out height, 0.1s ease-out width, 0.1s ease-out top !important;
+      }
+
+      .ngx-slider-pointer::after {
+        display: none;
+      }
+
+      .ngx-slider-pointer:hover {
+        $handle-size-hover: 20px;
+
+        height: $handle-size-hover;
+        width: $handle-size-hover;
+        top: -$handle-size-hover / 2 + $bar-dimension / 2;
+      }
+      .ngx-slider-pointer:focus {
+        outline: none;
+      }
+
+      .ngx-slider-bubble {
+        font-family: $font-family-poppins;
+        font-size: $font-size-body-3;
+      }
+    }
+  }
+}
