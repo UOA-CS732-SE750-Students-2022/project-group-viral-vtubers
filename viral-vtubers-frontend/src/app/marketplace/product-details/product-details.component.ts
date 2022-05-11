@@ -11,37 +11,35 @@ import { ProductDetailFragmentFragment } from 'src/schema/type';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  images$: Observable<GalleryItem[]>;
+  images$?: Observable<GalleryItem[]>;
 
-  productDetails$: Observable<ProductDetailFragmentFragment>;
+  productDetails$?: Observable<ProductDetailFragmentFragment>;
 
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
   ) {
-    const product = this.productService.getProduct();
-    this.productDetails$ = product.product$;
-
-    console.log('lol');
-
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       console.log(id);
+      if (!id) {
+        return;
+      }
+      const product = this.productService.getProduct(id);
+      this.productDetails$ = product.product$;
 
-      product.query.fetch({ id: id ?? '' });
+      this.images$ = product.product$.pipe(
+        map((data) => [
+          new ImageItem({
+            src: data.titleImage,
+            thumb: data.titleImage,
+          }),
+          ...data.images.map((image) => {
+            return new ImageItem({ src: image, thumb: image });
+          }),
+        ])
+      );
     });
-
-    this.images$ = product.product$.pipe(
-      map((data) => [
-        new ImageItem({
-          src: data.titleImage,
-          thumb: data.titleImage,
-        }),
-        ...data.images.map((image) => {
-          return new ImageItem({ src: image, thumb: image });
-        }),
-      ])
-    );
   }
 
   ngOnInit(): void {}

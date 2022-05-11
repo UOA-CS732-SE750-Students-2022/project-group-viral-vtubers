@@ -12,7 +12,7 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
   styleUrls: ['./browse-products.component.scss'],
 })
 export class BrowseProductsComponent implements OnInit {
-  products$: Observable<ProductBlurbFragmentFragment[]>;
+  products$?: Observable<ProductBlurbFragmentFragment[]>;
 
   minValue = 0;
   maxValue = 800;
@@ -69,45 +69,33 @@ export class BrowseProductsComponent implements OnInit {
     private blurbService: BlurbService,
     private route: ActivatedRoute
   ) {
-    const products = this.productService.getProducts();
-    const productsCategory = this.productService.getProductsCategory();
-    const productsSubCategory = this.productService.getProductsSubcategory();
-
-    this.products$ = products.products$.pipe(
-      map((p) => p.edges.map((e) => e.node))
-    );
-    products.query.fetch();
-
     this.route.paramMap.subscribe((params) => {
       const categoryBlurb = params.get('categoryBlurb');
       const subcategoryBlurb = params.get('subcategoryBlurb');
 
       if (!categoryBlurb && !subcategoryBlurb) {
+        const products = productService.getProducts();
         this.products$ = products.products$.pipe(
           map((p) => p.edges.map((e) => e.node))
         );
-        products.query.fetch();
         return;
       }
       if (categoryBlurb && !subcategoryBlurb) {
+        const productsCategory = productService.getProductsCategory(
+          blurbService.getCategoryId(categoryBlurb)
+        );
         this.products$ = productsCategory.products$.pipe(
           map((p) => p.edges.map((e) => e.node))
         );
-        productsCategory.query.fetch({
-          categoryId: blurbService.getCategoryId(categoryBlurb),
-        });
         return;
       }
       if (subcategoryBlurb && categoryBlurb) {
+        const productsSubCategory = productService.getProductsSubcategory(
+          blurbService.getSubcategoryId(categoryBlurb, subcategoryBlurb)
+        );
         this.products$ = productsSubCategory.products$.pipe(
           map((p) => p.edges.map((e) => e.node))
         );
-        productsSubCategory.query.fetch({
-          subcategoryId: blurbService.getSubcategoryId(
-            categoryBlurb,
-            subcategoryBlurb
-          ),
-        });
         return;
       }
     });

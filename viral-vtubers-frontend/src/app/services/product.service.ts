@@ -13,13 +13,10 @@ import {
   providedIn: 'root',
 })
 export class ProductService {
-  product$: Observable<ProductDetailFragmentFragment>;
-
+  product$?: Observable<ProductDetailFragmentFragment>;
   products$: Observable<ProductPaginationFragmentFragment>;
-
-  categoryProducts$: Observable<ProductPaginationFragmentFragment>;
-
-  subcategoryProducts$: Observable<ProductPaginationFragmentFragment>;
+  categoryProducts$?: Observable<ProductPaginationFragmentFragment>;
+  subcategoryProducts$?: Observable<ProductPaginationFragmentFragment>;
 
   constructor(
     private productGQL: ProductGQL,
@@ -27,34 +24,16 @@ export class ProductService {
     private productsCategoryGQL: ProductsCategoryGQL,
     private productsSubcategoryGQL: ProductsSubategoryQueryGQL
   ) {
-    this.product$ = this.productGQL
-      .watch({ id: '62781d1aa17d6a5ded7d4fe9' })
-      .valueChanges.pipe(map((result) => result.data.product));
-
     this.products$ = productsGQL
       .watch()
       .valueChanges.pipe(map((result) => result.data.products));
-
-    this.categoryProducts$ = productsCategoryGQL
-      .watch(
-        { categoryId: '6276deb5fbc3a8262a1448e3' },
-        {
-          fetchPolicy: 'network-only',
-        }
-      )
-      .valueChanges.pipe(map((result) => result.data.category.products));
-
-    this.subcategoryProducts$ = productsSubcategoryGQL
-      .watch(
-        { subcategoryId: '6276e19ad8adca914945452b' },
-        {
-          fetchPolicy: 'network-only',
-        }
-      )
-      .valueChanges.pipe(map((result) => result.data.subcategory.products));
   }
 
-  getProduct() {
+  getProduct(productId: string) {
+    this.product$ = this.productGQL
+      .watch({ id: productId })
+      .valueChanges.pipe(map((result) => result.data.product));
+
     return { query: this.productGQL, product$: this.product$ };
   }
 
@@ -62,14 +41,22 @@ export class ProductService {
     return { query: this.productsGQL, products$: this.products$ };
   }
 
-  getProductsCategory() {
+  getProductsCategory(categoryId: string) {
+    this.categoryProducts$ = this.productsCategoryGQL
+      .watch({ categoryId: categoryId })
+      .valueChanges.pipe(map((result) => result.data.category.products));
+
     return {
       query: this.productsCategoryGQL,
       products$: this.categoryProducts$,
     };
   }
 
-  getProductsSubcategory() {
+  getProductsSubcategory(subcategoryId: string) {
+    this.subcategoryProducts$ = this.productsSubcategoryGQL
+      .watch({ subcategoryId: subcategoryId })
+      .valueChanges.pipe(map((result) => result.data.subcategory.products));
+
     return {
       query: this.productsSubcategoryGQL,
       products$: this.subcategoryProducts$,
