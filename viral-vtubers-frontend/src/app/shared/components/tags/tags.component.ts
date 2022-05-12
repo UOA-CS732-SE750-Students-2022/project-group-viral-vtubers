@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Tag } from 'src/schema/type';
+import { Tag, TagFragmentFragment } from 'src/schema/type';
 
 interface ColorTags extends Tag {
   color: string;
@@ -27,9 +27,9 @@ interface ColorTags extends Tag {
 export class TagsComponent implements OnInit {
   @Input()
   public isEdit = true;
-  public newTag = false;
 
-  public tags: Array<ColorTags> = [
+  @Input()
+  public tags: TagFragmentFragment[] = [
     {
       id: '1',
       name: 'Modding',
@@ -49,6 +49,8 @@ export class TagsComponent implements OnInit {
       backgroundColor: '#FFE5E5',
     },
   ];
+
+  public newTag = false;
 
   public allTags: Array<ColorTags> = [
     {
