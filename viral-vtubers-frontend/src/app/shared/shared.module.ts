@@ -5,23 +5,23 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductsGridComponent } from './components/products-grid/products-grid.component';
 import { TagsComponent } from './components/tags/tags.component';
-import { VrmViewerComponent } from './vrm-viewer/vrm-viewer.component';
+import { VrmCanvasComponent } from './components/vrm-canvas/vrm-canvas.component';
 
 @NgModule({
   declarations: [
-    VrmViewerComponent,
     FooterComponent,
     NavbarComponent,
     TagsComponent,
     ProductsGridComponent,
+    VrmCanvasComponent,
   ],
   imports: [CommonModule],
   exports: [
-    VrmViewerComponent,
     NavbarComponent,
     TagsComponent,
     FooterComponent,
     ProductsGridComponent,
+    VrmCanvasComponent,
   ],
 })
 export class SharedModule {}
