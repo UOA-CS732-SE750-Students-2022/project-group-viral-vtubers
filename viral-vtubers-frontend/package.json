@@ -17,8 +17,6 @@
   "private": true,
   "dependencies": {
     "@angular-slider/ngx-slider": "^2.0.4",
-    "@angular-three/core": "~5.0.0",
-    "@angular-three/schematics": "^5.2.2",
     "@angular/animations": "~13.3.0",
     "@angular/cdk": "^13.3.5",
     "@angular/common": "~13.3.0",
