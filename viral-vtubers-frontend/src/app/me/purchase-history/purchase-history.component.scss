@@ -1,0 +1,110 @@
+@import "../../../variables";
+
+:host {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+h1 {
+  font-size: $font-size-h6;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+h1 + hr {
+  border: solid 1px $color-primary;
+  margin: 0;
+  width: 50px;
+
+  margin-bottom: 20px;
+}
+
+.row {
+  background-color: lightblue;
+  width: 100%;
+
+  border-bottom: solid 1px $color-grey-light;
+}
+
+// Product column
+table {
+  margin-right: 40px;
+
+  tr {
+    th {
+      text-align: left;
+      font-weight: 500;
+      font-size: $font-size-body-1;
+    }
+
+    td {
+      &.product-col {
+        width: 35%;
+        background-color: lightcyan;
+      }
+
+      &.artist-col {
+        width: 25%;
+      }
+
+      &.date-col {
+        width: 25px;
+
+        background-color: lavender;
+      }
+
+      &.price-col {
+        width: 15%;
+
+        background-color: lightblue;
+      }
+    }
+  }
+}
+
+.product-container {
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
+    border: solid 1px $color-grey-light;
+  }
+
+  > div {
+    margin-left: 20px;
+
+    h5 {
+      font-size: $font-size-body-1;
+      margin: 0;
+      margin-bottom: 8px;
+      font-weight: 500;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    p {
+      margin: 0;
+      margin-top: 8px;
+      font-size: $font-size-body-3;
+      color: $color-grey-dark;
+      font-weight: 400;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
