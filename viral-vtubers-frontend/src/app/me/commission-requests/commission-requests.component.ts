@@ -27,8 +27,6 @@ import {
 export class CommissionRequestsComponent implements OnInit {
   myOrders: MyOrdersFragmentFragment;
 
-  orderPopup = false;
-
   selectedOrder: OrderFragmentFragment | undefined;
 
   constructor(private router: Router) {
@@ -423,11 +421,6 @@ export class CommissionRequestsComponent implements OnInit {
 
   navigateToUser(id: string | undefined) {
     this.router.navigateByUrl('/user/' + id);
-  }
-
-  showOrderPopup(showPopup: boolean) {
-    this.orderPopup = showPopup;
-    console.log(this.orderPopup);
   }
 
   setSelectedOrder(order: OrderFragmentFragment | undefined) {
