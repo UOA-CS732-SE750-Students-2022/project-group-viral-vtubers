@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MyOrdersFragmentFragment, Order } from 'src/schema/type';
@@ -6,9 +7,23 @@ import { MyOrdersFragmentFragment, Order } from 'src/schema/type';
   selector: 'app-commission-requests',
   templateUrl: './commission-requests.component.html',
   styleUrls: ['./commission-requests.component.scss'],
+  animations: [
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.2s ease', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1 }),
+        animate('0.2s ease', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class CommissionRequestsComponent implements OnInit {
   myOrders: MyOrdersFragmentFragment;
+
+  orderPopup = false;
 
   constructor(private router: Router) {
     this.myOrders = {
@@ -425,5 +440,10 @@ export class CommissionRequestsComponent implements OnInit {
 
   navigateToUser(id: string | undefined) {
     this.router.navigateByUrl('/user/' + id);
+  }
+
+  showOrderPopup(showPopup: boolean) {
+    this.orderPopup = showPopup;
+    console.log(this.orderPopup);
   }
 }

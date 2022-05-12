@@ -163,8 +163,13 @@
   </div>
 </div>
 
-<div class="overlay" *ngIf="changePopup" [@inOutAnimation]>
-  <div class="popup">
+<div
+  class="overlay"
+  *ngIf="changePopup"
+  (click)="hideChange(); $event.stopPropagation()"
+  [@inOutAnimation]
+>
+  <div class="popup" (click)="$event.stopPropagation()">
     <p class="title">Categories</p>
     <a class="close" (click)="hideChange()"> &times; </a>
     <p>Available Categories:</p>

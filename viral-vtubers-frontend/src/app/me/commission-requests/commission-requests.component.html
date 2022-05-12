@@ -3,7 +3,11 @@
 
 <h3>Pending Orders</h3>
 <div class="content-container pending-orders">
-  <div *ngFor="let order of myOrders.active" class="request-container">
+  <div
+    *ngFor="let order of myOrders.active"
+    class="request-container"
+    (click)="showOrderPopup(true)"
+  >
     <img
       src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
     />
@@ -56,4 +60,18 @@
       </tr>
     </ng-container>
   </table>
+</div>
+
+<div
+  class="overlay"
+  (click)="showOrderPopup(false); $event.stopPropagation()"
+  *ngIf="orderPopup"
+  [@inOutAnimation]
+>
+  <div class="popup" (click)="$event.stopPropagation()">
+    <p class="title">Categories</p>
+    <a class="close" (click)="showOrderPopup(false)"> &times; </a>
+    <p>Available Categories:</p>
+    <div></div>
+  </div>
 </div>
