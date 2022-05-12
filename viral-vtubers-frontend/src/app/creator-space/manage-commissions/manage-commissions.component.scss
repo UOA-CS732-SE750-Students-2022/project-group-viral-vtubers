@@ -77,16 +77,8 @@ table {
         width: 35%;
       }
 
-      &.artist-col {
+      &.requester-col {
         width: 25%;
-      }
-
-      &.date-col {
-        width: 25px;
-      }
-
-      &.price-col {
-        width: 15%;
       }
     }
   }
@@ -147,7 +139,7 @@ table {
   }
 }
 
-.artist-container {
+.requester-container {
   display: flex;
   align-items: center;
 
@@ -175,16 +167,6 @@ table {
     margin: 0;
     padding-left: 10px;
   }
-}
-
-.date-container {
-  font-size: $font-size-body-3;
-  margin: 0;
-}
-
-.price-container {
-  font-size: $font-size-body-1;
-  margin: 0;
 }
 
 .pending-orders {
@@ -436,7 +418,7 @@ table {
       }
     }
 
-    .artist-container {
+    .requester-container {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -447,7 +429,7 @@ table {
         }
       }
 
-      .artist {
+      .requester {
         display: flex;
         flex-direction: row;
         align-self: center;

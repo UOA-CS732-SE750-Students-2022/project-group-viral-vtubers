@@ -23,12 +23,12 @@
 
 <div class="past-commissions-container">
   <div class="won-commissions-container">
-    <h3>Done Deals</h3>
+    <h3>Won Commissions</h3>
     <div class="content-container">
       <table>
         <tr>
           <th class="request-col">Request</th>
-          <th class="artist-col">Artist</th>
+          <th class="requester-col">Requester</th>
         </tr>
 
         <ng-container *ngFor="let order of myCommissions.won">
@@ -44,9 +44,9 @@
                 </div>
               </div>
             </td>
-            <td class="artist-col">
+            <td class="requester-col">
               <div
-                class="artist-container"
+                class="requester-container"
                 (click)="navigateToUser(order.artist?.id)"
               >
                 <img src="{{ order.artist?.profileImageURI }}" />
@@ -60,12 +60,12 @@
   </div>
 
   <div class="won-commissions-container">
-    <h3>Done Deals</h3>
+    <h3>Lost Commissions</h3>
     <div class="content-container">
       <table>
         <tr>
           <th class="request-col">Request</th>
-          <th class="artist-col">Artist</th>
+          <th class="requester-col">Requester</th>
         </tr>
 
         <ng-container *ngFor="let order of myCommissions.won">
@@ -81,9 +81,9 @@
                 </div>
               </div>
             </td>
-            <td class="artist-col">
+            <td class="requester-col">
               <div
-                class="artist-container"
+                class="requester-container"
                 (click)="navigateToUser(order.artist?.id)"
               >
                 <img src="{{ order.artist?.profileImageURI }}" />
