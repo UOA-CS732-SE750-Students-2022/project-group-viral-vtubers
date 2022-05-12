@@ -125,8 +125,13 @@
       <img src="{{ selectedOrder.image }}" />
       <p class="description-container">{{ selectedOrder.description }}</p>
     </div>
-    <div class="button-container">
-      <button class="cancel-button">Cancel application</button>
+    <div class="button-container" *ngIf="!selectedOrder.artist">
+      <button
+        class="cancel-button"
+        (click)="handleCancelApplication(selectedOrder)"
+      >
+        Cancel application
+      </button>
     </div>
   </div>
 </div>

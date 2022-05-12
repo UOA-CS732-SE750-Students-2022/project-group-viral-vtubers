@@ -498,4 +498,8 @@ export class ManageCommissionsComponent implements OnInit {
   setSelectedOrder(order: OrderFragmentFragment | undefined) {
     this.selectedOrder = order;
   }
+
+  handleCancelApplication(order: OrderFragmentFragment) {
+    // TODO: cancel application
+  }
 }

@@ -432,6 +432,8 @@ table {
 
       align-items: flex-end;
 
+      margin-top: 15px;
+
       .cancel-button {
         height: 40px;
 
@@ -449,6 +451,14 @@ table {
         align-self: flex-end;
 
         padding: 0 20px;
+
+        cursor: pointer;
+        transition: $button-hover-animation;
+
+        &:hover {
+          color: red;
+          border: solid 1px red;
+        }
       }
     }
   }
