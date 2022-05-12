@@ -1,7 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MyOrdersFragmentFragment, Order } from 'src/schema/type';
+import {
+  MyOrdersFragmentFragment,
+  OrderFragmentFragment,
+} from 'src/schema/type';
 
 @Component({
   selector: 'app-commission-requests',
@@ -24,6 +27,8 @@ export class CommissionRequestsComponent implements OnInit {
   myOrders: MyOrdersFragmentFragment;
 
   orderPopup = false;
+
+  selectedOrder: OrderFragmentFragment | undefined;
 
   constructor(private router: Router) {
     this.myOrders = {
@@ -445,5 +450,9 @@ export class CommissionRequestsComponent implements OnInit {
   showOrderPopup(showPopup: boolean) {
     this.orderPopup = showPopup;
     console.log(this.orderPopup);
+  }
+
+  setSelectedOrder(order: OrderFragmentFragment | undefined) {
+    this.selectedOrder = order;
   }
 }

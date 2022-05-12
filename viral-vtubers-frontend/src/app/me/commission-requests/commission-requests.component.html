@@ -6,7 +6,7 @@
   <div
     *ngFor="let order of myOrders.active"
     class="request-container"
-    (click)="showOrderPopup(true)"
+    (click)="setSelectedOrder(order)"
   >
     <img
       src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
@@ -64,14 +64,25 @@
 
 <div
   class="overlay"
-  (click)="showOrderPopup(false); $event.stopPropagation()"
-  *ngIf="orderPopup"
+  (click)="setSelectedOrder(undefined); $event.stopPropagation()"
+  *ngIf="selectedOrder"
   [@inOutAnimation]
 >
   <div class="popup" (click)="$event.stopPropagation()">
-    <p class="title">Categories</p>
-    <a class="close" (click)="showOrderPopup(false)"> &times; </a>
-    <p>Available Categories:</p>
-    <div></div>
+    <div class="info-container">
+      <div class="title-info-container">
+        <h4>{{ selectedOrder.name }}</h4>
+        <app-tags [isEdit]="false" [tags]="selectedOrder.tags"></app-tags>
+      </div>
+      <div class="request-info-container"></div>
+    </div>
+    <div class="image-description-container">
+      <img src="{{ selectedOrder.image }}" />
+      <p class="description-container">description</p>
+    </div>
+    <div class="applicants-container">
+      <h4>Applicants</h4>
+      <div class="applicant" *ngFor="let i; in: [0, 1]"></div>
+    </div>
   </div>
 </div>
