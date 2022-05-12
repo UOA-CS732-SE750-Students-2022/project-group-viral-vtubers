@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PurchaseFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -9,7 +10,7 @@ import { PurchaseFragmentFragment } from 'src/schema/type';
 export class PurchaseHistoryComponent implements OnInit {
   purchases: PurchaseFragmentFragment[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.purchases = [
       {
         id: '1',
@@ -124,4 +125,12 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  navigateToProduct(id: string) {
+    this.router.navigateByUrl(`/marketplace/product/${id}`);
+  }
+
+  navigateToUser(id: string) {
+    this.router.navigateByUrl(`/user/${id}`);
+  }
 }
