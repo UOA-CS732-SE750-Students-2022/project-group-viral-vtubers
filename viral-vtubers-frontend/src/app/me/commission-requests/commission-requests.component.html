@@ -38,7 +38,9 @@
             <p>{{ order.artist?.displayName }}</p>
           </div>
         </td>
-        <td class="date-col">tags</td>
+        <td class="date-col">
+          <app-tags [isEdit]="false" [tags]="order.tags"></app-tags>
+        </td>
         <td class="price-col">${{ order.bounty | number: "1.2-2" }}</td>
       </tr>
     </ng-container>

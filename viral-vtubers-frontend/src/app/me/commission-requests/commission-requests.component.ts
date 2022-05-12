@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MyOrdersFragmentFragment, Order } from 'src/schema/type';
 
 @Component({
@@ -9,7 +10,7 @@ import { MyOrdersFragmentFragment, Order } from 'src/schema/type';
 export class CommissionRequestsComponent implements OnInit {
   myOrders: MyOrdersFragmentFragment;
 
-  constructor() {
+  constructor(private router: Router) {
     this.myOrders = {
       active: [
         {
@@ -374,7 +375,19 @@ export class CommissionRequestsComponent implements OnInit {
             },
             {
               id: '1',
-              name: 'Hair',
+              name: 'Cry',
+              color: '#ff0000',
+              backgroundColor: '#ffffff',
+            },
+            {
+              id: '1',
+              name: 'Anime',
+              color: '#ff0000',
+              backgroundColor: '#ffffff',
+            },
+            {
+              id: '1',
+              name: 'Cat',
               color: '#ff0000',
               backgroundColor: '#ffffff',
             },
@@ -410,5 +423,7 @@ export class CommissionRequestsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  navigateToUser(id: string | undefined) {}
+  navigateToUser(id: string | undefined) {
+    this.router.navigateByUrl('/user/' + id);
+  }
 }
