@@ -197,7 +197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-eslint/eslint-plugin@latest":
+"@angular-eslint/eslint-plugin@npm:latest":
   version: 13.2.1
   resolution: "@angular-eslint/eslint-plugin@npm:13.2.1"
   dependencies:
@@ -6317,7 +6317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@latest":
+"@typescript-eslint/eslint-plugin@npm:latest":
   version: 5.23.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.23.0"
   dependencies:
@@ -8604,9 +8604,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001299, caniuse-lite@npm:^1.0.30001332, caniuse-lite@npm:^1.0.30001335":
-  version: 1.0.30001339
-  resolution: "caniuse-lite@npm:1.0.30001339"
-  checksum: c974676c6e38692ab5a274c460557476f1d167166493249059b5595dc3166942a30bb030dd4a6f6dcbc28fb53c741b5c95fc0f82b043def296e6a49b32b68478
+  version: 1.0.30001340
+  resolution: "caniuse-lite@npm:1.0.30001340"
+  checksum: 5b419c93cb5a67568ffe8c84520d149146e5b84056ce41ee509c89d2bd036e4ce6d87485e25dfee2bb8a818d46e0734e93cacbef6b9b911c20166b943b36b78c
   languageName: node
   linkType: hard
 
@@ -12658,11 +12658,11 @@ __metadata:
   linkType: hard
 
 "globals@npm:^13.6.0, globals@npm:^13.9.0":
-  version: 13.14.0
-  resolution: "globals@npm:13.14.0"
+  version: 13.15.0
+  resolution: "globals@npm:13.15.0"
   dependencies:
     type-fest: ^0.20.2
-  checksum: a8d560119c611b434fa7bd0f305d34fec03e2cc63dcf8ef8bc352f075c54f2653bc6f9c85a1ef9422d82916e6fe5a4fc87fdd6a3e691afcff04545a7d876e078
+  checksum: 383ade0873b2ab29ce6d143466c203ed960491575bc97406395e5c8434026fb02472ab2dfff5bc16689b8460269b18fda1047975295cd0183904385c51258bae
   languageName: node
   linkType: hard
 
@@ -12800,11 +12800,11 @@ __metadata:
   linkType: hard
 
 "graphql-ws@npm:^5.4.1":
-  version: 5.8.1
-  resolution: "graphql-ws@npm:5.8.1"
+  version: 5.8.2
+  resolution: "graphql-ws@npm:5.8.2"
   peerDependencies:
     graphql: ">=0.11 <=16"
-  checksum: 0e8d08a1155204655510f8dc902f295ae5494cf01390c87226cef8d9b460fac5101ec96802ccf056d479d7e57a2a6b575fc4769b2123ae330396ac1d44912a8a
+  checksum: 2f7701ffc531f053c47fd42ea1fa4555775195f621f1ff767d668eef41ab1376900c1ef166c0063dbc81aa49a2aabd60becb517b8d1b7bc0b3dd687bd4d319a6
   languageName: node
   linkType: hard
 
