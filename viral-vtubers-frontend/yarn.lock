@@ -16260,6 +16260,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mmd-parser@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "mmd-parser@npm:1.0.4"
+  checksum: 892cc317598440c43919250ec95aec26349db977e64bbe37d0fa8d6a8076e190105e5e687221225dd9afa8937d9d2d06ddab77586c2bc4781cb6855a2938d95b
+  languageName: node
+  linkType: hard
+
 "moment@npm:^2.29.3":
   version: 2.29.3
   resolution: "moment@npm:2.29.3"
@@ -22394,6 +22401,7 @@ __metadata:
     karma-coverage: ~2.1.0
     karma-jasmine: ~4.0.0
     karma-jasmine-html-reporter: ~1.7.0
+    mmd-parser: ^1.0.4
     moment: ^2.29.3
     ng-gallery: ^6.0.1
     prettier: ^2.6.1
