@@ -10,6 +10,9 @@
   gap: 25px;
 
   .product-item {
+    display: block;
+    text-decoration: none;
+    color: $color-kneegrow;
     border: solid 1px $color-grey-light;
     box-sizing: border-box;
 

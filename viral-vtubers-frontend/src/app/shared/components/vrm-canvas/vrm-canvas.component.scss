@@ -1,5 +1,16 @@
-.vrm-viewer-canvas {
+@import "../../../../variables";
+
+.container {
   height: 100%;
   width: 100%;
-  background-color: lightpink;
+  overflow: hidden;
+}
+
+.vrm-viewer-canvas {
+  height: 100% !important;
+  width: 100% !important;
+  background-repeat: no-repeat;
+  background-image: url("../../../../assets/spinner/spinner.gif");
+  background-attachment: fixed;
+  background-position: center;
 }

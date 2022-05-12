@@ -10,6 +10,7 @@ export const ProductDetailFragment = gql`
     numLikes
     description
     titleImage
+    vrm
     images
     tags {
       ...TagFragment

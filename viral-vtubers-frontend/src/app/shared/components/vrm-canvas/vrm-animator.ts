@@ -1,6 +1,7 @@
-import { Vector3, Quaternion, MathUtils } from 'three';
 import { VRMSchema } from '@pixiv/three-vrm';
-import { Parser, VmdFile, CharsetEncoder } from 'mmd-parser';
+import { CharsetEncoder, Parser, VmdFile } from 'mmd-parser';
+import { MathUtils, Quaternion, Vector3 } from 'three';
+
 import { AnimationData, Timeline, VRMOffsets } from './vmd-animator';
 
 export function isTruely<T>(
@@ -559,7 +560,7 @@ function localizeTimeline(...tls: [Keyframe[], Keyframe[]]) {
           fp.position
         ),
         rotation: (fc.isNew ? fc.rotation : fc.rotation.clone()).multiply(
-          tempQ.copy(fp.rotation).inverse()
+          tempQ.copy(fp.rotation).invert()
         ),
       };
     }

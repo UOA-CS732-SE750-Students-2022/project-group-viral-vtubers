@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GalleryItem, ImageItem } from 'ng-gallery';
-import { map, Observable } from 'rxjs';
+import { Gallery, GalleryItem, GalleryRef } from 'ng-gallery';
+import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProductDetailFragmentFragment } from 'src/schema/type';
@@ -16,10 +16,13 @@ export class ProductDetailsComponent implements OnInit {
 
   productDetails$?: Observable<ProductDetailFragmentFragment>;
 
+  galleryId = 'image-gallery';
+
   constructor(
     private productService: ProductService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private gallery: Gallery
   ) {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -29,24 +32,33 @@ export class ProductDetailsComponent implements OnInit {
       const product = this.productService.getProduct(id);
       this.productDetails$ = product.product$;
 
-      this.images$ = product.product$.pipe(
-        map((data) => [
-          new ImageItem({
-            src: data.titleImage,
-            thumb: data.titleImage,
-          }),
-          ...data.images.map((image) => {
-            return new ImageItem({ src: image, thumb: image });
-          }),
-        ])
-      );
+      this.productDetails$.subscribe(({ titleImage, images, vrm }) => {
+        const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+        galleryRef.reset();
+        if (vrm !== '' && !!vrm) {
+          galleryRef.addIframe({
+            src: '/vrm?vrm=' + encodeURIComponent(vrm),
+            thumb: 'assets/icons/vrm-preview.svg',
+          });
+        }
+
+        galleryRef.addImage({
+          src: titleImage,
+          thumb: titleImage,
+        });
+        images.forEach((image) => {
+          galleryRef.addImage({
+            src: image,
+            thumb: image,
+          });
+        });
+      });
     });
   }
 
   ngOnInit(): void {}
 
   follow(artistId: string): void {
-    console.log(artistId);
     this.userService.follow(artistId, true).subscribe();
   }
 

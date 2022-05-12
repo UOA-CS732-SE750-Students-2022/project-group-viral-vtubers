@@ -1,9 +1,11 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { VRM, VRMSchema, VRMUtils } from '@pixiv/three-vrm';
 import * as THREE from 'three';
-import { VRM, VRMUtils } from '@pixiv/three-vrm';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { bindToVRM, convert } from './vmd-animator';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
+import { bindToVRM, calculatePosition, convert } from './vmd-animator';
 import VRMIKHandler from './vrm-ik-handler';
 
 @Component({
@@ -13,16 +15,13 @@ import VRMIKHandler from './vrm-ik-handler';
 })
 export class VrmCanvasComponent implements OnInit {
   @Input()
-  vrmUrl: string = 'assets/loli.vrm';
-
-  @Input()
-  vmdUrl: string = 'assets/vmd/appearing.vmd';
+  vrmUrl = 'assets/vrm/loli-maid.vrm';
 
   @ViewChild('canvas')
   canvasRef!: ElementRef;
   scene: THREE.Scene;
   loaderGLTF = new GLTFLoader();
-  camera!: THREE.Camera;
+  camera!: THREE.PerspectiveCamera;
   mixer?: THREE.AnimationMixer;
   ikHandler?: VRMIKHandler;
 
@@ -31,7 +30,12 @@ export class VrmCanvasComponent implements OnInit {
 
   private clock!: THREE.Clock;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
+    route.queryParams.subscribe((params) => {
+      if (params['vrm']) {
+        this.vrmUrl = params['vrm'];
+      }
+    });
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(255, 255, 255);
     const light = new THREE.DirectionalLight(0xffffff);
@@ -41,31 +45,56 @@ export class VrmCanvasComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async ngAfterViewInit(): Promise<void> {
+  ngAfterViewInit(): void {
     this.camera = new THREE.PerspectiveCamera(
       30.0,
       this.canvas.clientWidth / this.canvas.clientHeight,
       0.1,
       20.0
     );
-    this.camera.position.set(0.0, 1.0, 5.0);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
     });
-    this.renderer.setPixelRatio(
-      window.screen.availWidth / document.documentElement.clientWidth
-    );
+    this.renderer.setPixelRatio(2);
     this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
 
-    await this.loadVRM(this.vrmUrl);
-    await this.loadAnimation(
-      'assets/vmd/appearing.vmd',
-      'assets/vmd/liked.vmd',
-      'assets/vmd/waiting.vmd'
-    );
-    this.startRenderingLoop();
+    const randomNum = (n: number) => Math.floor(Math.random() * n) + 1;
+
+    const start = async () => {
+      await this.loadVRM(this.vrmUrl);
+
+      this.camera.position.set(0.0, 1.0, 4);
+      await this.loadAnimation(
+        'assets/vmd/appearing/' + randomNum(2) + '.vmd',
+        'assets/vmd/liked/' + randomNum(5) + '.vmd',
+        'assets/vmd/waiting/' + randomNum(5) + '.vmd'
+      );
+      this.startRenderingLoop();
+    };
+    start();
+  }
+
+  calcHeightVRM(): number {
+    const { humanoid } = this.vrm;
+    if (!humanoid) throw new Error('VRM does not have humanoid');
+
+    const foot = humanoid.getBoneNode(VRMSchema.HumanoidBoneName.LeftFoot);
+    const head = humanoid.getBoneNode(VRMSchema.HumanoidBoneName.Head);
+    const currentPose = humanoid.getPose();
+    humanoid.resetPose();
+
+    const headY = calculatePosition(head, head)?.[1];
+    const footY = calculatePosition(foot, foot)?.[1];
+    if (!headY || !footY) {
+      return 0;
+    }
+
+    const height = headY - footY;
+    humanoid.setPose(currentPose);
+
+    return height;
   }
 
   private get canvas(): HTMLCanvasElement {
@@ -83,7 +112,9 @@ export class VrmCanvasComponent implements OnInit {
             this.scene.add(vrm.scene);
             this.vrm = vrm;
             this.vrm.scene.rotation.y = Math.PI;
-            console.log(vrm);
+            this.vrm.scene.position.set(0, 0, 0);
+            const scale = 0.4 + 0.34 / this.calcHeightVRM();
+            this.vrm.scene.scale.set(scale, scale, scale);
             resolve();
           });
         },
@@ -98,13 +129,13 @@ export class VrmCanvasComponent implements OnInit {
     );
   }
 
-  private getVmd(url: string): Promise<ArrayBufferLike> {
-    return fetch(url)
-      .then((res) => res.blob())
-      .then((blob) => blob.arrayBuffer());
+  async getVmd(url: string): Promise<ArrayBufferLike> {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    return await blob.arrayBuffer();
   }
 
-  private async loadAnimation(
+  async loadAnimation(
     appearingVmd: string,
     likedVmd: string,
     waitingVmd: string
@@ -131,23 +162,28 @@ export class VrmCanvasComponent implements OnInit {
     const animateLiked = this.mixer.clipAction(clips[1]);
     animateLiked.clampWhenFinished = true;
     const animateWaiting = this.mixer.clipAction(clips[2]);
-    animateWaiting.clampWhenFinished = true;
-    animateAppearing.crossFadeTo(animateLiked, 0.2, false);
-    animateLiked.crossFadeTo(animateWaiting, 0.2, false);
-    animateWaiting.crossFadeTo(animateLiked, 0.2, false);
 
-    animateWaiting.play();
+    animateWaiting.setLoop(THREE.LoopRepeat, 1);
+    animateLiked.setLoop(THREE.LoopRepeat, 1);
+    animateAppearing.setLoop(THREE.LoopOnce, 1);
+    animateAppearing.play();
 
-    // clips.map((clip) => {
-    //   if (this.mixer == null) {
-    //     return;
-    //   }
-    //   const animate = this.mixer.clipAction(clip);
-    //   animate.play();
-    // });
+    this.mixer.addEventListener('finished', ({ action }) => {
+      action.fadeOut(0.2);
+      if (action === animateAppearing || action === animateWaiting) {
+        animateLiked.reset().fadeIn(0.2).play();
+        animateLiked.clampWhenFinished = true;
+        return;
+      }
+      if (action === animateLiked) {
+        animateWaiting.reset().fadeIn(0.2).play();
+        animateWaiting.clampWhenFinished = true;
+        return;
+      }
+    });
   }
 
-  private startRenderingLoop() {
+  startRenderingLoop() {
     this.clock = new THREE.Clock();
 
     const controls = new OrbitControls(this.camera, this.renderer.domElement);
@@ -165,11 +201,6 @@ export class VrmCanvasComponent implements OnInit {
         this.mixer.update(delta);
       }
 
-      // update ik handler for IK bones (e.g. legs, feet).
-      if (this.ikHandler) {
-        this.ikHandler.update();
-      }
-
       // update vrm itself (e.g. hair physics, animations).
       if (this.vrm) {
         this.vrm.update(delta);
@@ -177,5 +208,11 @@ export class VrmCanvasComponent implements OnInit {
     };
 
     render();
+  }
+
+  onResize(event: any) {
+    console.log(event);
+    this.camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
+    this.camera.updateProjectionMatrix();
   }
 }

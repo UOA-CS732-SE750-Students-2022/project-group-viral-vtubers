@@ -1,5 +1,6 @@
-import { Object3D, MathUtils, Quaternion, Vector3, Euler, Bone } from 'three';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { VRM, VRMSchema } from '@pixiv/three-vrm';
+import { Bone, Euler, MathUtils, Object3D, Quaternion, Vector3 } from 'three';
 
 export function clampVector3ByRadian(
   v: Vector3 | Euler,

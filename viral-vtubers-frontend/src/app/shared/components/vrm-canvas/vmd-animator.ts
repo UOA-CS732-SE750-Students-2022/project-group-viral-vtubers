@@ -1,15 +1,16 @@
+import { VRM, VRMSchema } from '@pixiv/three-vrm';
 import {
   AnimationClip,
   KeyframeTrack,
-  QuaternionKeyframeTrack,
-  VectorKeyframeTrack,
   NumberKeyframeTrack,
-  Vector3,
   Object3D,
+  QuaternionKeyframeTrack,
+  Vector3,
+  VectorKeyframeTrack,
 } from 'three';
-import { VRM, VRMSchema } from '@pixiv/three-vrm';
-import VRMIKHandler from './vrm-ik-handler';
+
 import { convert as convertSync } from './vrm-animator';
+import VRMIKHandler from './vrm-ik-handler';
 
 export interface AnimationData {
   duration: number;
@@ -58,7 +59,10 @@ export function toOffset(vrm: VRM): VRMOffsets {
 }
 
 const tempV3 = new Vector3();
-function calculatePosition(from?: Object3D | null, to?: Object3D | null) {
+export function calculatePosition(
+  from?: Object3D | null,
+  to?: Object3D | null
+) {
   if (!from || !to) return;
   let current: Object3D | null = to;
   const chain: Object3D[] = [to];

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
@@ -46,7 +46,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     BrowserAnimationsModule,
     DragDropModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, { provide: PERSISTENCE, useValue: 'session' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

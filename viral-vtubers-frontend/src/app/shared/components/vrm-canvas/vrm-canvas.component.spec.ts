@@ -8,9 +8,8 @@ describe('VrmCanvasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VrmCanvasComponent ]
-    })
-    .compileComponents();
+      declarations: [VrmCanvasComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
