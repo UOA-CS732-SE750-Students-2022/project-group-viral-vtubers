@@ -74,11 +74,11 @@ table {
       padding: 0 15px;
 
       &.request-col {
-        width: 35%;
+        width: 70%;
       }
 
       &.requester-col {
-        width: 25%;
+        width: 30%;
       }
     }
   }
@@ -363,7 +363,7 @@ table {
           }
         }
 
-        .requester-container {
+        .requester-name-container {
           display: flex;
           align-items: center;
 

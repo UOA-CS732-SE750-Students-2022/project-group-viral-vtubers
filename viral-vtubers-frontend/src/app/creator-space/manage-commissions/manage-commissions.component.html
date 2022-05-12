@@ -115,9 +115,9 @@
           <h6>Bounty:</h6>
           <p>${{ selectedOrder.bounty }}</p>
         </div>
-        <div class="requester-container">
+        <div class="requester-name-container">
           <h6>Requested by:</h6>
-          <p>Me</p>
+          <p>{{ selectedOrder.owner.displayName }}</p>
         </div>
       </div>
     </div>
