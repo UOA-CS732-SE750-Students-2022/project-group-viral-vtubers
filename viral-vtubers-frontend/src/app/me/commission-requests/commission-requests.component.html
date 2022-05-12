@@ -10,7 +10,7 @@
 <div class="content-container">
   <table>
     <tr>
-      <th class="product-col">Product</th>
+      <th class="request-col">Request</th>
       <th class="artist-col">Artist</th>
       <th class="tags-col">Tags</th>
       <th class="price-col">Price</th>
@@ -18,8 +18,8 @@
 
     <ng-container *ngFor="let order of myOrders.past">
       <tr>
-        <td class="product-col">
-          <div class="product-container">
+        <td class="request-col">
+          <div class="request-container">
             <img src="{{ order.image }}" />
             <div>
               <h5>{{ order.name }}</h5>
