@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {
   MyOrdersFragmentFragment,
   OrderFragmentFragment,
+  UserFragmentFragment,
 } from 'src/schema/type';
 
 @Component({
@@ -431,5 +432,9 @@ export class CommissionRequestsComponent implements OnInit {
 
   setSelectedOrder(order: OrderFragmentFragment | undefined) {
     this.selectedOrder = order;
+  }
+
+  handleAcceptApplication(application: UserFragmentFragment) {
+    // TODO do something
   }
 }

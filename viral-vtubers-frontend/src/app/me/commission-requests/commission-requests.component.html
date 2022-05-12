@@ -92,7 +92,7 @@
     </div>
     <div *ngIf="selectedOrder.artist; else noArtist" class="artist-container">
       <h4>Artist</h4>
-      <div class="artist">
+      <div class="artist" (click)="navigateToUser(selectedOrder.artist.id)">
         <img src="{{ selectedOrder.artist.profileImageURI }}" />
         <div class="applicant-info-container">
           <h5>{{ selectedOrder.artist.displayName }}</h5>
@@ -110,13 +110,20 @@
           <div
             class="applicant"
             *ngFor="let application of selectedOrder.applications"
+            (click)="navigateToUser(application.id)"
           >
             <img src="{{ application.profileImageURI }}" />
             <div class="applicant-info-container">
               <h5>{{ application.displayName }}</h5>
               <p>{{ application.bio }}</p>
             </div>
-            <button>Accept</button>
+            <button
+              (click)="
+                handleAcceptApplication(application); $event.stopPropagation()
+              "
+            >
+              Accept
+            </button>
           </div>
         </ng-container>
 
