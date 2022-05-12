@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 
 @Component({
@@ -13,75 +16,17 @@ export class FavouritesComponent implements OnInit {
   ];
   selectedSortOption: sortBy = this.sortOptions[0];
 
-  products: ProductBlurbFragmentFragment[];
+  products$?: Observable<ProductBlurbFragmentFragment[]>;
 
-  constructor() {
-    this.products = [
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-      {
-        id: '1',
-        name: 'Aya 着替B ver0.98',
-        minPrice: 12.99,
-        numLikes: 29,
-        titleImage:
-          'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
-      },
-    ];
+  constructor(private userService: UserService, private route: ActivatedRoute) {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (!id) {
+        return;
+      }
+      const products = userService.getUserLikedProjects(id);
+      this.products$ = products.likedProducts$;
+    });
   }
 
   ngOnInit(): void {}

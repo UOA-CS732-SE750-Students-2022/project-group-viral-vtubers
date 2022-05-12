@@ -2,9 +2,9 @@ import { gql } from 'apollo-angular';
 
 import { UserFragment } from '../fragments/user.fragment';
 
-export const editSelfMutation = gql`
-  mutation EditSelf($input: EditSelfInput!) {
-    editSelf(input: $input) {
+export const followMutation = gql`
+  mutation Follow($id: ID!, $follow: Boolean!) {
+    follow(id: $id, follow: $follow) {
       ...UserFragment
     }
   }

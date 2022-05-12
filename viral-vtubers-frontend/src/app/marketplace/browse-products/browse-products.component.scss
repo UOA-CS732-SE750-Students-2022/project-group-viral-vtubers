@@ -206,3 +206,8 @@ $bar-dimension: 3px;
     overflow-y: scroll;
   }
 }
+
+.selected {
+  color: $color-primary !important;
+  border-color: $color-primary !important;
+}

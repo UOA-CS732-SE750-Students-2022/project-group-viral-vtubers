@@ -1,9 +1,11 @@
 <nav class="navbar">
   <div #marketplace class="navbarBtn marketplaceBtn">
-    <a href="#" class="logo" (mouseover)="marketplaceShow()">marketplace</a>
+    <a href="/marketplace" class="logo" (mouseover)="marketplaceShow()"
+      >marketplace</a
+    >
   </div>
   <div class="navbarBtn">
-    <a href="#" class="logo">commission</a>
+    <a href="/commissions" class="logo">commission</a>
   </div>
   <div class="navbarBtn logoBtn">
     <a href="#" class="logo">Vlogo</a>
@@ -16,7 +18,13 @@
   </div>
   <a href="me">
     <div class="profileImg">
-      <img src="https://picsum.photos/200" />
+      <img
+        [src]="
+          !(self$ | async)?.profileImageURI
+            ? (self$ | async)?.profileImageURI
+            : 'assets/chibis/chibi-profile.png'
+        "
+      />
     </div>
   </a>
   <div class="iconBtns">
@@ -37,25 +45,17 @@
     (mouseleave)="marketplaceHide()"
     (mouseover)="marketplaceShow()"
   >
-    <a #dress #category (click)="categoryDress()" href="#">{{
-      firstCategory
-    }}</a>
+    <a #dress #category (click)="categoryDress()">{{ firstCategory }}</a>
     <div #otherCategories>
-      <a #wholeModels #category (click)="categoryWholeModels()" href="#"
-        >whole models</a
-      >
-      <a #accessories #category (click)="categoryAccessories()" href="#"
-        >accessories</a
-      >
-      <a #backgrounds #category (click)="categoryBackgrounds()" href="#"
-        >backgrounds</a
-      >
+      <a #wholeModels #category (click)="categoryWholeModels()">models</a>
+      <a #accessories #category (click)="categoryAccessories()">accessories</a>
+      <a #backgrounds #category (click)="categoryBackgrounds()">backgrounds</a>
     </div>
     <div #subcategories class="dropdown-subcategories">
-      <a href="#">top</a>
-      <a href="#">pants</a>
-      <a href="#">footwear</a>
-      <a href="#">underwear</a>
+      <a #subcategory>top</a>
+      <a #subcategory>pants</a>
+      <a #subcategory>footwear</a>
+      <a #subcategory>underwear</a>
     </div>
   </div>
 </nav>

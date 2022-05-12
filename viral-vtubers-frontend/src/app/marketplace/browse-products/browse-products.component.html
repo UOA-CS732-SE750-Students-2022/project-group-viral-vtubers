@@ -11,7 +11,13 @@
     <div class="filter-container">
       <h5>Category</h5>
       <div class="select-wrapper">
-        <select [(ngModel)]="selectedCategoryFilter">
+        <select
+          [(ngModel)]="selectedCategoryFilter"
+          [ngClass]="
+            selectedCategoryFilter === categoryFilters[0] ? '' : 'selected'
+          "
+          (ngModelChange)="onCategoryFiltersChange($event)"
+        >
           <option *ngFor="let option of categoryFilters" [ngValue]="option">
             {{ option.name }}
           </option>
@@ -22,8 +28,21 @@
     <div class="filter-container">
       <h5>Subcategory</h5>
       <div class="select-wrapper">
-        <select [(ngModel)]="selectedSubCategoryFilter">
-          <option *ngFor="let option of subCategoryFilters" [ngValue]="option">
+        <select
+          [(ngModel)]="selectedSubCategoryFilter"
+          [ngClass]="
+            selectedSubCategoryFilter ===
+            selectedCategoryFilter.subcategories[0]
+              ? ''
+              : 'selected'
+          "
+          [disabled]="selectedCategoryFilter === categoryFilters[0]"
+          (ngModelChange)="onSubcategoryFiltersChange($event)"
+        >
+          <option
+            *ngFor="let option of selectedCategoryFilter.subcategories"
+            [ngValue]="option"
+          >
             {{ option.name }}
           </option>
         </select>
@@ -33,7 +52,15 @@
     <div class="filter-container">
       <h5>Age Restriction</h5>
       <div class="select-wrapper">
-        <select [(ngModel)]="selectedAgeRestrictionFilter">
+        <select
+          [(ngModel)]="selectedAgeRestrictionFilter"
+          [ngClass]="
+            selectedAgeRestrictionFilter === ageRestrictionFilters[0]
+              ? ''
+              : 'selected'
+          "
+          (ngModelChange)="onAgeRestrictionFiltersChange($event)"
+        >
           <option
             *ngFor="let option of ageRestrictionFilters"
             [ngValue]="option"
@@ -50,14 +77,22 @@
         [(value)]="minValue"
         [(highValue)]="maxValue"
         [options]="options"
+        (userChangeEnd)="onPriceChange($event)"
       ></ngx-slider>
     </div>
   </div>
 
-  <div class="products-container">
+  <div
+    class="products-container"
+    *ngIf="products$ | async as products; else loading"
+    [@inOutAnimation]
+  >
     <div class="config-container">
       <p>Total {{ products.length }} items</p>
-      <select [(ngModel)]="selectedSortOption">
+      <select
+        [(ngModel)]="selectedSortOption"
+        (ngModelChange)="onSortChange($event)"
+      >
         <option *ngFor="let sortOp of sortOptions" [ngValue]="sortOp">
           {{ sortOp.name }}
         </option>
@@ -68,3 +103,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

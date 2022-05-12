@@ -131,12 +131,9 @@ type Cart {
 "Purchase"
 type Purchase {
   id: ID!
-  items: [ID!]!
   numItems: Int!
   placed: DateTime!
-  sellerId: ID!
   totalAmount: Float!
-  variants: [ID!]!
   seller: User!
   items: [ProductVariant!]!
 }
@@ -183,6 +180,10 @@ type Query {
   users(filter: UserFilter, sort: UserSort, cursor: String, limit: Int): UserPagination!
   "Get mail"
   mail(id: ID!): Mail!
+  "Get all products"
+  products(filter: ProductFilter, sort: ProductSort, cursor: String, limit: Int): ProductPagination!
+  "Get a product"
+  product(id: ID!): Product!
   "Get Categories"
   categories: [Category!]!
   "Get Category"
@@ -219,7 +220,7 @@ type Mutation {
   "Edit a mail"
   editMail(input: EditMailInput!): [Mail!]!
   "Follow a user"
-  follow(id: ID!, follow: Boolean!): Boolean!
+  follow(id: ID!, follow: Boolean!): User!
   "Add a product"
   addProduct(input: AddProductInput!): Product!
   "Edit a product"
@@ -292,6 +293,7 @@ input ProductFilter {
 input ProductSort {
   createdDate: SortEnum
   name: SortEnum
+  numLikes: SortEnum
   price: SortEnum
 }
 ""

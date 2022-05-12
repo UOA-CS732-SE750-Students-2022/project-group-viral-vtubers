@@ -23,8 +23,12 @@ fun SchemaBuilder.userSchema(
         property<Boolean>("isFollowing") {
             resolver { user, ctx: Context ->
                 description = "Get if current user if following this user"
-                val userId = authService.getUserId(ctx)
-                userService.isFollowing(userId, user.id)
+                try {
+                    val userId = authService.getUserId(ctx)
+                    userService.isFollowing(userId, user.id)
+                } catch (e: Exception) {
+                    false
+                }
             }
         }
 

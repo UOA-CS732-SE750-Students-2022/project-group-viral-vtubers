@@ -43,6 +43,9 @@ fun SchemaBuilder.cartSchema(
     }
     type<Purchase> {
         description = "Purchase"
+        Purchase::sellerId.ignore()
+        Purchase::items.ignore()
+        Purchase::variants.ignore()
 
         property<User>("seller") {
             resolver { purchase ->

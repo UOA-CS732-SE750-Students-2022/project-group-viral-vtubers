@@ -16,6 +16,13 @@ interface ProductService : KoinComponent {
 
     suspend fun getAllProducts(): List<Product>
 
+    suspend fun getSearch(
+        filter: ProductFilter?,
+        sort: ProductSort?,
+        cursor: String?,
+        limit: Int?
+    ): ProductPagination
+
     suspend fun getCategorySearch(
         categoryId: ID,
         filter: ProductFilter?,

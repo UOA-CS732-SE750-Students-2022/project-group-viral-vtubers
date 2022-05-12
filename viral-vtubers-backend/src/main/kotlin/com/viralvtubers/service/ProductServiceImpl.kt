@@ -5,6 +5,7 @@ import com.viralvtubers.database.model.ProductVariant
 import com.viralvtubers.database.mongo.repositories.LikeRepository
 import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.database.mongo.repositories.ProductRepository
+import com.viralvtubers.database.mongo.repositories.UserRepository
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import com.viralvtubers.mapper.map
@@ -17,7 +18,8 @@ import com.viralvtubers.database.model.Product as DataProduct
 
 class ProductServiceImpl(
     private val productRepository: ProductRepository,
-    private val likeRepository: LikeRepository
+    private val likeRepository: LikeRepository,
+    private val userRepository: UserRepository
 ) : ProductService {
     override suspend fun getProductId(productId: ID): Product {
         return productRepository.getById(productId.map())?.map()
@@ -86,6 +88,39 @@ class ProductServiceImpl(
             ?: throw error("variant not found")
     }
 
+    override suspend fun getSearch(
+        filter: ProductFilter?,
+        sort: ProductSort?,
+        cursor: String?,
+        limit: Int?
+    ): ProductPagination {
+        val filterBson = getFilterBson(filter)
+        val sortBson = getSortBson(sort)
+
+        var productFlow = productRepository.getProducts(
+            *filterBson.toTypedArray(),
+            sort = sortBson,
+        ).withIndex()
+
+        if (cursor != null) {
+            val before =
+                productFlow.takeWhile { it.value._id.toString() != cursor }
+
+            val last = before.last()
+
+            productFlow = productFlow.dropWhile { it.index <= last.index }
+        }
+
+        val products = productFlow.take(limit ?: 25).map { it.value }.toList()
+
+        return Page(
+            start = products.firstOrNull()?._id,
+            end = products.lastOrNull()?._id,
+            items = products,
+            hasNext = products.size == (limit ?: 25),
+        ).map()
+    }
+
     override suspend fun getSubcategorySearch(
         subcategoryId: ID,
         filter: ProductFilter?,
@@ -138,6 +173,12 @@ class ProductServiceImpl(
             return if (it == SortEnum.ASC) ascending(DataProduct::minPrice)
             else descending(DataProduct::minPrice)
         }
+
+        sort.numLikes?.let {
+            return if (it == SortEnum.ASC) ascending(DataProduct::numLikes)
+            else descending(DataProduct::numLikes)
+        }
+
         return descending(DataProduct::createdDate)
     }
 
@@ -334,9 +375,18 @@ class ProductServiceImpl(
 
         val productData = productRepository.getById(productId.map())
             ?: throw error("product not found")
-        val update = productData.copy(numLikes = productData.numLikes + 1)
-        return productRepository.update(update)?.map()
+
+        val updateProduct =
+            productData.copy(numLikes = productData.numLikes + 1)
+        productRepository.update(updateProduct)?.map()
             ?: throw error("product not found")
+
+        val userData = userRepository.getById(userId.map())
+            ?: throw error("user not found")
+
+        val updateUser = userData.copy(numLikes = userData.numLikes + 1)
+        userRepository.update(updateUser)?.map()
+            ?: throw error("user not found")
 
         return getProductId(productId)
     }
@@ -349,9 +399,17 @@ class ProductServiceImpl(
 
         val productData = productRepository.getById(productId.map())
             ?: throw error("product not found")
+
         val update = productData.copy(numLikes = productData.numLikes - 1)
-        return productRepository.update(update)?.map()
+        productRepository.update(update)?.map()
             ?: throw error("product not found")
+
+        val userData = userRepository.getById(userId.map())
+            ?: throw error("user not found")
+
+        val updateUser = userData.copy(numLikes = userData.numLikes - 1)
+        userRepository.update(updateUser)?.map()
+            ?: throw error("user not found")
 
         return getProductId(productId)
     }

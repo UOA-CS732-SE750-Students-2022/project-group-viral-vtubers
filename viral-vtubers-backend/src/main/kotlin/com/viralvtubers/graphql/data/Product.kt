@@ -61,6 +61,7 @@ data class ProductFilter(
 data class ProductSort(
     val name: SortEnum?,
     val createdDate: SortEnum?,
+    val numLikes: SortEnum?,
     val price: SortEnum?,
 )
 

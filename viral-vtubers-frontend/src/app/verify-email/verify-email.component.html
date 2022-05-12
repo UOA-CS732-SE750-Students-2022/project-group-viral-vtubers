@@ -1,13 +1,19 @@
 <div>
-    <h3>Thank you for Registering</h3>
-    <div *ngIf="authService.userData as user">
-        <p>We have send a confirmation email to <strong>{{user.email}}</strong></p>
-        <p>Please check your email and click on the link to verify your account.</p>
-    </div>
-    <div>
-        <input type="button" value="Resend Verification Email" (click)="authService.SendVerificationMail()">
-    </div>
-    <div>
-        <span>Go back to?<span routerLink="/signin"> Sign In</span></span>
-    </div>
+  <h3>Thank you for Registering</h3>
+  <div *ngIf="authService.userData as user">
+    <p>
+      We have send a confirmation email to <strong>{{ user.email }}</strong>
+    </p>
+    <p>Please check your email and click on the link to verify your account.</p>
+  </div>
+  <div>
+    <input
+      type="button"
+      value="Resend Verification Email"
+      (click)="authService.sendVerificationMail()"
+    />
+  </div>
+  <div>
+    <span>Go back to?<span routerLink="/signin"> Sign In</span></span>
+  </div>
 </div>

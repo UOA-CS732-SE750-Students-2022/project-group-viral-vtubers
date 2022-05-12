@@ -8,6 +8,11 @@ import org.litote.kmongo.Id
 interface ProductRepository : Repository<Product> {
     fun getProductOfProductVariant(productVariantId: Id<ProductVariant>): Flow<Product>
 
+    suspend fun getProducts(
+        vararg filter: Bson,
+        sort: Bson
+    ): Flow<Product>
+
     suspend fun getProductOfCategory(
         categoryId: Id<Category>,
         vararg filter: Bson,

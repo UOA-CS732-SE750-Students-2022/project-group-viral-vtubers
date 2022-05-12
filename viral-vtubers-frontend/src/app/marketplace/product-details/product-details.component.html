@@ -1,9 +1,12 @@
-<div class="container">
+<div
+  class="container"
+  *ngIf="productDetails$ | async as productDetails; else loading"
+>
   <div class="product-information-container">
     <div class="images-container">
       <gallery
         class="image-display"
-        [items]="images"
+        [items]="(images$ | async) ?? []"
         thumbPosition="bottom"
         thumbView="contain"
         imageSize="contain"
@@ -12,13 +15,20 @@
     <div class="details-container">
       <div class="creator-info">
         <span>
-          <img src="{{ productDetails.artist.profileImageURI }}" />{{
-            productDetails.artist.displayName
-          }}
-          <button *ngIf="!productDetails.artist.isFollowing">Follow</button>
+          <a [href]="'/user/' + productDetails.artist.id">
+            <img src="{{ productDetails.artist.profileImageURI }}" />
+            {{ productDetails.artist.displayName }}
+          </a>
+          <button
+            *ngIf="!productDetails.artist.isFollowing"
+            (click)="follow(productDetails.artist.id)"
+          >
+            Follow
+          </button>
           <button
             *ngIf="productDetails.artist.isFollowing"
             class="unfollow-btn"
+            (click)="unfollow(productDetails.artist.id)"
           >
             Following
           </button>
@@ -29,7 +39,11 @@
         {{ productDetails.subcategory.category.name }} >
         {{ productDetails.subcategory.name }}
       </p>
-      <button class="heart-button">
+      <button
+        class="heart-button"
+        [ngClass]="{ active: productDetails.isLiked }"
+        (click)="like(productDetails.id, productDetails.isLiked)"
+      >
         <img src="assets/icons/hearts/heart-empty-grey.svg" />
         <p>{{ productDetails.numLikes }}</p>
       </button>
@@ -67,3 +81,7 @@
   </div>
   <div class="comments-container">Comments here</div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>
