@@ -20,7 +20,7 @@ h1 {
 }
 
 h1 + hr {
-  border: solid 1px $color-primary;
+  border: solid 1px $color-secondary;
   margin: 0;
   width: 100px;
 
@@ -206,7 +206,7 @@ table {
     transition: $button-hover-animation;
 
     &:hover {
-      border: solid 1px $color-primary;
+      border: solid 1px $color-secondary;
 
       h4 {
         color: $color-primary;
@@ -265,7 +265,7 @@ table {
       font-size: $font-size-body-2;
       font-weight: 500;
 
-      color: $color-primary;
+      color: $color-secondary;
 
       cursor: pointer;
       transition: $button-hover-animation;
