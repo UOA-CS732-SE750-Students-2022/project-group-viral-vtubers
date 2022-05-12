@@ -92,7 +92,17 @@
     </div>
     <div class="applicants-container">
       <h4>Applicants</h4>
-      <div class="applicant" *ngFor="let i; in: [0, 1]"></div>
+      <div
+        class="applicant"
+        *ngFor="let application of selectedOrder.applications"
+      >
+        <img src="{{ application.profileImageURI }}" />
+        <div class="info-container">
+          <h5>{{ application.displayName }}</h5>
+          <p>{{ application.bio }}</p>
+        </div>
+        <button>Accept</button>
+      </div>
     </div>
   </div>
 </div>
