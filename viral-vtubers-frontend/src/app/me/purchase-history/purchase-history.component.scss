@@ -32,21 +32,27 @@ h1 + hr {
   border-bottom: solid 1px $color-grey-light;
 }
 
-// Product column
 table {
   margin-right: 40px;
+
+  border-collapse: collapse;
 
   tr {
     th {
       text-align: left;
       font-weight: 500;
       font-size: $font-size-body-1;
+
+      padding: 5px 15px;
     }
 
     td {
+      border-top: solid 1px $color-grey-light;
+
+      padding: 0 15px;
+
       &.product-col {
         width: 35%;
-        background-color: lightcyan;
       }
 
       &.artist-col {
@@ -55,14 +61,10 @@ table {
 
       &.date-col {
         width: 25px;
-
-        background-color: lavender;
       }
 
       &.price-col {
         width: 15%;
-
-        background-color: lightblue;
       }
     }
   }
@@ -71,6 +73,8 @@ table {
 .product-container {
   display: flex;
   align-items: flex-start;
+
+  margin: 24px 0;
 
   img {
     height: 80px;
@@ -85,6 +89,8 @@ table {
     h5 {
       font-size: $font-size-body-1;
       margin: 0;
+
+      margin-top: 5px;
       margin-bottom: 8px;
       font-weight: 500;
 
@@ -107,4 +113,44 @@ table {
       overflow: hidden;
     }
   }
+}
+
+.artist-container {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  &:hover {
+    p {
+      color: $color-primary;
+    }
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin-right: 5px;
+
+    border: solid 1px $color-grey-light;
+  }
+
+  p {
+    transition: $button-hover-animation;
+
+    font-size: $font-size-body-2;
+    margin: 0;
+    padding-left: 10px;
+  }
+}
+
+.date-container {
+  font-size: $font-size-body-3;
+  margin: 0;
+}
+
+.price-container {
+  font-size: $font-size-body-1;
+  margin: 0;
 }

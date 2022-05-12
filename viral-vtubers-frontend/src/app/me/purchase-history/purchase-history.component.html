@@ -9,7 +9,7 @@
     <th class="price-col">Price</th>
   </tr>
 
-  <tr>
+  <tr *ngFor="let i of [0, 1, 2]">
     <td class="product-col">
       <div class="product-container">
         <img src="https://picsum.photos/200?2" />
@@ -26,8 +26,10 @@
     </td>
     <td class="artist-col">12-12-2000 5:30pm</td>
     <td class="date-col">
-      <img src="https://picsum.photos/200?2" />
-      <h5>Baka</h5>
+      <div class="artist-container">
+        <img src="https://picsum.photos/200?2" />
+        <p>Baka</p>
+      </div>
     </td>
     <td class="price-col">$69.99</td>
   </tr>
