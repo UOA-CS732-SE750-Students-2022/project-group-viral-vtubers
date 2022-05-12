@@ -284,7 +284,7 @@ export class CommissionRequestsComponent implements OnInit {
           },
           artist: {
             id: '1',
-            bio: "I'm a designer and illustrator who loves anime and waifus.",
+            bio: "I'm a designer and illustrator who loves anime and waifus. I'm a designer and illustrator who loves anime and waifus. I'm a designer and illustrator who loves anime and waifus.",
             numCompletedCommissions: 20,
             displayName: 'Nozomi Tojo',
             email: 'nozomi.senpai@gmail.com',

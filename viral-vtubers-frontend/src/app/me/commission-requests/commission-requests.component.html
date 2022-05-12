@@ -34,7 +34,7 @@
     <ng-container *ngFor="let order of myOrders.past">
       <tr>
         <td class="request-col">
-          <div class="request-container">
+          <div class="request-container" (click)="setSelectedOrder(order)">
             <img src="{{ order.image }}" />
             <div>
               <h5>{{ order.name }}</h5>
@@ -91,10 +91,13 @@
       <p class="description-container">{{ selectedOrder.description }}</p>
     </div>
     <div *ngIf="selectedOrder.artist; else noArtist" class="artist-container">
-      <img src="{{ selectedOrder.artist.profileImageURI }}" />
-      <div class="applicant-info-container">
-        <h5>{{ selectedOrder.artist.displayName }}</h5>
-        <p>{{ selectedOrder.artist.bio }}</p>
+      <h4>Artist</h4>
+      <div class="artist">
+        <img src="{{ selectedOrder.artist.profileImageURI }}" />
+        <div class="applicant-info-container">
+          <h5>{{ selectedOrder.artist.displayName }}</h5>
+          <p>{{ selectedOrder.artist.bio }}</p>
+        </div>
       </div>
     </div>
 
