@@ -284,7 +284,17 @@ export class CommissionRequestsComponent implements OnInit {
               'https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png',
             isFollowing: true,
           },
-          artist: null,
+          artist: {
+            id: '1',
+            bio: "I'm a designer and illustrator who loves anime and waifus.",
+            numCompletedCommissions: 20,
+            displayName: 'Nozomi Tojo',
+            email: 'nozomi.senpai@gmail.com',
+            numLikes: 291,
+            profileImageURI:
+              'https://static.wikia.nocookie.net/yuripedia/images/0/02/Nozomi_Tojo.jpg/revision/latest?cb=20160409233839',
+            isFollowing: true,
+          },
           tags: [
             {
               id: '1',
@@ -344,7 +354,17 @@ export class CommissionRequestsComponent implements OnInit {
               'https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png',
             isFollowing: true,
           },
-          artist: null,
+          artist: {
+            id: '1',
+            bio: "I'm a designer and illustrator who loves anime and waifus.",
+            numCompletedCommissions: 20,
+            displayName: 'Nozomi Tojo',
+            email: 'nozomi.senpai@gmail.com',
+            numLikes: 291,
+            profileImageURI:
+              'https://static.wikia.nocookie.net/yuripedia/images/0/02/Nozomi_Tojo.jpg/revision/latest?cb=20160409233839',
+            isFollowing: true,
+          },
           tags: [
             {
               id: '1',
@@ -389,4 +409,6 @@ export class CommissionRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  navigateToUser(id: string | undefined) {}
 }

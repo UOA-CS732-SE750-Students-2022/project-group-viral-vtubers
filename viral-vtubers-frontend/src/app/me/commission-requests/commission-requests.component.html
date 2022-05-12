@@ -8,27 +8,23 @@
 
 <h3>Done Deals</h3>
 <div class="content-container">
-  <!-- <table>
+  <table>
     <tr>
       <th class="product-col">Product</th>
       <th class="artist-col">Artist</th>
-      <th class="date-col">Transaction Date</th>
+      <th class="tags-col">Tags</th>
       <th class="price-col">Price</th>
-      <th class="download-col">Download</th>
     </tr>
 
-    <ng-container *ngFor="let purchase of purchases">
-      <tr *ngFor="let item of purchase.items">
+    <ng-container *ngFor="let order of myOrders.past">
+      <tr>
         <td class="product-col">
-          <div
-            class="product-container"
-            (click)="navigateToProduct(item.product.id)"
-          >
-            <img src="{{ item.product.titleImage }}" />
+          <div class="product-container">
+            <img src="{{ order.image }}" />
             <div>
-              <h5>{{ item.product.name }}</h5>
+              <h5>{{ order.name }}</h5>
               <p>
-                {{ item.fileName }}
+                {{ order.description }}
               </p>
             </div>
           </div>
@@ -36,24 +32,15 @@
         <td class="artist-col">
           <div
             class="artist-container"
-            (click)="navigateToUser(item.product.id)"
+            (click)="navigateToUser(order.artist?.id)"
           >
-            <img src="{{ purchase.seller.profileImageURI }}" />
-            <p>{{ purchase.seller.displayName }}</p>
+            <img src="{{ order.artist?.profileImageURI }}" />
+            <p>{{ order.artist?.displayName }}</p>
           </div>
         </td>
-        <td class="date-col">
-          {{ purchase.placed }}
-        </td>
-        <td class="price-col">${{ item.price | number: "1.2-2" }}</td>
-        <td class="download-col">
-          <div class="download-container">
-            <a href="{{ item.file }}">
-              <button>Download</button>
-            </a>
-          </div>
-        </td>
+        <td class="date-col">tags</td>
+        <td class="price-col">${{ order.bounty | number: "1.2-2" }}</td>
       </tr>
     </ng-container>
-  </table> -->
+  </table>
 </div>
