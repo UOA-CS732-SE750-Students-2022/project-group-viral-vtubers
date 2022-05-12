@@ -1,6 +1,6 @@
-import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-product',
@@ -108,7 +108,7 @@ export class CreateProductComponent implements OnInit {
     this.selectedCategory = category;
   }
 
-  removeImage(image: String): void {
+  removeImage(image: string): void {
     this.images = this.images.filter((i) => i !== image);
   }
 
