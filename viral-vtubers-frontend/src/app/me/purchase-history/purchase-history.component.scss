@@ -76,6 +76,14 @@ table {
 
   margin: 24px 0;
 
+  cursor: pointer;
+
+  &:hover {
+    h5 {
+      color: $color-primary;
+    }
+  }
+
   img {
     height: 80px;
     width: 80px;
@@ -98,6 +106,8 @@ table {
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
+
+      transition: $button-hover-animation;
     }
 
     p {

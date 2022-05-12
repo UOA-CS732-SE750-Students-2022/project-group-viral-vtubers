@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PurchaseFragmentFragment } from 'src/schema/type';
 
 @Component({
   selector: 'app-purchase-history',
@@ -6,7 +7,117 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./purchase-history.component.scss'],
 })
 export class PurchaseHistoryComponent implements OnInit {
-  constructor() {}
+  purchases: PurchaseFragmentFragment[];
+
+  constructor() {
+    this.purchases = [
+      {
+        id: '1',
+        placed: '2020-01-01',
+        seller: {
+          id: '1',
+          displayName: 'NozomiSenpai',
+          profileImageURI:
+            'https://static.zerochan.net/Toujou.Nozomi.full.3309434.png',
+          status: 'I am very cool',
+        },
+        items: [
+          {
+            id: '1',
+            name: 'Toujou Nozomi',
+            price: 100,
+            product: {
+              id: '1',
+              name: 'Toujou Nozomi',
+              titleImage:
+                'https://static.zerochan.net/Toujou.Nozomi.full.3305292.png',
+            },
+            file: 'https://static.zerochan.net/Toujou.Nozomi.full.3305292.png',
+            fileTypes: ['vrm'],
+          },
+        ],
+      },
+
+      {
+        id: '1',
+        placed: '2020-01-01',
+        seller: {
+          id: '1',
+          displayName: 'NozomiSenpai',
+          profileImageURI:
+            'https://static.zerochan.net/Toujou.Nozomi.full.3294721.jpg',
+          status: 'I am very cool',
+        },
+        items: [
+          {
+            id: '1',
+            name: 'Toujou Nozomi',
+            price: 100,
+            product: {
+              id: '1',
+              name: 'Toujou Nozomi',
+              titleImage:
+                'https://static.zerochan.net/Toujou.Nozomi.full.3289426.jpg',
+            },
+            file: 'https://static.zerochan.net/Toujou.Nozomi.full.3305292.png',
+            fileTypes: ['vrm'],
+          },
+        ],
+      },
+      {
+        id: '1',
+        placed: '2020-01-01',
+        seller: {
+          id: '1',
+          displayName: 'NozomiSenpai',
+          profileImageURI:
+            'https://static.zerochan.net/Toujou.Nozomi.full.3297483.png',
+          status: 'I am very cool',
+        },
+        items: [
+          {
+            id: '1',
+            name: 'Toujou Nozomi',
+            price: 100,
+            product: {
+              id: '1',
+              name: 'Toujou Nozomi',
+              titleImage:
+                'https://static.zerochan.net/Toujou.Nozomi.full.3298036.jpg',
+            },
+            file: 'https://static.zerochan.net/Toujou.Nozomi.full.3298036.jpg',
+            fileTypes: ['vrm'],
+          },
+        ],
+      },
+      {
+        id: '1',
+        placed: '2020-01-01',
+        seller: {
+          id: '1',
+          displayName: 'NozomiSenpai',
+          profileImageURI:
+            'https://static.zerochan.net/Toujou.Nozomi.full.3301635.png',
+          status: 'I am very cool',
+        },
+        items: [
+          {
+            id: '1',
+            name: 'Toujou Nozomi',
+            price: 100,
+            product: {
+              id: '1',
+              name: 'Toujou Nozomi',
+              titleImage:
+                'https://static.zerochan.net/Toujou.Nozomi.full.3304931.jpg',
+            },
+            file: 'https://static.zerochan.net/Toujou.Nozomi.full.3304931.jpg',
+            fileTypes: ['vrm'],
+          },
+        ],
+      },
+    ];
+  }
 
   ngOnInit(): void {}
 }
