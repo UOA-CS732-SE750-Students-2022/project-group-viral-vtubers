@@ -32,6 +32,7 @@ export class CartComponent implements OnInit {
                 titleImage: 'https://picsum.photos/200',
               },
               file: 'test.vrm',
+              fileName: 'test.vrm',
               fileTypes: ['.vrm'],
             },
           ],
@@ -57,6 +58,7 @@ export class CartComponent implements OnInit {
                 titleImage: 'https://picsum.photos/200',
               },
               file: 'test.vrm',
+              fileName: 'test.vrm',
               fileTypes: ['.vrm'],
             },
             {
@@ -69,6 +71,7 @@ export class CartComponent implements OnInit {
                 titleImage: 'https://picsum.photos/200',
               },
               file: 'test.vrm',
+              fileName: 'test.vrm',
               fileTypes: ['.vrm'],
             },
           ],

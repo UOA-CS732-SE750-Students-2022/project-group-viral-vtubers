@@ -13,6 +13,7 @@ export const ItemFragment = gql`
       titleImage
     }
     file
+    fileName
     fileTypes
   }
 `;
