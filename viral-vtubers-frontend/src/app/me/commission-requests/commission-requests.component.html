@@ -2,7 +2,58 @@
 <hr />
 
 <h3>Pending Orders</h3>
-<div class="content-container"></div>
+<div class="content-container">
+  <div *ngFor="let i of [0, 1, 2]">request</div>
+</div>
 
 <h3>Done Deals</h3>
-<div class="content-container"></div>
+<div class="content-container">
+  <!-- <table>
+    <tr>
+      <th class="product-col">Product</th>
+      <th class="artist-col">Artist</th>
+      <th class="date-col">Transaction Date</th>
+      <th class="price-col">Price</th>
+      <th class="download-col">Download</th>
+    </tr>
+
+    <ng-container *ngFor="let purchase of purchases">
+      <tr *ngFor="let item of purchase.items">
+        <td class="product-col">
+          <div
+            class="product-container"
+            (click)="navigateToProduct(item.product.id)"
+          >
+            <img src="{{ item.product.titleImage }}" />
+            <div>
+              <h5>{{ item.product.name }}</h5>
+              <p>
+                {{ item.fileName }}
+              </p>
+            </div>
+          </div>
+        </td>
+        <td class="artist-col">
+          <div
+            class="artist-container"
+            (click)="navigateToUser(item.product.id)"
+          >
+            <img src="{{ purchase.seller.profileImageURI }}" />
+            <p>{{ purchase.seller.displayName }}</p>
+          </div>
+        </td>
+        <td class="date-col">
+          {{ purchase.placed }}
+        </td>
+        <td class="price-col">${{ item.price | number: "1.2-2" }}</td>
+        <td class="download-col">
+          <div class="download-container">
+            <a href="{{ item.file }}">
+              <button>Download</button>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </table> -->
+</div>
