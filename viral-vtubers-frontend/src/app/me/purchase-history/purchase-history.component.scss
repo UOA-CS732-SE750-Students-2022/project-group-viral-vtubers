@@ -57,7 +57,7 @@ table {
       }
 
       &.artist-col {
-        width: 25%;
+        width: 20%;
       }
 
       &.date-col {
@@ -65,7 +65,11 @@ table {
       }
 
       &.price-col {
-        width: 15%;
+        width: 10%;
+      }
+
+      &.download-col {
+        width: 10%;
       }
     }
   }
@@ -164,4 +168,29 @@ table {
 .price-container {
   font-size: $font-size-body-1;
   margin: 0;
+}
+
+.download-container {
+  button {
+    height: 40px;
+    background-color: $color-primary;
+    color: white;
+
+    border-radius: 5px;
+    border: solid 1px $color-grey-light;
+
+    transition: $button-hover-animation;
+
+    font-family: $font-family-poppins;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+    &:hover {
+      opacity: $button-coloured-hover-opacity;
+    }
+  }
 }

@@ -18,7 +18,7 @@ export class PurchaseHistoryComponent implements OnInit {
           id: '1',
           displayName: 'NozomiSenpai',
           profileImageURI:
-            'https://static.zerochan.net/Toujou.Nozomi.full.3309434.png',
+            'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
           status: 'I am very cool',
         },
         items: [
@@ -30,7 +30,7 @@ export class PurchaseHistoryComponent implements OnInit {
               id: '1',
               name: 'Toujou Nozomi',
               titleImage:
-                'https://static.zerochan.net/Toujou.Nozomi.full.3305292.png',
+                'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
             },
             file: 'https://static.zerochan.net/Toujou.Nozomi.full.3305292.png',
             fileName: 'test.vrm',
@@ -73,7 +73,7 @@ export class PurchaseHistoryComponent implements OnInit {
           id: '1',
           displayName: 'NozomiSenpai',
           profileImageURI:
-            'https://static.zerochan.net/Toujou.Nozomi.full.3297483.png',
+            'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
           status: 'I am very cool',
         },
         items: [
@@ -100,7 +100,7 @@ export class PurchaseHistoryComponent implements OnInit {
           id: '1',
           displayName: 'NozomiSenpai',
           profileImageURI:
-            'https://static.zerochan.net/Toujou.Nozomi.full.3301635.png',
+            'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
           status: 'I am very cool',
         },
         items: [
