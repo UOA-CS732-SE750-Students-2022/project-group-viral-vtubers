@@ -74,11 +74,21 @@
         <h4>{{ selectedOrder.name }}</h4>
         <app-tags [isEdit]="false" [tags]="selectedOrder.tags"></app-tags>
       </div>
-      <div class="request-info-container"></div>
+      <div class="request-info-container">
+        <div class="bounty-container">
+          <img src="assets/icons/money-bag.svg" />
+          <h6>Bounty:</h6>
+          <p>${{ selectedOrder.bounty }}</p>
+        </div>
+        <div class="requester-container">
+          <h6>Requested by:</h6>
+          <p>Me</p>
+        </div>
+      </div>
     </div>
     <div class="image-description-container">
       <img src="{{ selectedOrder.image }}" />
-      <p class="description-container">description</p>
+      <p class="description-container">{{ selectedOrder.description }}</p>
     </div>
     <div class="applicants-container">
       <h4>Applicants</h4>

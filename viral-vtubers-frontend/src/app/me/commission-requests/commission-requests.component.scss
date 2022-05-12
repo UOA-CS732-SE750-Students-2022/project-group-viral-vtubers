@@ -337,8 +337,65 @@ table {
     .info-container {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
+      column-gap: 30px;
 
       margin-bottom: 20px;
+
+      .request-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .bounty-container {
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 24px;
+            width: 24px;
+            margin-right: 10px;
+          }
+
+          h6 {
+            font-size: $font-size-body-2;
+            text-transform: uppercase;
+            font-weight: 500;
+
+            margin: 0;
+            margin-right: 20px;
+          }
+
+          p {
+            margin: 0;
+
+            color: $color-secondary;
+            font-size: $font-size-h6;
+          }
+        }
+
+        .requester-container {
+          display: flex;
+          align-items: center;
+
+          h6 {
+            color: $color-grey-dark;
+            margin: 0;
+
+            margin-right: 20px;
+
+            font-size: $font-size-body-2;
+            font-weight: 400;
+          }
+
+          p {
+            margin: 0;
+
+            font-size: $font-size-body-2;
+          }
+        }
+      }
     }
 
     .image-description-container {
