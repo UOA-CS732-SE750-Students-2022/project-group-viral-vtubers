@@ -540,6 +540,13 @@ table {
           }
         }
       }
+
+      .no-applicants-container {
+        p {
+          color: $color-grey-dark;
+          font-size: $font-size-body-2;
+        }
+      }
     }
   }
 }

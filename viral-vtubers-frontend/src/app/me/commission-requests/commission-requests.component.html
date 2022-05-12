@@ -90,19 +90,39 @@
       <img src="{{ selectedOrder.image }}" />
       <p class="description-container">{{ selectedOrder.description }}</p>
     </div>
-    <div class="applicants-container">
-      <h4>Applicants</h4>
-      <div
-        class="applicant"
-        *ngFor="let application of selectedOrder.applications"
-      >
-        <img src="{{ application.profileImageURI }}" />
-        <div class="applicant-info-container">
-          <h5>{{ application.displayName }}</h5>
-          <p>{{ application.bio }}</p>
-        </div>
-        <button>Accept</button>
+    <div *ngIf="selectedOrder.artist; else noArtist" class="artist-container">
+      <img src="{{ selectedOrder.artist.profileImageURI }}" />
+      <div class="applicant-info-container">
+        <h5>{{ selectedOrder.artist.displayName }}</h5>
+        <p>{{ selectedOrder.artist.bio }}</p>
       </div>
     </div>
+
+    <ng-template #noArtist>
+      <div class="applicants-container">
+        <h4>Applicants</h4>
+        <ng-container
+          *ngIf="selectedOrder.applications.length > 0; else noApplicants"
+        >
+          <div
+            class="applicant"
+            *ngFor="let application of selectedOrder.applications"
+          >
+            <img src="{{ application.profileImageURI }}" />
+            <div class="applicant-info-container">
+              <h5>{{ application.displayName }}</h5>
+              <p>{{ application.bio }}</p>
+            </div>
+            <button>Accept</button>
+          </div>
+        </ng-container>
+
+        <ng-template #noApplicants>
+          <div class="no-applicants-container">
+            <p>No applicants so far~</p>
+          </div>
+        </ng-template>
+      </div>
+    </ng-template>
   </div>
 </div>
