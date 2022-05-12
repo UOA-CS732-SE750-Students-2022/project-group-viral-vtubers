@@ -126,8 +126,17 @@ export class VrmCanvasComponent implements OnInit {
     this.mixer = new THREE.AnimationMixer(this.vrm.scene);
     this.ikHandler = VRMIKHandler.get(this.vrm);
 
-    const animate = this.mixer.clipAction(clips[0]);
-    animate.play();
+    const animateAppearing = this.mixer.clipAction(clips[0]);
+    animateAppearing.clampWhenFinished = true;
+    const animateLiked = this.mixer.clipAction(clips[1]);
+    animateLiked.clampWhenFinished = true;
+    const animateWaiting = this.mixer.clipAction(clips[2]);
+    animateWaiting.clampWhenFinished = true;
+    animateAppearing.crossFadeTo(animateLiked, 0.2, false);
+    animateLiked.crossFadeTo(animateWaiting, 0.2, false);
+    animateWaiting.crossFadeTo(animateLiked, 0.2, false);
+
+    animateWaiting.play();
 
     // clips.map((clip) => {
     //   if (this.mixer == null) {
