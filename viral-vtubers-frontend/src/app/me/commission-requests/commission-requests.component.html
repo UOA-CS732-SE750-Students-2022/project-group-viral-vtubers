@@ -3,17 +3,17 @@
 
 <h3>Pending Orders</h3>
 <div class="content-container pending-orders">
-  <div *ngFor="let i of [0, 1, 2]" class="request-container">
+  <div *ngFor="let order of myOrders.active" class="request-container">
     <img
       src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
     />
     <div class="info-container">
-      <h4>hullo</h4>
+      <h4>{{ order.name }}</h4>
       <div class="description-container">
-        <p>dsafsa</p>
+        <p>{{ order.description }}</p>
       </div>
     </div>
-    <p>2 Applicants</p>
+    <p>{{ order.applications.length }} Applicants</p>
   </div>
 </div>
 
