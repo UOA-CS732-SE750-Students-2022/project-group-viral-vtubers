@@ -18,12 +18,14 @@ export class ManageUploadsComponent implements OnInit {
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
         numLikes: 29,
+        isLiked: false,
         titleImage:
           'https://pbs.twimg.com/profile_images/950544018160709632/TBueVZZr_400x400.jpg',
       },
       {
         id: '1',
         name: '',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -32,6 +34,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -42,6 +45,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -50,6 +54,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -58,6 +63,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -66,6 +72,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -75,6 +82,7 @@ export class ManageUploadsComponent implements OnInit {
         id: '1',
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
+        isLiked: false,
         numLikes: 29,
         titleImage:
           'https://64.media.tumblr.com/256c6a85096830310954813172b8e266/tumblr_np0da4RvDz1uwhadvo1_250.jpg',
@@ -83,6 +91,7 @@ export class ManageUploadsComponent implements OnInit {
         id: '1',
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
+        isLiked: false,
         numLikes: 29,
         titleImage:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyF3bjSJt9T-dHmFcPiRWfPx9gDCOOGCGz8LoY6AJ1snM-mJNFKZLYa7xiQCVwM42Mf-E&usqp=CAU',
@@ -90,6 +99,7 @@ export class ManageUploadsComponent implements OnInit {
       {
         id: '1',
         name: 'Aya 着替B ver0.98',
+        isLiked: false,
         minPrice: 12.99,
         numLikes: 29,
         titleImage:
@@ -99,6 +109,7 @@ export class ManageUploadsComponent implements OnInit {
         id: '1',
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
+        isLiked: false,
         numLikes: 29,
         titleImage:
           'https://64.media.tumblr.com/2c1330e52fe9a1f22729be266f37477f/tumblr_np0da4RvDz1uwhadvo3_400.jpg',
@@ -107,6 +118,7 @@ export class ManageUploadsComponent implements OnInit {
         id: '1',
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
+        isLiked: false,
         numLikes: 29,
         titleImage:
           'https://64.media.tumblr.com/256c6a85096830310954813172b8e266/tumblr_np0da4RvDz1uwhadvo1_250.jpg',
@@ -115,6 +127,7 @@ export class ManageUploadsComponent implements OnInit {
         id: '1',
         name: 'Aya 着替B ver0.98',
         minPrice: 12.99,
+        isLiked: false,
         numLikes: 29,
         titleImage:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyF3bjSJt9T-dHmFcPiRWfPx9gDCOOGCGz8LoY6AJ1snM-mJNFKZLYa7xiQCVwM42Mf-E&usqp=CAU',

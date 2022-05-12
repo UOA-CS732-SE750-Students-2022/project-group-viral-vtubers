@@ -62,6 +62,7 @@ type Product {
 "Product Variant"
 type ProductVariant {
   file: String!
+  fileName: String!
   fileTypes: [String!]!
   id: ID!
   name: String!

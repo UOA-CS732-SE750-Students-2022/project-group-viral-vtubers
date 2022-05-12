@@ -10,6 +10,13 @@
           <p>Account</p>
         </li>
         <li
+          [ngClass]="{ active: activeRoute === '/me/purchases' }"
+          routerLink="purchases"
+        >
+          <img src="assets/icons/currency-usd.svg" />
+          <p>Purchase History</p>
+        </li>
+        <li
           [ngClass]="{ active: activeRoute === '/me/orders' }"
           routerLink="orders"
         >

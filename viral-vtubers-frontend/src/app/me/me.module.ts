@@ -8,6 +8,7 @@ import { AccountComponent } from './account/account.component';
 import { CommissionRequestsComponent } from './commission-requests/commission-requests.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { MeComponent } from './me.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: '',
         component: AccountComponent,
+      },
+      {
+        path: 'purchases',
+        component: PurchaseHistoryComponent,
       },
       {
         path: 'orders',
@@ -36,6 +41,7 @@ export const routes: Routes = [
     CommissionRequestsComponent,
     FavouritesComponent,
     MeComponent,
+    PurchaseHistoryComponent,
   ],
   imports: [
     CommonModule,

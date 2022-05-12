@@ -475,6 +475,7 @@ export type ProductSort = {
 export type ProductVariant = {
   __typename?: 'ProductVariant';
   file: Scalars['String'];
+  fileName: Scalars['String'];
   fileTypes: Array<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -692,9 +693,9 @@ export type UserSort = {
   numLikes?: InputMaybe<SortEnum>;
 };
 
-export type ItemFragmentFragment = { __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } };
+export type ItemFragmentFragment = { __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } };
 
-export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } };
+export type CartFragmentFragment = { __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } };
 
 export type CategoryFragmentFragment = { __typename?: 'Category', id: string, name: string, subcategories: Array<{ __typename?: 'Subcategory', id: string, name: string }> };
 
@@ -716,6 +717,8 @@ export type ProductBlurbFragmentFragment = { __typename?: 'Product', id: string,
 
 export type ProductPaginationFragmentFragment = { __typename?: 'ProductPagination', edges: Array<{ __typename?: 'ProductEdge', cursor: string, node: { __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, titleImage: string, minPrice: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor: string, hasNextPage: boolean, startCursor: string } };
 
+export type PurchaseFragmentFragment = { __typename?: 'Purchase', id: string, placed: any, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> };
+
 export type TagFragmentFragment = { __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string };
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
@@ -732,7 +735,7 @@ export type AddToCartMutationVariables = Exact<{
 }>;
 
 
-export type AddToCartMutation = { __typename?: 'Mutation', addToCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
+export type AddToCartMutation = { __typename?: 'Mutation', addToCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type RemoveFromCartMutationVariables = Exact<{
   productId: Scalars['ID'];
@@ -740,21 +743,21 @@ export type RemoveFromCartMutationVariables = Exact<{
 }>;
 
 
-export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
+export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type EmptyCartMutationVariables = Exact<{
   sellerId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type EmptyCartMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
+export type EmptyCartMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type CheckoutMutationVariables = Exact<{
   sellerId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type CheckoutMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
+export type CheckoutMutation = { __typename?: 'Mutation', emptyCart: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type LoginMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -815,7 +818,7 @@ export type FollowMutation = { __typename?: 'Mutation', follow: { __typename?: '
 export type CartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CartQuery = { __typename?: 'Query', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
+export type CartQuery = { __typename?: 'Query', carts: Array<{ __typename?: 'Cart', numItems: number, totalAmount: number, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }>, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string } }> };
 
 export type InboxQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -940,6 +943,7 @@ export const ItemFragmentFragmentDoc = gql`
     titleImage
   }
   file
+  fileName
   fileTypes
 }
     `;
@@ -1135,6 +1139,19 @@ export const ProductPaginationFragmentFragmentDoc = gql`
   }
 }
     ${ProductBlurbFragmentFragmentDoc}`;
+export const PurchaseFragmentFragmentDoc = gql`
+    fragment PurchaseFragment on Purchase {
+  id
+  placed
+  seller {
+    ...UserBlurbFragment
+  }
+  items {
+    ...ItemFragment
+  }
+}
+    ${UserBlurbFragmentFragmentDoc}
+${ItemFragmentFragmentDoc}`;
 export const UserProfileFragmentFragmentDoc = gql`
     fragment UserProfileFragment on User {
   id
@@ -1194,7 +1211,7 @@ export const AddToCartDocument = gql`
   })
   export class AddToCartGQL extends Apollo.Mutation<AddToCartMutation, AddToCartMutationVariables> {
     override document = AddToCartDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1212,7 +1229,7 @@ export const RemoveFromCartDocument = gql`
   })
   export class RemoveFromCartGQL extends Apollo.Mutation<RemoveFromCartMutation, RemoveFromCartMutationVariables> {
     override document = RemoveFromCartDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1230,7 +1247,7 @@ export const EmptyCartDocument = gql`
   })
   export class EmptyCartGQL extends Apollo.Mutation<EmptyCartMutation, EmptyCartMutationVariables> {
     override document = EmptyCartDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1248,7 +1265,7 @@ export const CheckoutDocument = gql`
   })
   export class CheckoutGQL extends Apollo.Mutation<CheckoutMutation, CheckoutMutationVariables> {
     override document = CheckoutDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1266,7 +1283,7 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
     override document = LoginDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1284,7 +1301,7 @@ export const AddOrderDocument = gql`
   })
   export class AddOrderGQL extends Apollo.Mutation<AddOrderMutation, AddOrderMutationVariables> {
     override document = AddOrderDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1302,7 +1319,7 @@ export const EditOrderDocument = gql`
   })
   export class EditOrderGQL extends Apollo.Mutation<EditOrderMutation, EditOrderMutationVariables> {
     override document = EditOrderDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1320,7 +1337,7 @@ export const DeleteOrderDocument = gql`
   })
   export class DeleteOrderGQL extends Apollo.Mutation<DeleteOrderMutation, DeleteOrderMutationVariables> {
     override document = DeleteOrderDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1338,7 +1355,7 @@ export const ApplyOrderDocument = gql`
   })
   export class ApplyOrderGQL extends Apollo.Mutation<ApplyOrderMutation, ApplyOrderMutationVariables> {
     override document = ApplyOrderDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1356,7 +1373,7 @@ export const LikeProductDocument = gql`
   })
   export class LikeProductGQL extends Apollo.Mutation<LikeProductMutation, LikeProductMutationVariables> {
     override document = LikeProductDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1374,7 +1391,7 @@ export const EditSelfDocument = gql`
   })
   export class EditSelfGQL extends Apollo.Mutation<EditSelfMutation, EditSelfMutationVariables> {
     override document = EditSelfDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1392,7 +1409,7 @@ export const FollowDocument = gql`
   })
   export class FollowGQL extends Apollo.Mutation<FollowMutation, FollowMutationVariables> {
     override document = FollowDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1410,7 +1427,7 @@ export const CartDocument = gql`
   })
   export class CartGQL extends Apollo.Query<CartQuery, CartQueryVariables> {
     override document = CartDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1430,7 +1447,7 @@ export const InboxDocument = gql`
   })
   export class InboxGQL extends Apollo.Query<InboxQuery, InboxQueryVariables> {
     override document = InboxDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1450,7 +1467,7 @@ export const OutboxDocument = gql`
   })
   export class OutboxGQL extends Apollo.Query<OutboxQuery, OutboxQueryVariables> {
     override document = OutboxDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1468,7 +1485,7 @@ export const OrderDocument = gql`
   })
   export class OrderGQL extends Apollo.Query<OrderQuery, OrderQueryVariables> {
     override document = OrderDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1486,7 +1503,7 @@ export const MyOrdersDocument = gql`
   })
   export class MyOrdersGQL extends Apollo.Query<MyOrdersQuery, MyOrdersQueryVariables> {
     override document = MyOrdersDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1504,7 +1521,7 @@ export const MyCommissionsDocument = gql`
   })
   export class MyCommissionsGQL extends Apollo.Query<MyCommissionsQuery, MyCommissionsQueryVariables> {
     override document = MyCommissionsDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1522,7 +1539,7 @@ export const CategoryDocument = gql`
   })
   export class CategoryGQL extends Apollo.Query<CategoryQuery, CategoryQueryVariables> {
     override document = CategoryDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1540,7 +1557,7 @@ export const CategoriesDocument = gql`
   })
   export class CategoriesGQL extends Apollo.Query<CategoriesQuery, CategoriesQueryVariables> {
     override document = CategoriesDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1558,7 +1575,7 @@ export const SubcategoryDocument = gql`
   })
   export class SubcategoryGQL extends Apollo.Query<SubcategoryQuery, SubcategoryQueryVariables> {
     override document = SubcategoryDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1576,7 +1593,7 @@ export const ProductsDocument = gql`
   })
   export class ProductsGQL extends Apollo.Query<ProductsQuery, ProductsQueryVariables> {
     override document = ProductsDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1596,7 +1613,7 @@ export const ProductsCategoryDocument = gql`
   })
   export class ProductsCategoryGQL extends Apollo.Query<ProductsCategoryQuery, ProductsCategoryQueryVariables> {
     override document = ProductsCategoryDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1616,7 +1633,7 @@ export const ProductsSubategoryQueryDocument = gql`
   })
   export class ProductsSubategoryQueryGQL extends Apollo.Query<ProductsSubategoryQueryQuery, ProductsSubategoryQueryQueryVariables> {
     override document = ProductsSubategoryQueryDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1634,7 +1651,7 @@ export const ProductDocument = gql`
   })
   export class ProductGQL extends Apollo.Query<ProductQuery, ProductQueryVariables> {
     override document = ProductDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1652,7 +1669,7 @@ export const SelfDocument = gql`
   })
   export class SelfGQL extends Apollo.Query<SelfQuery, SelfQueryVariables> {
     override document = SelfDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1680,7 +1697,7 @@ export const ArtistsDocument = gql`
   })
   export class ArtistsGQL extends Apollo.Query<ArtistsQuery, ArtistsQueryVariables> {
     override document = ArtistsDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1698,7 +1715,7 @@ export const UserProfileDocument = gql`
   })
   export class UserProfileGQL extends Apollo.Query<UserProfileQuery, UserProfileQueryVariables> {
     override document = UserProfileDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
@@ -1720,7 +1737,7 @@ ${ProductBlurbFragmentFragmentDoc}`;
   })
   export class UserLikedProductGQL extends Apollo.Query<UserLikedProductQuery, UserLikedProductQueryVariables> {
     override document = UserLikedProductDocument;
-
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
