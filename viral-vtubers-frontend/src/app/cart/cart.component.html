@@ -23,7 +23,7 @@
       <div *ngFor="let item of cart.items">
         <div class="item">
           <a routerLink="/marketplace/product/{{ item.product.id }}">
-            <img src="{{ item.product.titleImage }}" alt="Ayumi Sensei" />
+            <img src="{{ item.product.titleImage }}" />
             <div class="item-content">
               <div class="item-details">
                 <p class="item-name">{{ item.name }}</p>
