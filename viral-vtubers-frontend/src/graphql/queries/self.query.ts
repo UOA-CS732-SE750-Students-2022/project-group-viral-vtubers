@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-import { UserFragment } from '../fragments/user.fragment';
+import { UserAccountFragment, UserFragment } from '../fragments/user.fragment';
 
 export const selfQuery = gql`
   query Self {
@@ -9,4 +9,13 @@ export const selfQuery = gql`
     }
   }
   ${UserFragment}
+`;
+
+export const accountQuery = gql`
+  query Account {
+    self {
+      ...UserAccountFragment
+    }
+  }
+  ${UserAccountFragment}
 `;

@@ -88,3 +88,18 @@ export const UserBlurbFragment = gql`
     profileImageURI
   }
 `;
+
+export const UserAccountFragment = gql`
+  fragment UserAccountFragment on User {
+    id
+    displayName
+    email
+    following {
+      ...UserBlurbFragment
+    }
+    followers {
+      ...UserBlurbFragment
+    }
+  }
+  ${UserBlurbFragment}
+`;

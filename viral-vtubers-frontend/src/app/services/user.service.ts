@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ThumbnailsMode } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import {
+  AccountGQL,
   ArtistFragmentFragment,
   ArtistPaginationFragmentFragment,
   ArtistsGQL,
@@ -11,6 +12,7 @@ import {
   LoginGQL,
   ProductBlurbFragmentFragment,
   SelfGQL,
+  UserAccountFragmentFragment,
   UserByNameGQL,
   UserFragmentFragment,
   UserLikedProductGQL,
@@ -30,6 +32,8 @@ export class UserService {
   artists$?: Observable<ArtistPaginationFragmentFragment>;
   userByName$?: Observable<UserFragmentFragment>;
 
+  account$?: Observable<UserAccountFragmentFragment>;
+
   constructor(
     private userProfileGQL: UserProfileGQL,
     private selfGQL: SelfGQL,
@@ -38,7 +42,8 @@ export class UserService {
     private followGQL: FollowGQL,
     private userLikedProductGQL: UserLikedProductGQL,
     private artistsGQL: ArtistsGQL,
-    private userByNameGQL: UserByNameGQL
+    private userByNameGQL: UserByNameGQL,
+    private accountGQL: AccountGQL
   ) {}
 
   getSelf() {
@@ -79,6 +84,13 @@ export class UserService {
       .watch({ name })
       .valueChanges.pipe(map((res) => res.data.userByName));
     return { query: this.userByNameGQL, userByName$: this.userByName$ };
+  }
+
+  getAccount() {
+    this.account$ = this.accountGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.self));
+    return { query: this.accountGQL, account$: this.account$ };
   }
 
   editSelf(input: EditSelfInput) {

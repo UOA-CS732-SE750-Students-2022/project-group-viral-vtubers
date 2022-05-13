@@ -731,6 +731,8 @@ export type ArtistPaginationFragmentFragment = { __typename?: 'UserPagination', 
 
 export type UserBlurbFragmentFragment = { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string };
 
+export type UserAccountFragmentFragment = { __typename?: 'User', id: string, displayName: string, email: string, following: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }>, followers: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }> };
+
 export type AddToCartMutationVariables = Exact<{
   productId: Scalars['ID'];
   variantId: Scalars['ID'];
@@ -918,6 +920,11 @@ export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SelfQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+
+export type AccountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AccountQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, displayName: string, email: string, following: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }>, followers: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }> } };
 
 export type ArtistsQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']>;
@@ -1231,6 +1238,19 @@ export const ArtistPaginationFragmentFragmentDoc = gql`
   }
 }
     ${ArtistFragmentFragmentDoc}`;
+export const UserAccountFragmentFragmentDoc = gql`
+    fragment UserAccountFragment on User {
+  id
+  displayName
+  email
+  following {
+    ...UserBlurbFragment
+  }
+  followers {
+    ...UserBlurbFragment
+  }
+}
+    ${UserBlurbFragmentFragmentDoc}`;
 export const AddToCartDocument = gql`
     mutation AddToCart($productId: ID!, $variantId: ID!) {
   addToCart(productId: $productId, variantId: $variantId) {
@@ -1720,6 +1740,24 @@ export const SelfDocument = gql`
   })
   export class SelfGQL extends Apollo.Query<SelfQuery, SelfQueryVariables> {
     override document = SelfDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AccountDocument = gql`
+    query Account {
+  self {
+    ...UserAccountFragment
+  }
+}
+    ${UserAccountFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AccountGQL extends Apollo.Query<AccountQuery, AccountQueryVariables> {
+    override document = AccountDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

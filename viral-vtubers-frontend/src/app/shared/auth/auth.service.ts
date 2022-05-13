@@ -32,6 +32,16 @@ export class AuthService {
     });
   }
 
+  async getToken(): Promise<string> {
+    const user = await this.afAuth.currentUser;
+
+    if (!user) {
+      return '';
+    }
+
+    return user.getIdToken();
+  }
+
   // Sign in with email/password
   signIn(email: string, password: string) {
     return this.afAuth
@@ -117,8 +127,3 @@ export class AuthService {
     });
   }
 }
-
-type subcategoryType = {
-  id: string;
-  name: string;
-};
