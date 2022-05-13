@@ -1,5 +1,6 @@
 import { gql } from 'apollo-angular';
 
+import { SubcategoryFragment } from './category.fragment';
 import { TagFragment } from './tag.fragment';
 import { UserFragment } from './user.fragment';
 
@@ -8,6 +9,9 @@ export const OrderFragment = gql`
     bounty
     description
     id
+    subcategory {
+      ...SubcategoryFragment
+    }
     image
     isDraft
     name
@@ -26,6 +30,7 @@ export const OrderFragment = gql`
   }
   ${UserFragment}
   ${TagFragment}
+  ${SubcategoryFragment}
 `;
 
 export const MyOrdersFragment = gql`

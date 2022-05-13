@@ -2,38 +2,56 @@
   <div class="history-container">
     <h4>Sale History</h4>
     <div class="title-underscore"></div>
-    <div class="sales-container">
-      <div class="sale-headers">
-        <h5 class="sale-heading product-col">Product</h5>
-        <h5 class="sale-heading buyer-col">Buyer</h5>
-        <h5 class="sale-heading date-col">Transaction Date</h5>
-        <h5 class="sale-heading price-col">Price</h5>
-      </div>
-      <hr class="divider" id="first-divider" />
-      <div class="sale-items" *ngFor="let i of [0, 1, 2, 3]">
-        <div class="sale-item">
-          <div class="product-col">
-            <img src="https://picsum.photos/200?1" class="product-img" />
-            <div class="item-names">
-              <h5>VROID Outfit - Raiden Shogun/Genshin Impact</h5>
-              <h6>
-                VRM - Shogun/Genshin Impact Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Iusto provident ab modi quos
-                nesciunt voluptatum ut esse quo, possimus est impedit. Neque,
-                ipsum ex voluptates tempore labore beatae nemo incidunt?
-              </h6>
-            </div>
+    <ng-container *ngIf="sales$ | async as sales; else loading">
+      <ng-container *ngIf="sales.length > 0; else empty">
+        <div class="sales-container">
+          <div class="sale-headers">
+            <h5 class="sale-heading product-col">Product</h5>
+            <h5 class="sale-heading buyer-col">Buyer</h5>
+            <h5 class="sale-heading date-col">Transaction Date</h5>
+            <h5 class="sale-heading price-col">Price</h5>
           </div>
+          <hr class="divider" id="first-divider" />
 
-          <div class="buyer buyer-col">
-            <img src="https://picsum.photos/200?2" />
-            <h5>Baka</h5>
-          </div>
-          <h5 class="date-col">12-12-2000 5:30pm</h5>
-          <h5 class="price-col">$69.99</h5>
+          <ng-container *ngFor="let sale of sales">
+            <div class="sale-items" *ngFor="let item of sale.items">
+              <div class="sale-item">
+                <div class="product-col">
+                  <img [src]="item.product.titleImage" class="product-img" />
+                  <div class="item-names">
+                    <h5></h5>
+                    <h6>
+                      {{ item.product.description }}
+                    </h6>
+                  </div>
+                </div>
+
+                <div class="buyer buyer-col">
+                  <img [src]="sale.buyer.profileImageURI" />
+                  <h5>{{ sale.buyer.displayName }}</h5>
+                </div>
+                <h5 class="date-col">{{ toDate(sale.placed) }}</h5>
+                <h5 class="price-col">{{ item.price }}</h5>
+              </div>
+              <hr class="divider" />
+            </div>
+          </ng-container>
         </div>
-        <hr class="divider" />
-      </div>
-    </div>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_pink.png" />
+    <p>No sales yet...</p>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="empty">
+    <img src="assets/chibis/chibi_pink.png" />
+    <p>Loading...</p>
+  </div>
+</ng-template>

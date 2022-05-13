@@ -1,6 +1,6 @@
 import { gql } from 'apollo-angular';
 
-import { PurchaseFragment } from '../fragments/purchase.fragment';
+import { PurchaseFragment, SaleFragment } from '../fragments/purchase.fragment';
 export const purchasesQuery = gql`
   query Purchases {
     purchases {
@@ -13,8 +13,8 @@ export const purchasesQuery = gql`
 export const salesQuery = gql`
   query Sales {
     sales {
-      ...PurchaseFragment
+      ...SaleFragment
     }
   }
-  ${PurchaseFragment}
+  ${SaleFragment}
 `;

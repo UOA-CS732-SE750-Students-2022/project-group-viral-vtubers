@@ -119,6 +119,7 @@ type Order {
   name: String!
   owner: User!
   artist: User
+  subcategory: Subcategory!
   tags: [Tag!]!
   applications: [User!]!
 }
@@ -136,7 +137,13 @@ type Purchase {
   placed: DateTime!
   totalAmount: Float!
   seller: User!
+  buyer: User!
   items: [ProductVariant!]!
+}
+""
+type Notification {
+  numCart: Int!
+  numMail: Int!
 }
 ""
 type UserPagination {
@@ -173,6 +180,8 @@ type MyCommission {
 type Query {
   "Get self"
   self: User!
+  "Get notification"
+  notification: Notification!
   "Get a single user"
   user(id: ID!): User!
   "Get a single user by name"
@@ -412,6 +421,7 @@ input AddOrderInput {
   image: String!
   isDraft: Boolean!
   name: String!
+  subcategoryId: ID!
   tagIds: [String!]!
 }
 ""
@@ -423,5 +433,6 @@ input EditOrderInput {
   image: String
   isDraft: Boolean
   name: String
+  subcategoryId: ID
   tagIds: [String!]
 }
