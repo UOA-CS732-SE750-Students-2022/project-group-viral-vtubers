@@ -32,7 +32,12 @@
           </a>
           <div class="item-buttons">
             <p class="item-price">${{ item.price | number: "1.2-2" }} USD</p>
-            <button class="item-remove">Remove</button>
+            <button
+              class="item-remove"
+              (click)="removeFromCart(item.product.id, item.id)"
+            >
+              Remove
+            </button>
           </div>
           <hr class="divider" />
         </div>
@@ -45,7 +50,9 @@
               >${{ cart.totalAmount | number: "1.2-2" }} USD</span
             >
           </p>
-          <button class="checkout-button">Checkout</button>
+          <button class="checkout-button" (click)="checkout(cart.seller.id)">
+            Checkout
+          </button>
           <br />
           <a href="#" class="checkout-return">Continue Shopping ></a>
         </div>

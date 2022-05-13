@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Gallery, GalleryItem, GalleryRef } from 'ng-gallery';
 import { Observable } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProductDetailFragmentFragment } from 'src/schema/type';
@@ -21,6 +22,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private userService: UserService,
+    private cartService: CartService,
     private route: ActivatedRoute,
     private gallery: Gallery
   ) {
@@ -68,5 +70,9 @@ export class ProductDetailsComponent implements OnInit {
 
   like(productId: string, isLiked: boolean): void {
     this.productService.likeProduct(productId, !isLiked).subscribe();
+  }
+
+  addToCart(productId: string, variantId: string) {
+    this.cartService.addToCart(productId, variantId).subscribe();
   }
 }
