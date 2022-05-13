@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthService } from '../shared/auth/auth.service';
+import { mockAuthService } from '../shared/auth/auth.service.mock';
 import { SignInComponent } from './sign-in.component';
 
 describe('SignInComponent', () => {
@@ -12,15 +13,15 @@ describe('SignInComponent', () => {
 
   beforeEach(async () => {
     authService = {
-      SignIn: async (email, password) => {
+      SignIn: async (email: string, password: string) => {
         signInEmail = email;
         signInPassword = password;
       },
-    } as AuthService;
+    } as unknown as AuthService;
 
     await TestBed.configureTestingModule({
       declarations: [SignInComponent],
-      providers: [{ provide: AuthService, useValue: authService }],
+      providers: [mockAuthService()],
     }).compileComponents();
   });
 

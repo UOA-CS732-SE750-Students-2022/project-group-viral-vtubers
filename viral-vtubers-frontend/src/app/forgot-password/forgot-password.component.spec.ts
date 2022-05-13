@@ -14,7 +14,7 @@ describe('ForgotPasswordComponent', () => {
       ForgotPassword: async (passwordResetEmail: string) => {
         resetEmail = passwordResetEmail;
       },
-    } as AuthService;
+    } as unknown as AuthService;
 
     await TestBed.configureTestingModule({
       declarations: [ForgotPasswordComponent],
