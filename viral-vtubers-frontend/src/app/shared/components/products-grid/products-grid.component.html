@@ -1,8 +1,8 @@
 <div class="products-content">
-  <div
+  <a
     *ngFor="let product of products"
     class="product-item"
-    (click)="nagivateToProduct(product.id)"
+    [href]="getProductUrl(product.id)"
   >
     <img src="{{ product.titleImage }}" alt="waifu" />
     <div>
@@ -15,5 +15,5 @@
       </div>
       <p>${{ product.minPrice | number: "1.2-2" }}</p>
     </div>
-  </div>
+  </a>
 </div>

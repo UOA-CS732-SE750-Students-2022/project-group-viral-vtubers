@@ -5,7 +5,7 @@ import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { VrmViewerComponent } from './shared/vrm-viewer/vrm-viewer.component';
+import { VrmCanvasComponent } from './shared/components/vrm-canvas/vrm-canvas.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -13,8 +13,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 export const routes: Routes = [
   {
-    path: 'vrm-viewer',
-    component: VrmViewerComponent,
+    path: 'vrm',
+    component: VrmCanvasComponent,
   },
   // Modules: Each has nested routes, and is lazy loaded.
   {

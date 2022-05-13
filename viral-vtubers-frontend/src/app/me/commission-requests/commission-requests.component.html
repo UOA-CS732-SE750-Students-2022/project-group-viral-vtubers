@@ -1,1 +1,138 @@
-<p>commission-requests works!</p>
+<h1>My Commission Requests</h1>
+<hr />
+
+<h3>Pending Orders</h3>
+<div class="content-container pending-orders">
+  <div
+    *ngFor="let order of myOrders.active"
+    class="request-container"
+    (click)="setSelectedOrder(order)"
+  >
+    <img
+      src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
+    />
+    <div class="info-container">
+      <h4>{{ order.name }}</h4>
+      <div class="description-container">
+        <p>{{ order.description }}</p>
+      </div>
+    </div>
+    <p>{{ order.applications.length }} Applicants</p>
+  </div>
+</div>
+
+<h3>Done Deals</h3>
+<div class="content-container">
+  <table>
+    <tr>
+      <th class="request-col">Request</th>
+      <th class="artist-col">Artist</th>
+      <th class="tags-col">Tags</th>
+      <th class="price-col">Price</th>
+    </tr>
+
+    <ng-container *ngFor="let order of myOrders.past">
+      <tr>
+        <td class="request-col">
+          <div class="request-container" (click)="setSelectedOrder(order)">
+            <img src="{{ order.image }}" />
+            <div>
+              <h5>{{ order.name }}</h5>
+              <p>
+                {{ order.description }}
+              </p>
+            </div>
+          </div>
+        </td>
+        <td class="artist-col">
+          <div
+            class="artist-container"
+            (click)="navigateToUser(order.artist?.id)"
+          >
+            <img src="{{ order.artist?.profileImageURI }}" />
+            <p>{{ order.artist?.displayName }}</p>
+          </div>
+        </td>
+        <td class="date-col">
+          <app-tags [isEdit]="false" [tags]="order.tags"></app-tags>
+        </td>
+        <td class="price-col">${{ order.bounty | number: "1.2-2" }}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
+
+<div
+  class="overlay"
+  (click)="setSelectedOrder(undefined); $event.stopPropagation()"
+  *ngIf="selectedOrder"
+  [@inOutAnimation]
+>
+  <div class="popup" (click)="$event.stopPropagation()">
+    <div class="info-container">
+      <div class="title-info-container">
+        <h4>{{ selectedOrder.name }}</h4>
+        <app-tags [isEdit]="false" [tags]="selectedOrder.tags"></app-tags>
+      </div>
+      <div class="request-info-container">
+        <div class="bounty-container">
+          <img src="assets/icons/money-bag.svg" />
+          <h6>Bounty:</h6>
+          <p>${{ selectedOrder.bounty }}</p>
+        </div>
+        <div class="requester-container">
+          <h6>Requested by:</h6>
+          <p>Me</p>
+        </div>
+      </div>
+    </div>
+    <div class="image-description-container">
+      <img src="{{ selectedOrder.image }}" />
+      <p class="description-container">{{ selectedOrder.description }}</p>
+    </div>
+    <div *ngIf="selectedOrder.artist; else noArtist" class="artist-container">
+      <h4>Artist</h4>
+      <div class="artist" (click)="navigateToUser(selectedOrder.artist.id)">
+        <img src="{{ selectedOrder.artist.profileImageURI }}" />
+        <div class="applicant-info-container">
+          <h5>{{ selectedOrder.artist.displayName }}</h5>
+          <p>{{ selectedOrder.artist.bio }}</p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noArtist>
+      <div class="applicants-container">
+        <h4>Applicants</h4>
+        <ng-container
+          *ngIf="selectedOrder.applications.length > 0; else noApplicants"
+        >
+          <div
+            class="applicant"
+            *ngFor="let application of selectedOrder.applications"
+            (click)="navigateToUser(application.id)"
+          >
+            <img src="{{ application.profileImageURI }}" />
+            <div class="applicant-info-container">
+              <h5>{{ application.displayName }}</h5>
+              <p>{{ application.bio }}</p>
+            </div>
+            <button
+              (click)="
+                handleAcceptApplication(application); $event.stopPropagation()
+              "
+            >
+              Accept
+            </button>
+          </div>
+        </ng-container>
+
+        <ng-template #noApplicants>
+          <div class="no-applicants-container">
+            <p>No applicants so far~</p>
+          </div>
+        </ng-template>
+      </div>
+    </ng-template>
+  </div>
+</div>

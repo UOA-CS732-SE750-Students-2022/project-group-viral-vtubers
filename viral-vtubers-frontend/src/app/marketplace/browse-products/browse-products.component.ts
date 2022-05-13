@@ -400,6 +400,7 @@ export class BrowseProductsComponent implements OnInit {
     this.selectedAgeRestrictionFilter = this.ageRestrictionFilters[0];
     this.minValue = 0;
     this.maxValue = 800;
+    this.router.navigate(['/marketplace', 'all']);
   }
 }
 
