@@ -3,7 +3,7 @@
   <div *ngFor="let cart of carts.carts" class="cart">
     <div class="title">
       <div class="seller">
-        <a routerLink="/marketplace">
+        <a routerLink="/marketplace/product/{{ cart.seller.id }}">
           <img
             src="{{ cart.seller.profileImageURI }}"
             alt="{{ cart.seller.displayName }} profile picture"
