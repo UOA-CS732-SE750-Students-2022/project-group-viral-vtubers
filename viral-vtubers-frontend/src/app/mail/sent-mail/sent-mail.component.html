@@ -2,7 +2,13 @@
   <div *ngFor="let mail of mails" class="mail-item">
     <h4>{{ mail.title }}</h4>
     <p class="mail-meta">
-      to <span>{{ mail.receiver.displayName }}</span> sent {{ mail.date }}
+      to
+      <span
+        ><a routerLink="/user/{{ mail.receiver.id }}">{{
+          mail.receiver.displayName
+        }}</a></span
+      >
+      sent {{ mail.date }}
     </p>
     <p class="mail-content">{{ mail.body }}</p>
   </div>

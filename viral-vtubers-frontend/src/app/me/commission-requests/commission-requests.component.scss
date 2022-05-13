@@ -40,7 +40,6 @@ h3 {
 }
 
 .row {
-  background-color: lightblue;
   width: 100%;
 
   border-bottom: solid 1px $color-grey-light;
@@ -186,6 +185,32 @@ table {
   flex-direction: row;
   flex-wrap: wrap;
 
+  // button {
+  //   height: 70px;
+  //   width: 600px;
+
+  //   background-color: $color-primary;
+  //   color: $color-background;
+
+  //   font-size: $font-size-body-2;
+  //   font-weight: 500;
+  //   font-family: $font-family-poppins;
+
+  //   border: solid 1px $color-grey-light;
+  //   border-radius: 5px;
+
+  //   padding: 0 20px;
+
+  //   cursor: pointer;
+  //   transition: $button-hover-animation;
+
+  //   &:hover {
+  //     opacity: $button-coloured-hover-opacity;
+  //   }
+
+  //   margin-bottom: 30px;
+  // }
+
   .request-container {
     height: 100px;
     width: 600px;
@@ -275,6 +300,42 @@ table {
       }
     }
   }
+  .new-request {
+    a {
+      height: 100%;
+      width: 100%;
+
+      color: inherit;
+    }
+
+    button {
+      height: 100%;
+      width: 100%;
+
+      background: #f6f9fa;
+
+      border: none;
+
+      font-size: $font-size-body-2;
+      font-weight: 500;
+      font-family: $font-family-poppins;
+      text-transform: uppercase;
+
+      color: $color-grey-dark;
+
+      border-radius: 5px;
+
+      padding: 0 20px;
+
+      cursor: pointer;
+      transition: $button-hover-animation;
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+        color: $color-primary;
+      }
+    }
+  }
 }
 
 .overlay {
@@ -342,6 +403,42 @@ table {
       column-gap: 30px;
 
       margin-bottom: 25px;
+
+      .title-info-container {
+        .title-container {
+          display: flex;
+          align-items: center;
+          column-gap: 15px;
+
+          .edit-icon {
+            margin-right: 5px;
+            height: 24px;
+            width: 24px;
+
+            border-radius: 50%;
+            border: 2px solid rgba(34, 34, 34, 0.2);
+            border-style: outset;
+
+            background-color: $color-background;
+            background-clip: padding-box;
+            transition: $button-hover-animation;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+
+            > img {
+              height: 50%;
+            }
+          }
+        }
+      }
 
       .request-info-container {
         display: flex;

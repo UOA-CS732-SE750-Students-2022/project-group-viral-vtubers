@@ -240,7 +240,21 @@ export class BrowseProductsComponent implements OnInit {
 
       this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
     });
+
+    this.router.events.subscribe(this.updatePageTitle);
   }
+
+  updatePageTitle = () => {
+    if (this.selectedCategoryFilter.id !== 'all') {
+      let newTitle = this.selectedCategoryFilter.name;
+
+      if (this.selectedSubCategoryFilter.id !== 'all') {
+        newTitle += ' > ' + this.selectedSubCategoryFilter.name;
+      }
+
+      this.title = newTitle;
+    }
+  };
 
   getProducts(
     categoryBlurb?: string,
@@ -291,7 +305,9 @@ export class BrowseProductsComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updatePageTitle();
+  }
 
   onSortChange(sort: selectItem) {
     const productSort: ProductSort = {};

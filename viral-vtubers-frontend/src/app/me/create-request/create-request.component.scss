@@ -1,45 +1,10 @@
 @import "../../../variables";
 
-.container {
-  border-top: 1px solid $color-grey-light;
+:host {
   background: #f6f9fa;
-  min-height: calc(100% - $header-height);
   width: 100%;
-  display: flex;
-  flex-direction: row;
-}
 
-h4 {
-  margin: 0;
-  font-weight: 400;
-}
-
-hr {
-  border: 1px solid $color-grey-light;
-  margin: -40px -100px 50px;
-}
-
-.sidebar-container {
-  background-color: aqua;
-  padding: 40px;
-  box-sizing: border-box;
-
-  display: flex;
-  > nav {
-    margin-top: 35px;
-    flex: 1;
-  }
-
-  > nav > ul {
-    margin: 0;
-    padding: 0;
-
-    width: 235px;
-
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-  }
+  overflow-y: auto;
 }
 
 .edit-side-container {
@@ -51,7 +16,7 @@ hr {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: $color-grey-light;
+    background-color: #f6f9fa;
     margin-right: 55px;
     max-width: 400px;
   }
@@ -113,8 +78,22 @@ hr {
   display: flex;
   flex-direction: column;
   max-width: 1200px;
-  width: 100%;
   margin: 40px 100px;
+
+  overflow-y: none;
+
+  h4 {
+    margin: 0;
+    font-weight: 400;
+    font-size: $font-size-h5;
+  }
+
+  hr {
+    border: 0.5px solid $color-grey-light;
+    margin: 0 -100px;
+    margin-bottom: 30px;
+  }
+
   input {
     height: 40px;
     border-radius: 5px;
@@ -146,6 +125,8 @@ hr {
 
     box-sizing: border-box;
     padding: 14px 22px;
+
+    min-height: 200px;
 
     &::placeholder {
       color: $color-grey-light;

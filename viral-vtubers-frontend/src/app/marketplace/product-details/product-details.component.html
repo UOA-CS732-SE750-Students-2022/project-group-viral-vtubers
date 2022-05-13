@@ -40,12 +40,18 @@
         {{ productDetails.subcategory.category.name }} >
         {{ productDetails.subcategory.name }}
       </p>
+      <app-tags [isEdit]="false" [tags]="productDetails.tags"></app-tags>
       <button
         class="heart-button"
-        [ngClass]="{ active: productDetails.isLiked }"
         (click)="like(productDetails.id, productDetails.isLiked)"
       >
-        <img src="assets/icons/hearts/heart-empty-grey.svg" />
+        <img
+          *ngIf="productDetails.isLiked; else emptyHeart"
+          src="assets/icons/hearts/heart-filled-secondary.svg"
+        />
+        <ng-template #emptyHeart>
+          <img src="assets/icons/hearts/heart-empty-grey.svg" />
+        </ng-template>
         <p data-test-id="numLikes">{{ productDetails.numLikes }}</p>
       </button>
       <div class="prices-container">

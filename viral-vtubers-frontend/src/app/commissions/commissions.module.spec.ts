@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { CommissionsModule, routes } from './commissions.module';
 
-import { CreateRequestComponent } from './create-request/create-request.component';
+import { CreateRequestComponent } from '../me/create-request/create-request.component';
+import { CommissionsModule, routes } from './commissions.module';
 import { SelectViewComponent } from './select-view/select-view.component';
 import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
@@ -24,7 +24,10 @@ describe('CommissionsModule', () => {
   });
 
   it('should contain route for /requests', () => {
-    const expectedRoute = { path: 'requests', component: ViewRequestsComponent };
+    const expectedRoute = {
+      path: 'requests',
+      component: ViewRequestsComponent,
+    };
     expect(routes).toContain(expectedRoute);
   });
 
@@ -32,10 +35,4 @@ describe('CommissionsModule', () => {
     const expectedRoute = { path: 'artists', component: ViewArtistsComponent };
     expect(routes).toContain(expectedRoute);
   });
-
-  it('should contain route for /create-request', () => {
-    const expectedRoute = { path: 'create-request', component: CreateRequestComponent };
-    expect(routes).toContain(expectedRoute);
-  });
-
 });
