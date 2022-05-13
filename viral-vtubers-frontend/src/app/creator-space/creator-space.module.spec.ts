@@ -31,16 +31,6 @@ describe('CommissionsModule', () => {
   it('should contain route for /', () => {
     const expectedRoute = {
       path: '',
-      component: DashboardComponent,
-    };
-    expect(routes.find((r) => r.path === '')?.children).toContain(
-      expectedRoute
-    );
-  });
-
-  it('should contain route for /uploads', () => {
-    const expectedRoute = {
-      path: 'uploads',
       component: ManageUploadsComponent,
     };
     expect(routes.find((r) => r.path === '')?.children).toContain(
