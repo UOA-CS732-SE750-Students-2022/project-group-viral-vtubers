@@ -84,6 +84,14 @@ fun SchemaBuilder.cartSchema(
         }
     }
 
+    query("sales") {
+        description = "Get sale history"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            cartService.getSales(userId)
+        }
+    }
+
     mutation("addToCart") {
         description = "Add item to Cart"
         resolver { ctx: Context, productId: ID, variantId: ID ->

@@ -7,4 +7,5 @@ import org.litote.kmongo.Id
 
 interface PurchaseRepository : Repository<Purchase> {
     fun getPurchasesByUserId(userId: Id<User>): Flow<Purchase>
+    fun getSalesByUserId(userId: Id<User>): Flow<Purchase>
 }

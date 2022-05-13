@@ -9,6 +9,8 @@ interface CartService {
 
     suspend fun getPurchases(userId: ID): List<Purchase>
 
+    suspend fun getSales(userId: ID): List<Purchase>
+
     suspend fun addToCart(userId: ID, productId: ID, variantId: ID): List<Cart>
 
     suspend fun removeFromCart(

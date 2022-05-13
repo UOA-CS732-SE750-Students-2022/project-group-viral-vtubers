@@ -48,6 +48,12 @@ class CartServiceImpl(
             .map { it.map() }
     }
 
+    override suspend fun getSales(userId: ID): List<Purchase> {
+        return purchaseRepository.getSalesByUserId(userId.map())
+            .toList()
+            .map { it.map() }
+    }
+
     override suspend fun addToCart(
         userId: ID,
         productId: ID,
