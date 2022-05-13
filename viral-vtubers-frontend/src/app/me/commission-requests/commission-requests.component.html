@@ -1,8 +1,8 @@
-<div>
-  <h1>My Commission Requests</h1>
-  <hr />
-
-  <button>New Commission Request</button>
+<div class="page-title-container">
+  <div>
+    <h1>My Commission Requests</h1>
+    <hr />
+  </div>
 </div>
 
 <h3>Pending Orders</h3>
@@ -22,6 +22,11 @@
       </div>
     </div>
     <p>{{ order.applications.length }} Applicants</p>
+  </div>
+  <div class="request-container new-request">
+    <a routerLink="">
+      <button>+ New Commission Request</button>
+    </a>
   </div>
 </div>
 
