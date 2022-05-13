@@ -127,14 +127,6 @@ $side-margin: 40px;
       transform: scale(1.05);
     }
 
-    &.active {
-      color: $color-secondary !important;
-      border-color: $color-secondary !important;
-      p {
-        color: $color-secondary !important;
-      }
-    }
-
     img {
       height: 30px;
       width: 30px;
