@@ -203,6 +203,8 @@ type Query {
   carts: [Cart!]!
   "Get past Purchases"
   purchases: [Purchase!]!
+  "Get sale history"
+  sales: [Purchase!]!
 }
 "Mutation object"
 type Mutation {
@@ -381,6 +383,7 @@ input EditProductInput {
 ""
 input AddProductVariant {
   file: String!
+  fileName: String!
   fileTypes: [String!]!
   name: String!
   price: Float!
@@ -389,6 +392,7 @@ input AddProductVariant {
 ""
 input EditProductVariant {
   file: String
+  fileName: String
   fileTypes: [String!]
   id: ID!
   name: String

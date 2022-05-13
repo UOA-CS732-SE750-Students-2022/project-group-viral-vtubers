@@ -45,6 +45,7 @@ export type AddProductInput = {
 
 export type AddProductVariant = {
   file: Scalars['String'];
+  fileName: Scalars['String'];
   fileTypes: Array<Scalars['String']>;
   name: Scalars['String'];
   price: Scalars['Float'];
@@ -130,6 +131,7 @@ export type EditProductInput = {
 
 export type EditProductVariant = {
   file?: InputMaybe<Scalars['String']>;
+  fileName?: InputMaybe<Scalars['String']>;
   fileTypes?: InputMaybe<Array<Scalars['String']>>;
   id: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
@@ -519,6 +521,8 @@ export type Query = {
   products: ProductPagination;
   /** Get past Purchases */
   purchases: Array<Purchase>;
+  /** Get sale history */
+  sales: Array<Purchase>;
   /** Get self */
   self: User;
   /** Get Subcategory */
@@ -915,6 +919,16 @@ export type ProductQueryVariables = Exact<{
 
 
 export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, description: string, titleImage: string, vrm: string, images: Array<string>, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, fileTypes: Array<string>, file: string, name: string, price: number }> } };
+
+export type PurchasesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PurchasesQuery = { __typename?: 'Query', purchases: Array<{ __typename?: 'Purchase', id: string, placed: any, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> }> };
+
+export type SalesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SalesQuery = { __typename?: 'Query', sales: Array<{ __typename?: 'Purchase', id: string, placed: any, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> }> };
 
 export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1722,6 +1736,42 @@ export const ProductDocument = gql`
   })
   export class ProductGQL extends Apollo.Query<ProductQuery, ProductQueryVariables> {
     override document = ProductDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const PurchasesDocument = gql`
+    query Purchases {
+  purchases {
+    ...PurchaseFragment
+  }
+}
+    ${PurchaseFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class PurchasesGQL extends Apollo.Query<PurchasesQuery, PurchasesQueryVariables> {
+    override document = PurchasesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const SalesDocument = gql`
+    query Sales {
+  sales {
+    ...PurchaseFragment
+  }
+}
+    ${PurchaseFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class SalesGQL extends Apollo.Query<SalesQuery, SalesQueryVariables> {
+    override document = SalesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
