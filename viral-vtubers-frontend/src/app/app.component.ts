@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 
+import { AuthService } from './shared/auth/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,11 +11,12 @@ import { Router, RouterEvent } from '@angular/router';
 export class AppComponent {
   currentRoute = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     router.events.subscribe((event) => {
       if (event instanceof RouterEvent) {
         this.currentRoute = event.url.split('/')[1];
         this.currentRoute = this.currentRoute.split('?')[0];
+        authService.getToken();
       }
     });
   }

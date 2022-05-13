@@ -62,6 +62,24 @@ export const ArtistFragment = gql`
   }
 `;
 
+export const ArtistPaginationFragment = gql`
+  fragment ArtistPaginationFragment on UserPagination {
+    edges {
+      cursor
+      node {
+        ...ArtistFragment
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      startCursor
+    }
+  }
+
+  ${ArtistFragment}
+`;
+
 export const UserBlurbFragment = gql`
   fragment UserBlurbFragment on User {
     id
@@ -69,4 +87,19 @@ export const UserBlurbFragment = gql`
     status
     profileImageURI
   }
+`;
+
+export const UserAccountFragment = gql`
+  fragment UserAccountFragment on User {
+    id
+    displayName
+    email
+    following {
+      ...UserBlurbFragment
+    }
+    followers {
+      ...UserBlurbFragment
+    }
+  }
+  ${UserBlurbFragment}
 `;

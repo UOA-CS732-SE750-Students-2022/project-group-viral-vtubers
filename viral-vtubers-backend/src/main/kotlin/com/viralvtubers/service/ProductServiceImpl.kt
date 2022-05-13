@@ -287,6 +287,7 @@ class ProductServiceImpl(
                 price = input.price,
                 name = input.name,
                 file = input.file,
+                fileName = input.fileName,
                 fileTypes = input.fileTypes,
             )
         )
@@ -309,6 +310,7 @@ class ProductServiceImpl(
                 price = input.price ?: variant.price,
                 name = input.name ?: variant.name,
                 file = input.file ?: variant.file,
+                fileName = input.fileName ?: variant.fileName,
                 fileTypes = input.fileTypes ?: variant.fileTypes,
             )
         )

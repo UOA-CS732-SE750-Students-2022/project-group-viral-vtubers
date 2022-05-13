@@ -1,15 +1,28 @@
-<div class="content-container">
-  <div *ngFor="let mail of mails" class="mail-item">
-    <h4>{{ mail.title }}</h4>
-    <p class="mail-meta">
-      to
-      <span
-        ><a routerLink="/user/{{ mail.receiver.id }}">{{
-          mail.receiver.displayName
-        }}</a></span
-      >
-      sent {{ mail.date }}
-    </p>
-    <p class="mail-content">{{ mail.body }}</p>
-  </div>
+<div class="content-container" *ngIf="mails$ | async as mails; else loading">
+  <ng-container *ngIf="mails.length > 0; else empty">
+    <div *ngFor="let mail of mails" class="mail-item">
+      <h4>{{ mail.title }}</h4>
+      <p class="mail-meta">
+        to
+        <span
+          ><a routerLink="/user/{{ mail.receiver.id }}">{{
+            mail.receiver.displayName
+          }}</a></span
+        >
+        sent {{ mail.date }}
+      </p>
+      <p class="mail-content">{{ mail.body }}</p>
+    </div>
+  </ng-container>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_pink.png" />
+    <p>No send mail yet... Let's <a href="/mail/new">send mail</a>!</p>
+  </div>
+</ng-template>

@@ -1,47 +1,66 @@
-<div class="container">
+<div class="container" *ngIf="carts$ | async as carts; else loading">
   <h4>Current Cart</h4>
-  <div *ngFor="let cart of carts.carts" class="cart">
-    <div class="title">
-      <div class="seller">
-        <a routerLink="/marketplace/product/{{ cart.seller.id }}">
-          <img
-            src="{{ cart.seller.profileImageURI }}"
-            alt="{{ cart.seller.displayName }} profile picture"
-          />
-          <h5>{{ cart.seller.displayName }}</h5>
-        </a>
-      </div>
-      <img src="assets/icons/ExitIcon.svg" alt="Exit Icon" class="exit-icon" />
-    </div>
-    <hr class="divider" />
-    <div *ngFor="let item of cart.items">
-      <div class="item">
-        <a routerLink="/marketplace/product/{{ item.product.id }}">
-          <img src="{{ item.product.titleImage }}" alt="Ayumi Sensei" />
-          <div class="item-content">
-            <div class="item-details">
-              <p class="item-name">{{ item.name }}</p>
-              <p class="item-fileName">{{ item.fileName }}</p>
-            </div>
-          </div>
-        </a>
-        <div class="item-buttons">
-          <p class="item-price">${{ item.price | number: "1.2-2" }} USD</p>
-          <button class="item-remove">Remove</button>
+  <ng-container *ngIf="carts.length > 0; else empty">
+    <div *ngFor="let cart of carts" class="cart">
+      <div class="title">
+        <div class="seller">
+          <a routerLink="/marketplace/product/{{ cart.seller.id }}">
+            <img
+              src="{{ cart.seller.profileImageURI }}"
+              alt="{{ cart.seller.displayName }} profile picture"
+            />
+            <h5>{{ cart.seller.displayName }}</h5>
+          </a>
         </div>
+        <img
+          src="assets/icons/ExitIcon.svg"
+          alt="Exit Icon"
+          class="exit-icon"
+        />
       </div>
       <hr class="divider" />
+      <div *ngFor="let item of cart.items">
+        <div class="item">
+          <a routerLink="/marketplace/product/{{ item.product.id }}">
+            <img src="{{ item.product.titleImage }}" alt="Ayumi Sensei" />
+            <div class="item-content">
+              <div class="item-details">
+                <p class="item-name">{{ item.name }}</p>
+                <p class="item-fileName">{{ item.fileName }}</p>
+              </div>
+            </div>
+          </a>
+          <div class="item-buttons">
+            <p class="item-price">${{ item.price | number: "1.2-2" }} USD</p>
+            <button class="item-remove">Remove</button>
+          </div>
+          <hr class="divider" />
+        </div>
+        <div class="checkout">
+          <p>
+            <span class="checkout-total"
+              >Total: {{ cart.numItems }} item(s)</span
+            >
+            <span class="checkout-price"
+              >${{ cart.totalAmount | number: "1.2-2" }} USD</span
+            >
+          </p>
+          <button class="checkout-button">Checkout</button>
+          <br />
+          <a href="#" class="checkout-return">Continue Shopping ></a>
+        </div>
+      </div>
     </div>
-    <div class="checkout">
-      <p>
-        <span class="checkout-total">Total: {{ cart.numItems }} item(s)</span>
-        <span class="checkout-price"
-          >${{ cart.totalAmount | number: "1.2-2" }} USD</span
-        >
-      </p>
-      <button class="checkout-button">Checkout</button>
-      <br />
-      <a href="#" class="checkout-return">Continue Shopping ></a>
-    </div>
-  </div>
+  </ng-container>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_blue.png" />
+    <p>No item yet... Let's <a href="/marketplace">start shopping</a>!</p>
+  </div>
+</ng-template>

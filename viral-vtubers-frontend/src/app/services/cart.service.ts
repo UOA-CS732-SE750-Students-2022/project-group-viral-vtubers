@@ -6,7 +6,10 @@ import {
   CartGQL,
   CheckoutGQL,
   EmptyCartGQL,
+  PurchaseFragmentFragment,
+  PurchasesGQL,
   RemoveFromCartGQL,
+  SalesGQL,
 } from 'src/schema/type';
 
 @Injectable({
@@ -14,13 +17,17 @@ import {
 })
 export class CartService {
   carts$?: Observable<CartFragmentFragment[]>;
+  purchases$?: Observable<PurchaseFragmentFragment[]>;
+  sales$?: Observable<PurchaseFragmentFragment[]>;
 
   constructor(
     private cartGQL: CartGQL,
     private addToCartGQL: AddToCartGQL,
     private removeFromCartGQL: RemoveFromCartGQL,
     private emptyCartGQL: EmptyCartGQL,
-    private checkoutGQL: CheckoutGQL
+    private checkoutGQL: CheckoutGQL,
+    private purchasesGQL: PurchasesGQL,
+    private salesGQL: SalesGQL
   ) {}
 
   getCarts() {
@@ -28,6 +35,20 @@ export class CartService {
       .watch()
       .valueChanges.pipe(map((res) => res.data.carts));
     return { query: this.cartGQL, carts$: this.carts$ };
+  }
+
+  getPurchases() {
+    this.purchases$ = this.purchasesGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.purchases));
+    return { query: this.purchasesGQL, purchases$: this.purchases$ };
+  }
+
+  getSales() {
+    this.sales$ = this.salesGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.sales));
+    return { query: this.salesGQL, sales$: this.sales$ };
   }
 
   addToCart(productId: string, variantId: string) {

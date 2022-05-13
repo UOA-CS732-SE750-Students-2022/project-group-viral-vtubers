@@ -2,27 +2,18 @@ import { gql } from 'apollo-angular';
 
 import { ProductBlurbFragment } from '../fragments/product.fragment';
 import {
-  ArtistFragment,
+  ArtistPaginationFragment,
+  UserFragment,
   UserProfileFragment,
 } from '../fragments/user.fragment';
 
 export const artistsQuery = gql`
   query Artists($cursor: String, $limit: Int) {
     users(cursor: $cursor, limit: $limit) {
-      edges {
-        cursor
-        node {
-          ...ArtistFragment
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-        startCursor
-      }
+      ...ArtistPaginationFragment
     }
   }
-  ${ArtistFragment}
+  ${ArtistPaginationFragment}
 `;
 
 export const userProfileQuery = gql`
@@ -47,4 +38,14 @@ export const userLikedProductQuery = gql`
 
   ${UserProfileFragment}
   ${ProductBlurbFragment}
+`;
+
+export const userByNameQuery = gql`
+  query UserByName($name: String!) {
+    userByName(name: $name) {
+      ...UserFragment
+    }
+  }
+
+  ${UserFragment}
 `;

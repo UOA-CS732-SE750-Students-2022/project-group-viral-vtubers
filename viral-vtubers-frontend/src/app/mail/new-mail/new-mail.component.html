@@ -3,22 +3,35 @@
   <div class="new-mail-container">
     <div class="input-group">
       <p>To: <span>(username)</span></p>
-      <input type="text" placeholder="happy-vivi" />
+      <input
+        type="text"
+        placeholder="happy-vivi"
+        #receiver
+        (focusout)="checkUser(receiver.value)"
+        (focus)="invalidReceiver = false"
+        [ngClass]="{ invalid: !!invalidReceiver }"
+      />
     </div>
     <div class="input-group">
       <p>Subject:</p>
-      <input type="text" placeholder="new commission" />
+      <input type="text" placeholder="new commission" #subject />
     </div>
     <div class="input-group message-group">
       <p>Message:</p>
       <textarea
         type="text"
         placeholder="I want to talk to you about..."
+        #body
       ></textarea>
       <p class="content-policy">
         Please adhere to our <span>content policy</span>
       </p>
     </div>
-    <button class="send-button">Send</button>
+    <button
+      class="send-button"
+      (click)="sendMail(receiver.value, body.value, subject.value)"
+    >
+      Send
+    </button>
   </div>
 </div>

@@ -16,5 +16,9 @@ fun MongoDatabase.asPurchaseRepository(): PurchaseRepository =
         override fun getPurchasesByUserId(userId: Id<User>): Flow<Purchase> {
             return col.find(Purchase::userId eq userId).toFlow()
         }
+
+        override fun getSalesByUserId(userId: Id<User>): Flow<Purchase> {
+            return col.find(Purchase::sellerId eq userId).toFlow()
+        }
     }
 

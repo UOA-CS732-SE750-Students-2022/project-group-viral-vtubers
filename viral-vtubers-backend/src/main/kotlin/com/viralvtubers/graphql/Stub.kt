@@ -64,15 +64,17 @@ val stubProduct = { id: String ->
                 id = ID("productVariant1"),
                 name = "Fake Product Variant 1",
                 price = 10.0,
-                file = "fake_file.vrm",
-                fileTypes = listOf(".vrm"),
+                file = "fake_file.zip",
+                fileName = "fake_file.zip",
+                fileTypes = listOf(".vrm", ".vroid"),
                 productId = ID("fake_product_id")
             ),
             ProductVariant(
                 id = ID("productVariant2"),
                 name = "Fake Product Variant 2",
                 price = 20.0,
-                file = "fake_files.zip",
+                file = "fake_file.zip",
+                fileName = "fake_file.zip",
                 fileTypes = listOf(".vrm", ".vroid"),
                 productId = ID("fake_product_id")
             ),
@@ -83,15 +85,6 @@ val stubProduct = { id: String ->
         tags = ArrayList()
     )
 }
-
-fun stubProductVariant(id: String): ProductVariant = ProductVariant(
-    id = ID(id),
-    name = "Fake Product Variant",
-    price = 10.0,
-    file = "fake_files.zip",
-    fileTypes = listOf(".vrm", ".vroid"),
-    productId = ID("fake_product_id")
-)
 
 val stubMail = { id: String ->
     Mail(

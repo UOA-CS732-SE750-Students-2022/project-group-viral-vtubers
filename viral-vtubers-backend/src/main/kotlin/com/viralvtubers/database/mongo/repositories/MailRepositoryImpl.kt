@@ -14,10 +14,10 @@ fun MongoDatabase.asMailRepository(): MailRepository =
             database.getCollection()
 
         override fun getInbox(userId: Id<User>): Flow<Mail> {
-            return col.find(Mail::senderId eq userId).toFlow()
+            return col.find(Mail::receiverId eq userId).toFlow()
         }
 
         override fun getSent(userId: Id<User>): Flow<Mail> {
-            return col.find(Mail::receiverId eq userId).toFlow()
+            return col.find(Mail::senderId eq userId).toFlow()
         }
     }

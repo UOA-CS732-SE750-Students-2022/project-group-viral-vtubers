@@ -40,7 +40,8 @@
     color: $color-grey-dark;
     line-height: 0.3;
 
-    > span {
+    > a {
+      text-decoration: none;
       color: $color-primary;
       cursor: pointer;
 
@@ -53,5 +54,34 @@
 
   .mail-content {
     margin-top: 20px;
+  }
+}
+
+.empty {
+  height: 90%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+      transition: $button-hover-animation;
+
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
+      }
+    }
   }
 }
