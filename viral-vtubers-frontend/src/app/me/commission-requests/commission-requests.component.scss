@@ -343,6 +343,42 @@ table {
 
       margin-bottom: 25px;
 
+      .title-info-container {
+        .title-container {
+          display: flex;
+          align-items: center;
+          column-gap: 15px;
+
+          .edit-icon {
+            margin-right: 5px;
+            height: 24px;
+            width: 24px;
+
+            border-radius: 50%;
+            border: 2px solid rgba(34, 34, 34, 0.2);
+            border-style: outset;
+
+            background-color: $color-background;
+            background-clip: padding-box;
+            transition: $button-hover-animation;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+
+            > img {
+              height: 50%;
+            }
+          }
+        }
+      }
+
       .request-info-container {
         display: flex;
         flex-direction: column;

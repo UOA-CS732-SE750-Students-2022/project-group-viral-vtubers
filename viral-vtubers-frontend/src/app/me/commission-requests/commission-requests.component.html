@@ -1,5 +1,9 @@
-<h1>My Commission Requests</h1>
-<hr />
+<div>
+  <h1>My Commission Requests</h1>
+  <hr />
+
+  <button>New Commission Request</button>
+</div>
 
 <h3>Pending Orders</h3>
 <div class="content-container pending-orders">
@@ -71,7 +75,12 @@
   <div class="popup" (click)="$event.stopPropagation()">
     <div class="info-container">
       <div class="title-info-container">
-        <h4>{{ selectedOrder.name }}</h4>
+        <div class="title-container">
+          <h4>{{ selectedOrder.name }}</h4>
+          <div class="edit-icon" (click)="editRequest(selectedOrder.id)">
+            <img src="assets/icons/EditIcon.svg" />
+          </div>
+        </div>
         <app-tags [isEdit]="false" [tags]="selectedOrder.tags"></app-tags>
       </div>
       <div class="request-info-container">

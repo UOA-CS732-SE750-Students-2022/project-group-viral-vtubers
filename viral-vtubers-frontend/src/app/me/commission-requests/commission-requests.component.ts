@@ -430,4 +430,8 @@ export class CommissionRequestsComponent implements OnInit {
   handleAcceptApplication(application: UserFragmentFragment) {
     // TODO do something
   }
+
+  editRequest(id: string) {
+    // this.router.navigateByUrl("/me/requests/" + id);
+  }
 }
