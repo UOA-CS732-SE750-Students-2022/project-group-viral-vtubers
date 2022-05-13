@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CreateRequestComponent } from '../me/create-request/create-request.component';
 import { SharedModule } from '../shared/shared.module';
-import { CreateRequestComponent } from './create-request/create-request.component';
 import { SelectViewComponent } from './select-view/select-view.component';
 import { ViewArtistsComponent } from './view-artists/view-artists.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';

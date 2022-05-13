@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AccountComponent } from './account/account.component';
 import { CommissionRequestsComponent } from './commission-requests/commission-requests.component';
+import { CreateRequestComponent } from './create-request/create-request.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { MeComponent } from './me.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
@@ -22,6 +23,10 @@ export const routes: Routes = [
       {
         path: 'purchases',
         component: PurchaseHistoryComponent,
+      },
+      {
+        path: 'orders/new',
+        component: CreateRequestComponent,
       },
       {
         path: 'orders',
