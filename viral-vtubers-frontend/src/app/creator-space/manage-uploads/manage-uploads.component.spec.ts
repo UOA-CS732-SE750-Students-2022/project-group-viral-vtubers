@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockRouter } from '../../../../test/router';
 import { ManageUploadsComponent } from './manage-uploads.component';
 
 describe('ManageUploadsComponent', () => {
@@ -8,9 +9,9 @@ describe('ManageUploadsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageUploadsComponent ]
-    })
-    .compileComponents();
+      declarations: [ManageUploadsComponent],
+      providers: [mockRouter()],
+    }).compileComponents();
   });
 
   beforeEach(() => {
