@@ -29,6 +29,8 @@ h4 {
   align-items: center;
   text-decoration: none;
 
+  color: inherit;
+
   &:hover {
     h5 {
       color: $color-secondary;
@@ -78,7 +80,9 @@ h5 {
 
 .item {
   display: flex;
-  > img {
+  justify-content: space-between;
+
+  img {
     width: 64px;
     height: 64px;
     border: 1px solid $color-grey-light;
@@ -88,7 +92,15 @@ h5 {
     margin: 0;
   }
 
-  > .item-content {
+  a {
+    display: flex;
+
+    text-decoration: none;
+
+    color: inherit;
+  }
+
+  .item-content {
     padding-left: 36px;
     display: flex;
     flex-grow: 1;
@@ -97,10 +109,26 @@ h5 {
     > .item-details {
       cursor: pointer;
       flex: 1;
-      > .item-price {
-        margin: 0;
-        color: $color-secondary;
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      justify-content: space-around;
+
+      .item-name {
+        font-size: $font-size-body-1;
       }
+
+      .item-fileName {
+        font-size: $font-size-body-3;
+        font-weight: 400;
+
+        color: $color-grey-dark;
+
+        margin: 0;
+      }
+
       &:hover {
         .item-name {
           color: $color-primary;
@@ -111,27 +139,33 @@ h5 {
     .item-name {
       transition: $button-hover-animation;
     }
+  }
 
-    > .item-buttons {
-      flex: 1;
-      text-align: end;
-      justify-content: space-between;
+  > .item-buttons {
+    flex: 1;
+    text-align: end;
+    justify-content: space-between;
 
-      > p {
-        height: calc(100% - 20px);
-      }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
 
-      > button {
-        color: $color-grey-dark;
-        font-size: $font-size-body-2;
-        background: none !important;
-        border: none;
-        padding: 0 !important;
-        cursor: pointer;
-        transition: $button-hover-animation;
-        &:hover {
-          opacity: $button-coloured-hover-opacity;
-        }
+    > .item-price {
+      margin: 0;
+      color: $color-secondary;
+    }
+
+    > button {
+      color: $color-grey-dark;
+      font-size: $font-size-body-2;
+      background: none !important;
+      border: none;
+      padding: 0 !important;
+      cursor: pointer;
+      transition: $button-hover-animation;
+      &:hover {
+        opacity: $button-coloured-hover-opacity;
       }
     }
   }
