@@ -44,5 +44,9 @@ fun MongoDatabase.asCartRepository(): CartRepository = object : CartRepository {
     override suspend fun emptyCartSeller(userId: Id<User>, sellerId: Id<User>) {
         col.deleteMany(Cart::userId eq userId, Cart::sellerId eq sellerId)
     }
+
+    override suspend fun getCount(userId: Id<User>): Int {
+        return col.countDocuments(Cart::userId eq userId).toInt()
+    }
 }
 

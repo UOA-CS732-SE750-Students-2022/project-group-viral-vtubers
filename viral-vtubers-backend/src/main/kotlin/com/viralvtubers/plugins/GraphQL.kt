@@ -25,6 +25,8 @@ fun Application.configureGraphQL() {
     val userService = UserServiceImpl(
         database.asUserRepository(),
         database.asFollowRepository(),
+        database.asMailRepository(),
+        database.asCartRepository()
     )
     val tagService = TagServiceImpl(database.asTagRepository())
     val firebaseService = FirebaseServiceImpl()
@@ -79,6 +81,7 @@ fun Application.configureGraphQL() {
                 tagService = tagService,
                 userService = userService,
                 authService = authService,
+                categoryService = categoryService,
             )
             cartSchema(
                 cartService = cartService,

@@ -10,4 +10,6 @@ interface MailRepository : Repository<Mail> {
     fun getInbox(userId: Id<User>): Flow<Mail>
 
     fun getSent(userId: Id<User>): Flow<Mail>
+
+    suspend fun getCount(userId: Id<User>): Int
 }

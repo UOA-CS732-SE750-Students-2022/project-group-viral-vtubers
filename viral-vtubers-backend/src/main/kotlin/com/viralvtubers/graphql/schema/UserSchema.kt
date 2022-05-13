@@ -146,6 +146,14 @@ fun SchemaBuilder.userSchema(
         }
     }
 
+    query("notification") {
+        description = "Get notification"
+        resolver { ctx: Context ->
+            val userId = authService.getUserId(ctx)
+            userService.getNotification(userId)
+        }
+    }
+
     query("user") {
         description = "Get a single user"
         resolver { id: ID ->

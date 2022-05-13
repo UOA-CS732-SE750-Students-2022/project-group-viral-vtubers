@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 //@kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
     configureHTTP()
-    configureRouting()
     configureSecurity()
+    configureRouting()
     configureGraphQL()
 }

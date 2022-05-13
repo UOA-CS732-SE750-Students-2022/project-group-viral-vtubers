@@ -8,6 +8,7 @@ fun DataPurchase.map() = GraphQLPurchase(
     numItems = products.size,
     placed = createdDate,
     sellerId = sellerId.map(),
+    buyerId = userId.map(),
     items = products.map { it.productId.map() },
     variants = products.map { it.variantId.map() },
     totalAmount = totalAmount,

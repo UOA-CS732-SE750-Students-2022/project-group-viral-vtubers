@@ -105,6 +105,7 @@ class OrderServiceImpl(
 
     override suspend fun addOrder(userId: ID, order: AddOrderInput): Order {
         val newOrder = OrderModel(
+            subcategoryId = order.subcategoryId.map(),
             name = order.name,
             description = order.description,
             bounty = order.bounty,
@@ -129,6 +130,8 @@ class OrderServiceImpl(
         }
 
         val update = orderModel.copy(
+            subcategoryId = order.subcategoryId?.map()
+                ?: orderModel.subcategoryId,
             name = order.name ?: orderModel.name,
             description = order.description ?: orderModel.description,
             bounty = order.bounty ?: orderModel.bounty,

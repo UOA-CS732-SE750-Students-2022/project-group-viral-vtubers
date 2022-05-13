@@ -5,16 +5,14 @@ import com.apurebase.kgraphql.schema.dsl.SchemaBuilder
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.AddOrderInput
 import com.viralvtubers.graphql.input.EditOrderInput
-import com.viralvtubers.service.AuthService
-import com.viralvtubers.service.OrderService
-import com.viralvtubers.service.TagService
-import com.viralvtubers.service.UserService
+import com.viralvtubers.service.*
 
 fun SchemaBuilder.orderSchema(
     orderService: OrderService,
     tagService: TagService,
     userService: UserService,
     authService: AuthService,
+    categoryService: CategoryService,
 ) {
     type<Order> {
         description = "Order"
@@ -23,6 +21,7 @@ fun SchemaBuilder.orderSchema(
         Order::applications.ignore()
         Order::ownerId.ignore()
         Order::artistId.ignore()
+        Order::subcategoryId.ignore()
 
         property<User>("owner") {
             resolver { order ->
@@ -37,6 +36,13 @@ fun SchemaBuilder.orderSchema(
                 order.artistId?.let {
                     userService.getUserId(order.ownerId)
                 }
+            }
+        }
+
+        property<Subcategory>("subcategory") {
+            resolver { order ->
+                description = "Get SubCategory of the Order"
+                categoryService.getSubcategoryById(order.subcategoryId)
             }
         }
 

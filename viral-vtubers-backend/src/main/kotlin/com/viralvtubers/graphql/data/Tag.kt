@@ -6,4 +6,3 @@ data class Tag(
     val color: String,
     val backgroundColor: String,
 )
-

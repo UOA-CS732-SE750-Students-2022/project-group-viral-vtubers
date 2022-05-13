@@ -146,17 +146,3 @@ val stubOrderPagination = { order: Order ->
     )
 }
 
-val stubOrder = { id: String ->
-    Order(
-        ID(id),
-        "Fake Order",
-        "Fake Order Description",
-        99.99,
-        false,
-        "fakeImage.png",
-        ID("fake_owner"),
-        ID("fake_artist"),
-        ArrayList(),
-        ArrayList()
-    )
-}
