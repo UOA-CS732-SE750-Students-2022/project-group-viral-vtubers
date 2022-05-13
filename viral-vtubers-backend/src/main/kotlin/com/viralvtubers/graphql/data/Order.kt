@@ -15,6 +15,7 @@ data class Order(
 //  ignore fields
     val ownerId: ID,
     val artistId: ID?,
+    val subcategoryId: ID,
 
     val tags: List<ID>,
     val applications: List<ID>

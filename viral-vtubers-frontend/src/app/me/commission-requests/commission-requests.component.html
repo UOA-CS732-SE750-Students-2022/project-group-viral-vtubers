@@ -5,71 +5,73 @@
   </div>
 </div>
 
-<h3>Pending Orders</h3>
-<div class="content-container pending-orders">
-  <div
-    *ngFor="let order of myOrders.active"
-    class="request-container"
-    (click)="setSelectedOrder(order)"
-  >
-    <img
-      src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
-    />
-    <div class="info-container">
-      <h4>{{ order.name }}</h4>
-      <div class="description-container">
-        <p>{{ order.description }}</p>
+<ng-container *ngIf="myOrders$ | async as myOrders; else loading">
+  <h3>Pending Orders</h3>
+  <div class="content-container pending-orders">
+    <div
+      *ngFor="let order of myOrders.active"
+      class="request-container"
+      (click)="setSelectedOrder(order)"
+    >
+      <img
+        src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
+      />
+      <div class="info-container">
+        <h4>{{ order.name }}</h4>
+        <div class="description-container">
+          <p>{{ order.description }}</p>
+        </div>
       </div>
+      <p>{{ order.applications.length }} Applicants</p>
     </div>
-    <p>{{ order.applications.length }} Applicants</p>
+    <div class="request-container new-request">
+      <a routerLink="new">
+        <button>+ New Commission Request</button>
+      </a>
+    </div>
   </div>
-  <div class="request-container new-request">
-    <a routerLink="new">
-      <button>+ New Commission Request</button>
-    </a>
-  </div>
-</div>
 
-<h3>Done Deals</h3>
-<div class="content-container">
-  <table>
-    <tr>
-      <th class="request-col">Request</th>
-      <th class="artist-col">Artist</th>
-      <th class="tags-col">Tags</th>
-      <th class="price-col">Price</th>
-    </tr>
-
-    <ng-container *ngFor="let order of myOrders.past">
+  <h3>Done Deals</h3>
+  <div class="content-container">
+    <table>
       <tr>
-        <td class="request-col">
-          <div class="request-container" (click)="setSelectedOrder(order)">
-            <img src="{{ order.image }}" />
-            <div>
-              <h5>{{ order.name }}</h5>
-              <p>
-                {{ order.description }}
-              </p>
-            </div>
-          </div>
-        </td>
-        <td class="artist-col">
-          <div
-            class="artist-container"
-            (click)="navigateToUser(order.artist?.id)"
-          >
-            <img src="{{ order.artist?.profileImageURI }}" />
-            <p>{{ order.artist?.displayName }}</p>
-          </div>
-        </td>
-        <td class="date-col">
-          <app-tags [isEdit]="false" [tags]="order.tags"></app-tags>
-        </td>
-        <td class="price-col">${{ order.bounty | number: "1.2-2" }}</td>
+        <th class="request-col">Request</th>
+        <th class="artist-col">Artist</th>
+        <th class="tags-col">Tags</th>
+        <th class="price-col">Price</th>
       </tr>
-    </ng-container>
-  </table>
-</div>
+
+      <ng-container *ngFor="let order of myOrders.past">
+        <tr>
+          <td class="request-col">
+            <div class="request-container" (click)="setSelectedOrder(order)">
+              <img src="{{ order.image }}" />
+              <div>
+                <h5>{{ order.name }}</h5>
+                <p>
+                  {{ order.description }}
+                </p>
+              </div>
+            </div>
+          </td>
+          <td class="artist-col">
+            <div
+              class="artist-container"
+              (click)="order.artist ? navigateToUser(order.artist.id) : null"
+            >
+              <img src="{{ order.artist?.profileImageURI }}" />
+              <p>{{ order.artist?.displayName }}</p>
+            </div>
+          </td>
+          <td class="date-col">
+            <app-tags [isEdit]="false" [tags]="order.tags"></app-tags>
+          </td>
+          <td class="price-col">${{ order.bounty | number: "1.2-2" }}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</ng-container>
 
 <div
   class="overlay"
@@ -150,3 +152,10 @@
     </ng-template>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="empty">
+    <img src="assets/chibis/chibi_pink.png" />
+    <p>Loading...</p>
+  </div>
+</ng-template>

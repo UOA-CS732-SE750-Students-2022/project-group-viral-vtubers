@@ -17,3 +17,35 @@ export const PurchaseFragment = gql`
   ${ItemFragment}
   ${UserBlurbFragment}
 `;
+
+export const ItemDescriptionFragment = gql`
+  fragment ItemDescriptionFragment on ProductVariant {
+    id
+    name
+    price
+    product {
+      id
+      name
+      titleImage
+      description
+    }
+    file
+    fileName
+    fileTypes
+  }
+`;
+
+export const SaleFragment = gql`
+  fragment SaleFragment on Purchase {
+    id
+    placed
+    buyer {
+      ...UserBlurbFragment
+    }
+    items {
+      ...ItemDescriptionFragment
+    }
+  }
+  ${ItemFragment}
+  ${ItemDescriptionFragment}
+`;

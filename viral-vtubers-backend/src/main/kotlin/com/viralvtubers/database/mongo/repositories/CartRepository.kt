@@ -21,4 +21,6 @@ interface CartRepository : Repository<Cart> {
     suspend fun emptyCart(userId: Id<User>)
 
     suspend fun emptyCartSeller(userId: Id<User>, sellerId: Id<User>)
+
+    suspend fun getCount(userId: Id<User>): Int
 }

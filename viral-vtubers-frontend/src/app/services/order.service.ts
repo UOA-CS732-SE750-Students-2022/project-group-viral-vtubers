@@ -45,14 +45,17 @@ export class OrderService {
     this.myCommissions$ = this.myCommissionsGQL
       .watch()
       .valueChanges.pipe(map((res) => res.data.myCommissions));
-    return { query: this.myCommissionsGQL, order$: this.order$ };
+    return {
+      query: this.myCommissionsGQL,
+      myCommissions$: this.myCommissions$,
+    };
   }
 
   myOrders() {
     this.myOrders$ = this.myOrdersGQL
       .watch()
       .valueChanges.pipe(map((res) => res.data.myOrders));
-    return { query: this.myOrdersGQL, order$: this.order$ };
+    return { query: this.myOrdersGQL, myOrders$: this.myOrders$ };
   }
 
   addOrder(input: AddOrderInput) {

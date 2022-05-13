@@ -2,6 +2,7 @@ package com.viralvtubers.plugins
 
 import com.auth0.jwk.JwkProviderBuilder
 import com.google.auth.oauth2.GoogleCredentials
+import com.google.cloud.storage.StorageOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import io.ktor.server.application.*
@@ -18,6 +19,8 @@ fun Application.configureSecurity() {
         .setCredentials(GoogleCredentials.fromStream(firebaseConfig))
         .build()
 
+    StorageOptions.getDefaultInstance()
+
     FirebaseApp.initializeApp(firebaseOptions)
 
     val issuer = "http://localhost:8080"
@@ -27,10 +30,14 @@ fun Application.configureSecurity() {
         .build()
 
     install(Authentication) {
-        jwt{
-            verifier(jwkProvider, "https://securetoken.google.com/viral-vtubers")
+        jwt {
+            verifier(
+                jwkProvider,
+                "https://securetoken.google.com/viral-vtubers"
+            )
             validate { credential ->
-                JWTPrincipal(credential.payload) }
+                JWTPrincipal(credential.payload)
+            }
         }
     }
 }

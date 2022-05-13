@@ -5,6 +5,7 @@ import com.viralvtubers.database.model.User
 import com.viralvtubers.database.mongo.MongoDatabase
 import kotlinx.coroutines.flow.Flow
 import org.litote.kmongo.Id
+import org.litote.kmongo.and
 import org.litote.kmongo.coroutine.CoroutineCollection
 import org.litote.kmongo.eq
 
@@ -19,5 +20,14 @@ fun MongoDatabase.asMailRepository(): MailRepository =
 
         override fun getSent(userId: Id<User>): Flow<Mail> {
             return col.find(Mail::senderId eq userId).toFlow()
+        }
+
+        override suspend fun getCount(userId: Id<User>): Int {
+            return col.countDocuments(
+                and(
+                    Mail::receiverId eq userId,
+                    Mail::isRead eq false
+                )
+            ).toInt()
         }
     }

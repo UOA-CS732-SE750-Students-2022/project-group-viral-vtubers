@@ -1,5 +1,6 @@
 import { gql } from 'apollo-angular';
 
+import { NotificationFragment } from '../fragments/notification.fragment';
 import { UserAccountFragment, UserFragment } from '../fragments/user.fragment';
 
 export const selfQuery = gql`
@@ -19,3 +20,11 @@ export const accountQuery = gql`
   }
   ${UserAccountFragment}
 `;
+
+export const notificationQuery = gql`
+query Notification {
+  notification {
+    ...NotificationFragment
+  }
+  ${NotificationFragment}
+}`;

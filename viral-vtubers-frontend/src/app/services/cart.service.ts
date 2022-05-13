@@ -10,6 +10,7 @@ import {
   PurchaseFragmentFragment,
   PurchasesGQL,
   RemoveFromCartGQL,
+  SaleFragmentFragment,
   SalesGQL,
 } from 'src/schema/type';
 
@@ -19,7 +20,7 @@ import {
 export class CartService {
   carts$?: Observable<CartFragmentFragment[]>;
   purchases$?: Observable<PurchaseFragmentFragment[]>;
-  sales$?: Observable<PurchaseFragmentFragment[]>;
+  sales$?: Observable<SaleFragmentFragment[]>;
 
   constructor(
     private cartGQL: CartGQL,

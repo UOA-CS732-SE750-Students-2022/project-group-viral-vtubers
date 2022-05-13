@@ -4,6 +4,7 @@ import com.viralvtubers.graphql.data.ID
 
 data class EditOrderInput(
     val id: ID,
+    val subcategoryId: ID?,
     val name: String?,
     val description: String?,
     val bounty: Double?,

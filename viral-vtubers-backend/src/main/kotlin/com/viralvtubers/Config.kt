@@ -5,6 +5,7 @@ import io.ktor.server.application.*
 
 data class Config(
     val mongodb: MongoDatabase.Config,
+    val storageBucket: String,
     val development: Boolean,
 )
 
@@ -22,6 +23,7 @@ fun Application.config() = environment.config.run {
             databaseName = propertyOrNull("mongodb.databaseName")?.getString()
                 ?: DEFAULT_DATABASE_NAME,
         ),
+        storageBucket = property("gcp.bucket").getString(),
         development = property("ktor.development").getString().toBoolean(),
     )
 }

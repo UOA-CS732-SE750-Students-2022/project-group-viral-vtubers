@@ -27,6 +27,7 @@ export type AddOrderInput = {
   image: Scalars['String'];
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
+  subcategoryId: Scalars['ID'];
   tagIds: Array<Scalars['String']>;
 };
 
@@ -114,6 +115,7 @@ export type EditOrderInput = {
   image?: InputMaybe<Scalars['String']>;
   isDraft?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
+  subcategoryId?: InputMaybe<Scalars['ID']>;
   tagIds?: InputMaybe<Array<Scalars['String']>>;
 };
 
@@ -367,6 +369,12 @@ export type MyOrder = {
   past: Array<Order>;
 };
 
+export type Notification = {
+  __typename?: 'Notification';
+  numCart: Scalars['Int'];
+  numMail: Scalars['Int'];
+};
+
 /** Order */
 export type Order = {
   __typename?: 'Order';
@@ -379,6 +387,7 @@ export type Order = {
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   owner: User;
+  subcategory: Subcategory;
   tags: Array<Tag>;
 };
 
@@ -488,6 +497,7 @@ export type ProductVariant = {
 /** Purchase */
 export type Purchase = {
   __typename?: 'Purchase';
+  buyer: User;
   id: Scalars['ID'];
   items: Array<ProductVariant>;
   numItems: Scalars['Int'];
@@ -511,6 +521,8 @@ export type Query = {
   myCommissions: MyCommission;
   /** Get myOrders by user */
   myOrders: MyOrder;
+  /** Get notification */
+  notification: Notification;
   /** Get an Order by Id */
   order: Order;
   /** Get all Orders */
@@ -709,11 +721,13 @@ export type MailInboxFragmentFragment = { __typename?: 'Mail', body: string, dat
 
 export type MailOutboxFragmentFragment = { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } };
 
-export type OrderFragmentFragment = { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> };
+export type NotificationFragmentFragment = { __typename?: 'Notification', numMail: number, numCart: number };
 
-export type MyOrdersFragmentFragment = { __typename?: 'MyOrder', active: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, past: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> };
+export type OrderFragmentFragment = { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> };
 
-export type MyCommissionsFragmentFragment = { __typename?: 'MyCommission', lost: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, pending: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, won: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> };
+export type MyOrdersFragmentFragment = { __typename?: 'MyOrder', active: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, past: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> };
+
+export type MyCommissionsFragmentFragment = { __typename?: 'MyCommission', lost: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, pending: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, won: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> };
 
 export type ProductDetailFragmentFragment = { __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, description: string, titleImage: string, vrm: string, images: Array<string>, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, artist: { __typename?: 'User', id: string, displayName: string, profileImageURI: string, isFollowing: boolean }, variants: Array<{ __typename?: 'ProductVariant', id: string, fileTypes: Array<string>, file: string, name: string, price: number }> };
 
@@ -722,6 +736,10 @@ export type ProductBlurbFragmentFragment = { __typename?: 'Product', id: string,
 export type ProductPaginationFragmentFragment = { __typename?: 'ProductPagination', edges: Array<{ __typename?: 'ProductEdge', cursor: string, node: { __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, titleImage: string, minPrice: number } }>, pageInfo: { __typename?: 'PageInfo', endCursor: string, hasNextPage: boolean, startCursor: string } };
 
 export type PurchaseFragmentFragment = { __typename?: 'Purchase', id: string, placed: any, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> };
+
+export type ItemDescriptionFragmentFragment = { __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string, description: string } };
+
+export type SaleFragmentFragment = { __typename?: 'Purchase', id: string, placed: any, buyer: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string, description: string } }> };
 
 export type TagFragmentFragment = { __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string };
 
@@ -784,28 +802,28 @@ export type AddOrderMutationVariables = Exact<{
 }>;
 
 
-export type AddOrderMutation = { __typename?: 'Mutation', addOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
+export type AddOrderMutation = { __typename?: 'Mutation', addOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
 
 export type EditOrderMutationVariables = Exact<{
   input: EditOrderInput;
 }>;
 
 
-export type EditOrderMutation = { __typename?: 'Mutation', editOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
+export type EditOrderMutation = { __typename?: 'Mutation', editOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
 
 export type DeleteOrderMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type DeleteOrderMutation = { __typename?: 'Mutation', deleteOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
+export type DeleteOrderMutation = { __typename?: 'Mutation', deleteOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
 
 export type ApplyOrderMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type ApplyOrderMutation = { __typename?: 'Mutation', applyOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
+export type ApplyOrderMutation = { __typename?: 'Mutation', applyOrder: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
 
 export type LikeProductMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -850,17 +868,17 @@ export type OrderQueryVariables = Exact<{
 }>;
 
 
-export type OrderQuery = { __typename?: 'Query', order: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
+export type OrderQuery = { __typename?: 'Query', order: { __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> } };
 
 export type MyOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MyOrdersQuery = { __typename?: 'Query', myOrders: { __typename?: 'MyOrder', active: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, past: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> } };
+export type MyOrdersQuery = { __typename?: 'Query', myOrders: { __typename?: 'MyOrder', active: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, past: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> } };
 
 export type MyCommissionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MyCommissionsQuery = { __typename?: 'Query', myCommissions: { __typename?: 'MyCommission', lost: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, pending: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, won: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> } };
+export type MyCommissionsQuery = { __typename?: 'Query', myCommissions: { __typename?: 'MyCommission', lost: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, pending: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, won: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> } };
 
 export type CategoryQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -928,7 +946,7 @@ export type PurchasesQuery = { __typename?: 'Query', purchases: Array<{ __typena
 export type SalesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SalesQuery = { __typename?: 'Query', sales: Array<{ __typename?: 'Purchase', id: string, placed: any, seller: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string } }> }> };
+export type SalesQuery = { __typename?: 'Query', sales: Array<{ __typename?: 'Purchase', id: string, placed: any, buyer: { __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }, items: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number, file: string, fileName: string, fileTypes: Array<string>, product: { __typename?: 'Product', id: string, name: string, titleImage: string, description: string } }> }> };
 
 export type SelfQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -939,6 +957,11 @@ export type AccountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AccountQuery = { __typename?: 'Query', self: { __typename?: 'User', id: string, displayName: string, email: string, following: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }>, followers: Array<{ __typename?: 'User', id: string, displayName: string, status: string, profileImageURI: string }> } };
+
+export type NotificationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NotificationQuery = { __typename?: 'Query', notification: { __typename?: 'Notification', numMail: number, numCart: number } };
 
 export type ArtistsQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']>;
@@ -1015,16 +1038,6 @@ export const CategoryFragmentFragmentDoc = gql`
   }
 }
     `;
-export const SubcategoryFragmentFragmentDoc = gql`
-    fragment SubcategoryFragment on Subcategory {
-  id
-  name
-  category {
-    id
-    name
-  }
-}
-    `;
 export const MailInboxFragmentFragmentDoc = gql`
     fragment MailInboxFragment on Mail {
   body
@@ -1047,6 +1060,22 @@ export const MailOutboxFragmentFragmentDoc = gql`
   receiver {
     id
     displayName
+  }
+}
+    `;
+export const NotificationFragmentFragmentDoc = gql`
+    fragment NotificationFragment on Notification {
+  numMail
+  numCart
+}
+    `;
+export const SubcategoryFragmentFragmentDoc = gql`
+    fragment SubcategoryFragment on Subcategory {
+  id
+  name
+  category {
+    id
+    name
   }
 }
     `;
@@ -1075,6 +1104,9 @@ export const OrderFragmentFragmentDoc = gql`
   bounty
   description
   id
+  subcategory {
+    ...SubcategoryFragment
+  }
   image
   isDraft
   name
@@ -1091,7 +1123,8 @@ export const OrderFragmentFragmentDoc = gql`
     ...UserFragment
   }
 }
-    ${UserFragmentFragmentDoc}
+    ${SubcategoryFragmentFragmentDoc}
+${UserFragmentFragmentDoc}
 ${TagFragmentFragmentDoc}`;
 export const MyOrdersFragmentFragmentDoc = gql`
     fragment MyOrdersFragment on MyOrder {
@@ -1190,6 +1223,35 @@ export const PurchaseFragmentFragmentDoc = gql`
 }
     ${UserBlurbFragmentFragmentDoc}
 ${ItemFragmentFragmentDoc}`;
+export const ItemDescriptionFragmentFragmentDoc = gql`
+    fragment ItemDescriptionFragment on ProductVariant {
+  id
+  name
+  price
+  product {
+    id
+    name
+    titleImage
+    description
+  }
+  file
+  fileName
+  fileTypes
+}
+    `;
+export const SaleFragmentFragmentDoc = gql`
+    fragment SaleFragment on Purchase {
+  id
+  placed
+  buyer {
+    ...UserBlurbFragment
+  }
+  items {
+    ...ItemDescriptionFragment
+  }
+}
+    ${UserBlurbFragmentFragmentDoc}
+${ItemDescriptionFragmentFragmentDoc}`;
 export const UserProfileFragmentFragmentDoc = gql`
     fragment UserProfileFragment on User {
   id
@@ -1762,10 +1824,10 @@ export const PurchasesDocument = gql`
 export const SalesDocument = gql`
     query Sales {
   sales {
-    ...PurchaseFragment
+    ...SaleFragment
   }
 }
-    ${PurchaseFragmentFragmentDoc}`;
+    ${SaleFragmentFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
@@ -1808,6 +1870,24 @@ export const AccountDocument = gql`
   })
   export class AccountGQL extends Apollo.Query<AccountQuery, AccountQueryVariables> {
     override document = AccountDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const NotificationDocument = gql`
+    query Notification {
+  notification {
+    ...NotificationFragment
+  }
+}
+    ${NotificationFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class NotificationGQL extends Apollo.Query<NotificationQuery, NotificationQueryVariables> {
+    override document = NotificationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

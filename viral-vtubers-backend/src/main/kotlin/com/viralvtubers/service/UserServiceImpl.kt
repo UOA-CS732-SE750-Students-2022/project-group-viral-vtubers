@@ -1,8 +1,6 @@
 package com.viralvtubers.service
 
-import com.viralvtubers.database.mongo.repositories.FollowRepository
-import com.viralvtubers.database.mongo.repositories.Page
-import com.viralvtubers.database.mongo.repositories.UserRepository
+import com.viralvtubers.database.mongo.repositories.*
 import com.viralvtubers.graphql.data.*
 import com.viralvtubers.graphql.input.*
 import com.viralvtubers.mapper.map
@@ -15,6 +13,8 @@ import com.viralvtubers.database.model.User as DataUser
 class UserServiceImpl(
     private val userRepository: UserRepository,
     private val followRepository: FollowRepository,
+    private val mailRepository: MailRepository,
+    private val cartRepository: CartRepository
 ) : UserService {
 
     override suspend fun getUserByFirebaseUid(uid: String): User {
@@ -267,5 +267,12 @@ class UserServiceImpl(
         }
         return userRepository.getById(followId.map())?.map()
             ?: throw error("user not found")
+    }
+
+    override suspend fun getNotification(userId: ID): Notification {
+        return Notification(
+            numCart = cartRepository.getCount(userId.map()),
+            numMail = mailRepository.getCount(userId.map()),
+        )
     }
 }

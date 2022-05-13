@@ -24,6 +24,7 @@ data class Purchase(
 
 //  ignored fields
     val sellerId: ID,
+    val buyerId: ID,
     val items: List<ID>,
     val variants: List<ID>
 )

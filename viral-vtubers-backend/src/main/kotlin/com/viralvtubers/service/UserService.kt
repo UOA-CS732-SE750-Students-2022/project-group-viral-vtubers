@@ -41,4 +41,6 @@ interface UserService : KoinComponent {
     suspend fun getFollowers(userId: ID): List<User>
 
     suspend fun follow(userId: ID, followId: ID, follow: Boolean): User
+
+    suspend fun getNotification(userId: ID): Notification
 }
