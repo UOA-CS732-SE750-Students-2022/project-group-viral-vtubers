@@ -204,7 +204,29 @@ $bar-dimension: 3px;
     padding-right: 40px;
     padding-bottom: 40px;
 
-    overflow-y: scroll;
+    overflow-y: auto;
+
+    .no-products {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 60%;
+        margin-bottom: 15px;
+        transform: scaleX(-1);
+      }
+
+      p {
+        color: $color-grey-dark;
+
+        font-size: $font-size-body-2;
+      }
+    }
   }
 }
 

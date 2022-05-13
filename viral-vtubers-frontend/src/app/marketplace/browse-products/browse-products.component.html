@@ -99,7 +99,18 @@
       </select>
     </div>
     <div class="grid-container">
-      <app-products-grid [products]="products"></app-products-grid>
+      <app-products-grid
+        *ngIf="products.length > 0; else noProducts"
+        [products]="products"
+      ></app-products-grid>
+
+      <ng-template #noProducts>
+        <div class="no-products">
+          <img src="assets/chibis/chibi_blue.png" />
+
+          <p>Vivi found no products... Let's try something else!</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
