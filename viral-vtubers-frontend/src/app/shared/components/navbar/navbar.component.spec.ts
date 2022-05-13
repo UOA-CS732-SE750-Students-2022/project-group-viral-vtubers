@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockRouter } from '../../../../../test/router';
+import { mockUserService } from '../../../services/user.service.mock';
+import { mockBlurbService } from '../../blurb/blurb.service.mock';
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {
@@ -9,6 +12,7 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
+      providers: [mockRouter(), mockUserService(), mockBlurbService()],
     }).compileComponents();
   });
 
