@@ -105,6 +105,32 @@
   margin-top: 8px;
 }
 
+.submit-button {
+  margin-left: 10px;
+
+  background-color: $color-secondary;
+  color: $color-background;
+
+  border-radius: 5px;
+  border: none;
+
+  padding: 0 20px;
+
+  height: 30px;
+
+  cursor: pointer;
+
+  transition: $button-hover-animation;
+
+  font-family: $font-family-poppins;
+  text-transform: uppercase;
+  font-size: $font-size-body-3;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
 .notify {
   position: relative;
   background-color: $color-secondary;
