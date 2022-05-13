@@ -39,7 +39,7 @@
         {{ productDetails.subcategory.category.name }} >
         {{ productDetails.subcategory.name }}
       </p>
-      <app-tags [tags]="productDetails.tags"></app-tags>
+      <app-tags [isEdit]="false" [tags]="productDetails.tags"></app-tags>
       <button
         class="heart-button"
         [ngClass]="{ active: productDetails.isLiked }"
