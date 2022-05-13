@@ -9,7 +9,7 @@ import org.litote.kmongo.reactivestreams.KMongo
 
 const val DEFAULT_HOST_NAME = "localhost"
 const val DEFAULT_PORT = 27017u
-const val DEFAULT_DATABASE_NAME = "virtual-vtubers"
+const val DEFAULT_DATABASE_NAME = "viral-vtubers"
 const val DEFAULT_USERNAME = "admin"
 const val DEFAULT_PASSWORD = "password"
 
