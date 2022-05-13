@@ -1,6 +1,5 @@
 @import "../../variables";
 
-
 h4 {
   font-size: $font-size-h4;
   font-weight: 400;
@@ -17,7 +16,6 @@ h4 {
   align-items: center;
 
   .exit-icon {
-
     cursor: pointer;
     transition: $button-hover-animation;
     &:hover {
@@ -26,9 +24,17 @@ h4 {
   }
 }
 
-.seller {
+.seller a {
   display: flex;
   align-items: center;
+  text-decoration: none;
+
+  &:hover {
+    h5 {
+      color: $color-secondary;
+    }
+  }
+
   img {
     width: 48px;
     height: 48px;
@@ -36,12 +42,16 @@ h4 {
     border-radius: 32px;
     margin-right: 18px;
   }
+
+  h5 {
+    text-decoration: none;
+    transition: $button-hover-animation;
+  }
 }
 
 h5 {
   font-size: $font-size-h5;
   font-weight: 400;
-  color: $color-secondary;
   margin: 0;
 }
 

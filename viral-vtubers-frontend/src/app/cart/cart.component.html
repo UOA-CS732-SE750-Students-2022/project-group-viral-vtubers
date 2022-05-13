@@ -3,11 +3,13 @@
   <div *ngFor="let cart of carts.carts" class="cart">
     <div class="title">
       <div class="seller">
-        <img
-          src="{{ cart.seller.profileImageURI }}"
-          alt="{{ cart.seller.displayName }} profile picture"
-        />
-        <h5>{{ cart.seller.displayName }}</h5>
+        <a routerLink="/marketplace">
+          <img
+            src="{{ cart.seller.profileImageURI }}"
+            alt="{{ cart.seller.displayName }} profile picture"
+          />
+          <h5>{{ cart.seller.displayName }}</h5>
+        </a>
       </div>
       <img src="assets/icons/ExitIcon.svg" alt="Exit Icon" class="exit-icon" />
     </div>
