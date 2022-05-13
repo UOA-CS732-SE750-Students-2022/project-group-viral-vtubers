@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { cartQuery } from 'src/graphql/queries/cart.query';
 import {
   AddToCartGQL,
   CartFragmentFragment,
@@ -56,14 +57,41 @@ export class CartService {
   }
 
   removeFromCart(productId: string, variantId: string) {
-    return this.removeFromCartGQL.mutate({ productId, variantId });
+    return this.removeFromCartGQL.mutate(
+      { productId, variantId },
+      {
+        refetchQueries: [
+          {
+            query: cartQuery,
+          },
+        ],
+      }
+    );
   }
 
   emptyCart(sellerId: string) {
-    return this.emptyCartGQL.mutate({ sellerId });
+    return this.emptyCartGQL.mutate(
+      { sellerId },
+      {
+        refetchQueries: [
+          {
+            query: cartQuery,
+          },
+        ],
+      }
+    );
   }
 
   checkout(sellerId: string) {
-    return this.checkoutGQL.mutate({ sellerId });
+    return this.checkoutGQL.mutate(
+      { sellerId },
+      {
+        refetchQueries: [
+          {
+            query: cartQuery,
+          },
+        ],
+      }
+    );
   }
 }

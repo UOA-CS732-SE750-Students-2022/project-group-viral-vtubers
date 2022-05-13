@@ -16,13 +16,14 @@
           src="assets/icons/ExitIcon.svg"
           alt="Exit Icon"
           class="exit-icon"
+          (click)="emptyCart(cart.seller.id)"
         />
       </div>
       <hr class="divider" />
       <div *ngFor="let item of cart.items">
         <div class="item">
           <a routerLink="/marketplace/product/{{ item.product.id }}">
-            <img src="{{ item.product.titleImage }}" alt="Ayumi Sensei" />
+            <img src="{{ item.product.titleImage }}" />
             <div class="item-content">
               <div class="item-details">
                 <p class="item-name">{{ item.name }}</p>
@@ -32,23 +33,28 @@
           </a>
           <div class="item-buttons">
             <p class="item-price">${{ item.price | number: "1.2-2" }} USD</p>
-            <button class="item-remove">Remove</button>
+            <button
+              class="item-remove"
+              (click)="removeFromCart(item.product.id, item.id)"
+            >
+              Remove
+            </button>
           </div>
-          <hr class="divider" />
         </div>
-        <div class="checkout">
-          <p>
-            <span class="checkout-total"
-              >Total: {{ cart.numItems }} item(s)</span
-            >
-            <span class="checkout-price"
-              >${{ cart.totalAmount | number: "1.2-2" }} USD</span
-            >
-          </p>
-          <button class="checkout-button">Checkout</button>
-          <br />
-          <a href="#" class="checkout-return">Continue Shopping ></a>
-        </div>
+        <hr class="divider" />
+      </div>
+      <div class="checkout">
+        <p>
+          <span class="checkout-total">Total: {{ cart.numItems }} item(s)</span>
+          <span class="checkout-price"
+            >${{ cart.totalAmount | number: "1.2-2" }} USD</span
+          >
+        </p>
+        <button class="checkout-button" (click)="checkout(cart.seller.id)">
+          Checkout
+        </button>
+        <br />
+        <a href="#" class="checkout-return">Continue Shopping ></a>
       </div>
     </div>
   </ng-container>
