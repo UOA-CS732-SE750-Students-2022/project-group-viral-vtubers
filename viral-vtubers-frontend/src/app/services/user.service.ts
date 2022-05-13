@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { ThumbnailsMode } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import {
+  ArtistFragmentFragment,
+  ArtistPaginationFragmentFragment,
+  ArtistsGQL,
   EditSelfGQL,
   EditSelfInput,
   FollowGQL,
   LoginGQL,
   ProductBlurbFragmentFragment,
   SelfGQL,
+  UserByNameGQL,
   UserFragmentFragment,
   UserLikedProductGQL,
   UserProfileFragmentFragment,
@@ -23,13 +27,18 @@ export class UserService {
 
   likedProducts$?: Observable<ProductBlurbFragmentFragment[]>;
 
+  artists$?: Observable<ArtistPaginationFragmentFragment>;
+  userByName$?: Observable<UserFragmentFragment>;
+
   constructor(
     private userProfileGQL: UserProfileGQL,
     private selfGQL: SelfGQL,
     private editSelfGQL: EditSelfGQL,
     private loginGQL: LoginGQL,
     private followGQL: FollowGQL,
-    private userLikedProductGQL: UserLikedProductGQL
+    private userLikedProductGQL: UserLikedProductGQL,
+    private artistsGQL: ArtistsGQL,
+    private userByNameGQL: UserByNameGQL
   ) {}
 
   getSelf() {
@@ -56,6 +65,20 @@ export class UserService {
       query: this.userLikedProductGQL,
       likedProducts$: this.likedProducts$,
     };
+  }
+
+  getArtists() {
+    this.artists$ = this.artistsGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.users));
+    return { query: this.artistsGQL, artists$: this.artists$ };
+  }
+
+  getUserByName(name: string) {
+    this.userByName$ = this.userByNameGQL
+      .watch({ name })
+      .valueChanges.pipe(map((res) => res.data.userByName));
+    return { query: this.userByNameGQL, userByName$: this.userByName$ };
   }
 
   editSelf(input: EditSelfInput) {

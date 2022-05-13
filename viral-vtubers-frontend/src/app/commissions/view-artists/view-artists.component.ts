@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ArtistFragmentFragment } from 'src/schema/type';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { ArtistPaginationFragmentFragment } from 'src/schema/type';
 
 @Component({
   selector: 'app-view-artists',
@@ -7,52 +9,24 @@ import { ArtistFragmentFragment } from 'src/schema/type';
   styleUrls: ['./view-artists.component.scss'],
 })
 export class ViewArtistsComponent implements OnInit {
-  public artists: ArtistFragmentFragment[] = [
-    {
-      id: '1',
-      displayName: 'Hello',
-      numCompletedCommissions: 1,
-      numLikes: 1,
-      profileImageURI: 'https://picsum.photos/400',
-      isFollowing: false,
-      tags: [
-        {
-          id: '1',
-          name: 'test',
-        },
-      ],
-    },
-    {
-      id: '1',
-      displayName: 'Hello',
-      numCompletedCommissions: 1,
-      numLikes: 1,
-      profileImageURI: 'https://picsum.photos/300#test',
-      isFollowing: false,
-      tags: [
-        {
-          id: '1',
-          name: 'test',
-        },
-      ],
-    },
-    {
-      id: '1',
-      displayName: 'Hello',
-      numCompletedCommissions: 1,
-      numLikes: 1,
-      profileImageURI: 'https://picsum.photos/500#tests',
-      isFollowing: false,
-      tags: [
-        {
-          id: '1',
-          name: 'test',
-        },
-      ],
-    },
-  ];
+  public artists$: Observable<ArtistPaginationFragmentFragment>;
+  constructor(private userService: UserService) {
+    this.artists$ = userService.getArtists().artists$;
+  }
 
-  constructor() {}
+  follow(event: Event, artistId: string): void {
+    event.preventDefault();
+    this.userService.follow(artistId, true).subscribe();
+  }
+
+  unfollow(event: Event, artistId: string): void {
+    event.preventDefault();
+    this.userService.follow(artistId, false).subscribe();
+  }
+
+  preventDefault(event: Event): void {
+    event.preventDefault();
+  }
 
   ngOnInit(): void {}
 }

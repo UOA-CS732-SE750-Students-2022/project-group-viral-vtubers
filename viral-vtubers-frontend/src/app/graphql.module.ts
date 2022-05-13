@@ -12,6 +12,7 @@ import {
   ApolloLink,
   from,
   InMemoryCache,
+  ServerError,
 } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
@@ -109,7 +110,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     return forward(operation);
   });
 
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const errorLink = onError(({ graphQLErrors, networkError = {} as any }) => {
     if (graphQLErrors)
       graphQLErrors.forEach(({ message, locations, path }) =>
         console.log(
@@ -117,7 +118,17 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
         )
       );
 
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    if (networkError) {
+      console.log(`[Network error]: ${JSON.stringify(networkError)}`);
+      if (networkError.status && networkError.status === 401) {
+        console.log(`[Network error]: ${networkError}`);
+        localStorage.removeItem('token');
+        if (window.location.pathname !== '/signin') {
+          window.location.reload();
+          window.location.href = '/signin';
+        }
+      }
+    }
   });
 
   const link = middleware.concat(httpLink.create({ uri }));

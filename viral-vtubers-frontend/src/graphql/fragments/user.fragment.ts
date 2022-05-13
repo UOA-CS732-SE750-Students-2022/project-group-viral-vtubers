@@ -62,6 +62,24 @@ export const ArtistFragment = gql`
   }
 `;
 
+export const ArtistPaginationFragment = gql`
+  fragment ArtistPaginationFragment on UserPagination {
+    edges {
+      cursor
+      node {
+        ...ArtistFragment
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      startCursor
+    }
+  }
+
+  ${ArtistFragment}
+`;
+
 export const UserBlurbFragment = gql`
   fragment UserBlurbFragment on User {
     id

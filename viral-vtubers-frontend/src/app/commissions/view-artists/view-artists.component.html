@@ -9,27 +9,50 @@
     </div>
     <img src="assets/banners/default.png" />
   </div>
-  <div class="artist-section">
-    <div class="artist" *ngFor="let artist of artists">
-      <img [src]="artist.profileImageURI" />
-      <div>
-        <h5>{{ artist.displayName }}</h5>
-
-        <div class="artist-status">
-          <p class="status">Dancing in the rain hehe~</p>
-          <button>{{ artist.isFollowing ? "FOLLOWING" : "FOLLOW" }}</button>
+  <div class="artist-section" *ngIf="artists$ | async as artists; else loading">
+    <a
+      class="artist"
+      *ngFor="let artist of artists.edges"
+      [href]="'/user/' + artist.node.id"
+    >
+      <ng-container *ngIf="artist.node as artist">
+        <img [src]="artist.profileImageURI" />
+        <div>
+          <h5>{{ artist.displayName }}</h5>
+          <div class="artist-status">
+            <p class="status">Dancing in the rain hehe~</p>
+            <button
+              *ngIf="!artist.isFollowing"
+              (click)="follow($event, artist.id)"
+            >
+              Follow
+            </button>
+            <button
+              *ngIf="artist.isFollowing"
+              class="unfollow-btn"
+              (click)="unfollow($event, artist.id)"
+            >
+              Following
+            </button>
+          </div>
+          <p>
+            Completed <b> {{ artist.numCompletedCommissions }}</b> commissions
+          </p>
+          <p>
+            <span>
+              <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+              <b> {{ artist.numLikes }} </b> Total Likes
+            </span>
+          </p>
+          <ng-container (click)="preventDefault($event)">
+            <app-tags class="app-tags" [isEdit]="false"></app-tags>
+          </ng-container>
         </div>
-        <p>
-          Completed <b> {{ artist.numCompletedCommissions }}</b> commissions
-        </p>
-        <p>
-          <span>
-            <img src="assets/icons/hearts/heart-filled-secondary.svg" />
-            <b> {{ artist.numLikes }} </b> Total Likes
-          </span>
-        </p>
-        <app-tags class="app-tags" [isEdit]="false"></app-tags>
-      </div>
-    </div>
+      </ng-container>
+    </a>
   </div>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

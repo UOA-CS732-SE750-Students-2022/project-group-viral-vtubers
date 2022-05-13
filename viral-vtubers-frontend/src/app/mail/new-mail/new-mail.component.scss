@@ -16,7 +16,7 @@ $card-padding: 75px;
   flex: 1;
   overflow-y: scroll;
 
-  >h1 {
+  > h1 {
     font-size: $font-size-h6;
     font-weight: 400;
     margin-top: 0;
@@ -38,7 +38,12 @@ $card-padding: 75px;
   display: flex;
   flex-direction: column;
 
-  position: relative
+  position: relative;
+}
+
+.invalid {
+  color: #f44336;
+  border-color: #f44336;
 }
 
 .input-group {
@@ -47,18 +52,19 @@ $card-padding: 75px;
   display: flex;
   flex-direction: column;
 
-  >p {
+  > p {
     margin: 0;
     margin-bottom: 3px;
 
     font-size: $font-size-body-2;
 
-    >span {
+    > span {
       color: $color-grey-dark;
     }
   }
 
-  > input[type=text], > textarea {
+  > input[type="text"],
+  > textarea {
     border-radius: 10px;
     border: solid 1px $color-grey-light;
 
@@ -70,7 +76,7 @@ $card-padding: 75px;
     box-sizing: border-box;
     padding: 0 15px;
 
-    &::placeholder{
+    &::placeholder {
       color: $color-grey-light;
     }
   }
@@ -89,7 +95,7 @@ $card-padding: 75px;
     flex: 1;
 
     resize: none;
-  };
+  }
 }
 
 .message-group {
@@ -107,7 +113,6 @@ $card-padding: 75px;
     > span {
       color: $color-primary;
       cursor: pointer;
-
 
       &:hover {
         opacity: $button-coloured-hover-opacity;

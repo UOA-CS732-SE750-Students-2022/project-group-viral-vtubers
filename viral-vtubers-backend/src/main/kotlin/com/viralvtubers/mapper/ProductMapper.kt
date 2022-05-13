@@ -28,6 +28,7 @@ fun DataProductVariant.map() = GraphQLProductVariant(
     name = name,
     price = price,
     file = file,
+    fileName = fileName,
     fileTypes = fileTypes,
     productId = productId.map(),
 )

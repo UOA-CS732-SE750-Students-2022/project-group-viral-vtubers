@@ -1,24 +1,37 @@
-<div class="content-container">
-  <div
-    *ngFor="let mail of mails"
-    class="mail-item"
-    [ngClass]="{ unread: !mail.isRead }"
-  >
-    <h4>{{ mail.title }}</h4>
-    <p class="mail-meta">
-      from
-      <span
-        ><a routerLink="/user/{{ mail.sender.id }}">{{
-          mail.sender.displayName
-        }}</a></span
-      >
-      sent {{ mail.date }}
-    </p>
-    <p class="mail-content">{{ mail.body }}</p>
-    <div class="actions-container">
-      <button>Reply</button>
-      <button>Mark unread</button>
-      <button>Delete</button>
+<div class="content-container" *ngIf="mails$ | async as mails; else loading">
+  <ng-container *ngIf="mails.length > 0; else empty">
+    <div
+      *ngFor="let mail of mails"
+      class="mail-item"
+      [ngClass]="{ unread: !mail.isRead }"
+    >
+      <h4>{{ mail.title }}</h4>
+      <p class="mail-meta">
+        from
+        <span
+          ><a routerLink="/user/{{ mail.sender.id }}">{{
+            mail.sender.displayName
+          }}</a></span
+        >
+        sent {{ mail.date }}
+      </p>
+      <p class="mail-content">{{ mail.body }}</p>
+      <div class="actions-container">
+        <button>Reply</button>
+        <button>Mark unread</button>
+        <button>Delete</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="empty">
+    <img src="assets/chibis/chibi_blue.png" />
+    <p>No mail yet...</p>
+  </div>
+</ng-template>
