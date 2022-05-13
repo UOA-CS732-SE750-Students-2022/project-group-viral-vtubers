@@ -16,12 +16,13 @@
       <div class="creator-info">
         <span>
           <a [href]="'/user/' + productDetails.artist.id">
-            <img src="{{ productDetails.artist.profileImageURI }}" />
+            <img src="{{ productDetails.artist.profileImageURI }}" data-test-id="profileImage"  />
             {{ productDetails.artist.displayName }}
           </a>
           <button
             *ngIf="!productDetails.artist.isFollowing"
             (click)="follow(productDetails.artist.id)"
+            data-test-id="followButton"
           >
             Follow
           </button>
@@ -34,8 +35,8 @@
           </button>
         </span>
       </div>
-      <h1>{{ productDetails.name }}</h1>
-      <p>
+      <h1 data-test-id="name">{{ productDetails.name }}</h1>
+      <p data-test-id="categories">
         {{ productDetails.subcategory.category.name }} >
         {{ productDetails.subcategory.name }}
       </p>
@@ -45,20 +46,20 @@
         (click)="like(productDetails.id, productDetails.isLiked)"
       >
         <img src="assets/icons/hearts/heart-empty-grey.svg" />
-        <p>{{ productDetails.numLikes }}</p>
+        <p data-test-id="numLikes">{{ productDetails.numLikes }}</p>
       </button>
       <div class="prices-container">
         <div
           *ngFor="let i of productDetails.variants"
           class="price-details-container"
         >
-          <p>${{ i.price | number: "1.2-2" }} USD</p>
+          <p data-test-id="price">${{ i.price | number: "1.2-2" }} USD</p>
           <div class="file-info-container">
             <div class="file-info">
-              <p>{{ i.name }}</p>
+              <p data-test-id="name">{{ i.name }}</p>
               <div class="tags-container">
                 <span class="file-type-tag" *ngFor="let file of i.fileTypes">
-                  <p>{{ file }}</p>
+                  <p data-test-id="fileType">{{ file }}</p>
                 </span>
               </div>
             </div>
@@ -66,7 +67,7 @@
               <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>add to cart</h4>
-                <p>{{ i.file }}</p>
+                <p data-test-id="file">{{ i.file }}</p>
               </div>
             </button>
           </div>
@@ -75,7 +76,7 @@
     </div>
   </div>
   <div class="description-container">
-    <p>
+    <p data-test-id="description">
       {{ productDetails.description }}
     </p>
   </div>
