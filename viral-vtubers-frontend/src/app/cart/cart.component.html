@@ -16,6 +16,7 @@
           src="assets/icons/ExitIcon.svg"
           alt="Exit Icon"
           class="exit-icon"
+          (click)="emptyCart(cart.seller.id)"
         />
       </div>
       <hr class="divider" />
@@ -39,23 +40,21 @@
               Remove
             </button>
           </div>
-          <hr class="divider" />
         </div>
-        <div class="checkout">
-          <p>
-            <span class="checkout-total"
-              >Total: {{ cart.numItems }} item(s)</span
-            >
-            <span class="checkout-price"
-              >${{ cart.totalAmount | number: "1.2-2" }} USD</span
-            >
-          </p>
-          <button class="checkout-button" (click)="checkout(cart.seller.id)">
-            Checkout
-          </button>
-          <br />
-          <a href="#" class="checkout-return">Continue Shopping ></a>
-        </div>
+        <hr class="divider" />
+      </div>
+      <div class="checkout">
+        <p>
+          <span class="checkout-total">Total: {{ cart.numItems }} item(s)</span>
+          <span class="checkout-price"
+            >${{ cart.totalAmount | number: "1.2-2" }} USD</span
+          >
+        </p>
+        <button class="checkout-button" (click)="checkout(cart.seller.id)">
+          Checkout
+        </button>
+        <br />
+        <a href="#" class="checkout-return">Continue Shopping ></a>
       </div>
     </div>
   </ng-container>
