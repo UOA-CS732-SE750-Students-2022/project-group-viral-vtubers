@@ -432,6 +432,10 @@ export class CommissionRequestsComponent implements OnInit {
   }
 
   editRequest(id: string) {
-    // this.router.navigateByUrl("/me/requests/" + id);
+    this.router.navigateByUrl('/me/orders/new', {
+      state: {
+        requestId: id,
+      },
+    });
   }
 }
