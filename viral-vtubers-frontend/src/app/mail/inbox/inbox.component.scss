@@ -42,6 +42,11 @@
     > span {
       color: $color-primary;
       cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
     }
   }
 
