@@ -36,6 +36,7 @@ export const UserProfileFragment = gql`
     products {
       id
       name
+      minPrice
       variants {
         id
         name

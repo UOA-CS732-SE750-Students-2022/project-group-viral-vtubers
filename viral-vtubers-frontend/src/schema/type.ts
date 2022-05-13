@@ -723,7 +723,7 @@ export type TagFragmentFragment = { __typename?: 'Tag', id: string, name: string
 
 export type UserFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean };
 
-export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> };
+export type UserProfileFragmentFragment = { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, minPrice: number, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> };
 
 export type ArtistFragmentFragment = { __typename?: 'User', id: string, displayName: string, numCompletedCommissions: number, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }> };
 
@@ -923,14 +923,14 @@ export type UserProfileQueryVariables = Exact<{
 }>;
 
 
-export type UserProfileQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> } };
+export type UserProfileQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, minPrice: number, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> } };
 
 export type UserLikedProductQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type UserLikedProductQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, likedProduct: Array<{ __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, titleImage: string, minPrice: number }>, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> } };
+export type UserLikedProductQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, bio: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, likedProduct: Array<{ __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, titleImage: string, minPrice: number }>, tags: Array<{ __typename?: 'Tag', id: string, name: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, minPrice: number, images: Array<string>, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> } };
 
 export const ItemFragmentFragmentDoc = gql`
     fragment ItemFragment on ProductVariant {
@@ -1176,6 +1176,7 @@ export const UserProfileFragmentFragmentDoc = gql`
   products {
     id
     name
+    minPrice
     variants {
       id
       name
