@@ -52,7 +52,7 @@ export class AuthService {
           return;
         }
         this.ngZone.run(() => {
-          this.router.navigate(['feed']);
+          this.router.navigate(['/']);
         });
         await firstValueFrom(this.userService.login());
       })

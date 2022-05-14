@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="parallelogram para-blue">
+    <div class="parallelogram-content">
+      <p>Follow Gwenny... I'll show you the world!</p>
+      <h2>Browse Assets</h2>
+      <img
+        class="gwenny-img"
+        src="assets/chibis/chibi_pink.png"
+        alt="Your gal Gwenny!"
+      />
+    </div>
+  </div>
+  <div class="parallelogram para-pink">
+    <div class="parallelogram-content">
+      <p>Follow Vivi... Come see the commissions!</p>
+      <h2>Commission Assets</h2>
+      <img
+        class="vivi-img"
+        src="assets/chibis/chibi_blue.png"
+        alt="Your gal Vivi!"
+      />
+    </div>
+  </div>
+
+  <div class="hero-container">
+    <h1>BROWSE, <br />CREATE, or<br />REQUEST ASSETS</h1>
+    <p>
+      Couldn’t find your perfect Vtuber? Or want to share your talents with<br />
+      the rest of the world? The all new commission system is now
+      <br />available!
+    </p>
+    <button>Start browsing now</button>
+  </div>
+  <div class="content-container">
+    <ul class="categories-container">
+      <li>
+        <div>
+          <h3>Dresses</h3>
+          <a>Shop now</a>
+        </div>
+        <img src="assets/categories/dresses.png" />
+      </li>
+      <li>
+        <div>
+          <h3>Models</h3>
+          <a>Shop now</a>
+        </div>
+        <img src="assets/categories/models.png" />
+      </li>
+      <li>
+        <div>
+          <h3>Accessories</h3>
+          <a>Shop now</a>
+        </div>
+        <img src="assets/categories/accessories.png" />
+      </li>
+      <li>
+        <div>
+          <h3>Backgrounds</h3>
+          <a>Shop now</a>
+        </div>
+        <img src="assets/categories/backgrounds.png" />
+      </li>
+    </ul>
+
+    <div class="section">
+      <h3>Newest Products</h3>
+      <hr />
+
+      <div class="section-content products">
+        <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" class="products-content">
+          <a class="product-item">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPoAqbxmqSwl8qjS9Ad3BTjTsBwZCzvhJ7Jw&usqp=CAU"
+              alt="waifu"
+            />
+            <div>
+              <div class="product-info">
+                <h4>Product Name</h4>
+                <p>
+                  <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+                  num Likes
+                </p>
+              </div>
+              <p>$price</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <h3>Latest Commission Requests</h3>
+      <hr />
+
+      <div class="section-content commission-requests">
+        <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" class="request-container">
+          <img
+            src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5cdc8468-88cf-4472-9d66-44c7d166408e/de79fly-13a68791-05de-458a-baf3-2f4d843e103f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVjZGM4NDY4LTg4Y2YtNDQ3Mi05ZDY2LTQ0YzdkMTY2NDA4ZVwvZGU3OWZseS0xM2E2ODc5MS0wNWRlLTQ1OGEtYmFmMy0yZjRkODQzZTEwM2YucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6z1Uom9GkUxuZyHF81JsAGigbWjtsYPx6BzuFNjovPU"
+          />
+          <div class="info-container">
+            <h4>Order name</h4>
+            <div class="description-container">
+              <p>Order description</p>
+            </div>
+          </div>
+          <p>$price</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
