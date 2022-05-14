@@ -74,6 +74,7 @@ fun MongoDatabase.asProductRepository(): ProductRepository =
         ): Flow<Product> {
             val result =
                 col.find(
+                    Product::isDraft eq false,
                     *filter
                 ).sort(sort)
             return result.toFlow()

@@ -15,6 +15,7 @@ data class Order(
     val description: String,
     val bounty: Double,
     val isDraft: Boolean,
+    val isComment: Boolean,
     val image: String,
     val tags: List<Id<User>>,
     val applications: List<Id<User>>,

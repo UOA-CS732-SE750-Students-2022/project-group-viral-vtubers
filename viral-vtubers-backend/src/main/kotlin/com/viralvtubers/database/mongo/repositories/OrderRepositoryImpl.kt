@@ -20,6 +20,7 @@ fun MongoDatabase.asOrderRepository(): OrderRepository =
         ): Flow<Order> {
             val result =
                 col.find(
+                    Order::isDraft eq false,
                     *filter
                 ).sort(sort)
             return result.toFlow()
