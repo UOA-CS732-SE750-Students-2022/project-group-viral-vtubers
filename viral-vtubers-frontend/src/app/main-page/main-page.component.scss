@@ -109,7 +109,7 @@ $page-margin: 130px;
 
 .hero-container {
   width: 40%;
-  height: 1000px;
+  height: 960px;
 
   box-sizing: border-box;
   padding-left: $page-margin;
@@ -165,9 +165,25 @@ $page-margin: 130px;
 }
 
 .content-container {
-  background-color: pink;
   width: 100%;
 
   box-sizing: border-box;
   padding: 0 $page-margin;
+
+  .categories-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    column-gap: 40px;
+
+    > li {
+      list-style: none;
+
+      height: 300px;
+      flex: 1;
+
+      background-color: #f6f9fa;
+    }
+  }
 }
