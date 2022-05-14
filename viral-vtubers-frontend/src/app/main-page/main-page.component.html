@@ -83,7 +83,10 @@
         <ng-container *ngIf="products.length > 0; else emptyProducts">
           <div class="section-content products">
             <div *ngFor="let product of products" class="products-content">
-              <a class="product-item">
+              <a
+                class="product-item"
+                routerLink="/marketplace/product/{{ product.id }}"
+              >
                 <img src="{{ product.titleImage }}" alt="waifu" />
                 <div>
                   <div class="product-info">
@@ -125,14 +128,16 @@
         <ng-container *ngIf="requests.length > 0; else emptyRequests">
           <div class="section-content commission-requests">
             <div *ngFor="let order of requests" class="request-container">
-              <img src="{{ order.image }}" />
-              <div class="info-container">
-                <h4>{{ order.name }}</h4>
-                <div class="description-container">
-                  <p>{{ order.description }}</p>
+              <a class="product-item" routerLink="/commissions/requests">
+                <img src="{{ order.image }}" />
+                <div class="info-container">
+                  <h4>{{ order.name }}</h4>
+                  <div class="description-container">
+                    <p>{{ order.description }}</p>
+                  </div>
                 </div>
-              </div>
-              <p>${{ order.bounty }}</p>
+                <p>${{ order.bounty }}</p>
+              </a>
             </div>
           </div>
         </ng-container>
