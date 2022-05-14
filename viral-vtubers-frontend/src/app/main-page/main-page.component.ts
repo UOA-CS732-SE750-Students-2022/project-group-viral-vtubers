@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import {
+  OrderFragmentFragment,
   OrderPaginationFragmentFragment,
   ProductBlurbFragmentFragment,
   ProductPaginationFragmentFragment,
@@ -17,7 +18,7 @@ import { ProductService } from '../services/product.service';
 export class MainPageComponent implements OnInit {
   products$?: Observable<ProductBlurbFragmentFragment[]>;
 
-  requests$: Observable<OrderPaginationFragmentFragment>;
+  requests$: Observable<OrderFragmentFragment[]>;
 
   constructor(
     private router: Router,
@@ -28,7 +29,9 @@ export class MainPageComponent implements OnInit {
       .getProducts(undefined, undefined, undefined, 6)
       .products$.pipe(map((p) => p.edges.map((e) => e.node)));
 
-    this.requests$ = orderService.getOrdersWithLimit(8).newestOrders$;
+    this.requests$ = orderService
+      .getOrdersWithLimit(8)
+      .newestOrders$.pipe(map((r) => r.edges.map((e) => e.node)));
   }
 
   ngOnInit(): void {}
