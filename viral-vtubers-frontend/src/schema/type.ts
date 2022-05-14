@@ -963,6 +963,11 @@ export type NotificationQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type NotificationQuery = { __typename?: 'Query', notification: { __typename?: 'Notification', numMail: number, numCart: number } };
 
+export type MyUploadedProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyUploadedProductsQuery = { __typename?: 'Query', self: { __typename?: 'User', products: Array<{ __typename?: 'Product', id: string, name: string, isLiked: boolean, numLikes: number, titleImage: string, minPrice: number }> } };
+
 export type ArtistsQueryVariables = Exact<{
   cursor?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1888,6 +1893,26 @@ export const NotificationDocument = gql`
   })
   export class NotificationGQL extends Apollo.Query<NotificationQuery, NotificationQueryVariables> {
     override document = NotificationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MyUploadedProductsDocument = gql`
+    query MyUploadedProducts {
+  self {
+    products {
+      ...ProductBlurbFragment
+    }
+  }
+}
+    ${ProductBlurbFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MyUploadedProductsGQL extends Apollo.Query<MyUploadedProductsQuery, MyUploadedProductsQueryVariables> {
+    override document = MyUploadedProductsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

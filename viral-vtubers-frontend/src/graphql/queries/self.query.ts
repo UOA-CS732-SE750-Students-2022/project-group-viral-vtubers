@@ -1,6 +1,7 @@
 import { gql } from 'apollo-angular';
 
 import { NotificationFragment } from '../fragments/notification.fragment';
+import { ProductBlurbFragment } from '../fragments/product.fragment';
 import { UserAccountFragment, UserFragment } from '../fragments/user.fragment';
 
 export const selfQuery = gql`
@@ -28,3 +29,14 @@ query Notification {
   }
   ${NotificationFragment}
 }`;
+
+export const userUploadedProducts = gql`
+  query MyUploadedProducts {
+    self {
+      products {
+        ...ProductBlurbFragment
+      }
+    }
+  }
+  ${ProductBlurbFragment}
+`;
