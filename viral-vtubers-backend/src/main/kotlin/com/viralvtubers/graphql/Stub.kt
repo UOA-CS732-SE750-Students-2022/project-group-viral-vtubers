@@ -51,41 +51,6 @@ val stubCategory = { id: String ->
     )
 }
 
-val stubProduct = { id: String ->
-    Product(
-        ID(id),
-        "Fake Product",
-        "Fake Product Short Description",
-        titleImage = "fakeImage.png",
-        images = listOf("fakeImage.png"),
-        vrm = "fakeVRM.vrm",
-        variants = listOf(
-            ProductVariant(
-                id = ID("productVariant1"),
-                name = "Fake Product Variant 1",
-                price = 10.0,
-                file = "fake_file.zip",
-                fileName = "fake_file.zip",
-                fileTypes = listOf(".vrm", ".vroid"),
-                productId = ID("fake_product_id")
-            ),
-            ProductVariant(
-                id = ID("productVariant2"),
-                name = "Fake Product Variant 2",
-                price = 20.0,
-                file = "fake_file.zip",
-                fileName = "fake_file.zip",
-                fileTypes = listOf(".vrm", ".vroid"),
-                productId = ID("fake_product_id")
-            ),
-        ),
-        artistId = ID("fake_artist_id"),
-        subcategoryId = ID("fake_subcategory_id"),
-        minPrice = 12.0,
-        tags = ArrayList()
-    )
-}
-
 val stubMail = { id: String ->
     Mail(
         ID(id),

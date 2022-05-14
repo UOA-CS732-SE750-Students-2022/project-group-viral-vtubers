@@ -20,7 +20,8 @@
     <div class="profileImg">
       <img
         [src]="
-          !(self$ | async)?.profileImageURI
+          !(self$ | async)?.profileImageURI &&
+          (self$ | async)?.profileImageURI !== ''
             ? (self$ | async)?.profileImageURI
             : 'assets/chibis/chibi-profile.png'
         "

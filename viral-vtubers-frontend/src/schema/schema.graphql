@@ -48,6 +48,8 @@ type Product {
   description: String!
   id: ID!
   images: [String!]!
+  isComment: Boolean!
+  isDraft: Boolean!
   minPrice: Float!
   name: String!
   titleImage: String!
@@ -68,6 +70,8 @@ type ProductVariant {
   name: String!
   price: Float!
   product: Product!
+  isPurchased: Boolean!
+  isCart: Boolean!
 }
 "Category"
 type Subcategory {
@@ -200,6 +204,8 @@ type Query {
   category(id: ID!): Category!
   "Get Subcategory"
   subcategory(id: ID!): Subcategory!
+  "Get Tags"
+  tags: [Tag!]!
   "Get all Orders"
   orders(filter: OrderFilter, sort: OrderSort, cursor: String, limit: Int): OrderPagination!
   "Get an Order by Id"
@@ -369,6 +375,8 @@ input AddProductInput {
   artist: ID!
   description: String!
   images: [String!]!
+  isComment: Boolean!
+  isDraft: Boolean!
   isMature: Boolean!
   name: String!
   numLikes: Int!
@@ -382,6 +390,9 @@ input EditProductInput {
   description: String
   id: ID!
   images: [String!]
+  isComment: Boolean
+  isDraft: Boolean
+  isMature: Boolean
   name: String
   numLikes: Int
   subcategoryId: ID

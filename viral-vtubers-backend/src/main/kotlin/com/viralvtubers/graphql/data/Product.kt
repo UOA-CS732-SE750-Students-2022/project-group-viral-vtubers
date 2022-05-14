@@ -13,6 +13,8 @@ data class Product(
     val variants: List<ProductVariant>,
     val minPrice: Double,
 //  val isLike: Boolean,
+    val isComment: Boolean,
+    val isDraft: Boolean,
 
 //  ignored fields
     val subcategoryId: ID,

@@ -12,7 +12,7 @@ export const addToCartMutation = gql`
 `;
 
 export const removeFromCart = gql`
-  mutation removeFromCart($productId: ID!, $variantId: ID!) {
+  mutation RemoveFromCart($productId: ID!, $variantId: ID!) {
     removeFromCart(productId: $productId, variantId: $variantId) {
       ...CartFragment
     }
@@ -21,7 +21,7 @@ export const removeFromCart = gql`
 `;
 
 export const emptyCart = gql`
-  mutation emptyCart($sellerId: ID) {
+  mutation EmptyCart($sellerId: ID) {
     emptyCart(sellerId: $sellerId) {
       ...CartFragment
     }
@@ -30,8 +30,8 @@ export const emptyCart = gql`
 `;
 
 export const checkout = gql`
-  mutation checkout($sellerId: ID) {
-    emptyCart(sellerId: $sellerId) {
+  mutation Checkout($sellerId: ID) {
+    checkout(sellerId: $sellerId) {
       ...CartFragment
     }
   }

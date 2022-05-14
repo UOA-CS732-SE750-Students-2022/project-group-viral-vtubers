@@ -1,6 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
@@ -17,6 +18,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'add-product',
+        component: CreateProductComponent,
+      },
+      {
+        path: 'edit-product/:productId',
         component: CreateProductComponent,
       },
       {
@@ -47,6 +52,7 @@ export const routes: Routes = [
     CommonModule,
     SharedModule,
     DragDropModule,
+    FormsModule,
     RouterModule.forChild(routes),
   ],
 })

@@ -12,6 +12,7 @@ fun SchemaBuilder.productSchema(
     userService: UserService,
     tagService: TagService,
     authService: AuthService,
+    cartService: CartService,
 ) {
     type<Product> {
         description = "Product"
@@ -70,6 +71,30 @@ fun SchemaBuilder.productSchema(
             resolver { productVariant ->
                 description = "Get the product which variant is a product of"
                 productService.getProductId(productVariant.productId)
+            }
+        }
+
+        property<Boolean>("isPurchased") {
+            resolver { productVariant, ctx: Context ->
+                description = "Get isPurchased"
+                val userId = authService.getUserId(ctx)
+                cartService.checkIsPurchased(
+                    userId,
+                    productVariant.productId,
+                    productVariant.id,
+                )
+            }
+        }
+
+        property<Boolean>("isCart") {
+            resolver { productVariant, ctx: Context ->
+                description = "Get isCart"
+                val userId = authService.getUserId(ctx)
+                cartService.checkIsCart(
+                    userId,
+                    productVariant.productId,
+                    productVariant.id,
+                )
             }
         }
     }
@@ -161,6 +186,13 @@ fun SchemaBuilder.productSchema(
         description = "Get Subcategory"
         resolver { id: ID ->
             categoryService.getSubcategoryById(id)
+        }
+    }
+
+    query("tags") {
+        description = "Get Tags"
+        resolver { ->
+            tagService.getAllTags()
         }
     }
 
