@@ -10,6 +10,7 @@ import {
   EditSelfInput,
   FollowGQL,
   LoginGQL,
+  MyUploadedProductsGQL,
   ProductBlurbFragmentFragment,
   SelfGQL,
   UserAccountFragmentFragment,
@@ -34,6 +35,8 @@ export class UserService {
 
   account$?: Observable<UserAccountFragmentFragment>;
 
+  uploadedProducts$?: Observable<ProductBlurbFragmentFragment[]>;
+
   constructor(
     private userProfileGQL: UserProfileGQL,
     private selfGQL: SelfGQL,
@@ -43,7 +46,8 @@ export class UserService {
     private userLikedProductGQL: UserLikedProductGQL,
     private artistsGQL: ArtistsGQL,
     private userByNameGQL: UserByNameGQL,
-    private accountGQL: AccountGQL
+    private accountGQL: AccountGQL,
+    private myUploadsGQL: MyUploadedProductsGQL
   ) {}
 
   getSelf() {
@@ -103,5 +107,16 @@ export class UserService {
 
   follow(userId: string, follow: boolean) {
     return this.followGQL.mutate({ id: userId, follow });
+  }
+
+  getMyUploadedProducts() {
+    this.uploadedProducts$ = this.myUploadsGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.self.products));
+
+    return {
+      query: this.myUploadsGQL,
+      uploadedProducts$: this.uploadedProducts$,
+    };
   }
 }
