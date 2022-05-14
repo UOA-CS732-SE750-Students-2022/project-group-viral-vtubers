@@ -3,11 +3,16 @@ import { ThumbnailsMode } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import {
   AccountGQL,
+  AddServiceGQL,
+  AddServiceInput,
   ArtistFragmentFragment,
   ArtistPaginationFragmentFragment,
   ArtistsGQL,
+  DeleteServiceGQL,
   EditSelfGQL,
   EditSelfInput,
+  EditServiceGQL,
+  EditServiceInput,
   FollowGQL,
   LoginGQL,
   MyUploadedProductsGQL,
@@ -47,7 +52,10 @@ export class UserService {
     private artistsGQL: ArtistsGQL,
     private userByNameGQL: UserByNameGQL,
     private accountGQL: AccountGQL,
-    private myUploadsGQL: MyUploadedProductsGQL
+    private myUploadsGQL: MyUploadedProductsGQL,
+    private addServiceGQL: AddServiceGQL,
+    private editServiceGQL: EditServiceGQL,
+    private deleteServiceGQL: DeleteServiceGQL
   ) {}
 
   getSelf() {
@@ -97,6 +105,17 @@ export class UserService {
     return { query: this.accountGQL, account$: this.account$ };
   }
 
+  getMyUploadedProducts() {
+    this.uploadedProducts$ = this.myUploadsGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.self.products));
+
+    return {
+      query: this.myUploadsGQL,
+      uploadedProducts$: this.uploadedProducts$,
+    };
+  }
+
   editSelf(input: EditSelfInput) {
     return this.editSelfGQL.mutate({ input });
   }
@@ -109,14 +128,15 @@ export class UserService {
     return this.followGQL.mutate({ id: userId, follow });
   }
 
-  getMyUploadedProducts() {
-    this.uploadedProducts$ = this.myUploadsGQL
-      .watch()
-      .valueChanges.pipe(map((res) => res.data.self.products));
+  addService(input: AddServiceInput) {
+    return this.addServiceGQL.mutate({ input });
+  }
 
-    return {
-      query: this.myUploadsGQL,
-      uploadedProducts$: this.uploadedProducts$,
-    };
+  editService(input: EditServiceInput) {
+    return this.editServiceGQL.mutate({ input });
+  }
+
+  deleteService(id: string) {
+    return this.deleteServiceGQL.mutate({ id });
   }
 }

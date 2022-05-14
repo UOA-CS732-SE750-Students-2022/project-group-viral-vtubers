@@ -364,6 +364,10 @@ h6 {
     &:hover {
       opacity: $button-coloured-hover-opacity;
     }
+
+    &:disabled {
+      background-color: $color-grey-dark;
+    }
   }
 
   > .save-draft-button {
@@ -400,6 +404,16 @@ h6 {
     width: 100%;
     height: 100%;
   }
+
+  > .cover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
   background-color: $color-primary;
 
   transition: $button-hover-animation;
@@ -415,4 +429,8 @@ h6 {
 
 .title-tags {
   margin-top: -10px !important;
+}
+
+img {
+  object-fit: cover;
 }

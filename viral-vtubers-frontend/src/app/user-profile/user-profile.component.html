@@ -9,7 +9,7 @@
     <div class="profile-info">
       <h2>{{ user.displayName }}</h2>
       <div class="status-group">
-        <p>Statuses are not implemented~</p>
+        <p>{{ user.status }}</p>
         <button *ngIf="!isEdit">Following</button>
         <button (click)="openEditProfile()" *ngIf="isEdit">Edit</button>
       </div>
@@ -25,7 +25,11 @@
           <span>{{ user.numLikes }}</span> total likes
         </p>
         <p>Specialties:</p>
-        <div class="tags">tags are not implemented</div>
+        <app-tags
+          class="app-tags"
+          [isEdit]="false"
+          [tags]="user.tags"
+        ></app-tags>
       </div>
     </div>
   </div>
@@ -44,6 +48,7 @@
         >
           <div
             class="inner"
+            (click)="openEditService(service)"
             cdkDrag
             [cdkDragDisabled]="!isEdit"
             [class.drag]="isEdit"
@@ -56,10 +61,11 @@
               </div>
             </div>
             <div class="price-info">
-              <p>
+              <p *ngIf="service.priceType.toString() !== 'POA'">
                 ${{ service.price | number: "1.2-2" }}
                 <span>/{{ service.priceType }}</span>
               </p>
+              <p *ngIf="service.priceType.toString() === 'POA'">POA</p>
             </div>
             <div *ngIf="isEdit" class="remove-btn" (click)="remove(service)">
               <p>-</p>
@@ -81,18 +87,22 @@
         <button>View all</button>
       </div>
       <div class="products-content">
-        <a *ngFor="let product of user.products" class="product-item" href="/marketplace/product/{{ product.id }}">
-            <img src="{{ product.titleImage }}" alt="waifu" />
-            <div>
-              <div class="product-info">
-                <h4>{{ product.name }}</h4>
-                <p>
-                  <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
-                  Likes
-                </p>
-              </div>
-              <p>${{ product.minPrice | number: "1.2-2" }}</p>
+        <a
+          *ngFor="let product of user.products"
+          class="product-item"
+          href="/marketplace/product/{{ product.id }}"
+        >
+          <img src="{{ product.titleImage }}" alt="waifu" />
+          <div>
+            <div class="product-info">
+              <h4>{{ product.name }}</h4>
+              <p>
+                <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
+                Likes
+              </p>
             </div>
+            <p>${{ product.minPrice | number: "1.2-2" }}</p>
+          </div>
         </a>
       </div>
     </div>
@@ -105,19 +115,36 @@
       <div class="profile">
         <p class="title">Edit Profile</p>
         <a class="close" (click)="closeEditProfile()"> &times; </a>
-        <p>Specialties <span>4/5</span></p>
+        <p>
+          Specialties <span>{{ tagsRef.tags.length + "/5" }}</span>
+        </p>
         <div>
-          <app-tags class="app-tags"></app-tags>
+          <app-tags
+            #tagsRef
+            class="app-tags"
+            [allTags]="(allTags$ | async) ?? []"
+          ></app-tags>
         </div>
       </div>
       <div class="profile-img">
-        <img src="{{ (user$ | async)?.profileImageURI }}" alt="waifu" />
-        <input type="file" />
+        <img [src]="userProfileURI" alt="waifu" />
+        <input
+          type="file"
+          #profileImg
+          accept="image/*"
+          (change)="handleProfileImageInput(profileImg)"
+        />
       </div>
     </div>
+    <p class="about-me">Status</p>
+    <input placeholder="Dancing in the rain hehe~" [(ngModel)]="userStatus" />
     <p class="about-me">About me</p>
-    <textarea rows="5" placeholder="I am great at creating lolis..."></textarea>
-    <button>SAVE</button>
+    <textarea
+      rows="5"
+      placeholder="I am great at creating lolis..."
+      [(ngModel)]="userBio"
+    ></textarea>
+    <button (click)="editSelf()">SAVE</button>
   </div>
 </div>
 
@@ -126,26 +153,57 @@
     <p class="title">Add/Edit Service</p>
     <a class="close" (click)="closeNewService()"> &times; </a>
     <p>Service title</p>
-    <input placeholder="Breast augmentation" />
+    <input placeholder="Breast augmentation" [(ngModel)]="serviceTitle" />
     <p>Pricing:</p>
     <div>
       <input
         class="radio"
         type="radio"
-        name="comments"
+        name="pricing"
         [defaultChecked]="true"
+        (change)="setPrice($event)"
+        value="PRICE"
+        [(ngModel)]="selectedPrice"
       />
       <span class="price-prefix">$</span>
-      <input class="price-input" type="number" placeholder="69.99" />
-      <select name="price-type">
-        <option value="hour">/hr</option>
-        <option value="each">/ea</option>
+      <input
+        [disabled]="!price"
+        class="price-input"
+        type="number"
+        placeholder="69.99"
+        step="0.01"
+        [(ngModel)]="servicePrice"
+      />
+      <select
+        [disabled]="!price"
+        name="price-type"
+        [(ngModel)]="selectedPriceType"
+        (change)="setPriceType($event)"
+      >
+        <option value="HOUR">/hr</option>
+        <option value="EACH">/ea</option>
       </select>
-      <input class="radio" type="radio" name="comments" />
+      <input
+        class="radio"
+        type="radio"
+        name="pricing"
+        value="POA"
+        (change)="setPriceType($event)"
+        [(ngModel)]="selectedPrice"
+      />
       <span>POA</span>
     </div>
-    <textarea rows="5" placeholder="I am great at creating lolis..."></textarea>
-    <button>SAVE</button>
+    <textarea
+      rows="5"
+      placeholder="I am great at creating lolis..."
+      [(ngModel)]="serviceDescription"
+    ></textarea>
+    <button
+      [disabled]="this.serviceTitle === '' || this.serviceDescription === ''"
+      (click)="submitService()"
+    >
+      SAVE
+    </button>
   </div>
 </div>
 

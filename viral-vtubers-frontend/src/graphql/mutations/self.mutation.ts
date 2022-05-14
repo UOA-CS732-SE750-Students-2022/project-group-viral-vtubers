@@ -19,3 +19,44 @@ export const loginMutation = gql`
   }
   ${UserFragment}
 `;
+
+export const addService = gql`
+  mutation AddService($input: AddServiceInput!) {
+    addService(input: $input) {
+      ...UserFragment
+      services {
+        description
+        id
+        name
+        price
+        priceType
+      }
+    }
+  }
+  ${UserFragment}
+`;
+
+export const editService = gql`
+  mutation EditService($input: EditServiceInput!) {
+    editService(input: $input) {
+      ...UserFragment
+      services {
+        description
+        id
+        name
+        price
+        priceType
+      }
+    }
+  }
+  ${UserFragment}
+`;
+
+export const deleteService = gql`
+  mutation DeleteService($id: ID!) {
+    deleteService(id: $id) {
+      ...UserFragment
+    }
+  }
+  ${UserFragment}
+`;

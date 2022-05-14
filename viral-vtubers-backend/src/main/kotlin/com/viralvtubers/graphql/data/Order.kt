@@ -8,6 +8,7 @@ data class Order(
     val bounty: Double,
     val isDraft: Boolean,
     val image: String,
+    val isComment: Boolean,
 //  val applications: List<User>
 //  val owner: User,
 //  val artist: User?,

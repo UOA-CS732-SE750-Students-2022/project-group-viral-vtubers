@@ -2,7 +2,6 @@ package com.viralvtubers.mapper
 
 import com.viralvtubers.database.mongo.repositories.Page
 import com.viralvtubers.graphql.data.*
-import org.litote.kmongo.util.idValue
 import com.viralvtubers.database.model.Order as OrderModel
 
 fun OrderModel.map() = Order(
@@ -12,6 +11,7 @@ fun OrderModel.map() = Order(
     description = description,
     bounty = bounty,
     isDraft = isDraft,
+    isComment = isComment,
     image = image,
     ownerId = ownerId.map(),
     artistId = artistId?.map(),

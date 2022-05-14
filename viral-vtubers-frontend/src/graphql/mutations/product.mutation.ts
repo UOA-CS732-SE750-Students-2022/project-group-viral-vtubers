@@ -3,7 +3,6 @@ import { gql } from 'apollo-angular';
 import {
   ProductBlurbFragment,
   ProductDetailFragment,
-  ProductDetailVariantFragment,
 } from '../fragments/product.fragment';
 
 export const likeProductMutation = gql`

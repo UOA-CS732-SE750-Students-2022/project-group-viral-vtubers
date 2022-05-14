@@ -119,6 +119,7 @@ type Order {
   description: String!
   id: ID!
   image: String!
+  isComment: Boolean!
   isDraft: Boolean!
   name: String!
   owner: User!
@@ -428,8 +429,8 @@ input DeleteProductVariant {
 input AddOrderInput {
   bounty: Float!
   description: String!
-  id: ID!
   image: String!
+  isComment: Boolean!
   isDraft: Boolean!
   name: String!
   subcategoryId: ID!
@@ -442,6 +443,7 @@ input EditOrderInput {
   description: String
   id: ID!
   image: String
+  isComment: Boolean
   isDraft: Boolean
   name: String
   subcategoryId: ID

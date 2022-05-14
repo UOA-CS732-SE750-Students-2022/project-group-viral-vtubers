@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UploadService } from 'src/app/services/upload.service';
 import { UserService } from 'src/app/services/user.service';
+import { TagsComponent } from 'src/app/shared/components/tags/tags.component';
 import {
   CategoryFragmentFragment,
   ProductDetailFragmentFragment,
@@ -38,6 +39,9 @@ type SubcategoryType = {
   ],
 })
 export class CreateProductComponent implements OnInit {
+  @ViewChild('appTags')
+  tagsRef!: TagsComponent;
+
   categories$: Observable<CategoryFragmentFragment[]>;
   allTags$: Observable<TagFragmentFragment[]>;
   artistId = '';
@@ -56,7 +60,6 @@ export class CreateProductComponent implements OnInit {
   comment = true;
   categories?: CategoryFragmentFragment[];
   product?: ProductDetailFragmentFragment;
-  tags: TagFragmentFragment[] = [];
 
   productId = '';
   vrm = '';
@@ -120,6 +123,7 @@ export class CreateProductComponent implements OnInit {
       this.productService
         .getProduct(productId)
         .product$.subscribe((product) => {
+          this.product = product;
           this.productId = product.id;
           this.selectedCategory = this.categories?.find(
             (category) => category.id === product.subcategory.category.id
@@ -139,7 +143,7 @@ export class CreateProductComponent implements OnInit {
           ];
           this.freeToggles = Array(this.variants.length);
           this.images = [product.titleImage, ...product.images];
-          this.tags = product.tags;
+          this.tagsRef.tags = product.tags;
           this.title = product.name;
           this.descriptionString = product.description;
           this.comment = product.isComment;
@@ -278,7 +282,7 @@ export class CreateProductComponent implements OnInit {
               name: name,
               numLikes: 0,
               subcategoryId: this.selectedSubcategory?.id ?? '',
-              tags: this.tags.map((tag) => tag.id),
+              tags: this.tagsRef.tags.map((tag) => tag.id),
               titleImage: this.images[0],
               vrm: this.vrm ?? '',
             })
@@ -294,9 +298,8 @@ export class CreateProductComponent implements OnInit {
           isDraft: draft,
           isMature: this.adultBoolean,
           name: name,
-          numLikes: 0,
           subcategoryId: this.selectedSubcategory?.id ?? '',
-          tags: this.tags.map((tag) => tag.id),
+          tags: this.tagsRef.tags.map((tag) => tag.id),
           titleImage: this.images[0],
           vrm: this.vrm ?? '',
         })

@@ -6,20 +6,36 @@
       <img src="assets/icons/UploadIcon.svg" alt="upload-icon" />
       <p class="title">Add a cover image</p>
       <p>Upload a visualisation of what you would like to commission</p>
-      <input type="file" />
+      <img
+        class="cover-image"
+        *ngIf="requestImage !== ''"
+        [src]="requestImage"
+        alt="request image"
+      />
+      <input
+        type="file"
+        #requestImg
+        accept="image/*"
+        (change)="handleImageInput(requestImg)"
+      />
     </div>
     <div class="edit-fields">
       <p>Commission request title</p>
-      <input class="title-input" placeholder="Loli Gyaru" />
+      <input
+        class="title-input"
+        placeholder="Loli Gyaru"
+        #title
+        [(ngModel)]="requestTitle"
+      />
       <p>Category</p>
-      <div class="category-input" *ngIf="selectedSubCategory">
-        Accessories > Underwear
+      <div class="category-input" *ngIf="selectedSubcategory">
+        {{ selectedCategory?.name }} > {{ selectedSubcategory.name }}
         <span class="category-change" (click)="showChange()">
           Change category
         </span>
       </div>
       <div
-        *ngIf="!selectedSubCategory"
+        *ngIf="!selectedSubcategory"
         class="category-input category-empty-select"
         (click)="showChange()"
       >
@@ -28,24 +44,47 @@
       <p>Bounty</p>
       <div class="selection-section">
         <div>
-          <input type="radio" name="bounty" />
+          <input
+            type="radio"
+            name="bounty"
+            value="PRICE"
+            (change)="setPrice($event)"
+            [(ngModel)]="selectedPrice"
+          />
           <p class="input-dollar-sign">$</p>
           <input
             class="input-bounty"
             type="number"
             name="bounty"
+            min="1"
+            step="0.01"
             [defaultChecked]="true"
+            [disabled]="requestPriceDisable"
+            [(ngModel)]="requestBounty"
+            [value]="requestBounty"
           />
           <p>USD</p>
           <span></span>
-          <input type="radio" name="bounty" />
+          <input
+            type="radio"
+            name="bounty"
+            value="FREE"
+            (change)="setPrice($event)"
+            [(ngModel)]="selectedPrice"
+          />
           <p>I want the artwork done for free</p>
         </div>
       </div>
       <p class="allow-comments">Allow comments</p>
       <div class="selection-section">
         <div>
-          <input type="radio" name="comments" [defaultChecked]="true" />
+          <input
+            type="radio"
+            name="comments"
+            [defaultChecked]="true"
+            (click)="changeComment($event)"
+            [value]="true"
+          />
           <p>ON</p>
           <span></span>
           <input type="radio" name="comments" />
@@ -53,19 +92,37 @@
         </div>
       </div>
       <p class="title-tags">Tags</p>
-      <app-tags class="tags"></app-tags>
+      <app-tags #appTags class="tags"></app-tags>
     </div>
   </div>
   <textarea
+    #description
     rows="8"
     class="description-input"
     type="text"
     placeholder="Describe the artwork that you would like to have done. Please include as much detail as you can to assist the artist in envisioning your request."
+    [(ngModel)]="requestDescription"
   ></textarea>
 
   <div class="save-section">
-    <button class="save-draft-button">SAVE A DRAFT</button>
-    <button class="save-publish-button">CREATE</button>
+    <button
+      class="save-draft-button"
+      (click)="handleSubmit(title.value, description.value, true)"
+    >
+      SAVE A DRAFT
+    </button>
+    <button
+      class="save-publish-button"
+      (click)="handleSubmit(title.value, description.value, false)"
+      [disabled]="
+        title.value === '' ||
+        description.value === '' ||
+        selectedSubcategory === undefined ||
+        requestImage === ''
+      "
+    >
+      {{ orderId === "" ? "CREATE" : "SAVE" }}
+    </button>
   </div>
 </div>
 
@@ -81,7 +138,7 @@
     <p>Available Categories:</p>
     <div>
       <div
-        *ngFor="let category of getAllCategories()"
+        *ngFor="let category of categories$ | async"
         class="category"
         (click)="openCategory(category)"
       >
@@ -113,7 +170,7 @@
           <div
             *ngFor="let subcategory of category.subcategories"
             class="subcategory"
-            (click)="changeCategory(subcategory)"
+            (click)="changeSubcategory(subcategory)"
           >
             {{ subcategory.name }}
           </div>

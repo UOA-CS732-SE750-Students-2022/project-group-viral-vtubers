@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CreateRequestComponent } from '../me/create-request/create-request.component';
@@ -20,8 +21,12 @@ export const routes: Routes = [
     ViewRequestsComponent,
     ViewArtistsComponent,
     SelectViewComponent,
-    CreateRequestComponent,
   ],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class CommissionsModule {}
