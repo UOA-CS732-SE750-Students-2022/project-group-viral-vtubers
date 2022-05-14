@@ -248,6 +248,11 @@
 }
 
 .products-container {
+  * {
+    text-decoration: inherit;
+    color: inherit;
+  }
+
   .title-container {
     display: flex;
     flex-direction: row;
