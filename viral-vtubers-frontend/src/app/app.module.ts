@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { GraphQLModule } from './graphql.module';
+import { MainPageComponent } from './main-page/main-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth/auth.service';
 import { SharedModule } from './shared/shared.module';
@@ -31,6 +32,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     NotFoundComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,

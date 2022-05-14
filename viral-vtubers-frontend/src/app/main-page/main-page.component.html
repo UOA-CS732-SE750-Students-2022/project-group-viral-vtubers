@@ -62,5 +62,37 @@
         <img src="assets/categories/backgrounds.png" />
       </li>
     </ul>
+
+    <div class="section">
+      <h3>Newest Products</h3>
+      <hr />
+
+      <div class="section-content products">
+        <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" class="products-content">
+          <a class="product-item">
+            <img
+              src="https://static.wikia.nocookie.net/madmanroberto123-fanfiction/images/d/df/Nozomi_%281%29.jpg/revision/latest/top-crop/width/360/height/450?cb=20181223233800"
+              alt="waifu"
+            />
+            <div>
+              <div class="product-info">
+                <h4>Product Name</h4>
+                <p>
+                  <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+                  num Likes
+                </p>
+              </div>
+              <p>$price</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <h3>Latest Commission Requests</h3>
+      <hr />
+
+      <div class="section-content">section content</div>
+    </div>
   </div>
 </div>
