@@ -499,12 +499,11 @@
   display: flex;
   .drag {
     cursor: move;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-      .remove-btn {
-        opacity: 1;
-      }
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    .remove-btn {
+      opacity: 1;
     }
   }
 
@@ -742,6 +741,10 @@
 
       &:hover {
         opacity: $button-coloured-hover-opacity;
+      }
+
+      &:disabled {
+        background-color: $color-grey-dark;
       }
     }
   }

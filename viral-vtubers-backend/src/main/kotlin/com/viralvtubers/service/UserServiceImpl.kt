@@ -145,13 +145,12 @@ class UserServiceImpl(
             numCompletedCommissions = input.numCompletedCommissions
                 ?: user.numCompletedCommissions,
             status = input.status ?: user.status,
-            profileImageURI = input.status ?: user.status,
+            profileImageURI = input.profileImageURI ?: user.profileImageURI,
             tags = input.tags?.map { it.map() }
                 ?: user.tags,
             services = user.services,
             numLikes = user.numLikes
         )
-        userRepository.add(user)
         return userRepository.update(update)?.map()
             ?: throw error("user not found")
     }
@@ -163,9 +162,8 @@ class UserServiceImpl(
             displayName = input.displayName ?: user.displayName,
             bio = input.bio ?: user.bio,
             status = input.status ?: user.status,
-            profileImageURI = input.status ?: user.status,
+            profileImageURI = input.profileImageURI ?: user.profileImageURI,
         )
-        userRepository.add(user)
         return userRepository.update(update)?.map()
             ?: throw error("self not found")
     }
@@ -188,7 +186,6 @@ class UserServiceImpl(
         )
 
         val update = user.copy(services = services)
-        userRepository.add(user)
         return userRepository.update(update)?.map()
             ?: throw error("self not found")
     }
@@ -214,7 +211,6 @@ class UserServiceImpl(
         services[index] = updatedService
 
         val update = user.copy(services = services)
-        userRepository.add(user)
         return userRepository.update(update)?.map()
             ?: throw error("self not found")
     }
@@ -228,7 +224,6 @@ class UserServiceImpl(
         services.removeAt(index)
 
         val update = user.copy(services = services)
-        userRepository.add(user)
         return userRepository.update(update)?.map()
             ?: throw error("self not found")
 

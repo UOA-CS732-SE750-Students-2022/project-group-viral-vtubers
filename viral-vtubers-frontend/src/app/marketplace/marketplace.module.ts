@@ -20,7 +20,6 @@ export const routes: Routes = [
     redirectTo: '/marketplace/:categoryBlurb/',
     pathMatch: 'full',
   },
-
   {
     path: 'product/:id',
     component: ProductDetailsComponent,

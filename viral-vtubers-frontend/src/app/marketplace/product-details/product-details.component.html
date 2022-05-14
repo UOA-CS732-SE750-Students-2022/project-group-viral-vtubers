@@ -16,7 +16,10 @@
       <div class="creator-info">
         <span>
           <a [href]="'/user/' + productDetails.artist.id">
-            <img src="{{ productDetails.artist.profileImageURI }}" data-test-id="profileImage"  />
+            <img
+              src="{{ productDetails.artist.profileImageURI }}"
+              data-test-id="profileImage"
+            />
             {{ productDetails.artist.displayName }}
           </a>
           <button
@@ -69,13 +72,40 @@
                 </span>
               </div>
             </div>
-            <button (click)="addToCart(productDetails.id, i.id)">
+            <button *ngIf="userId === selfId" class="disabled-btn">
               <img src="assets/icons/cart-white.svg" />
               <div>
                 <h4>add to cart</h4>
-                <p data-test-id="file">{{ i.file }}</p>
+                <p data-test-id="file">{{ i.fileName }}</p>
               </div>
             </button>
+            <button
+              *ngIf="userId !== selfId && !i.isCart && !i.isPurchased"
+              (click)="addToCart(productDetails.id, i.id)"
+            >
+              <img src="assets/icons/cart-white.svg" />
+              <div>
+                <h4>add to cart</h4>
+                <p data-test-id="file">{{ i.fileName }}</p>
+              </div>
+            </button>
+            <button
+              class="remove-btn"
+              *ngIf="userId !== selfId && i.isCart && !i.isPurchased"
+              (click)="removeFromCart(productDetails.id, i.id)"
+            >
+              <img src="assets/icons/check-outline.svg" />
+              <div>
+                <h4>remove from cart</h4>
+              </div>
+            </button>
+            <a class="download-btn" *ngIf="userId !== selfId && i.isPurchased">
+              <img src="assets/icons/download.svg" />
+              <div>
+                <h4>download</h4>
+                <p data-test-id="file">{{ i.fileName }}</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>

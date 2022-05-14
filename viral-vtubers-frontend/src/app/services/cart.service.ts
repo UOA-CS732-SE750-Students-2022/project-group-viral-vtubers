@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { cartQuery } from 'src/graphql/queries/cart.query';
+import { productQuery } from 'src/graphql/queries/product.query';
 import {
   AddToCartGQL,
   CartFragmentFragment,
   CartGQL,
   CheckoutGQL,
   EmptyCartGQL,
+  ProductDetailFragmentFragment,
   PurchaseFragmentFragment,
   PurchasesGQL,
   RemoveFromCartGQL,
@@ -54,7 +56,48 @@ export class CartService {
   }
 
   addToCart(productId: string, variantId: string) {
-    return this.addToCartGQL.mutate({ productId, variantId });
+    return this.addToCartGQL.mutate(
+      { productId, variantId },
+      {
+        update: (store) => {
+          const product: ProductDetailFragmentFragment = (
+            store.readQuery({
+              query: productQuery,
+              variables: {
+                id: productId,
+              },
+            }) as any
+          ).product as ProductDetailFragmentFragment;
+
+          if (!product) {
+            return;
+          }
+
+          const updated: ProductDetailFragmentFragment = {
+            ...product,
+            variants: product.variants.map((variant) => {
+              if (variant.id === variantId) {
+                return {
+                  ...variant,
+                  isCart: true,
+                };
+              }
+              return variant;
+            }),
+          };
+
+          store.writeQuery({
+            query: productQuery,
+            data: {
+              product: updated,
+            },
+            variables: {
+              id: productId,
+            },
+          });
+        },
+      }
+    );
   }
 
   removeFromCart(productId: string, variantId: string) {
@@ -66,6 +109,43 @@ export class CartService {
             query: cartQuery,
           },
         ],
+        update: (store) => {
+          const product: ProductDetailFragmentFragment = (
+            store.readQuery({
+              query: productQuery,
+              variables: {
+                id: productId,
+              },
+            }) as any
+          ).product as ProductDetailFragmentFragment;
+
+          if (!product) {
+            return;
+          }
+
+          const updated: ProductDetailFragmentFragment = {
+            ...product,
+            variants: product.variants.map((variant) => {
+              if (variant.id === variantId) {
+                return {
+                  ...variant,
+                  isCart: false,
+                };
+              }
+              return variant;
+            }),
+          };
+
+          store.writeQuery({
+            query: productQuery,
+            data: {
+              product: updated,
+            },
+            variables: {
+              id: productId,
+            },
+          });
+        },
       }
     );
   }

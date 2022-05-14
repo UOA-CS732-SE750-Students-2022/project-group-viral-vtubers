@@ -1,9 +1,12 @@
 import { gql } from 'apollo-angular';
 
+import { TagFragment } from './tag.fragment';
+
 export const UserFragment = gql`
   fragment UserFragment on User {
     id
     bio
+    status
     numCompletedCommissions
     displayName
     email
@@ -17,14 +20,14 @@ export const UserProfileFragment = gql`
   fragment UserProfileFragment on User {
     id
     bio
+    status
     numCompletedCommissions
     displayName
     numLikes
     profileImageURI
     isFollowing
     tags {
-      id
-      name
+      ...TagFragment
     }
     services {
       description
@@ -45,6 +48,8 @@ export const UserProfileFragment = gql`
       titleImage
     }
   }
+
+  ${TagFragment}
 `;
 
 export const ArtistFragment = gql`
@@ -56,10 +61,11 @@ export const ArtistFragment = gql`
     profileImageURI
     isFollowing
     tags {
-      id
-      name
+      ...TagFragment
     }
   }
+
+  ${TagFragment}
 `;
 
 export const ArtistPaginationFragment = gql`
