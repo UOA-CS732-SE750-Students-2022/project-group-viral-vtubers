@@ -67,26 +67,32 @@
       <h3>Newest Products</h3>
       <hr />
 
-      <div class="section-content products">
-        <div *ngFor="let i of [0, 1, 2, 3, 4, 5]" class="products-content">
-          <a class="product-item">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPoAqbxmqSwl8qjS9Ad3BTjTsBwZCzvhJ7Jw&usqp=CAU"
-              alt="waifu"
-            />
-            <div>
-              <div class="product-info">
-                <h4>Product Name</h4>
-                <p>
-                  <img src="assets/icons/hearts/heart-filled-secondary.svg" />
-                  num Likes
-                </p>
+      <ng-container *ngIf="products$ | async as products; else loadingProducts">
+        <div class="section-content products">
+          <div *ngFor="let product of products" class="products-content">
+            <a class="product-item">
+              <img src="{{ product.titleImage }}" alt="waifu" />
+              <div>
+                <div class="product-info">
+                  <h4>{{ product.name }}</h4>
+                  <p>
+                    <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+                    {{ product.numLikes }} Likes
+                  </p>
+                </div>
+                <p>${{ product.minPrice | number: "1.2-2" }}</p>
               </div>
-              <p>$price</p>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #loadingProducts>
+        <div class="loading-products">
+          <img src="assets/chibis/chibi_blue.png" />
+
+          <p>Vivi is working hard to load some products for you...</p>
+        </div>
+      </ng-template>
     </div>
     <div class="section">
       <h3>Latest Commission Requests</h3>

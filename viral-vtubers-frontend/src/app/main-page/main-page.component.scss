@@ -1,6 +1,7 @@
 @import "../../variables";
 
 $page-margin: 130px;
+$margin-top: 10px;
 
 :host {
   width: 100%;
@@ -88,8 +89,8 @@ $page-margin: 130px;
 }
 
 .para-pink {
-  top: $header-height;
   right: -200px;
+  margin-top: $margin-top;
 
   h2 {
     font-size: $font-size-h6 !important;
@@ -101,8 +102,9 @@ $page-margin: 130px;
 }
 
 .para-blue {
-  top: $header-height + 170px;
+  top: 170px;
   right: 400px;
+  margin-top: $margin-top;
 
   &::before {
     background-color: $color-primary-light;
@@ -111,7 +113,7 @@ $page-margin: 130px;
 
 .hero-container {
   width: 40%;
-  height: 960px;
+  height: 860px;
 
   box-sizing: border-box;
   padding-left: $page-margin;
@@ -287,6 +289,8 @@ $page-margin: 130px;
 .product-item {
   border: solid 1px $color-grey-light;
   box-sizing: border-box;
+
+  flex: 1;
 
   border-radius: 5px;
 
@@ -555,5 +559,22 @@ $page-margin: 130px;
       opacity: $button-coloured-hover-opacity;
       color: $color-primary;
     }
+  }
+}
+
+.loading-products {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 70%;
+  }
+
+  p {
+    color: $color-grey-dark;
+    font-size: $font-size-body-2;
   }
 }
