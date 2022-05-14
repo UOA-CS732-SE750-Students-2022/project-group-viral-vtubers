@@ -44,6 +44,8 @@ export const ProductDetailFragment = gql`
     }
     variants {
       ...ProductDetailVariantFragment
+      isPurchased
+      isCart
     }
   }
 
@@ -56,6 +58,7 @@ export const ProductBlurbFragment = gql`
     id
     name
     isLiked
+    isDraft
     numLikes
     titleImage
     minPrice

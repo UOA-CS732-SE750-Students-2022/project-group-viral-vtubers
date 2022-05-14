@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
+import { filter, map, Observable } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 import { ProductBlurbFragmentFragment } from 'src/schema/type';
 @Component({
   selector: 'app-manage-uploads',
@@ -9,24 +9,35 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
   styleUrls: ['./manage-uploads.component.scss'],
 })
 export class ManageUploadsComponent implements OnInit {
-  // Drafts don't appear to exist in the backend, leaving empty for now. UI hides drafts section if this is empty.
-  drafts: ProductBlurbFragmentFragment[] = [];
+  drafts$: Observable<ProductBlurbFragmentFragment[]>;
 
   uploads$: Observable<ProductBlurbFragmentFragment[]>;
 
-  constructor(private router: Router, private userService: UserService) {
-    this.uploads$ = this.userService.getMyUploadedProducts().uploadedProducts$;
+  constructor(private router: Router, private productService: ProductService) {
+    this.drafts$ = this.productService
+      .getProducts()
+      .products$.pipe(
+        map((products) =>
+          products.edges
+            .filter((product) => product.node.isDraft)
+            .map((product) => product.node)
+        )
+      );
+
+    this.uploads$ = this.productService
+      .getProducts()
+      .products$.pipe(
+        map((products) =>
+          products.edges
+            .filter((product) => !product.node.isDraft)
+            .map((product) => product.node)
+        )
+      );
   }
 
   ngOnInit(): void {}
 
-  nagivateToProduct(id: string) {
-    this.router.navigateByUrl(`/products/${id}`);
-  }
-
   editProduct(id: string) {
-    this.router.navigateByUrl(`/creator/add-product`, {
-      state: { productId: id },
-    });
+    this.router.navigateByUrl(`/creator/edit-product/` + id);
   }
 }

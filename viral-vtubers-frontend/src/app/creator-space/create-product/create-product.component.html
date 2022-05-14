@@ -6,16 +6,21 @@
     <div class="edit-side-container">
       <div class="edit-fields">
         <p>Product Title</p>
-        <input class="title-input" placeholder="Loli Gyaru" #displayName />
+        <input
+          class="title-input"
+          placeholder="Loli Gyaru"
+          #displayName
+          [(ngModel)]="title"
+        />
         <p>Category</p>
-        <div class="category-input" *ngIf="selectedSubCategory">
-          {{ selectedCategory?.name }} > {{ selectedSubCategory?.name }}
+        <div class="category-input" *ngIf="selectedSubcategory">
+          {{ selectedCategory?.name }} > {{ selectedSubcategory?.name }}
           <span class="category-change" (click)="showChange()">
             Change category
           </span>
         </div>
         <div
-          *ngIf="!selectedSubCategory"
+          *ngIf="!selectedSubcategory"
           class="category-input category-empty-select"
           (click)="showChange()"
         >
@@ -39,6 +44,7 @@
           your item!
         </p>
         <p>.vrm</p>
+        <iframe *ngIf="vrmURL !== undefined" [src]="vrmURL"></iframe>
         <input
           type="file"
           accept=".vrm"
@@ -103,6 +109,7 @@
       class="description-input"
       type="text"
       placeholder="Describe your artwork in detail. Include everything that your buyer might need to know about this product. "
+      [(ngModel)]="descriptionString"
     ></textarea>
     <p>Visible to</p>
     <div class="checkboxes">
@@ -121,6 +128,7 @@
         #adult
         value="true"
         (click)="changeAdult($event)"
+        [(ngModel)]="adultBoolean"
       />
       <p>R18</p>
     </div>
@@ -144,10 +152,16 @@
         name="comments"
         [defaultChecked]="true"
         (click)="changeComment($event)"
+        [value]="true"
       />
       <p>ON</p>
       <span></span>
-      <input type="radio" name="comments" (click)="changeComment($event)" />
+      <input
+        type="radio"
+        name="comments"
+        (click)="changeComment($event)"
+        [value]="false"
+      />
       <p>OFF</p>
     </div>
 
@@ -164,9 +178,15 @@
           class="name-input"
           placeholder="VRM + VROID - Shogun/Genshin Impact"
           (change)="changeVariantName(i, $event)"
+          [value]="variant.name"
         />
         <p>File type(s) included (e.g ".vrm .vroid")</p>
-        <input class="vrm-input" placeholder="Loli Gyaru" />
+        <input
+          class="vrm-input"
+          placeholder="Loli Gyaru"
+          [value]="variant.fileTypes[0]"
+          (change)="changeVariantFileType(i, $event)"
+        />
         <p>Price</p>
         <div class="checkboxes dollars">
           <input
@@ -175,6 +195,7 @@
             value="false"
             [defaultChecked]="true"
             (change)="changeVariantPriceFree(i, $event)"
+            [value]="variant.price"
           />
           <span>$</span>
           <input
@@ -234,6 +255,9 @@
       <button
         class="save-publish-button"
         (click)="handleSubmit(displayName.value, description.value, false)"
+        [disabled]="
+          !checkSubmit(variants, images, selectedCategory, selectedSubcategory)
+        "
       >
         UPLOAD
       </button>

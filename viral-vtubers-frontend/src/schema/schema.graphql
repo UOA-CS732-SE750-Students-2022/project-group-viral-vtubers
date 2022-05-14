@@ -70,6 +70,8 @@ type ProductVariant {
   name: String!
   price: Float!
   product: Product!
+  isPurchased: Boolean!
+  isCart: Boolean!
 }
 "Category"
 type Subcategory {
@@ -390,6 +392,7 @@ input EditProductInput {
   images: [String!]
   isComment: Boolean
   isDraft: Boolean
+  isMature: Boolean
   name: String
   numLikes: Int
   subcategoryId: ID

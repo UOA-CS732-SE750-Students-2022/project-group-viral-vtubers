@@ -388,6 +388,10 @@ h6 {
   }
   > .save-publish-button {
     padding: 10px 35px;
+    &:disabled {
+      background-color: $color-grey-light;
+      color: $color-grey-dark;
+    }
   }
 }
 
@@ -429,6 +433,20 @@ h6 {
     width: 100%;
     height: 100%;
   }
+
+  > iframe {
+    border-color: $color-grey-light;
+    border-style: solid;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   background-color: $color-primary;
 
   transition: $button-hover-animation;

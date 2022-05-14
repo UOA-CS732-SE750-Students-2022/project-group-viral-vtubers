@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
@@ -43,21 +44,49 @@ export class CreateProductComponent implements OnInit {
 
   changePopup = false;
   selectedCategory?: CategoryFragmentFragment;
-  selectedSubCategory?: SubcategoryType;
+  selectedSubcategory?: SubcategoryType;
 
   images: string[] = [];
-
-  vrm?: string;
 
   variants: ProductDetailVariantFragmentFragment[] = [];
 
   freeToggles: boolean[] = [];
 
-  adult = false;
+  adultBoolean = false;
   comment = true;
   categories?: CategoryFragmentFragment[];
   product?: ProductDetailFragmentFragment;
   tags: TagFragmentFragment[] = [];
+
+  productId = '';
+  vrm = '';
+  vrmURL?: SafeUrl;
+  title = '';
+  descriptionString = '';
+
+  checkSubmit(
+    variants: ProductDetailVariantFragmentFragment[],
+    images: string[],
+    selectedCategory?: CategoryFragmentFragment,
+    selectedSubcategory?: SubcategoryType
+  ): boolean {
+    if (variants.length === 0) return false;
+
+    for (const variant of variants) {
+      if (variant.file === '') return false;
+      if (variant.name === '') return false;
+    }
+
+    if (!selectedCategory) return false;
+
+    if (!selectedSubcategory) return false;
+
+    if (images.length === 0) return false;
+
+    if (this.artistId === '') return false;
+
+    return true;
+  }
 
   constructor(
     private categoryService: CategoryService,
@@ -65,7 +94,8 @@ export class CreateProductComponent implements OnInit {
     private productService: ProductService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {
     userService.getSelf().self$.subscribe((self) => {
       this.artistId = self.id;
@@ -90,17 +120,35 @@ export class CreateProductComponent implements OnInit {
       this.productService
         .getProduct(productId)
         .product$.subscribe((product) => {
+          this.productId = product.id;
           this.selectedCategory = this.categories?.find(
             (category) => category.id === product.subcategory.category.id
           );
-          this.selectedSubCategory = product.subcategory;
+          this.selectedSubcategory = product.subcategory;
           this.vrm = product.vrm;
-          this.variants = product.variants;
+          if (this.vrm !== '') {
+            this.vrmURL = this.getSafeUrl(
+              '/vrm?vrm=' + encodeURIComponent(this.vrm)
+            );
+          }
+          this.variants = [
+            ...product.variants.map((variant) => ({
+              ...variant,
+              fileTypes: [variant.fileTypes.join(' ')],
+            })),
+          ];
           this.freeToggles = Array(this.variants.length);
           this.images = [product.titleImage, ...product.images];
           this.tags = product.tags;
+          this.title = product.name;
+          this.descriptionString = product.description;
+          this.comment = product.isComment;
         });
     });
+  }
+
+  getSafeUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -108,7 +156,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   changeSubcategory(subcategory: SubcategoryType): void {
-    this.selectedSubCategory = subcategory;
+    this.selectedSubcategory = subcategory;
     this.hideChange();
   }
 
@@ -137,15 +185,14 @@ export class CreateProductComponent implements OnInit {
       id: '',
       file: '',
       fileName: '',
-      fileTypes: [],
+      fileTypes: [''],
       name: '',
-      price: 0.0,
+      price: 1.0,
     });
     this.freeToggles.push(false);
   }
 
   removeVariantIndex(i: number) {
-    console.log(i);
     this.variants.splice(i, 1);
   }
 
@@ -159,8 +206,6 @@ export class CreateProductComponent implements OnInit {
 
     const fileURIs = await Promise.all(promises);
 
-    console.log(fileURIs);
-
     this.images = [...this.images, ...fileURIs];
   }
 
@@ -169,12 +214,13 @@ export class CreateProductComponent implements OnInit {
 
     const fileURI = await this.uploadService.upload(file);
 
+    this.vrmURL = this.getSafeUrl('/vrm?vrm=' + encodeURIComponent(fileURI));
     this.vrm = fileURI;
   }
 
   changeAdult(event: any) {
     const adult = event.target.value as string;
-    this.adult = adult === 'true';
+    this.adultBoolean = adult === 'true';
   }
 
   changeComment(event: any) {
@@ -193,7 +239,6 @@ export class CreateProductComponent implements OnInit {
   }
 
   changeVariantPriceFree(i: number, event: any) {
-    console.log(event);
     const free = event.target.value as string;
     if (free === 'true') {
       this.freeToggles[i] = true;
@@ -201,6 +246,11 @@ export class CreateProductComponent implements OnInit {
       return;
     }
     this.freeToggles[i] = false;
+  }
+
+  changeVariantFileType(i: number, event: any) {
+    const fileType = event.target.value as string;
+    this.variants[i].fileTypes[0] = fileType;
   }
 
   async handleVariantFileInput(i: number, input: any) {
@@ -213,40 +263,60 @@ export class CreateProductComponent implements OnInit {
   }
 
   async handleSubmit(name: string, description: string, draft: boolean) {
-    const productId = (
+    let productId: string = this.productId;
+    if (this.productId == '') {
+      productId =
+        (
+          await firstValueFrom(
+            this.productService.addProduct({
+              artist: this.artistId,
+              description: description,
+              images: this.images.slice(1),
+              isComment: this.comment,
+              isDraft: draft,
+              isMature: this.adultBoolean,
+              name: name,
+              numLikes: 0,
+              subcategoryId: this.selectedSubcategory?.id ?? '',
+              tags: this.tags.map((tag) => tag.id),
+              titleImage: this.images[0],
+              vrm: this.vrm ?? '',
+            })
+          )
+        ).data?.addProduct.id ?? '';
+    } else {
       await firstValueFrom(
-        this.productService.addProduct({
-          artist: this.artistId,
+        this.productService.editProduct({
+          id: productId,
           description: description,
           images: this.images.slice(1),
           isComment: this.comment,
           isDraft: draft,
-          isMature: this.adult,
+          isMature: this.adultBoolean,
           name: name,
           numLikes: 0,
-          subcategoryId: this.selectedSubCategory?.id ?? '',
-          tags: [],
+          subcategoryId: this.selectedSubcategory?.id ?? '',
+          tags: this.tags.map((tag) => tag.id),
           titleImage: this.images[0],
           vrm: this.vrm ?? '',
         })
-      )
-    ).data?.addProduct.id;
+      );
+    }
 
-    if (!productId) {
+    if (productId === '') {
       return;
     }
 
-    console.log(productId);
-
     const promises = this.variants.map(async (variant) => {
-      console.log(variant);
-
       if (variant.id === '') {
         await firstValueFrom(
           this.productService.addProductVariant({
             file: variant.file,
             fileName: variant.fileName,
-            fileTypes: variant.fileTypes,
+            fileTypes:
+              variant.fileTypes[0] !== ''
+                ? variant.fileTypes[0].split(' ')
+                : [],
             name: variant.name,
             price: variant.price,
             productId: productId,
@@ -259,7 +329,8 @@ export class CreateProductComponent implements OnInit {
           id: variant.id,
           file: variant.file,
           fileName: variant.fileName,
-          fileTypes: variant.fileTypes,
+          fileTypes:
+            variant.fileTypes[0] !== '' ? variant.fileTypes[0].split(' ') : [],
           name: variant.name,
           price: variant.price,
           productId: productId,

@@ -1,63 +1,65 @@
 <h1>Manage Uploads</h1>
 <hr />
 
-<ng-container *ngIf="uploads$ | async as uploads; else loading">
-  <h3 *ngIf="drafts.length > 0">Upload Drafts</h3>
-  <div class="content-container" *ngIf="drafts.length > 0">
-    <div class="grid-container">
-      <div class="products-content">
-        <div
-          *ngFor="let product of drafts"
-          class="product-item draft-item"
-          (click)="editProduct(product.id); $event.stopPropagation()"
-        >
-          <img src="{{ product.titleImage }}" alt="waifu" />
-          <div>
-            <div class="product-info">
-              <h4 *ngIf="product.name; else noName">{{ product.name }}</h4>
+<ng-container *ngIf="drafts$ | async as drafts; else loading">
+  <ng-container *ngIf="uploads$ | async as uploads; else loading">
+    <h3 *ngIf="drafts.length > 0">Upload Drafts</h3>
+    <div class="content-container" *ngIf="drafts.length > 0">
+      <div class="grid-container">
+        <div class="products-content">
+          <div
+            *ngFor="let product of drafts"
+            class="product-item draft-item"
+            (click)="editProduct(product.id); $event.stopPropagation()"
+          >
+            <img src="{{ product.titleImage }}" alt="waifu" />
+            <div>
+              <div class="product-info">
+                <h4 *ngIf="product.name; else noName">{{ product.name }}</h4>
 
-              <ng-template #noName>
-                <h4 class="noName">Untitled product</h4>
-              </ng-template>
-            </div>
-            <div
-              class="edit-icon"
-              (click)="editProduct(product.id); $event.stopPropagation()"
-            >
-              <img src="assets/icons/EditIcon.svg" />
+                <ng-template #noName>
+                  <h4 class="noName">Untitled product</h4>
+                </ng-template>
+              </div>
+              <div
+                class="edit-icon"
+                (click)="editProduct(product.id); $event.stopPropagation()"
+              >
+                <img src="assets/icons/EditIcon.svg" />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <h3>My Uploads</h3>
-  <div class="content-container" *ngIf="uploads.length > 0; else empty">
-    <div class="grid-container">
-      <div class="products-content">
-        <div
-          *ngFor="let product of uploads"
-          class="product-item upload-item"
-          (click)="nagivateToProduct(product.id)"
-        >
-          <img src="{{ product.titleImage }}" alt="waifu" />
-          <div>
-            <div class="product-info">
-              <h4>{{ product.name }}</h4>
-              <p>${{ product.minPrice | number: "1.2-2" }}</p>
+    <h3>My Uploads</h3>
+    <div class="content-container" *ngIf="uploads.length > 0; else empty">
+      <div class="grid-container">
+        <div class="products-content">
+          <a
+            *ngFor="let product of uploads"
+            class="product-item upload-item"
+            [href]="'/marketplace/product/' + product.id"
+          >
+            <img src="{{ product.titleImage }}" alt="waifu" />
+            <div>
+              <div class="product-info">
+                <h4>{{ product.name }}</h4>
+                <p>${{ product.minPrice | number: "1.2-2" }}</p>
+              </div>
+              <div
+                class="edit-icon"
+                (click)="editProduct(product.id); $event.preventDefault()"
+              >
+                <img src="assets/icons/EditIcon.svg" />
+              </div>
             </div>
-            <div
-              class="edit-icon"
-              (click)="editProduct(product.id); $event.stopPropagation()"
-            >
-              <img src="assets/icons/EditIcon.svg" />
-            </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 
 <ng-template #empty>
