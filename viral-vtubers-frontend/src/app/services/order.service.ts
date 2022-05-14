@@ -13,6 +13,8 @@ import {
   MyOrdersGQL,
   OrderFragmentFragment,
   OrderGQL,
+  OrderPaginationFragmentFragment,
+  OrdersGQL,
 } from 'src/schema/type';
 
 @Injectable({
@@ -20,11 +22,13 @@ import {
 })
 export class OrderService {
   order$?: Observable<OrderFragmentFragment>;
+  allOrders$?: Observable<OrderPaginationFragmentFragment>;
   myCommissions$?: Observable<MyCommissionsFragmentFragment>;
   myOrders$?: Observable<MyOrdersFragmentFragment>;
 
   constructor(
     private orderGQL: OrderGQL,
+    private allOrdersGQL: OrdersGQL,
     private myCommissionsGQL: MyCommissionsGQL,
     private myOrdersGQL: MyOrdersGQL,
     private addOrderGQL: AddOrderGQL,
@@ -39,6 +43,13 @@ export class OrderService {
       .valueChanges.pipe(map((res) => res.data.order));
 
     return { query: this.orderGQL, order$: this.order$ };
+  }
+
+  getAllOrders() {
+    this.allOrders$ = this.allOrdersGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.orders));
+    return { query: this.allOrdersGQL, allOrders$: this.allOrders$ };
   }
 
   myCommissions() {
