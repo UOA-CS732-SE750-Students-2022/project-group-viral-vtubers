@@ -9,6 +9,7 @@ import { ProductBlurbFragmentFragment } from 'src/schema/type';
   styleUrls: ['./manage-uploads.component.scss'],
 })
 export class ManageUploadsComponent implements OnInit {
+  // Drafts don't appear to exist in the backend, leaving empty for now. UI hides drafts section if this is empty.
   drafts: ProductBlurbFragmentFragment[] = [];
 
   uploads$: Observable<ProductBlurbFragmentFragment[]>;
