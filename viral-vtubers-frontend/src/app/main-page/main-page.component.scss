@@ -1,0 +1,71 @@
+@import "../../variables";
+
+:host {
+  width: 100%;
+
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 1900px;
+  height: 1080px;
+
+  background-color: lightblue;
+  overflow-y: none;
+
+  margin: 0;
+}
+
+.parallelogram {
+  position: absolute;
+
+  margin: 0;
+
+  height: 700px;
+  width: 550px;
+
+  .parallelogram-content {
+    margin-top: 50px;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 550px;
+    height: 700px;
+    display: inline-block;
+    transform: skewX(15deg);
+    z-index: 1;
+  }
+
+  * {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+.para-pink {
+  top: $header-height;
+  right: -200px;
+
+  &::before {
+    background-color: $color-secondary-light;
+  }
+}
+
+.para-blue {
+  top: $header-height + 170px;
+  right: 400px;
+
+  &::before {
+    background-color: $color-primary-light;
+  }
+}
