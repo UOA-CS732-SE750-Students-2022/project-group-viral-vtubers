@@ -4,21 +4,24 @@ $page-margin: 130px;
 
 :host {
   width: 100%;
-
-  margin: auto;
+  height: calc(100% - $header-height);
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+
+  overflow-y: scroll;
 }
 
 .container {
-  width: 1900px;
-  height: 1080px;
+  width: 1920px;
 
-  overflow-y: none;
+  overflow-x: hidden;
 
   margin: 0;
+
+  position: relative;
 }
 
 .parallelogram {
@@ -29,10 +32,7 @@ $page-margin: 130px;
   height: 700px;
   width: 550px;
 
-  .parallelogram-content {
-    margin-top: 50px;
-  }
-
+  // this draws the parallelogram
   &::before {
     content: "";
     display: block;
@@ -47,9 +47,32 @@ $page-margin: 130px;
     z-index: 1;
   }
 
+  // need to set all children's z indexes for them to show up above the ::before
   * {
     position: relative;
     z-index: 5;
+  }
+
+  .parallelogram-content {
+    margin-top: 50px;
+
+    > p {
+      font-weight: 400;
+      font-size: $font-size-body-1;
+      line-height: 26px;
+
+      color: $color-grey-dark;
+    }
+
+    > h2 {
+      font-style: normal;
+      font-weight: 500;
+      font-size: $font-size-h5;
+
+      line-height: 36px;
+
+      margin: 0;
+    }
   }
 }
 
@@ -73,7 +96,7 @@ $page-margin: 130px;
 
 .hero-container {
   width: 40%;
-  height: 823px;
+  height: 1080px;
 
   box-sizing: border-box;
   padding-left: $page-margin;
