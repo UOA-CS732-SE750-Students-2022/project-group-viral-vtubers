@@ -25,6 +25,11 @@ $margin-top: 10px;
 
   position: relative;
   background-color: $color-background;
+
+  > a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .parallelogram {
@@ -34,6 +39,8 @@ $margin-top: 10px;
 
   height: 620px;
   width: 550px;
+
+  cursor: pointer;
 
   // this draws the parallelogram
   &::before {
@@ -55,6 +62,14 @@ $margin-top: 10px;
   * {
     position: relative;
     z-index: 5;
+  }
+
+  &:hover {
+    .parallelogram-content {
+      > img {
+        transform: scaleX(-1) scale(1.05);
+      }
+    }
   }
 
   .parallelogram-content {
@@ -84,6 +99,8 @@ $margin-top: 10px;
 
       top: 65px;
       left: 115px;
+
+      transition: $button-hover-animation;
     }
   }
 }
