@@ -42,7 +42,7 @@ export const UserProfileFragment = gql`
         name
         price
       }
-      images
+      titleImage
     }
   }
 `;
