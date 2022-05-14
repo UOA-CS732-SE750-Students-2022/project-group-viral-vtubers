@@ -25,6 +25,7 @@ export class OrderService {
   allOrders$?: Observable<OrderPaginationFragmentFragment>;
   myCommissions$?: Observable<MyCommissionsFragmentFragment>;
   myOrders$?: Observable<MyOrdersFragmentFragment>;
+  newestOrders$?: Observable<OrderPaginationFragmentFragment>;
 
   constructor(
     private orderGQL: OrderGQL,
@@ -50,6 +51,17 @@ export class OrderService {
       .watch()
       .valueChanges.pipe(map((res) => res.data.orders));
     return { query: this.allOrdersGQL, allOrders$: this.allOrders$ };
+  }
+
+  getOrdersWithLimit(limit: number) {
+    this.newestOrders$ = this.allOrdersGQL
+      .watch({ limit })
+      .valueChanges.pipe(map((res) => res.data.orders));
+
+    return {
+      query: this.allOrdersGQL,
+      newestOrders$: this.newestOrders$,
+    };
   }
 
   myCommissions() {

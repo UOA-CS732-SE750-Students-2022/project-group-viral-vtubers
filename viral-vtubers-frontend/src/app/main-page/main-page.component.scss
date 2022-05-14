@@ -1,6 +1,7 @@
 @import "../../variables";
 
 $page-margin: 130px;
+$margin-top: 10px;
 
 :host {
   width: 100%;
@@ -24,6 +25,11 @@ $page-margin: 130px;
 
   position: relative;
   background-color: $color-background;
+
+  > a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .parallelogram {
@@ -33,6 +39,8 @@ $page-margin: 130px;
 
   height: 620px;
   width: 550px;
+
+  cursor: pointer;
 
   // this draws the parallelogram
   &::before {
@@ -54,6 +62,14 @@ $page-margin: 130px;
   * {
     position: relative;
     z-index: 5;
+  }
+
+  &:hover {
+    .parallelogram-content {
+      > img {
+        transform: scaleX(-1) scale(1.05);
+      }
+    }
   }
 
   .parallelogram-content {
@@ -83,13 +99,15 @@ $page-margin: 130px;
 
       top: 65px;
       left: 115px;
+
+      transition: $button-hover-animation;
     }
   }
 }
 
 .para-pink {
-  top: $header-height;
   right: -200px;
+  margin-top: $margin-top;
 
   h2 {
     font-size: $font-size-h6 !important;
@@ -101,8 +119,9 @@ $page-margin: 130px;
 }
 
 .para-blue {
-  top: $header-height + 170px;
+  top: 170px;
   right: 400px;
+  margin-top: $margin-top;
 
   &::before {
     background-color: $color-primary-light;
@@ -111,7 +130,7 @@ $page-margin: 130px;
 
 .hero-container {
   width: 40%;
-  height: 960px;
+  height: 860px;
 
   box-sizing: border-box;
   padding-left: $page-margin;
@@ -205,42 +224,50 @@ $page-margin: 130px;
       }
     }
 
-    > img {
-      position: absolute;
-      margin: 0;
+    > a {
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
 
-      margin-top: 70px;
+      color: inherit;
 
-      margin-left: 190px;
-    }
-
-    > div {
-      margin-left: 45px;
-      margin-top: 130px;
-
-      position: absolute;
-
-      h3 {
-        font-size: $font-size-h6;
-        font-weight: 500;
-
-        text-transform: uppercase;
-
+      > img {
+        position: absolute;
         margin: 0;
-        margin-bottom: 10px;
+
+        margin-top: 70px;
+
+        margin-left: 190px;
       }
 
-      a {
-        color: $color-grey-dark;
+      > div {
+        margin-left: 45px;
+        margin-top: 130px;
 
-        text-decoration: none;
+        position: absolute;
 
-        cursor: pointer;
+        h3 {
+          font-size: $font-size-h6;
+          font-weight: 500;
 
-        transition: $button-hover-animation;
+          text-transform: uppercase;
 
-        font-size: $font-size-body-2;
-        font-weight: 400;
+          margin: 0;
+          margin-bottom: 10px;
+        }
+
+        a {
+          color: $color-grey-dark;
+
+          text-decoration: none;
+
+          cursor: pointer;
+
+          transition: $button-hover-animation;
+
+          font-size: $font-size-body-2;
+          font-weight: 400;
+        }
       }
     }
   }
@@ -274,6 +301,11 @@ $page-margin: 130px;
   column-gap: 20px;
 }
 
+.product-item {
+  text-decoration: none;
+  color: inherit;
+}
+
 .products-content {
   width: 100%;
 
@@ -287,6 +319,8 @@ $page-margin: 130px;
 .product-item {
   border: solid 1px $color-grey-light;
   box-sizing: border-box;
+
+  flex: 1;
 
   border-radius: 5px;
 
@@ -379,12 +413,16 @@ $page-margin: 130px;
 }
 
 .request-container {
-  display: flex;
-  align-items: flex-start;
-
   margin: 24px 0;
 
-  cursor: pointer;
+  a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+
+    cursor: pointer;
+  }
 
   &:hover {
     h5 {
@@ -452,8 +490,6 @@ $page-margin: 130px;
   transition: $button-hover-animation;
 
   &:hover {
-    border: solid 1px $color-primary;
-
     h4 {
       color: $color-primary;
     }
@@ -555,5 +591,22 @@ $page-margin: 130px;
       opacity: $button-coloured-hover-opacity;
       color: $color-primary;
     }
+  }
+}
+
+.loading {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 70%;
+  }
+
+  p {
+    color: $color-grey-dark;
+    font-size: $font-size-body-2;
   }
 }
