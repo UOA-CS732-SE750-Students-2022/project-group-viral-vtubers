@@ -63,6 +63,10 @@
   }
 }
 
+.request-content {
+  padding: 5px;
+}
+
 .request-selection {
   margin: auto;
   width: 84%;
@@ -74,7 +78,7 @@
   > .request {
     text-decoration: none;
     display: flex;
-    width: 49%;
+    width: 47%;
 
     border: solid 1px $color-grey-light;
     border-radius: 10px;
@@ -99,7 +103,7 @@
 
     .request-description {
       display: flex;
-      justify-content: baseline;
+      justify-content: space-between;
 
       > .description {
         color: $color-grey-dark;
@@ -112,9 +116,20 @@
         overflow: hidden;
       }
 
-      > span {
-        font-size: $font-size-body-2;
-        color: $color-grey-dark;
+      > .request-bounty {
+        margin-left: 10px;
+        display: flex;
+        align-content: flex-start;
+        padding: 0px 8px;
+        > img {
+          height: 24px;
+          width: 24px;
+          margin-right: 8px;
+        }
+        > span {
+          font-size: $font-size-body-1;
+          color: $color-secondary;
+        }
       }
     }
     h5 {
@@ -136,6 +151,11 @@
       margin-bottom: 6px;
     }
   }
+}
+
+.tag-container {
+  overflow: hidden;
+  max-height: 68px;
 }
 
 .app-tags {

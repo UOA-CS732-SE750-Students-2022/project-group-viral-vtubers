@@ -20,16 +20,25 @@
     >
       <ng-container *ngIf="request.node as request">
         <img [src]="request.image" />
-        <div>
+        <div class="request-content">
           <h5>{{ request.name }}</h5>
           <div class="request-description">
             <p class="description">{{ request.description }}</p>
-            <span (click)="apply($event, request.id)">
-              {{ request.bounty | number: "1.2-2" }}
-            </span>
+            <div class="request-bounty">
+              <img src="assets/icons/bounty.svg" />
+              <span (click)="apply($event, request.id)">
+                ${{ request.bounty | number: "1.2-2" }}
+              </span>
+            </div>
           </div>
           <ng-container (click)="preventDefault($event)">
-            <app-tags class="app-tags" [isEdit]="false"></app-tags>
+            <div class="tag-container">
+              <app-tags
+                class="app-tags"
+                [isEdit]="false"
+                [tags]="request.tags"
+              ></app-tags>
+            </div>
           </ng-container>
         </div>
       </ng-container>
