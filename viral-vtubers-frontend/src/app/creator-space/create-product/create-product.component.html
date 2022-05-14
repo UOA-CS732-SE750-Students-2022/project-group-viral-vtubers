@@ -6,10 +6,10 @@
     <div class="edit-side-container">
       <div class="edit-fields">
         <p>Product Title</p>
-        <input class="title-input" placeholder="Loli Gyaru" />
+        <input class="title-input" placeholder="Loli Gyaru" #displayName />
         <p>Category</p>
         <div class="category-input" *ngIf="selectedSubCategory">
-          Accessories > Underwear
+          {{ selectedCategory?.name }} > {{ selectedSubCategory?.name }}
           <span class="category-change" (click)="showChange()">
             Change category
           </span>
@@ -22,7 +22,12 @@
           + Select Category
         </div>
         <p class="title-tags">Tags</p>
-        <app-tags class="tags"></app-tags>
+        <app-tags
+          class="tags"
+          *ngIf="allTags$ | async as allTags"
+          [allTags]="allTags"
+          [tags]="tags"
+        ></app-tags>
       </div>
       <div class="edit-cover-image">
         <p class="title">
@@ -33,8 +38,13 @@
           This is the file that the buyer would be getting when they purchase
           your item!
         </p>
-        <p>.vrm .vroid .zip</p>
-        <input type="file" />
+        <p>.vrm</p>
+        <input
+          type="file"
+          accept=".vrm"
+          #vrmInput
+          (change)="handleVRMInput(vrmInput)"
+        />
       </div>
     </div>
     <p
@@ -49,7 +59,13 @@
         <p class="title">Upload cover photo<span>.png .jpg</span></p>
         <p>Other photos that will be displayed in the product gallery</p>
       </div>
-      <input type="file" />
+      <input
+        type="file"
+        accept="image/*"
+        #titleImage
+        multiple
+        (change)="handleNewImagesInput(titleImage)"
+      />
     </div>
 
     <div
@@ -70,12 +86,19 @@
       </div>
       <div>
         +
-        <input type="file" />
+        <input
+          type="file"
+          accept="image/*"
+          #newImage
+          multiple
+          (change)="handleNewImagesInput(newImage)"
+        />
       </div>
     </div>
 
     <p class="description-label">Description</p>
     <textarea
+      #description
       rows="8"
       class="description-input"
       type="text"
@@ -83,31 +106,48 @@
     ></textarea>
     <p>Visible to</p>
     <div class="checkboxes">
-      <input type="radio" name="visible" [defaultChecked]="true" />
+      <input
+        type="radio"
+        name="visible"
+        [defaultChecked]="true"
+        value="false"
+        (click)="changeAdult($event)"
+      />
       <p>All Ages</p>
       <span></span>
-      <input type="radio" name="visible" />
+      <input
+        type="radio"
+        name="visible"
+        #adult
+        value="true"
+        (click)="changeAdult($event)"
+      />
       <p>R18</p>
     </div>
 
     <p>Sensitive Content</p>
     <div class="checkboxes">
-      <input type="checkbox" name="sensitive" />
+      <input type="checkbox" name="sensitive" value="furry" />
       <p>Furry</p>
-      <input type="checkbox" name="sensitive" />
+      <input type="checkbox" name="sensitive" value="bl-yaoi" />
       <p>BL/Yaoi</p>
-      <input type="checkbox" name="sensitive" />
+      <input type="checkbox" name="sensitive" value="gl-yuri" />
       <p>GL/Yuri</p>
-      <input type="checkbox" name="sensitive" />
+      <input type="checkbox" name="sensitive" value="gore" />
       <p>Gore</p>
     </div>
 
     <p>Allow Comments</p>
     <div class="checkboxes">
-      <input type="radio" name="comments" [defaultChecked]="true" />
+      <input
+        type="radio"
+        name="comments"
+        [defaultChecked]="true"
+        (click)="changeComment($event)"
+      />
       <p>ON</p>
       <span></span>
-      <input type="radio" name="comments" />
+      <input type="radio" name="comments" (click)="changeComment($event)" />
       <p>OFF</p>
     </div>
 
@@ -123,16 +163,37 @@
         <input
           class="name-input"
           placeholder="VRM + VROID - Shogun/Genshin Impact"
+          (change)="changeVariantName(i, $event)"
         />
-        <p>File type(s) included</p>
+        <p>File type(s) included (e.g ".vrm .vroid")</p>
         <input class="vrm-input" placeholder="Loli Gyaru" />
         <p>Price</p>
         <div class="checkboxes dollars">
-          <input type="radio" name="price-{{ i }}" [defaultChecked]="true" />
+          <input
+            type="radio"
+            name="price-{{ i }}"
+            value="false"
+            [defaultChecked]="true"
+            (change)="changeVariantPriceFree(i, $event)"
+          />
           <span>$</span>
-          <input class="price-input" placeholder="69.95" />
+          <input
+            class="price-input"
+            type="number"
+            step="0.01"
+            placeholder="69.95"
+            [value]="variant.price"
+            [disabled]="freeToggles[i]"
+            min="1"
+            (change)="changeVariantPriceValue(i, $event)"
+          />
           <p>USD</p>
-          <input type="radio" name="price-{{ i }}" />
+          <input
+            type="radio"
+            name="price-{{ i }}"
+            value="true"
+            (change)="changeVariantPriceFree(i, $event)"
+          />
           <p>Free</p>
         </div>
       </div>
@@ -140,14 +201,21 @@
         <div class="variant-image">
           <p class="title">
             <img src="assets/icons/upload-outline.svg" alt="upload-icon" />
-            Upload product asset
+            {{
+              variant.fileName === ""
+                ? "Upload product asset"
+                : variant.fileName
+            }}
           </p>
           <p class="details">
             This is the file that the buyer would be getting when they purchase
             your item!
           </p>
           <p>.vrm .vroid .zip</p>
-          <input type="file" />
+          <input
+            type="file"
+            (change)="handleVariantFileInput(i, $event.target)"
+          />
         </div>
       </div>
     </div>
@@ -157,8 +225,18 @@
     </div>
 
     <div class="save-section">
-      <button class="save-draft-button">SAVE A DRAFT</button>
-      <button class="save-publish-button">UPLOAD</button>
+      <button
+        class="save-draft-button"
+        (click)="handleSubmit(displayName.value, description.value, true)"
+      >
+        SAVE A DRAFT
+      </button>
+      <button
+        class="save-publish-button"
+        (click)="handleSubmit(displayName.value, description.value, false)"
+      >
+        UPLOAD
+      </button>
     </div>
   </div>
 </div>
@@ -175,7 +253,7 @@
     <p>Available Categories:</p>
     <div>
       <div
-        *ngFor="let category of getAllCategories()"
+        *ngFor="let category of categories$ | async"
         class="category"
         (click)="openCategory(category)"
       >
@@ -207,7 +285,7 @@
           <div
             *ngFor="let subcategory of category.subcategories"
             class="subcategory"
-            (click)="changeCategory(subcategory)"
+            (click)="changeSubcategory(subcategory)"
           >
             {{ subcategory.name }}
           </div>

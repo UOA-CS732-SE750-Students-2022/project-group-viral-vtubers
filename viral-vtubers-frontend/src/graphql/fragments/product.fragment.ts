@@ -2,10 +2,23 @@ import { gql } from 'apollo-angular';
 
 import { TagFragment } from './tag.fragment';
 
+export const ProductDetailVariantFragment = gql`
+  fragment ProductDetailVariantFragment on ProductVariant {
+    id
+    fileTypes
+    fileName
+    file
+    name
+    price
+  }
+`;
+
 export const ProductDetailFragment = gql`
   fragment ProductDetailFragment on Product {
     id
     name
+    isComment
+    isDraft
     isLiked
     numLikes
     description
@@ -30,15 +43,12 @@ export const ProductDetailFragment = gql`
       isFollowing
     }
     variants {
-      id
-      fileTypes
-      file
-      name
-      price
+      ...ProductDetailVariantFragment
     }
   }
 
   ${TagFragment}
+  ${ProductDetailVariantFragment}
 `;
 
 export const ProductBlurbFragment = gql`

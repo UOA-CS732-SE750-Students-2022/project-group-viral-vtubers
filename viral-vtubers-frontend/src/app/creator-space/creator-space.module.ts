@@ -20,6 +20,10 @@ export const routes: Routes = [
         component: CreateProductComponent,
       },
       {
+        path: 'edit-product/:productId',
+        component: CreateProductComponent,
+      },
+      {
         path: '',
         component: ManageUploadsComponent,
       },

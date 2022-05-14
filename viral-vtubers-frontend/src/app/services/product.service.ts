@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import {
+  AddProductGQL,
+  AddProductInput,
+  AddProductVariant,
+  AddProductVariantGQL,
+  EditProductGQL,
+  EditProductInput,
+  EditProductVariant,
+  EditProductVariantGQL,
   LikeProductGQL,
   ProductDetailFragmentFragment,
   ProductFilter,
@@ -10,6 +18,8 @@ import {
   ProductsGQL,
   ProductSort,
   ProductsSubategoryQueryGQL,
+  TagFragmentFragment,
+  TagsGQL,
 } from 'src/schema/type';
 
 @Injectable({
@@ -20,13 +30,19 @@ export class ProductService {
   products$?: Observable<ProductPaginationFragmentFragment>;
   categoryProducts$?: Observable<ProductPaginationFragmentFragment>;
   subcategoryProducts$?: Observable<ProductPaginationFragmentFragment>;
+  tags$?: Observable<TagFragmentFragment[]>;
 
   constructor(
     private productGQL: ProductGQL,
     private productsGQL: ProductsGQL,
     private productsCategoryGQL: ProductsCategoryGQL,
     private productsSubcategoryGQL: ProductsSubategoryQueryGQL,
-    private likeProductGQL: LikeProductGQL
+    private likeProductGQL: LikeProductGQL,
+    private tagsGQL: TagsGQL,
+    private addProductGQL: AddProductGQL,
+    private editProductGQL: EditProductGQL,
+    private addProductVariantGQL: AddProductVariantGQL,
+    private editProductVariantGQL: EditProductVariantGQL
   ) {}
 
   getProduct(productId: string) {
@@ -83,7 +99,34 @@ export class ProductService {
     };
   }
 
+  getTags() {
+    this.tags$ = this.tagsGQL
+      .watch()
+      .valueChanges.pipe(map((result) => result.data.tags));
+
+    return {
+      query: this.tagsGQL,
+      tags$: this.tags$,
+    };
+  }
+
   likeProduct(productId: string, like: boolean) {
     return this.likeProductGQL.mutate({ id: productId, like });
+  }
+
+  addProduct(input: AddProductInput) {
+    return this.addProductGQL.mutate({ input });
+  }
+
+  editProduct(input: EditProductInput) {
+    return this.editProductGQL.mutate({ input });
+  }
+
+  addProductVariant(input: AddProductVariant) {
+    return this.addProductVariantGQL.mutate({ input });
+  }
+
+  editProductVariant(input: EditProductVariant) {
+    return this.editProductVariantGQL.mutate({ input });
   }
 }

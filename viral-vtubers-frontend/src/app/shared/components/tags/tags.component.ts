@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductService } from 'src/app/services/product.service';
 import { Tag, TagFragmentFragment } from 'src/schema/type';
 
 interface ColorTags extends Tag {
@@ -29,55 +30,12 @@ export class TagsComponent implements OnInit {
   public isEdit = true;
 
   @Input()
-  public tags: TagFragmentFragment[] = [
-    {
-      id: '1',
-      name: 'Modding',
-      color: '#e4a324b5',
-      backgroundColor: '#fff3e5',
-    },
-    {
-      id: '2',
-      name: 'Colouring',
-      color: '#2488E4',
-      backgroundColor: '#E5FAFF',
-    },
-    {
-      id: '3',
-      name: 'Extentions',
-      color: '#E42424',
-      backgroundColor: '#FFE5E5',
-    },
-  ];
+  public tags: TagFragmentFragment[] = [];
+
+  @Input()
+  public allTags!: TagFragmentFragment[];
 
   public newTag = false;
-
-  public allTags: Array<ColorTags> = [
-    {
-      id: '1',
-      name: 'Modding',
-      color: '#e4a324b5',
-      backgroundColor: '#fff3e5',
-    },
-    {
-      id: '2',
-      name: 'Colouring',
-      color: '#2488E4',
-      backgroundColor: '#E5FAFF',
-    },
-    {
-      id: '3',
-      name: 'Extentions',
-      color: '#E42424',
-      backgroundColor: '#FFE5E5',
-    },
-    {
-      id: '4',
-      name: 'Lolis',
-      color: '#2488E4',
-      backgroundColor: '#E5FAFF',
-    },
-  ];
 
   constructor() {}
 

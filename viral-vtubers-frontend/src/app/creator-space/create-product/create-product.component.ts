@@ -1,6 +1,23 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom, Observable } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
+import { ProductService } from 'src/app/services/product.service';
+import { UploadService } from 'src/app/services/upload.service';
+import { UserService } from 'src/app/services/user.service';
+import {
+  CategoryFragmentFragment,
+  ProductDetailFragmentFragment,
+  ProductDetailVariantFragmentFragment,
+  TagFragmentFragment,
+} from 'src/schema/type';
+
+type SubcategoryType = {
+  id: string;
+  name: string;
+};
 
 @Component({
   selector: 'app-create-product',
@@ -20,75 +37,78 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class CreateProductComponent implements OnInit {
+  categories$: Observable<CategoryFragmentFragment[]>;
+  allTags$: Observable<TagFragmentFragment[]>;
+  artistId = '';
+
   changePopup = false;
-  selectedCategory?: any;
-  selectedSubCategory?: any;
-  images = [
-    'https://picsum.photos/200?1',
-    'https://picsum.photos/200?2',
-    'https://picsum.photos/200?3',
-    'https://picsum.photos/200?4',
-  ];
+  selectedCategory?: CategoryFragmentFragment;
+  selectedSubCategory?: SubcategoryType;
 
-  variants = [
-    {
-      name: '12',
-      fileTypes: ['.vrm', '.vroid'],
-      price: '12.99',
-    },
-  ];
+  images: string[] = [];
 
-  categories = [
-    {
-      id: 1,
-      name: 'Clothes',
-      subcategories: [
-        {
-          id: 1,
-          name: 'T-Shirts',
-        },
-        {
-          id: 2,
-          name: 'Shirts',
-        },
-        {
-          id: 3,
-          name: 'Pants',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Accessories',
-      subcategories: [
-        {
-          id: 1,
-          name: 'Hats',
-        },
-        {
-          id: 2,
-          name: 'Gloves',
-        },
-        {
-          id: 3,
-          name: 'Bags',
-        },
-      ],
-    },
-  ];
+  vrm?: string;
 
-  constructor() {}
+  variants: ProductDetailVariantFragmentFragment[] = [];
+
+  freeToggles: boolean[] = [];
+
+  adult = false;
+  comment = true;
+  categories?: CategoryFragmentFragment[];
+  product?: ProductDetailFragmentFragment;
+  tags: TagFragmentFragment[] = [];
+
+  constructor(
+    private categoryService: CategoryService,
+    private uploadService: UploadService,
+    private productService: ProductService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    userService.getSelf().self$.subscribe((self) => {
+      this.artistId = self.id;
+    });
+    this.categories$ = this.categoryService.getCategories().categories$;
+    this.categories$.subscribe((categories) => {
+      this.categories = categories;
+      if (this.product) {
+        this.selectedCategory = this.categories?.find(
+          (category) => category.id === this.product?.subcategory.category.id
+        );
+      }
+    });
+    this.allTags$ = this.productService.getTags().tags$;
+
+    this.route.paramMap.subscribe((params) => {
+      const productId = params.get('productId');
+      if (!productId) {
+        return;
+      }
+
+      this.productService
+        .getProduct(productId)
+        .product$.subscribe((product) => {
+          this.selectedCategory = this.categories?.find(
+            (category) => category.id === product.subcategory.category.id
+          );
+          this.selectedSubCategory = product.subcategory;
+          this.vrm = product.vrm;
+          this.variants = product.variants;
+          this.freeToggles = Array(this.variants.length);
+          this.images = [product.titleImage, ...product.images];
+          this.tags = product.tags;
+        });
+    });
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.images, event.previousIndex, event.currentIndex);
   }
 
-  getAllCategories(): any {
-    return this.categories;
-  }
-
-  changeCategory(category: any): void {
-    this.selectedSubCategory = category;
+  changeSubcategory(subcategory: SubcategoryType): void {
+    this.selectedSubCategory = subcategory;
     this.hideChange();
   }
 
@@ -100,9 +120,9 @@ export class CreateProductComponent implements OnInit {
     this.changePopup = false;
   }
 
-  openCategory(category: any): void {
+  openCategory(category: CategoryFragmentFragment): void {
     if (this.selectedCategory?.id === category.id) {
-      this.selectedCategory = null;
+      this.selectedCategory = undefined;
       return;
     }
     this.selectedCategory = category;
@@ -114,10 +134,14 @@ export class CreateProductComponent implements OnInit {
 
   addVariant(): void {
     this.variants.push({
+      id: '',
+      file: '',
+      fileName: '',
+      fileTypes: [],
       name: '',
-      fileTypes: ['.vrm', '.vroid'],
-      price: '12.99',
+      price: 0.0,
     });
+    this.freeToggles.push(false);
   }
 
   removeVariantIndex(i: number) {
@@ -126,4 +150,125 @@ export class CreateProductComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  async handleNewImagesInput(images: any) {
+    const files: FileList = images.files;
+    const promises = Array.from(files).map((file) =>
+      this.uploadService.upload(file)
+    );
+
+    const fileURIs = await Promise.all(promises);
+
+    console.log(fileURIs);
+
+    this.images = [...this.images, ...fileURIs];
+  }
+
+  async handleVRMInput(vrm: any) {
+    const file: File = vrm.files[0];
+
+    const fileURI = await this.uploadService.upload(file);
+
+    this.vrm = fileURI;
+  }
+
+  changeAdult(event: any) {
+    const adult = event.target.value as string;
+    this.adult = adult === 'true';
+  }
+
+  changeComment(event: any) {
+    const comment = event.target.value as string;
+    this.comment = comment === 'true';
+  }
+
+  changeVariantName(i: number, event: any) {
+    const name = event.target.value as string;
+    this.variants[i].name = name;
+  }
+
+  changeVariantPriceValue(i: number, event: any) {
+    const price = event.target.value as number;
+    this.variants[i].price = price;
+  }
+
+  changeVariantPriceFree(i: number, event: any) {
+    console.log(event);
+    const free = event.target.value as string;
+    if (free === 'true') {
+      this.freeToggles[i] = true;
+      this.variants[i].price = 0.0;
+      return;
+    }
+    this.freeToggles[i] = false;
+  }
+
+  async handleVariantFileInput(i: number, input: any) {
+    const file: File = input.files[0];
+
+    const fileURI = await this.uploadService.upload(file);
+
+    this.variants[i].file = fileURI;
+    this.variants[i].fileName = file.name;
+  }
+
+  async handleSubmit(name: string, description: string, draft: boolean) {
+    const productId = (
+      await firstValueFrom(
+        this.productService.addProduct({
+          artist: this.artistId,
+          description: description,
+          images: this.images.slice(1),
+          isComment: this.comment,
+          isDraft: draft,
+          isMature: this.adult,
+          name: name,
+          numLikes: 0,
+          subcategoryId: this.selectedSubCategory?.id ?? '',
+          tags: [],
+          titleImage: this.images[0],
+          vrm: this.vrm ?? '',
+        })
+      )
+    ).data?.addProduct.id;
+
+    if (!productId) {
+      return;
+    }
+
+    console.log(productId);
+
+    const promises = this.variants.map(async (variant) => {
+      console.log(variant);
+
+      if (variant.id === '') {
+        await firstValueFrom(
+          this.productService.addProductVariant({
+            file: variant.file,
+            fileName: variant.fileName,
+            fileTypes: variant.fileTypes,
+            name: variant.name,
+            price: variant.price,
+            productId: productId,
+          })
+        );
+        return;
+      }
+      await firstValueFrom(
+        this.productService.editProductVariant({
+          id: variant.id,
+          file: variant.file,
+          fileName: variant.fileName,
+          fileTypes: variant.fileTypes,
+          name: variant.name,
+          price: variant.price,
+          productId: productId,
+        })
+      );
+    });
+
+    await Promise.all(promises);
+
+    this.router.navigateByUrl('/creator');
+  }
 }
