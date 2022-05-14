@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivityFeedComponent } from './activity-feed.component';
+import { MainPageComponent } from './main-page.component';
 
-describe('ActivityFeedComponent', () => {
-  let component: ActivityFeedComponent;
-  let fixture: ComponentFixture<ActivityFeedComponent>;
+describe('MainPageComponent', () => {
+  let component: MainPageComponent;
+  let fixture: ComponentFixture<MainPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ActivityFeedComponent ]
+      declarations: [ MainPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActivityFeedComponent);
+    fixture = TestBed.createComponent(MainPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,7 +8,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
-import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
@@ -27,7 +26,6 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     AppComponent,
     UserProfileComponent,
     CartComponent,
-    ActivityFeedComponent,
     SignInComponent,
     SignUpComponent,
     NotFoundComponent,

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { CartComponent } from './cart/cart.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { MainPageComponent } from './main-page/main-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { VrmCanvasComponent } from './shared/components/vrm-canvas/vrm-canvas.component';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -61,11 +61,7 @@ export const routes: Routes = [
     component: CartComponent,
     // canActivate: [AuthGuard],
   },
-  {
-    path: 'feed',
-    component: ActivityFeedComponent,
-    // canActivate: [AuthGuard],
-  },
+
   {
     path: 'signin',
     component: SignInComponent,
@@ -81,6 +77,11 @@ export const routes: Routes = [
   {
     path: 'verify-email',
     component: VerifyEmailComponent,
+  },
+  {
+    path: '',
+    component: MainPageComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: '**',
