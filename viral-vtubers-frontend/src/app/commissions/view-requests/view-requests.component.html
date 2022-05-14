@@ -1,1 +1,42 @@
-<p>view-requests works!</p>
+<div class="container">
+  <div class="carousel-section">
+    <div class="carousel-viewport">
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+      <img class="carousel-item" src="assets/banners/default.png" />
+    </div>
+    <img src="assets/banners/default.png" />
+  </div>
+  <div
+    class="request-selection"
+    *ngIf="requests$ | async as requests; else loading"
+  >
+    <a
+      class="request"
+      *ngFor="let request of requests.edges"
+      [href]="'/commissions/' + request.node.id"
+    >
+      <ng-container *ngIf="request.node as request">
+        <img [src]="request.image" />
+        <div>
+          <h5>{{ request.name }}</h5>
+          <div class="request-description">
+            <p class="description">{{ request.description }}</p>
+            <span (click)="apply($event, request.id)">
+              {{ request.bounty | number: "1.2-2" }}
+            </span>
+          </div>
+          <ng-container (click)="preventDefault($event)">
+            <app-tags class="app-tags" [isEdit]="false"></app-tags>
+          </ng-container>
+        </div>
+      </ng-container>
+    </a>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div>Loading ...</div>
+</ng-template>

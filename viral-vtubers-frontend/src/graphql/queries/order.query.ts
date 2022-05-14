@@ -3,6 +3,7 @@ import { gql } from 'apollo-angular';
 import {
   MyCommissionsFragment,
   MyOrdersFragment,
+  OrderPaginationFragment,
 } from '../fragments/order.fragment';
 
 export const order = gql`
@@ -11,6 +12,15 @@ export const order = gql`
       ...OrderFragment
     }
   }
+`;
+
+export const orders = gql`
+  query Orders($cursor: String, $limit: Int) {
+    orders(cursor: $cursor, limit: $limit) {
+      ...OrderPaginationFragment
+    }
+  }
+  ${OrderPaginationFragment}
 `;
 
 export const myOrders = gql`

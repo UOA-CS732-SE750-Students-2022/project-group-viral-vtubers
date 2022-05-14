@@ -6,7 +6,7 @@ import org.litote.kmongo.util.idValue
 import com.viralvtubers.database.model.Order as OrderModel
 
 fun OrderModel.map() = Order(
-    id = ID(value = _id.idValue.toString()),
+    id = _id.map(),
     subcategoryId = subcategoryId.map(),
     name = name,
     description = description,
