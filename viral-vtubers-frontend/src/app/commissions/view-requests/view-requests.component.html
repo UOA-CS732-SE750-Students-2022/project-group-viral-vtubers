@@ -77,7 +77,7 @@
     <div class="button-container">
       <button
         class="apply-btn"
-        *ngIf=""
+        [disabled]="checkIfApplied()"
         (click)="apply($event, selectedOrder.id)"
       >
         Apply

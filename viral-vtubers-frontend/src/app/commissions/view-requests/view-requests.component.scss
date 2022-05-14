@@ -440,6 +440,10 @@
         &:hover {
           opacity: $button-coloured-hover-opacity;
         }
+
+        &:disabled {
+          background-color: $color-grey-light;
+        }
       }
     }
   }

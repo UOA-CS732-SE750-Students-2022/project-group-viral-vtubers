@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
+import { UserService } from 'src/app/services/user.service';
 import {
   OrderFragmentFragment,
   OrderPaginationFragmentFragment,
@@ -27,10 +28,18 @@ import {
 })
 export class ViewRequestsComponent implements OnInit {
   requests$: Observable<OrderPaginationFragmentFragment>;
+  userId = '';
 
   selectedOrder?: OrderFragmentFragment;
-  constructor(private router: Router, private orderService: OrderService) {
+  constructor(
+    private router: Router,
+    private orderService: OrderService,
+    private userService: UserService
+  ) {
     this.requests$ = orderService.getAllOrders().allOrders$;
+    userService.getSelf().self$.subscribe((self) => {
+      this.userId = self.id;
+    });
   }
 
   ngOnInit(): void {}
@@ -45,12 +54,19 @@ export class ViewRequestsComponent implements OnInit {
 
   async apply(event: Event, commissionId: string): Promise<void> {
     event.preventDefault();
-    await firstValueFrom(this.orderService.applyOrder(commissionId));
+    this.orderService.applyOrder(commissionId).subscribe();
     this.selectedOrder = undefined;
     alert('Thank you for Applying, pls wait');
   }
 
   preventDefault(event: Event): void {
     event.preventDefault();
+  }
+
+  checkIfApplied(): boolean {
+    const ifApplied = this.selectedOrder?.applications.find((applicant) => {
+      applicant.id === this.userId;
+    });
+    return ifApplied === undefined;
   }
 }
