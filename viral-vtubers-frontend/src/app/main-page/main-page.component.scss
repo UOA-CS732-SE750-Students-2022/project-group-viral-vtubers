@@ -29,7 +29,7 @@ $page-margin: 130px;
 
   margin: 0;
 
-  height: 700px;
+  height: 620px;
   width: 550px;
 
   // this draws the parallelogram
@@ -41,7 +41,8 @@ $page-margin: 130px;
     left: 0;
 
     width: 550px;
-    height: 700px;
+    height: 620px;
+
     display: inline-block;
     transform: skewX(15deg);
     z-index: 1;
@@ -73,12 +74,24 @@ $page-margin: 130px;
 
       margin: 0;
     }
+
+    > img {
+      transform: scaleX(-1);
+      height: 410px;
+
+      top: 65px;
+      left: 115px;
+    }
   }
 }
 
 .para-pink {
   top: $header-height;
   right: -200px;
+
+  h2 {
+    font-size: $font-size-h6 !important;
+  }
 
   &::before {
     background-color: $color-secondary-light;
@@ -96,7 +109,7 @@ $page-margin: 130px;
 
 .hero-container {
   width: 40%;
-  height: 1080px;
+  height: 1000px;
 
   box-sizing: border-box;
   padding-left: $page-margin;
