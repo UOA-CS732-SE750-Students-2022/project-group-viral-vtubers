@@ -13,12 +13,12 @@
     class="request-selection"
     *ngIf="requests$ | async as requests; else loading"
   >
-    <a
-      class="request"
-      *ngFor="let request of requests.edges"
-      [href]="'/commissions/' + request.node.id"
-    >
-      <ng-container *ngIf="request.node as request">
+    <ng-container *ngFor="let request of requests.edges">
+      <div
+        class="request"
+        *ngIf="request.node as request"
+        (click)="setSelectedOrder(request)"
+      >
         <img [src]="request.image" />
         <div class="request-content">
           <h5>{{ request.name }}</h5>
@@ -26,9 +26,7 @@
             <p class="description">{{ request.description }}</p>
             <div class="request-bounty">
               <img src="assets/icons/bounty.svg" />
-              <span (click)="apply($event, request.id)">
-                ${{ request.bounty | number: "1.2-2" }}
-              </span>
+              <span> ${{ request.bounty | number: "1.2-2" }} </span>
             </div>
           </div>
           <ng-container (click)="preventDefault($event)">
@@ -41,8 +39,50 @@
             </div>
           </ng-container>
         </div>
-      </ng-container>
-    </a>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<div
+  class="overlay"
+  (click)="setSelectedOrder(undefined); $event.stopPropagation()"
+  *ngIf="selectedOrder"
+  [@inOutAnimation]
+>
+  <div class="popup" (click)="$event.stopPropagation()">
+    <div class="info-container">
+      <div class="title-info-container">
+        <div class="title-container">
+          <h4>{{ selectedOrder.name }}</h4>
+        </div>
+        <app-tags [isEdit]="false" [tags]="selectedOrder.tags"></app-tags>
+      </div>
+      <div class="request-info-container">
+        <div class="bounty-container">
+          <img src="assets/icons/money-bag.svg" />
+          <h6>Bounty:</h6>
+          <p>${{ selectedOrder.bounty }}</p>
+        </div>
+        <div class="requester-container">
+          <h6>Requested by:</h6>
+          <p>{{ selectedOrder.owner.displayName }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="image-description-container">
+      <img src="{{ selectedOrder.image }}" />
+      <p class="description-container">{{ selectedOrder.description }}</p>
+    </div>
+    <div class="button-container">
+      <button
+        class="apply-btn"
+        *ngIf=""
+        (click)="apply($event, selectedOrder.id)"
+      >
+        Apply
+      </button>
+    </div>
   </div>
 </div>
 
