@@ -2,12 +2,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import {
-  PriceEnum,
-  Service,
-  UserProfileFragmentFragment,
-} from 'src/schema/type';
+import { Observable } from 'rxjs';
+import { Service, UserProfileFragmentFragment } from 'src/schema/type';
 
 import { UserService } from '../services/user.service';
 import { AuthService } from '../shared/auth/auth.service';

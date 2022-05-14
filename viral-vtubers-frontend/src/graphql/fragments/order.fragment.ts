@@ -59,3 +59,20 @@ export const MyCommissionsFragment = gql`
   }
   ${OrderFragment}
 `;
+
+export const OrderPaginationFragment = gql`
+  fragment OrderPaginationFragment on OrderPagination {
+    edges {
+      cursor
+      node {
+        ...OrderFragment
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      startCursor
+    }
+  }
+  ${OrderFragment}
+`;
