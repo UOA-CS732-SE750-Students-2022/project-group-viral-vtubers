@@ -22,4 +22,12 @@ interface CartService {
     suspend fun emptyCart(userId: ID, serviceId: ID?): List<Cart>
 
     suspend fun checkout(userId: ID, serviceId: ID?): List<Cart>
+
+    suspend fun checkIsPurchased(
+        userId: ID,
+        productId: ID,
+        variantId: ID
+    ): Boolean
+
+    suspend fun checkIsCart(userId: ID, productId: ID, variantId: ID): Boolean
 }

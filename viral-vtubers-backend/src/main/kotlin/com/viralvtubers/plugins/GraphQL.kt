@@ -75,6 +75,7 @@ fun Application.configureGraphQL() {
                 userService = userService,
                 tagService = tagService,
                 authService = authService,
+                cartService = cartService,
             )
             orderSchema(
                 orderService = orderService,

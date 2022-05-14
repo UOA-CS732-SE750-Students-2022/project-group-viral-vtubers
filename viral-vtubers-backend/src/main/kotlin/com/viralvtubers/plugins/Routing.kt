@@ -30,8 +30,7 @@ fun Application.configureRouting() {
             call.respondText("Viral Vtubers - Backend")
         }
 
-        get("/upload") {
-            call.respondText("Upload")
+        post("/upload") {
             val multipartData = call.receiveMultipart()
 
             multipartData.forEachPart { part ->
@@ -43,13 +42,24 @@ fun Application.configureRouting() {
                             .map { f -> f.substring(fileName.lastIndexOf(".") + 1) }
                             ?: error("no extension")
 
+                        if (extension.isEmpty) {
+                            call.respondText(
+                                "No extension",
+                                ContentType.Text.Plain,
+                                HttpStatusCode.BadRequest,
+                            )
+                            return@forEachPart
+                        }
+
+                        val ext = extension.get()
+
                         val uuid = UUID.randomUUID().toString()
-                        val filePath = "$uuid.$extension"
+                        val filePath = "$uuid.$ext"
 
                         val fileBytes = part.streamProvider()
                         uploadService.upload(filePath, fileBytes)
 
-                        call.respondText(uuid);
+                        call.respondText(filePath);
                     }
                     else -> {
                         part.dispose()

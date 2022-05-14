@@ -170,4 +170,28 @@ class CartServiceImpl(
         cartRepository.emptyCartSeller(userId.map(), sellerId.map())
         return getCarts(userId)
     }
+
+    override suspend fun checkIsPurchased(
+        userId: ID,
+        productId: ID,
+        variantId: ID
+    ): Boolean {
+        return purchaseRepository.getPurchasesByUserId(userId.map())
+            .toList()
+            .find { purchase ->
+                purchase.products.find { it.productId.map() == productId && it.variantId.map() == variantId } != null
+            } != null
+    }
+
+    override suspend fun checkIsCart(
+        userId: ID,
+        productId: ID,
+        variantId: ID
+    ): Boolean {
+        return cartRepository.getCartsByUserId(userId.map())
+            .toList()
+            .find {
+                it.productId.map() == productId && it.variantId.map() == variantId
+            } != null
+    }
 }

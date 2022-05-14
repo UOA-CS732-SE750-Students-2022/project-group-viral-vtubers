@@ -19,4 +19,8 @@ class TagServiceImpl(
         return tagRepository.getById(id.map())?.map()
             ?: throw error("tag not found")
     }
+
+    override suspend fun getAllTags(): List<Tag> {
+        return tagRepository.getAll().map { it.map() }.toList()
+    }
 }

@@ -22,6 +22,8 @@ data class Product(
     val variants: List<ProductVariant>,
     val minPrice: Double,
     val isMature: Boolean,
+    val isComment: Boolean,
+    val isDraft: Boolean,
     val createdDate: Date,
     val modifiedDate: Date = Date(),
 ) : Model<Product>

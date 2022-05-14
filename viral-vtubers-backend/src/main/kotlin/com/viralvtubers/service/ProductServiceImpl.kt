@@ -244,6 +244,8 @@ class ProductServiceImpl(
             numLikes = 0,
             variants = ArrayList(),
             isMature = input.isMature,
+            isComment = input.isComment,
+            isDraft = input.isDraft,
             minPrice = 0.0,
             createdDate = Date(),
         )
@@ -266,8 +268,10 @@ class ProductServiceImpl(
             images = input.images ?: product.images,
             vrm = input.vrm ?: product.vrm,
             numLikes = product.numLikes,
-            variants = ArrayList(),
-            isMature = product.isMature,
+            variants = product.variants,
+            isMature = input.isMature ?: product.isMature,
+            isComment = input.isComment ?: product.isComment,
+            isDraft = input.isDraft ?: product.isDraft,
             minPrice = product.minPrice,
             createdDate = product.createdDate,
         )
