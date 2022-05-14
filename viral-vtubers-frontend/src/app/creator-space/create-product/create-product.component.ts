@@ -298,7 +298,6 @@ export class CreateProductComponent implements OnInit {
           isDraft: draft,
           isMature: this.adultBoolean,
           name: name,
-          numLikes: 0,
           subcategoryId: this.selectedSubcategory?.id ?? '',
           tags: this.tagsRef.tags.map((tag) => tag.id),
           titleImage: this.images[0],
