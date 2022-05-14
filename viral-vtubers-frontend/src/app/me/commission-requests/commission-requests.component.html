@@ -59,7 +59,10 @@
               class="artist-container"
               (click)="order.artist ? navigateToUser(order.artist.id) : null"
             >
-              <img src="{{ order.artist?.profileImageURI }}" />
+              <img
+                *ngIf="order.artist"
+                src="{{ order.artist?.profileImageURI }}"
+              />
               <p>{{ order.artist?.displayName }}</p>
             </div>
           </td>

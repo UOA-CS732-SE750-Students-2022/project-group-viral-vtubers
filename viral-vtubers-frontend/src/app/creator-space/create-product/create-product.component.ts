@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -123,6 +123,7 @@ export class CreateProductComponent implements OnInit {
       this.productService
         .getProduct(productId)
         .product$.subscribe((product) => {
+          this.product = product;
           this.productId = product.id;
           this.selectedCategory = this.categories?.find(
             (category) => category.id === product.subcategory.category.id

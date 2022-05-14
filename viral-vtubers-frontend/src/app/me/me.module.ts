@@ -29,6 +29,10 @@ export const routes: Routes = [
         component: CreateRequestComponent,
       },
       {
+        path: 'orders/edit/:orderId',
+        component: CreateRequestComponent,
+      },
+      {
         path: 'orders',
         component: CommissionRequestsComponent,
       },
@@ -47,6 +51,7 @@ export const routes: Routes = [
     FavouritesComponent,
     MeComponent,
     PurchaseHistoryComponent,
+    CreateRequestComponent,
   ],
   imports: [
     CommonModule,

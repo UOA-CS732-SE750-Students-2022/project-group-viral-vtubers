@@ -23,8 +23,8 @@ export type Scalars = {
 export type AddOrderInput = {
   bounty: Scalars['Float'];
   description: Scalars['String'];
-  id: Scalars['ID'];
   image: Scalars['String'];
+  isComment: Scalars['Boolean'];
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   subcategoryId: Scalars['ID'];
@@ -115,6 +115,7 @@ export type EditOrderInput = {
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   image?: InputMaybe<Scalars['String']>;
+  isComment?: InputMaybe<Scalars['Boolean']>;
   isDraft?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   subcategoryId?: InputMaybe<Scalars['ID']>;
@@ -389,6 +390,7 @@ export type Order = {
   description: Scalars['String'];
   id: Scalars['ID'];
   image: Scalars['String'];
+  isComment: Scalars['Boolean'];
   isDraft: Scalars['Boolean'];
   name: Scalars['String'];
   owner: User;

@@ -1,5 +1,22 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom, Observable } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
+import { OrderService } from 'src/app/services/order.service';
+import { ProductService } from 'src/app/services/product.service';
+import { UploadService } from 'src/app/services/upload.service';
+import { TagsComponent } from 'src/app/shared/components/tags/tags.component';
+import {
+  CategoryFragmentFragment,
+  OrderFragmentFragment,
+  TagFragmentFragment,
+} from 'src/schema/type';
+
+type SubcategoryType = {
+  id: string;
+  name: string;
+};
 
 @Component({
   selector: 'app-create-request',
@@ -19,57 +36,100 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class CreateRequestComponent implements OnInit {
-  public changePopup = false;
-  public selectedCategory?: any;
-  public selectedSubCategory?: any;
+  @ViewChild('appTags')
+  tagsRef!: TagsComponent;
 
-  constructor() {}
+  allTags$: Observable<TagFragmentFragment[]>;
 
-  public categories = [
-    {
-      id: 1,
-      name: 'Clothes',
-      subcategories: [
-        {
-          id: 1,
-          name: 'T-Shirts',
-        },
-        {
-          id: 2,
-          name: 'Shirts',
-        },
-        {
-          id: 3,
-          name: 'Pants',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Accessories',
-      subcategories: [
-        {
-          id: 1,
-          name: 'Hats',
-        },
-        {
-          id: 2,
-          name: 'Gloves',
-        },
-        {
-          id: 3,
-          name: 'Bags',
-        },
-      ],
-    },
-  ];
+  changePopup = false;
+  selectedCategory?: CategoryFragmentFragment;
+  selectedSubcategory?: SubcategoryType;
+  categories$: Observable<CategoryFragmentFragment[]>;
 
-  getAllCategories(): any {
-    return this.categories;
+  orderId = '';
+  artistId = '';
+
+  requestTitle = '';
+  requestImage = '';
+  requestBounty = 1.0;
+  requestDescription = '';
+  requestComment = true;
+  requestPriceDisable = false;
+  selectedPrice = 'PRICE';
+
+  categories?: CategoryFragmentFragment[];
+  order?: OrderFragmentFragment;
+
+  constructor(
+    private categoryService: CategoryService,
+    private productService: ProductService,
+    private orderSerivce: OrderService,
+    private uploadService: UploadService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.allTags$ = productService.getTags().tags$;
+    this.categories$ = categoryService.getCategories().categories$;
+    this.categories$.subscribe((categories) => {
+      this.categories = categories;
+      if (this.order) {
+        this.selectedCategory = this.categories?.find(
+          (category) => category.id === this.order?.subcategory.category.id
+        );
+      }
+    });
+    this.route.paramMap.subscribe((params) => {
+      const orderId = params.get('orderId');
+      if (!orderId) {
+        return;
+      }
+
+      this.orderSerivce.getOrder(orderId).order$.subscribe((order) => {
+        this.order = order;
+        this.orderId = order.id;
+        this.artistId = order.owner.id;
+
+        this.tagsRef.tags = order.tags;
+
+        this.requestTitle = order.name;
+        this.requestImage = order.image;
+        this.requestBounty = order.bounty;
+        this.requestDescription = order.description;
+
+        if (order.bounty === 0) {
+          this.requestPriceDisable = true;
+          this.selectedPrice = 'FREE';
+        } else {
+          this.requestPriceDisable = false;
+          this.selectedPrice = 'PRICE';
+        }
+
+        this.selectedCategory = this.categories?.find(
+          (category) => category.id === order.subcategory.category.id
+        );
+        this.selectedSubcategory = order.subcategory;
+      });
+    });
   }
 
-  changeCategory(category: any): void {
-    this.selectedSubCategory = category;
+  changeComment(event: any) {
+    const comment = event.target.value as string;
+    this.requestComment = comment === 'true';
+  }
+
+  setPrice(event: any) {
+    console.log(event.target.value);
+    if ('PRICE' === (event.target.value as string)) {
+      this.requestBounty = 1;
+      this.requestPriceDisable = false;
+    } else {
+      this.requestBounty = 0;
+      this.requestPriceDisable = true;
+    }
+  }
+
+  changeSubcategory(subcategory: SubcategoryType): void {
+    this.selectedSubcategory = subcategory;
     this.hideChange();
   }
 
@@ -81,12 +141,57 @@ export class CreateRequestComponent implements OnInit {
     this.changePopup = false;
   }
 
-  openCategory(category: any): void {
+  openCategory(category: CategoryFragmentFragment): void {
     if (this.selectedCategory?.id === category.id) {
-      this.selectedCategory = null;
+      this.selectedCategory = undefined;
       return;
     }
     this.selectedCategory = category;
+  }
+
+  async handleImageInput(image: any) {
+    const img: File = image.files[0];
+
+    const fileURI = await this.uploadService.upload(img);
+
+    this.requestImage = fileURI;
+  }
+
+  async handleSubmit(name: string, description: string, draft: boolean) {
+    if (!this.selectedSubcategory) {
+      return;
+    }
+
+    if (this.artistId == '') {
+      await firstValueFrom(
+        this.orderSerivce.addOrder({
+          name: name,
+          description: description,
+          bounty: this.requestBounty,
+          image: this.requestImage,
+          isDraft: draft,
+          isComment: this.requestComment,
+          subcategoryId: this.selectedSubcategory.id,
+          tagIds: this.tagsRef.tags.map((tag) => tag.id),
+        })
+      );
+    } else {
+      await firstValueFrom(
+        this.orderSerivce.editOrder({
+          id: this.orderId,
+          name: name,
+          description: description,
+          bounty: this.requestBounty,
+          image: this.requestImage,
+          isDraft: draft,
+          isComment: this.requestComment,
+          subcategoryId: this.selectedSubcategory.id,
+          tagIds: this.tagsRef.tags.map((tag) => tag.id),
+        })
+      );
+    }
+
+    this.router.navigateByUrl('/me/orders');
   }
 
   ngOnInit(): void {}
