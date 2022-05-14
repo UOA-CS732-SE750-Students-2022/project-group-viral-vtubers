@@ -81,19 +81,19 @@
         <button>View all</button>
       </div>
       <div class="products-content">
-        <div *ngFor="let product of user.products" class="product-item">
-          <img src="{{ product.images[0] }}" alt="waifu" />
-          <div>
-            <div class="product-info">
-              <h4>{{ product.name }}</h4>
-              <p>
-                <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
-                Likes
-              </p>
+        <a *ngFor="let product of user.products" class="product-item" href="/marketplace/product/{{ product.id }}">
+            <img src="{{ product.titleImage }}" alt="waifu" />
+            <div>
+              <div class="product-info">
+                <h4>{{ product.name }}</h4>
+                <p>
+                  <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
+                  Likes
+                </p>
+              </div>
+              <p>${{ product.minPrice | number: "1.2-2" }}</p>
             </div>
-            <p>${{ product.minPrice | number: "1.2-2" }}</p>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
