@@ -177,6 +177,9 @@ $page-margin: 130px;
 
     column-gap: 40px;
 
+    margin: 0;
+    padding: 0;
+
     > li {
       list-style: none;
 
@@ -184,6 +187,57 @@ $page-margin: 130px;
       flex: 1;
 
       background-color: #f6f9fa;
+
+      transition: $button-hover-animation;
+
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+
+        > div a {
+          color: $color-primary;
+        }
+      }
+
+      > img {
+        position: absolute;
+        margin: 0;
+
+        margin-top: 70px;
+
+        margin-left: 190px;
+      }
+
+      > div {
+        margin-left: 45px;
+        margin-top: 130px;
+
+        position: absolute;
+
+        h3 {
+          font-size: $font-size-h6;
+          font-weight: 500;
+
+          text-transform: uppercase;
+
+          margin: 0;
+          margin-bottom: 10px;
+        }
+
+        a {
+          color: $color-grey-dark;
+
+          text-decoration: none;
+
+          cursor: pointer;
+
+          transition: $button-hover-animation;
+
+          font-size: $font-size-body-2;
+          font-weight: 400;
+        }
+      }
     }
   }
 }
