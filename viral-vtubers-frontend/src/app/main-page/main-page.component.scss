@@ -1,5 +1,7 @@
 @import "../../variables";
 
+$page-margin: 130px;
+
 :host {
   width: 100%;
 
@@ -14,7 +16,6 @@
   width: 1900px;
   height: 1080px;
 
-  background-color: lightblue;
   overflow-y: none;
 
   margin: 0;
@@ -68,4 +69,43 @@
   &::before {
     background-color: $color-primary-light;
   }
+}
+
+.hero-container {
+  width: 40%;
+  height: 823px;
+
+  box-sizing: border-box;
+  padding-left: $page-margin;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: 70px;
+    font-weight: 600;
+    line-height: 105px;
+
+    margin: 0;
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    margin: 0;
+    margin-top: 15px;
+
+    font-weight: 400;
+    font-size: $font-size-body-1;
+    line-height: 24px;
+  }
+}
+
+.content-container {
+  background-color: pink;
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 0 $page-margin;
 }
