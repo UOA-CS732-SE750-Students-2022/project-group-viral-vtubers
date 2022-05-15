@@ -436,6 +436,11 @@ $margin-top: 10px;
     width: 100px;
     object-fit: contain;
     border: solid 1px $color-grey-light;
+
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 
   > div {
