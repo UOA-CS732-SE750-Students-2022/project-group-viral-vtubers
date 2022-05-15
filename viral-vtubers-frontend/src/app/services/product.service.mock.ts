@@ -1,14 +1,14 @@
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
-import { ProductGQL } from '../../schema/type';
+import { Product, ProductGQL } from '../../schema/type';
 import { ProductService } from './product.service';
 
-export const mockProductService = () => ({
+export const mockProductService = (product?: Observable<Product>) => ({
   provide: ProductService,
   useValue: {
     getProduct: (productId: string) => ({
       query: null as unknown as ProductGQL,
-      product$: from([{ productId: '3' }]),
+      product$: product || from([{ productId: '3' }]),
     }),
   },
 });
