@@ -4,102 +4,112 @@
 <ng-container *ngIf="myCommissions$ | async as myCommissions; else loading">
   <h3>Pending Commission Applications</h3>
   <div class="content-container pending-orders">
-    <div
-      *ngFor="let order of myCommissions.pending"
-      class="request-container"
-      (click)="setSelectedOrder(order)"
-    >
-      <img
-        src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
-      />
-      <div class="info-container">
-        <h4>{{ order.name }}</h4>
-        <div class="description-container">
-          <p>{{ order.description }}</p>
+    <ng-container *ngIf="myCommissions.pending.length > 0; else empty">
+      <div
+        *ngFor="let order of myCommissions.pending"
+        class="request-container"
+        (click)="setSelectedOrder(order)"
+      >
+        <img
+          src="https://i.idol.st/u/card/art/197UR-Toujou-Nozomi-Pain-Pain-Go-Away-Magical-Fever-Svt4gA.png"
+        />
+        <div class="info-container">
+          <h4>{{ order.name }}</h4>
+          <div class="description-container">
+            <p>{{ order.description }}</p>
+          </div>
         </div>
+        <p>${{ order.bounty }}</p>
       </div>
-      <p>${{ order.bounty }}</p>
-    </div>
+    </ng-container>
   </div>
 
   <div class="past-commissions-container">
     <div class="won-commissions-container">
       <h3>Won Commissions</h3>
       <div class="content-container">
-        <table>
-          <tr>
-            <th class="request-col">Request</th>
-            <th class="requester-col">Requester</th>
-          </tr>
-
-          <ng-container *ngFor="let order of myCommissions.won">
+        <ng-container
+          *ngIf="myCommissions.lost.length > 0; else emptyPastCommissions"
+        >
+          <table>
             <tr>
-              <td class="request-col">
-                <div
-                  class="request-container"
-                  (click)="setSelectedOrder(order)"
-                >
-                  <img src="{{ order.image }}" />
-                  <div>
-                    <h5>{{ order.name }}</h5>
-                    <p>
-                      {{ order.description }}
-                    </p>
-                  </div>
-                </div>
-              </td>
-              <td class="requester-col">
-                <div
-                  class="requester-container"
-                  (click)="navigateToUser(order.artist?.id)"
-                >
-                  <img src="{{ order.artist?.profileImageURI }}" />
-                  <p>{{ order.artist?.displayName }}</p>
-                </div>
-              </td>
+              <th class="request-col">Request</th>
+              <th class="requester-col">Requester</th>
             </tr>
-          </ng-container>
-        </table>
+
+            <ng-container *ngFor="let order of myCommissions.won">
+              <tr>
+                <td class="request-col">
+                  <div
+                    class="request-container"
+                    (click)="setSelectedOrder(order)"
+                  >
+                    <img src="{{ order.image }}" />
+                    <div>
+                      <h5>{{ order.name }}</h5>
+                      <p>
+                        {{ order.description }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="requester-col">
+                  <div
+                    class="requester-container"
+                    (click)="navigateToUser(order.artist?.id)"
+                  >
+                    <img src="{{ order.artist?.profileImageURI }}" />
+                    <p>{{ order.artist?.displayName }}</p>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+        </ng-container>
       </div>
     </div>
 
     <div class="won-commissions-container">
       <h3>Lost Commissions</h3>
       <div class="content-container">
-        <table>
-          <tr>
-            <th class="request-col">Request</th>
-            <th class="requester-col">Requester</th>
-          </tr>
-
-          <ng-container *ngFor="let order of myCommissions.won">
+        <ng-container
+          *ngIf="myCommissions.lost.length > 0; else emptyPastCommissions"
+        >
+          <table>
             <tr>
-              <td class="request-col">
-                <div
-                  class="request-container"
-                  (click)="setSelectedOrder(order)"
-                >
-                  <img src="{{ order.image }}" />
-                  <div>
-                    <h5>{{ order.name }}</h5>
-                    <p>
-                      {{ order.description }}
-                    </p>
-                  </div>
-                </div>
-              </td>
-              <td class="requester-col">
-                <div
-                  class="requester-container"
-                  (click)="navigateToUser(order.artist?.id)"
-                >
-                  <img src="{{ order.artist?.profileImageURI }}" />
-                  <p>{{ order.artist?.displayName }}</p>
-                </div>
-              </td>
+              <th class="request-col">Request</th>
+              <th class="requester-col">Requester</th>
             </tr>
-          </ng-container>
-        </table>
+
+            <ng-container *ngFor="let order of myCommissions.won">
+              <tr>
+                <td class="request-col">
+                  <div
+                    class="request-container"
+                    (click)="setSelectedOrder(order)"
+                  >
+                    <img src="{{ order.image }}" />
+                    <div>
+                      <h5>{{ order.name }}</h5>
+                      <p>
+                        {{ order.description }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="requester-col">
+                  <div
+                    class="requester-container"
+                    (click)="navigateToUser(order.artist?.id)"
+                  >
+                    <img src="{{ order.artist?.profileImageURI }}" />
+                    <p>{{ order.artist?.displayName }}</p>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </table>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -145,8 +155,20 @@
 </div>
 
 <ng-template #loading>
-  <div class="empty">
-    <img src="assets/chibis/gwenny.png" />
-    <p>Loading...</p>
-  </div>
+  <app-loading chibi="gwenny" height="600px" fontSize="large">
+    <p text>Gwenny is working hard to load your commissions...</p>
+  </app-loading>
 </ng-template>
+
+<ng-template #empty>
+  <app-loading chibi="gwenny" height="300px">
+    <p text>
+      Nothing here... Let's browse some
+      <a routerLink="/commissions/requests/">commission requests</a>!
+    </p>
+  </app-loading>
+</ng-template>
+
+<ng-template #emptyPastCommissions
+  ><div class="emptyPastCommissions">Nothing here... yet!</div></ng-template
+>
