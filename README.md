@@ -56,10 +56,9 @@ export const environment = {
     appId: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   },
 ```
-# URGENT, WHAT TO DO ABOUT MANUAL security.kt code with google 
-![image](https://user-images.githubusercontent.com/66896513/168466940-27197206-841b-4be4-a028-df833c0a2805.png)
+6. You will also need to manually change some of the values within `/viral-vtubers-backend/src/main/resources/application.conf`, once you have created your own firebase project, all you need to do is replace `jwt.issuer` with your project id subsituted into the value `https://securetoken.google.com/{YOUR PROJECT ID}` and `gcp.bucket` with `{YOUR_PROJECT_ID}.appspot.com`, examples are shown in the following screenshot
+  ![image](https://user-images.githubusercontent.com/66896513/168470984-c9bbe339-d667-4d92-8805-df482c417d47.png)
 
-6. You will also need to manually get the new  
 
 #### Frontend
 
@@ -76,6 +75,13 @@ export const environment = {
 3. Once it has finished installing, run `mvn package` to generate a jar
 4. Now we can start up the docker image with the MongoDB database, run `docker-compose up` inside `/viral-vtubers-backend/`
 5. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` or `mvn exec java`
+  
+### Data population
+
+I would strongly recommend that you populate data into the database, this can easily be done, by opening the project in intellij idea, and navigating to `viral-vtubers-backend/src/test/kotlin/com.viralvtubers/database.mongo/population/DatabasePopulator.kt` (as shown in the screenshot), if you run this class you will populate the database with data, that makes the application much easier to navigate and see the functionality
+
+![image](https://user-images.githubusercontent.com/66896513/168471490-ccc99507-436b-4554-b990-a7c4acd7c55b.png)
+
 
 ### Served Content
 
