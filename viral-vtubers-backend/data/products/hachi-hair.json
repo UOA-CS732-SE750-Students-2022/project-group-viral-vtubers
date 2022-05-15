@@ -1,0 +1,92 @@
+// Sourced from https://booth.pm/en/items/3435283
+{
+  "_id": "62804a3895798da3cb4d3399",
+  "name": "Hair Textures",
+  "artistId": "628047a68ebb5220e3ac6c5f",
+  "tags": [
+  ],
+  "description": "Hair color will be in order by picture! free to use. please do not resell texture. free to edit and use for personal use and commercial use. :) thankyou\n\n",
+  "titleImage": "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/86e6b4fe-b862-44c4-b031-5727e444c862.png",
+  "subcategory": "6276e191547ce5a4451ba997",
+  "images": [
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/bb0410fa-b36b-4d62-bc08-25496a57c25b.png",
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/27dfd2cb-df42-406a-badf-67db40494d0e.png",
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/d24a67e5-f5d6-47b1-b44c-7d001d4fcefb.png",
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/e5822966-0529-4d84-87a4-7e1b8e45cb17.png",
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/07198ed2-1ecd-41f9-ab01-983247c5d274.png",
+    "https://booth.pximg.net/ce43e040-a0e3-415e-894e-c89bb5ec634a/i/3435283/7265c8f3-ea7c-4b7e-b2c1-9326aa293639.png"
+  ],
+  "vrm": "",
+  "numLikes": 69,
+  "variants": [
+    {
+      "_id": "62804ab0e00e473edaa8d931",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Original",
+      "file": "original.png",
+      "fileName": "original",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804aaa1409c7b426f91d5e",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Black",
+      "file": "black.png",
+      "fileName": "black",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804aa3bc40a22e47500e19",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Midnight",
+      "file": "midnight.png",
+      "fileName": "midnight",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804a9c6e527007a012fb20",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Dark Red",
+      "file": "dark_red.png",
+      "fileName": "dark_red",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804a94e9e3e3212d6f9f9a",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Baby Pink",
+      "file": "baby_pink.png",
+      "fileName": "baby_pink",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804a8bfa3eb5d59f1e153f",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Violet",
+      "file": "violet.png",
+      "fileName": "violet",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "62804a6f6866235741cda1fd",
+      "productId": "62804a3895798da3cb4d3399",
+      "price": 0,
+      "name": "Purple",
+      "file": "purple.png",
+      "fileName": "purple",
+      "fileTypes": ["png"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

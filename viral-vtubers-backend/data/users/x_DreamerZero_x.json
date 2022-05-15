@@ -1,0 +1,36 @@
+{
+  "_id": "627f9fe88b3bec2852c36622",
+  "firebaseUid": "3",
+  "displayName": "Yume Zero",
+  "email": "yume.zero@gmail.com",
+  "bio": "mostly making stuff for vroid\n\nall products can be used in vtubing",
+  "numCompletedCommissions": 0,
+  "numLikes": 0,
+  "status": "",
+  "profileImageURI": "https://booth.pximg.net/c/128x128/users/9804862/icon_image/7f9a4d6b-37df-40a6-a5d4-63452e4be9dc_base_resized.jpg",
+  "tags": [],
+  "services": [
+    {
+      "_id": "627f3a11b4561e43435c4d60",
+      "name": "Hair modding",
+      "priceValue": 19,
+      "pricePerUnit": "Each",
+      "description": "Give me an existing hair file and I'll glamour it up!"
+    },
+    {
+      "_id": "627f3a7abb2867fe1f4452a0",
+      "name": "Character from scratch",
+      "priceValue": 19,
+      "pricePerUnit": "Hour",
+      "description": "Bring your character to life! I am just gonna type normally now, it's my new lorem ipsum."
+    },
+    {
+      "_id": "627f3b12aebfc4ac054954fc",
+      "name": "Anything at all",
+      "priceValue": 19,
+      "pricePerUnit": "PoA",
+      "description": "Name anything and I'll make it for you! Just hit me up and we'll figure something out."
+    }
+  ]
+}
+

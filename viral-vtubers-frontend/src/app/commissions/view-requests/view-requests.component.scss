@@ -86,6 +86,11 @@
       height: 150px;
       width: 164px;
       background-color: $color-grey-dark;
+
+      background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
     > div {
       display: flex;
@@ -312,6 +317,11 @@
         width: 350px;
 
         margin-right: 20px;
+
+        background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
       }
 
       p {

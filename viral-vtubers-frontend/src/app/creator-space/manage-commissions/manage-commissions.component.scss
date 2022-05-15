@@ -107,6 +107,11 @@ table {
     width: 80px;
     object-fit: contain;
     border: solid 1px $color-grey-light;
+
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 
   > div {
@@ -209,6 +214,11 @@ table {
       height: 100%;
       aspect-ratio: 1;
       border: none;
+
+      background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
     }
 
     .info-container {
@@ -412,6 +422,11 @@ table {
         width: 350px;
 
         margin-right: 20px;
+
+        background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
       }
 
       p {

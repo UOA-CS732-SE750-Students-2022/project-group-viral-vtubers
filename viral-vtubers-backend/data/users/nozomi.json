@@ -1,0 +1,22 @@
+{
+  "_id": "627f2c04c70cc19519cf0039",
+  "firebaseUid": "1",
+  "displayName": "NozomiSenpai",
+  "email": "nozomi.senpai@merc.dev",
+  "bio": "She's kind of a bitch.",
+  "numCompletedCommissions": 3,
+  "numLikes": 2,
+  "status": "being dere",
+  "profileImageURI": "https://media.discordapp.net/attachments/973434166576291860/973838486966788126/unknown.png?width=644&height=644",
+  "tags": [],
+  "services": [
+    {
+      "_id": "627f2d8a9a76c095aea773b4",
+      "name": "Breast Augmentation",
+      "priceValue": 20000,
+      "pricePerUnit": "Each",
+      "description": "Make your boobs bigger! Or smaller if you're Hiru. Definitely a fair price. Buy it, I dare you. Do it! Come on."
+    }
+  ]
+}
+

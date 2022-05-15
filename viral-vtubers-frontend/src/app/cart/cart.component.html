@@ -8,6 +8,7 @@
             <img
               src="{{ cart.seller.profileImageURI }}"
               alt="{{ cart.seller.displayName }} profile picture"
+              onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
             />
             <h5>{{ cart.seller.displayName }}</h5>
           </a>
@@ -23,7 +24,10 @@
       <div *ngFor="let item of cart.items">
         <div class="item">
           <a routerLink="/marketplace/product/{{ item.product.id }}">
-            <img src="{{ item.product.titleImage }}" />
+            <img
+              src="{{ item.product.titleImage }}"
+              onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+            />
             <div class="item-content">
               <div class="item-details">
                 <p class="item-name">{{ item.name }}</p>

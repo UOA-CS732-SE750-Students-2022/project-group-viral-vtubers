@@ -18,6 +18,7 @@
           <a routerLink="{{ '/user/' + productDetails.artist.id }}">
             <img
               src="{{ productDetails.artist.profileImageURI }}"
+              onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
               data-test-id="profileImage"
             />
             {{ productDetails.artist.displayName }}
@@ -96,7 +97,8 @@
             >
               <img src="assets/icons/check-outline.svg" />
               <div>
-                <h4>remove from cart</h4>
+                <h4>already in cart</h4>
+                <p data-test-id="file">{{ i.fileName }}</p>
               </div>
             </button>
             <a class="download-btn" *ngIf="userId !== selfId && i.isPurchased">

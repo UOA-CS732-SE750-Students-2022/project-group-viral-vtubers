@@ -25,6 +25,11 @@ $side-margin: 40px;
     aspect-ratio: 9/6;
     object-fit: contain;
 
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
     border: solid 1px $color-grey-light;
   }
 }
@@ -48,6 +53,9 @@ $side-margin: 40px;
       display: flex;
       color: $color-kneegrow;
       text-decoration: none;
+
+      transition: $button-hover-animation;
+
       &:hover {
         color: $color-secondary;
       }
@@ -369,7 +377,7 @@ $side-margin: 40px;
 
 .remove-btn {
   background: none !important;
-  color: $color-primary;
+  color: $color-primary !important;
   border-color: $color-primary !important;
   border-width: 1px !important;
   border-style: solid !important;
