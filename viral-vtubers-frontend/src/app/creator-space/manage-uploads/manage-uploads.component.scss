@@ -70,7 +70,7 @@ h3 {
     > img {
       width: 100%;
       max-height: width;
-      aspect-ratio: 1;
+      aspect-ratio: 1 !important;
       object-fit: contain;
     }
 

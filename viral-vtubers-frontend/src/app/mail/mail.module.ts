@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { SharedModule } from '../shared/shared.module';
 import { InboxComponent } from './inbox/inbox.component';
 import { MailComponent } from './mail.component';
 import { NewMailComponent } from './new-mail/new-mail.component';
@@ -35,6 +36,6 @@ export const routes: Routes = [
     SentMailComponent,
     MailComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })
 export class MailModule {}
