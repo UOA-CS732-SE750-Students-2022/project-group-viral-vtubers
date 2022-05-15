@@ -1,0 +1,50 @@
+{
+  "_id": "627f2fdfcca41a163f8a384c",
+  "firebaseUid": "2",
+  "displayName": "AyumiSenesei",
+  "email": "ayumi.sensei@gmail.com",
+  "bio": "Hi everyone! My name is ayumi, and I love to make vtuber shit. Just hit me up if you want anything made! I specialise in making hair, feet, and breast augmentations.",
+  "numCompletedCommissions": 183,
+  "numLikes": 0,
+  "status": "Dancing in the rain hehe~",
+  "profileImageURI": "https://media.discordapp.net/attachments/973434166576291860/973838486966788126/unknown.png?width=644&height=644",
+  "tags": [],
+  "services": [
+    {
+      "_id": "627f3a11b4561e43435c4d60",
+      "name": "Hair modding",
+      "priceValue": 19,
+      "pricePerUnit": "Each",
+      "description": "Give me an existing hair file and I'll glamour it up!"
+    },
+    {
+      "_id": "627f3a7abb2867fe1f4452a0",
+      "name": "Character from scratch",
+      "priceValue": 19,
+      "pricePerUnit": "Hour",
+      "description": "Bring your character to life! I am just gonna type normally now, it's my new lorem ipsum."
+    },
+    {
+      "_id": "627f3b12aebfc4ac054954fc",
+      "name": "Anything at all",
+      "priceValue": 19,
+      "pricePerUnit": "PoA",
+      "description": "Name anything and I'll make it for you! Just hit me up and we'll figure something out."
+    },
+    {
+      "_id": "627f3b12aebfc4ac054954fc",
+      "name": "Feet modelling",
+      "priceValue": 19,
+      "pricePerUnit": "PoA",
+      "description": "Name anything and I'll make it for you! Just hit me up and we'll figure something out."
+    },
+    {
+      "_id": "627f30e03f759c324e201d8e",
+      "name": "Breast Augmentation",
+      "priceValue": 29,
+      "pricePerUnit": "Hour",
+      "description": "Make your boobs bigger! Or smaller if you're Hiru. Definitely a fair price. Buy it, I dare you. Do it! Come on."
+    }
+  ]
+}
+
