@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 import { SharedModule } from '../shared/shared.module';
 import { AccountComponent } from './account/account.component';
@@ -58,6 +59,7 @@ export const routes: Routes = [
     SharedModule,
     FormsModule,
     RouterModule.forChild(routes),
+    ToastrModule.forRoot(),
   ],
 })
 export class MeModule {}

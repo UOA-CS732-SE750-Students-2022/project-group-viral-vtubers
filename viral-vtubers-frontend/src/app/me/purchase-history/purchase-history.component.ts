@@ -17,12 +17,4 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  navigateToProduct(id: string) {
-    this.router.navigateByUrl(`/marketplace/product/${id}`);
-  }
-
-  navigateToUser(id: string) {
-    this.router.navigateByUrl(`/user/${id}`);
-  }
 }

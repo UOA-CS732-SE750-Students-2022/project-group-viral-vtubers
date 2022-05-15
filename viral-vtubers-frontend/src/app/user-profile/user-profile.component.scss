@@ -797,3 +797,12 @@ img {
   flex-direction: column;
   justify-content: center;
 }
+
+.empty {
+  text-align: center;
+
+  font-size: $font-size-body-2 !important;
+  color: $color-grey-dark !important;
+
+  margin: 20px 0;
+}

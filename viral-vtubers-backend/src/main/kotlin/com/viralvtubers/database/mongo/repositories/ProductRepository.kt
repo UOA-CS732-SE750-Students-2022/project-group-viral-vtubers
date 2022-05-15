@@ -46,4 +46,6 @@ interface ProductRepository : Repository<Product> {
     ): List<ProductVariant>
 
     fun getProductsByUserId(userId: Id<User>): Flow<Product>
+
+    fun getProductsByUserIdNoDraft(userId: Id<User>): Flow<Product>
 }

@@ -40,79 +40,93 @@
   <div class="content-container">
     <div class="section services-container">
       <h1>Services</h1>
-      <div class="services-content" cdkDropListGroup>
-        <div
-          class="service-item"
-          *ngFor="let service of services; let i = index"
-          [class.drag]="isEdit"
-          (cdkDropListDropped)="drop($event)"
-          [cdkDropListData]="{ item: service, index: i }"
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-        >
+      <ng-container
+        *ngIf="services.length > 0 || selfId === userId; else noServices"
+      >
+        <div class="services-content" cdkDropListGroup>
           <div
-            class="inner"
-            (click)="openEditService(service)"
-            cdkDrag
-            [cdkDragDisabled]="!isEdit"
+            class="service-item"
+            *ngFor="let service of services; let i = index"
             [class.drag]="isEdit"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListData]="{ item: service, index: i }"
+            cdkDropList
+            cdkDropListOrientation="horizontal"
           >
-            <div *cdkDragPlaceholder></div>
-            <div class="item-info">
-              <h4>{{ service.name }}</h4>
-              <div class="description-container">
-                <p>{{ service.description }}</p>
+            <div
+              class="inner"
+              (click)="openEditService(service)"
+              cdkDrag
+              [cdkDragDisabled]="!isEdit"
+              [class.drag]="isEdit"
+            >
+              <div *cdkDragPlaceholder></div>
+              <div class="item-info">
+                <h4>{{ service.name }}</h4>
+                <div class="description-container">
+                  <p>{{ service.description }}</p>
+                </div>
+              </div>
+              <div class="price-info">
+                <p *ngIf="service.priceType.toString() !== 'POA'">
+                  ${{ service.price | number: "1.2-2" }}
+                  <span>/{{ service.priceType }}</span>
+                </p>
+                <p *ngIf="service.priceType.toString() === 'POA'">POA</p>
+              </div>
+              <div *ngIf="isEdit" class="remove-btn" (click)="remove(service)">
+                <p>-</p>
               </div>
             </div>
-            <div class="price-info">
-              <p *ngIf="service.priceType.toString() !== 'POA'">
-                ${{ service.price | number: "1.2-2" }}
-                <span>/{{ service.priceType }}</span>
-              </p>
-              <p *ngIf="service.priceType.toString() === 'POA'">POA</p>
-            </div>
-            <div *ngIf="isEdit" class="remove-btn" (click)="remove(service)">
-              <p>-</p>
-            </div>
+          </div>
+          <div
+            class="section-add"
+            (click)="openNewService()"
+            *ngIf="services.length < 6 && isEdit"
+          >
+            +
           </div>
         </div>
-        <div
-          class="section-add"
-          (click)="openNewService()"
-          *ngIf="services.length < 6 && isEdit"
-        >
-          +
-        </div>
-      </div>
+      </ng-container>
+
+      <ng-template #noServices>
+        <p class="empty">This user offers no services.</p>
+      </ng-template>
     </div>
     <div class="section products-container">
       <div class="title-container">
         <h1>Latest waifus</h1>
         <button>View all</button>
       </div>
-      <div class="products-content">
-        <a
-          *ngFor="let product of user.products"
-          class="product-item"
-          routerLink="/marketplace/product/{{ product.id }}"
-        >
-          <img
-            src="{{ product.titleImage }}"
-            onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
-            alt="waifu"
-          />
-          <div>
-            <div class="product-info">
-              <h4>{{ product.name }}</h4>
-              <p>
-                <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
-                Likes
-              </p>
+
+      <ng-container *ngIf="user.products.length > 0; else noProducts">
+        <div class="products-content">
+          <a
+            *ngFor="let product of user.products"
+            class="product-item"
+            routerLink="/marketplace/product/{{ product.id }}"
+          >
+            <img
+              src="{{ product.titleImage }}"
+              onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+              alt="waifu"
+            />
+            <div>
+              <div class="product-info">
+                <h4>{{ product.name }}</h4>
+                <p>
+                  <img src="assets/icons/hearts/heart-filled-secondary.svg" /> 0
+                  Likes
+                </p>
+              </div>
+              <p>${{ product.minPrice | number: "1.2-2" }}</p>
             </div>
-            <p>${{ product.minPrice | number: "1.2-2" }}</p>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+      </ng-container>
+      <ng-template #noProducts>
+        <p class="empty">No products right now!</p>
+      </ng-template>
     </div>
   </div>
 </div>
@@ -135,7 +149,11 @@
         </div>
       </div>
       <div class="profile-img">
-        <img [src]="userProfileURI" alt="waifu" />
+        <img
+          [src]="userProfileURI"
+          alt="waifu"
+          onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+        />
         <input
           type="file"
           #profileImg

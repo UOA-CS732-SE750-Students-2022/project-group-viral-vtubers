@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
 import {
@@ -31,7 +32,11 @@ export class CommissionRequestsComponent implements OnInit {
 
   selectedOrder?: OrderFragmentFragment;
 
-  constructor(private router: Router, private orderService: OrderService) {
+  constructor(
+    private router: Router,
+    private orderService: OrderService,
+    private toasterService: ToastrService
+  ) {
     this.myOrders$ = this.orderService.myOrders().myOrders$;
   }
 
@@ -52,6 +57,10 @@ export class CommissionRequestsComponent implements OnInit {
     this.orderService.editOrder({
       id: this.selectedOrder.id,
       artistId: application.id,
+    });
+    this.toasterService.success('Accepted artist for Comission', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
     });
   }
 

@@ -1,7 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import {
   PriceEnum,
@@ -33,7 +34,7 @@ import { TagsComponent } from '../shared/components/tags/tags.component';
     ]),
   ],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, AfterViewChecked {
   @ViewChild('tagsRef')
   tagsRef!: TagsComponent;
 
@@ -59,22 +60,22 @@ export class UserProfileComponent implements OnInit {
 
   userBio = '';
   userStatus = '';
-  userProfileURI = '';
+  userProfileURI?: string;
 
   priceType: PriceEnum = PriceEnum.Hour;
   price = true;
 
   tags: TagFragmentFragment[] = [];
-  allTags$: Observable<TagFragmentFragment[]>;
+  allTags$?: Observable<TagFragmentFragment[]>;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private authService: AuthService,
     private productService: ProductService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private toasterService: ToastrService
   ) {
-    this.allTags$ = this.productService.getTags().tags$;
     userService.getSelf().self$.subscribe((self) => {
       this.selfId = self.id;
 
@@ -87,6 +88,7 @@ export class UserProfileComponent implements OnInit {
         this.userBio = self.bio;
         this.userStatus = self.status;
         this.userProfileURI = self.profileImageURI;
+        this.allTags$ = this.productService.getTags().tags$;
       }
     });
 
@@ -98,8 +100,10 @@ export class UserProfileComponent implements OnInit {
 
       const userProfile = this.userService.getUserProfile(id);
       this.user$ = userProfile.userProfile$;
-      this.user$.subscribe(({ services }) => {
+      this.user$.subscribe(({ services, tags }) => {
         this.services = [...services];
+        this.tags = [...tags];
+        this.setTag(tags);
       });
 
       this.userId = id;
@@ -159,6 +163,10 @@ export class UserProfileComponent implements OnInit {
     this.services = this.services.filter((s) => s.id !== service.id);
 
     this.userService.deleteService(service.id).subscribe();
+    this.toasterService.success('Service removed', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
   }
 
   openNewService() {
@@ -215,6 +223,10 @@ export class UserProfileComponent implements OnInit {
         price: this.servicePrice,
       })
       .subscribe();
+    this.toasterService.success('New service added', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.closeNewService();
   }
@@ -233,6 +245,10 @@ export class UserProfileComponent implements OnInit {
         price: this.servicePrice,
       })
       .subscribe();
+    this.toasterService.success('Service edited', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.closeNewService();
   }
@@ -246,12 +262,17 @@ export class UserProfileComponent implements OnInit {
         profileImageURI: this.userProfileURI,
       })
       .subscribe();
+    this.toasterService.success('Profile edited', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.showEditProfile = false;
   }
 
   openEditProfile() {
     this.showEditProfile = true;
+    this.setTag(this.tags);
   }
 
   closeEditProfile() {
@@ -282,6 +303,16 @@ export class UserProfileComponent implements OnInit {
       return;
     }
     this.editService();
+  }
+
+  ngAfterViewChecked(): void {
+    this.setTag(this.tags);
+  }
+
+  setTag(tags: TagFragmentFragment[]) {
+    if (this.tagsRef && this.tagsRef.tags.length === 0) {
+      this.tagsRef.tags = Object.assign([], tags);
+    }
   }
 
   ngOnInit(): void {}

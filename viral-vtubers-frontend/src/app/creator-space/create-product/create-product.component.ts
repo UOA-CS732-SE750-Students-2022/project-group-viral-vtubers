@@ -1,8 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -38,7 +39,7 @@ type SubcategoryType = {
     ]),
   ],
 })
-export class CreateProductComponent implements OnInit {
+export class CreateProductComponent implements OnInit, AfterViewChecked {
   @ViewChild('appTags')
   tagsRef!: TagsComponent;
 
@@ -96,6 +97,7 @@ export class CreateProductComponent implements OnInit {
     private uploadService: UploadService,
     private productService: ProductService,
     private userService: UserService,
+    private toasterService: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer
@@ -143,12 +145,22 @@ export class CreateProductComponent implements OnInit {
           ];
           this.freeToggles = Array(this.variants.length);
           this.images = [product.titleImage, ...product.images];
-          this.tagsRef.tags = product.tags;
+
           this.title = product.name;
           this.descriptionString = product.description;
           this.comment = product.isComment;
         });
     });
+  }
+
+  ngAfterViewChecked(): void {
+    this.setTag(this.product?.tags ?? []);
+  }
+
+  setTag(tags: TagFragmentFragment[]) {
+    if (this.tagsRef && this.tagsRef.tags.length === 0) {
+      this.tagsRef.tags = Object.assign([], tags);
+    }
   }
 
   getSafeUrl(url: string) {
@@ -268,6 +280,22 @@ export class CreateProductComponent implements OnInit {
 
   async handleSubmit(name: string, description: string, draft: boolean) {
     let productId: string = this.productId;
+
+    if (
+      !this.checkSubmit(
+        this.variants,
+        this.images,
+        this.selectedCategory,
+        this.selectedSubcategory
+      ) &&
+      !draft
+    ) {
+      this.toasterService.error('Missing field(s)', 'Error', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
+      return;
+    }
     if (this.productId == '') {
       productId =
         (
@@ -288,6 +316,10 @@ export class CreateProductComponent implements OnInit {
             })
           )
         ).data?.addProduct.id ?? '';
+      this.toasterService.success('Created new Product', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     } else {
       await firstValueFrom(
         this.productService.editProduct({
@@ -304,6 +336,10 @@ export class CreateProductComponent implements OnInit {
           vrm: this.vrm ?? '',
         })
       );
+      this.toasterService.success('Edited Product', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     }
 
     if (productId === '') {
