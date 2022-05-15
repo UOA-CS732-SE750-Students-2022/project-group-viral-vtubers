@@ -45,17 +45,23 @@ export const environment = {
     apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXX',
     authDomain: 'XXXXXXXXX',
     projectId: 'XXXXXXXXXXX',
-    storageBucket: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX,
+    storageBucket: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
     messagingSenderId: 'XXXXXXXXXX',
     appId: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
   },
 ```
+# URGENT, WHAT TO DO ABOUT MANUAL security.kt code with google 
+![image](https://user-images.githubusercontent.com/66896513/168466940-27197206-841b-4be4-a028-df833c0a2805.png)
+
+6. You will also need to manually get the new  
 
 #### Frontend
 
 1. Go into the frontend directory in a terminal `cd ./viral-vtubers-frontend` 
 2. Run `yarn install` to get all the project dependencies
-3. Run `yarn run` to start the frontend
+3. Run `yarn run` to run through the steps of setting up all the needed stages for the frontend
+4. Run `ng serve` to run a development server to host the frontend
+4. Visit `http://localhost:4200/` to visit the frontend site
 
 #### Backend
 
@@ -67,6 +73,11 @@ export const environment = {
 
 ### Served Content
 
+- Frontend: [localhost:4200/](http://localhost:4200/)
+- GraphQL Schema (Backend): [localhost:8080/graphql](http://localhost:8080/graphql)
+
 ### Testing
+- To run all the frontend unit tests run `yarn test` in the frontend directory
+- To run all the backend unit tests `mvn test` in the backend directory
 
 ### Troubleshooting
