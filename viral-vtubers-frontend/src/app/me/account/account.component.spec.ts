@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockUserService } from '../../services/user.service.mock';
 import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
@@ -8,9 +9,9 @@ describe('AccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccountComponent ]
-    })
-    .compileComponents();
+      declarations: [AccountComponent],
+      imports: [mockUserService()],
+    }).compileComponents();
   });
 
   beforeEach(() => {

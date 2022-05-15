@@ -2,19 +2,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { mockActivatedRoute } from '../../../../test/activated-route';
 import { mockProductService } from '../../services/product.service.mock';
 import { mockUserService } from '../../services/user.service.mock';
-import { ProductVariant } from '../../../schema/type';
+import { Product, ProductVariant } from '../../../schema/type';
 import { ProductDetailsComponent } from './product-details.component';
+import { Subject } from 'rxjs';
+import { mockRouter } from "../../../../test/router";
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
   let fixture: ComponentFixture<ProductDetailsComponent>;
+  let product: Subject<Product>;
 
   beforeEach(async () => {
+    product = new Subject();
     await TestBed.configureTestingModule({
       declarations: [ProductDetailsComponent],
       providers: [
-        mockProductService(),
+        mockProductService(product),
         mockUserService(),
+        mockRouter(),
         mockActivatedRoute(),
       ],
     }).compileComponents();
@@ -43,7 +48,9 @@ describe('ProductDetailsComponent', () => {
     );
 
     // Change state
-    component.productDetails.artist.profileImageURI = IMAGE_URI;
+    product.next({
+      artist: { profileImageURI: IMAGE_URI },
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -56,14 +63,18 @@ describe('ProductDetailsComponent', () => {
     const button = () => testElement('followButton');
 
     // Prepare
-    component.productDetails.artist.isFollowing = false;
+    product.next({
+      artist: { isFollowing: false },
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test initial state
     expect(button()).not.toHaveClass('unfollow-btn');
 
     // Change state
-    component.productDetails.artist.isFollowing = true;
+    product.next({
+      artist: { isFollowing: true },
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -78,7 +89,9 @@ describe('ProductDetailsComponent', () => {
     expect(testElement('name').textContent).not.toContain(NAME);
 
     // Change state
-    component.productDetails.name = NAME;
+    product.next({
+      artist: { name: NAME },
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -95,8 +108,13 @@ describe('ProductDetailsComponent', () => {
     expect(testElement('categories').textContent).not.toContain(SUBCATEGORY);
 
     // Change state
-    component.productDetails.subcategory.category.name = CATEGORY;
-    component.productDetails.subcategory.name = SUBCATEGORY;
+
+    product.next({
+      subcategory: { category: { name: CATEGORY } },
+    } as unknown as Product);
+    product.next({
+      subcategory: { name: CATEGORY },
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -112,7 +130,9 @@ describe('ProductDetailsComponent', () => {
     expect(testElement('numLikes').textContent).not.toContain(NUM_LIKES);
 
     // Change state
-    component.productDetails.numLikes = NUM_LIKES;
+    product.next({
+      numLikes: NUM_LIKES,
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -155,7 +175,9 @@ describe('ProductDetailsComponent', () => {
       });
 
     // Test state change
-    component.productDetails.variants = VARIANTS;
+    product.next({
+      variants: VARIANTS,
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state
@@ -181,7 +203,9 @@ describe('ProductDetailsComponent', () => {
     expect(testElement('description').textContent).not.toContain(DESCRIPTION);
 
     // Change state
-    component.productDetails.description = DESCRIPTION;
+    product.next({
+      description: DESCRIPTION,
+    } as unknown as Product);
     fixture.detectChanges();
 
     // Test final state

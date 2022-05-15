@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { CreateProductComponent } from './create-product/create-product.component';
 import { CreatorSpaceModule, routes } from './creator-space.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManageCommissionsComponent } from './manage-commissions/manage-commissions.component';
 import { ManageUploadsComponent } from './manage-uploads/manage-uploads.component';
 

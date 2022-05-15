@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
@@ -37,11 +36,6 @@ describe('AppComponent', () => {
 
   it('should contain route for /cart', () => {
     const expectedRoute = { path: 'cart', component: CartComponent };
-    expect(routes).toContain(expectedRoute);
-  });
-
-  it('should contain route for /feed', () => {
-    const expectedRoute = { path: 'feed', component: ActivityFeedComponent };
     expect(routes).toContain(expectedRoute);
   });
 
