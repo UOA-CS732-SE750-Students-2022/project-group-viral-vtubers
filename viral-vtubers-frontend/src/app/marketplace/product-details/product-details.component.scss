@@ -48,6 +48,9 @@ $side-margin: 40px;
       display: flex;
       color: $color-kneegrow;
       text-decoration: none;
+
+      transition: $button-hover-animation;
+
       &:hover {
         color: $color-secondary;
       }
