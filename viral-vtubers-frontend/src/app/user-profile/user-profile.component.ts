@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
 import {
@@ -33,7 +33,7 @@ import { TagsComponent } from '../shared/components/tags/tags.component';
     ]),
   ],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, AfterViewChecked {
   @ViewChild('tagsRef')
   tagsRef!: TagsComponent;
 
@@ -59,13 +59,13 @@ export class UserProfileComponent implements OnInit {
 
   userBio = '';
   userStatus = '';
-  userProfileURI = '';
+  userProfileURI?: string;
 
   priceType: PriceEnum = PriceEnum.Hour;
   price = true;
 
   tags: TagFragmentFragment[] = [];
-  allTags$: Observable<TagFragmentFragment[]>;
+  allTags$?: Observable<TagFragmentFragment[]>;
 
   constructor(
     private userService: UserService,
@@ -74,7 +74,6 @@ export class UserProfileComponent implements OnInit {
     private productService: ProductService,
     private uploadService: UploadService
   ) {
-    this.allTags$ = this.productService.getTags().tags$;
     userService.getSelf().self$.subscribe((self) => {
       this.selfId = self.id;
 
@@ -87,6 +86,7 @@ export class UserProfileComponent implements OnInit {
         this.userBio = self.bio;
         this.userStatus = self.status;
         this.userProfileURI = self.profileImageURI;
+        this.allTags$ = this.productService.getTags().tags$;
       }
     });
 
@@ -98,8 +98,10 @@ export class UserProfileComponent implements OnInit {
 
       const userProfile = this.userService.getUserProfile(id);
       this.user$ = userProfile.userProfile$;
-      this.user$.subscribe(({ services }) => {
+      this.user$.subscribe(({ services, tags }) => {
         this.services = [...services];
+        this.tags = [...tags];
+        this.setTag(tags);
       });
 
       this.userId = id;
@@ -252,6 +254,7 @@ export class UserProfileComponent implements OnInit {
 
   openEditProfile() {
     this.showEditProfile = true;
+    this.setTag(this.tags);
   }
 
   closeEditProfile() {
@@ -282,6 +285,16 @@ export class UserProfileComponent implements OnInit {
       return;
     }
     this.editService();
+  }
+
+  ngAfterViewChecked(): void {
+    this.setTag(this.tags);
+  }
+
+  setTag(tags: TagFragmentFragment[]) {
+    if (this.tagsRef && this.tagsRef.tags.length === 0) {
+      this.tagsRef.tags = Object.assign([], tags);
+    }
   }
 
   ngOnInit(): void {}

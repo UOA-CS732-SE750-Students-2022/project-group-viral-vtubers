@@ -29,14 +29,19 @@ export class TagsComponent implements OnInit {
   public isEdit = true;
 
   @Input()
-  public tags: TagFragmentFragment[] = [];
+  public start!: TagFragmentFragment[];
+
+  @Input()
+  public tags: TagFragmentFragment[];
 
   @Input()
   public allTags!: TagFragmentFragment[];
 
   public newTag = false;
 
-  constructor() {}
+  constructor() {
+    this.tags = Object.assign([], this.start);
+  }
 
   deleteTag(tag: Tag): void {
     this.tags = this.tags.filter((t) => t.id !== tag.id);

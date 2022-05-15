@@ -16,6 +16,6 @@ export class SearchService {
   }
 
   getSearch(): Observable<string> {
-    return this.search$;
+    return this.search$.asObservable();
   }
 }

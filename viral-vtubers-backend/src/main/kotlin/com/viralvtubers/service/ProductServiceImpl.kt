@@ -37,6 +37,12 @@ class ProductServiceImpl(
             .map { it.map() }.toList()
     }
 
+    override suspend fun getProductsByUserIdNoDraft(userId: ID): List<Product> {
+        return productRepository.getProductsByUserIdNoDraft(userId.map())
+            .map { it.map() }.toList()
+    }
+
+
     override suspend fun getAllProducts(): List<Product> {
         return productRepository.getAll().map { it.map() }.toList()
     }

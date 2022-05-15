@@ -10,6 +10,8 @@ import {
   EditProductVariant,
   EditProductVariantGQL,
   LikeProductGQL,
+  MyProductsGQL,
+  ProductBlurbFragmentFragment,
   ProductDetailFragmentFragment,
   ProductFilter,
   ProductGQL,
@@ -31,6 +33,7 @@ export class ProductService {
   categoryProducts$?: Observable<ProductPaginationFragmentFragment>;
   subcategoryProducts$?: Observable<ProductPaginationFragmentFragment>;
   tags$?: Observable<TagFragmentFragment[]>;
+  myProducts$?: Observable<ProductBlurbFragmentFragment[]>;
 
   constructor(
     private productGQL: ProductGQL,
@@ -42,7 +45,8 @@ export class ProductService {
     private addProductGQL: AddProductGQL,
     private editProductGQL: EditProductGQL,
     private addProductVariantGQL: AddProductVariantGQL,
-    private editProductVariantGQL: EditProductVariantGQL
+    private editProductVariantGQL: EditProductVariantGQL,
+    private myProductsGQL: MyProductsGQL
   ) {}
 
   getProduct(productId: string) {
@@ -63,6 +67,13 @@ export class ProductService {
       .watch({ filter, sort, cursor, limit })
       .valueChanges.pipe(map((result) => result.data.products));
     return { query: this.productsGQL, products$: this.products$ };
+  }
+
+  getMyProducts() {
+    this.myProducts$ = this.myProductsGQL
+      .watch()
+      .valueChanges.pipe(map((result) => result.data.self.products));
+    return { query: this.myProductsGQL, myProducts$: this.myProducts$ };
   }
 
   getProductsCategory(

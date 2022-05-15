@@ -165,6 +165,7 @@ class UserServiceImpl(
             bio = input.bio ?: user.bio,
             status = input.status ?: user.status,
             profileImageURI = input.profileImageURI ?: user.profileImageURI,
+            tags = input.tagIds?.map { ID(it).map() } ?: user.tags
         )
         return userRepository.update(update)?.map()
             ?: throw error("self not found")

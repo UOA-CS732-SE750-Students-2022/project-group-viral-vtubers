@@ -2,8 +2,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeContext, LabelType, Options } from '@angular-slider/ngx-slider';
+import { ThumbnailsPosition } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { SearchService } from 'src/app/services/search.service';
 import { BlurbService } from 'src/app/shared/blurb/blurb.service';
 import {
   AgeRestrictionEnum,
@@ -45,6 +47,8 @@ export class BrowseProductsComponent implements OnInit {
       }
     },
   };
+
+  search = '';
 
   sortOptions: selectItem[] = [
     { id: 'newest', name: 'Time added (newest) ' },
@@ -191,6 +195,7 @@ export class BrowseProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private blurbService: BlurbService,
+    private searchService: SearchService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -223,7 +228,11 @@ export class BrowseProductsComponent implements OnInit {
         );
         if (!categoryFilter) {
           this.categoryBlurb = undefined;
-          this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+          this.getProducts(
+            this.categoryBlurb,
+            this.subcategoryBlurb,
+            this.filter
+          );
           return;
         }
         const subcategoryFilter = categoryFilter.subcategories.find(
@@ -231,14 +240,28 @@ export class BrowseProductsComponent implements OnInit {
         );
         if (!subcategoryFilter) {
           this.subcategoryBlurb = undefined;
-          this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+          this.getProducts(
+            this.categoryBlurb,
+            this.subcategoryBlurb,
+            this.filter
+          );
           return;
         }
 
         this.selectedSubCategoryFilter = subcategoryFilter;
       }
 
-      this.getProducts(this.categoryBlurb, this.subcategoryBlurb);
+      this.getProducts(this.categoryBlurb, this.subcategoryBlurb, this.filter);
+    });
+
+    this.searchService.getSearch().subscribe((search) => {
+      console.log('browser', search);
+      this.search = search;
+      this.filter = {
+        search: search,
+      };
+
+      this.getProducts(this.categoryBlurb, this.subcategoryBlurb, this.filter);
     });
 
     this.router.events.subscribe(this.updatePageTitle);
@@ -414,6 +437,7 @@ export class BrowseProductsComponent implements OnInit {
     this.selectedAgeRestrictionFilter = this.ageRestrictionFilters[0];
     this.minValue = 0;
     this.maxValue = 800;
+    this.search = '';
     this.router.navigate(['/marketplace', 'all']);
   }
 }

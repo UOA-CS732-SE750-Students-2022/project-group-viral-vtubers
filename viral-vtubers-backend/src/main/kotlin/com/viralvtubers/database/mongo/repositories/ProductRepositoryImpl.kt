@@ -6,11 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.bson.conversions.Bson
-import org.litote.kmongo.Id
-import org.litote.kmongo.`in`
+import org.litote.kmongo.*
 import org.litote.kmongo.coroutine.CoroutineCollection
-import org.litote.kmongo.div
-import org.litote.kmongo.eq
 
 fun MongoDatabase.asProductRepository(): ProductRepository =
     object : ProductRepository {
@@ -129,6 +126,15 @@ fun MongoDatabase.asProductRepository(): ProductRepository =
 
         override fun getProductsByUserId(userId: Id<User>): Flow<Product> {
             return col.find(Product::artistId eq userId).toFlow()
+        }
+
+        override fun getProductsByUserIdNoDraft(userId: Id<User>): Flow<Product> {
+            return col.find(
+                and(
+                    Product::artistId eq userId,
+                    Product::isDraft eq false
+                )
+            ).toFlow()
         }
     }
 
