@@ -82,7 +82,10 @@
       <ng-container *ngIf="products$ | async as products; else loadingProducts">
         <ng-container *ngIf="products.length > 0; else emptyProducts">
           <div class="section-content products">
-            <div *ngFor="let product of products" class="products-content">
+            <div
+              *ngFor="let product of products | slice: 0:10"
+              class="products-content"
+            >
               <a
                 class="product-item"
                 routerLink="/marketplace/product/{{ product.id }}"
