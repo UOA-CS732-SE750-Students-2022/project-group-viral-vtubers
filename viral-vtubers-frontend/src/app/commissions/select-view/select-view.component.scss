@@ -9,7 +9,7 @@ $input-width: 420px;
 
 .header-bg {
   background-color: #f6f9fa;
-  height: calc(100% - $header-height);
+  height: calc(100vh - $header-height);
   overflow: hidden;
   position: relative;
 
@@ -42,7 +42,7 @@ $input-width: 420px;
 }
 
 .page-container {
-  margin-top: 160px;
+  margin-top: 90px;
 
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ $input-width: 420px;
 
     margin: 0;
 
-    margin-bottom: 30px;
+    margin-bottom: 3%;
   }
 
   .options-container {
@@ -106,7 +106,10 @@ $input-width: 420px;
       > p {
         font-size: $font-size-body-2;
         font-weight: 400;
+
         margin: 0;
+        margin-top: 5px;
+
         color: $color-grey-dark;
 
         text-align: center;
@@ -128,9 +131,34 @@ $input-width: 420px;
 
         transition: $button-hover-animation;
 
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: $font-size-body-2;
+        font-family: $font-family-poppins;
+
         &:hover {
           opacity: $button-coloured-hover-opacity;
         }
+      }
+    }
+
+    .artist {
+      h3 {
+        color: $color-secondary;
+      }
+
+      button {
+        background-color: $color-secondary;
+      }
+    }
+
+    .requester {
+      h3 {
+        color: $color-primary;
+      }
+
+      button {
+        background-color: $color-primary;
       }
     }
   }
