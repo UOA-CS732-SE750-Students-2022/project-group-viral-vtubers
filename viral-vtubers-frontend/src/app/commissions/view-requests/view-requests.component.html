@@ -89,13 +89,17 @@
 </div>
 
 <ng-template #loading>
-  <app-loading chibi="gwenny" height="600px" fontSize="large"
-    ><p text>Gwenny is working hard to load some requests for you!</p>
-  </app-loading>
+  <div class="loading-container">
+    <app-loading chibi="gwenny" height="300px" fontSize="large"
+      ><p text>Gwenny is working hard to load some requests for you!</p>
+    </app-loading>
+  </div>
 </ng-template>
 
 <ng-template #empty>
-  <app-loading chibi="gwenny" height="600px" fontSize="large">
-    <p text>Gwenny found no requests... Let's check again later!</p>
-  </app-loading>
+  <div class="loading-container">
+    <app-loading chibi="gwenny" height="300px" fontSize="large">
+      <p text>Gwenny found no requests... Let's check again later!</p>
+    </app-loading>
+  </div>
 </ng-template>

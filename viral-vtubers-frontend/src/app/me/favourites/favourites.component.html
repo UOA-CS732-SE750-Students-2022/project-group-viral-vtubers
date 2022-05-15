@@ -21,19 +21,23 @@
   </ng-container>
 </div>
 
-<ng-template #empty>
-  <div class="empty">
-    <img src="assets/chibis/vivi.png" />
-    <p>
-      No favourites yet... Let's
-      <a routerLink="/marketplace">start browsing</a>!
-    </p>
+<ng-template #loading>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        Vivi is working hard to load your favourite products...
+      </p></app-loading
+    >
   </div>
 </ng-template>
 
-<ng-template #loading>
-  <div class="empty">
-    <img src="assets/chibis/vivi.png" />
-    <p>Loading...</p>
+<ng-template #empty>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        No favourites yet... Let's
+        <a routerLink="/marketplace">start browsing</a>!
+      </p></app-loading
+    >
   </div>
 </ng-template>
