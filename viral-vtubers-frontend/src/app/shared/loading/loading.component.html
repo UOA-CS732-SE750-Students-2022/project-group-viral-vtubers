@@ -3,5 +3,6 @@
     src="assets/chibis/{{ chibi }}.png"
     [ngClass]="{ flipped: isFlipped, 'font-size': fontSize }"
   />
-  <p>{{ text }}</p>
+
+  <p><ng-content select="[text]"></ng-content></p>
 </div>

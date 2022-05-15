@@ -35,5 +35,10 @@
     &.large {
       font-size: $font-size-body-1;
     }
+
+    a {
+      text-decoration: none !important ;
+      color: $color-primary !important;
+    }
   }
 }
