@@ -13,8 +13,6 @@ import io.ktor.server.plugins.autohead.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.nio.ByteBuffer
-import java.nio.channels.Channels
 import java.util.*
 
 val client = HttpClient(CIO)
@@ -70,30 +68,25 @@ fun Application.configureRouting() {
 
         get("/download/{fileName}") {
             val fileName = call.parameters["fileName"] ?: error("no file name")
-            val download = uploadService.download(fileName)
-            val contentType = ContentType.parse(download.contentType)
+            try {
+                val download = uploadService.download(fileName)
+                val contentType = ContentType.parse(download.contentType)
 
-            call.respondOutputStream(
-                contentType,
-                HttpStatusCode.OK
-            ) {
-                val buf = ByteBuffer.allocateDirect(16 * 1024);
-                val from = download.readable
-                val to = Channels.newChannel(this);
-
-                try {
-                    while (from.read(buf) != -1) {
-                        buf.flip();
-                        while (buf.hasRemaining()) {
-                            to.write(buf);
-                        }
-                        buf.clear();
-                    }
-                } finally {
-                    from.close()
-                    to.close()
-                }
+                call.respondBytes(download.data, contentType)
+            } catch (e: Exception) {
+                e.message?.let {
+                    call.respondText(
+                        it,
+                        ContentType.Text.Plain,
+                        HttpStatusCode.NotFound
+                    )
+                } ?: call.respondText(
+                    "failed to download",
+                    ContentType.Text.Plain,
+                    HttpStatusCode.NotFound
+                )
             }
+
         }
 
         get(".well-known/jwks.json") {

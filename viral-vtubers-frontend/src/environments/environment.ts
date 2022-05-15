@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyCrODvjXtq08KnhY1rYkczKgzIZXn5C0Yo',
-    authDomain: 'viral-vtubers.firebaseapp.com',
-    projectId: 'viral-vtubers',
-    storageBucket: 'viral-vtubers.appspot.com',
-    messagingSenderId: '102572388853',
-    appId: '1:102572388853:web:07234c02be6aa969e030bc',
+    apiKey: 'AIzaSyCodihd_xZa5OordbO8KUZN6HEPVhHUONc',
+    authDomain: 'viral-vtubers-6dbdf.firebaseapp.com',
+    projectId: 'viral-vtubers-6dbdf',
+    storageBucket: 'viral-vtubers-6dbdf.appspot.com',
+    messagingSenderId: '896426489319',
+    appId: '1:896426489319:web:66598c027f6f77593e3942',
   },
 };
 

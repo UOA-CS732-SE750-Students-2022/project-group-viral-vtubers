@@ -1,16 +1,18 @@
 package com.viralvtubers.service
 
+import com.github.benmanes.caffeine.cache.Caffeine
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.storage.Storage
 import com.google.cloud.storage.StorageOptions
 import io.ktor.server.engine.*
 import java.io.InputStream
-import java.nio.channels.ReadableByteChannel
+
 
 data class Download(
     val contentType: String,
-    val readable: ReadableByteChannel
+    val data: ByteArray
 )
+
 
 class UploadService(private val bucketName: String) {
 
@@ -21,6 +23,18 @@ class UploadService(private val bucketName: String) {
         StorageOptions.newBuilder()
             .setCredentials(GoogleCredentials.fromStream(firebaseConfig))
             .build().service
+
+    private val cache =
+        Caffeine.newBuilder().maximumWeight(200_000)
+            .weigher { key: String, value: ByteArray? -> value?.size ?: 0 }
+            .build<String, ByteArray?> {
+                try {
+                    storage.readAllBytes(bucketName, it)
+                } catch (e: Exception) {
+                    null
+                }
+            }
+
 
     fun upload(
         fileName: String,
@@ -37,11 +51,13 @@ class UploadService(private val bucketName: String) {
         val bucket = storage.get(bucketName)
             ?: error("Bucket $bucketName does not exist")
 
-        val blob = bucket.get(fileName)
-        val reader = blob.reader()
-        return Download(
-            blob.contentType,
-            reader
-        )
+        cache.get(fileName)?.let {
+            return Download(
+                bucket.get(fileName).contentType,
+                it
+            )
+        }
+
+        throw error("not found")
     }
 }
