@@ -45,12 +45,9 @@ fun SchemaBuilder.productSchema(
         property<Boolean>("isLiked") {
             resolver { product, ctx: Context ->
                 description = "Get the artist who created the Product"
-                try {
-                    val userId = authService.getUserId(ctx)
-                    productService.checkIsLiked(product.id, userId)
-                } catch (e: Exception) {
-                    false
-                }
+                authService.getOptionalUserId(ctx)?.let {
+                    productService.checkIsLiked(product.id, it)
+                } ?: false
             }
         }
 
@@ -77,24 +74,26 @@ fun SchemaBuilder.productSchema(
         property<Boolean>("isPurchased") {
             resolver { productVariant, ctx: Context ->
                 description = "Get isPurchased"
-                val userId = authService.getUserId(ctx)
-                cartService.checkIsPurchased(
-                    userId,
-                    productVariant.productId,
-                    productVariant.id,
-                )
+                authService.getOptionalUserId(ctx)?.let {
+                    cartService.checkIsPurchased(
+                        it,
+                        productVariant.productId,
+                        productVariant.id,
+                    )
+                } ?: false
             }
         }
 
         property<Boolean>("isCart") {
             resolver { productVariant, ctx: Context ->
                 description = "Get isCart"
-                val userId = authService.getUserId(ctx)
-                cartService.checkIsCart(
-                    userId,
-                    productVariant.productId,
-                    productVariant.id,
-                )
+                authService.getOptionalUserId(ctx)?.let {
+                    cartService.checkIsCart(
+                        it,
+                        productVariant.productId,
+                        productVariant.id,
+                    )
+                } ?: false
             }
         }
     }

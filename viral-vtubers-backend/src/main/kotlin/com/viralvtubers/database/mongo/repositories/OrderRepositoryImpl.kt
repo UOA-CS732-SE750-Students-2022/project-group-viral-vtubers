@@ -21,6 +21,7 @@ fun MongoDatabase.asOrderRepository(): OrderRepository =
             val result =
                 col.find(
                     Order::isDraft eq false,
+                    Order::artistId eq null,
                     *filter
                 ).sort(sort)
             return result.toFlow()

@@ -13,7 +13,7 @@
     <a
       class="artist"
       *ngFor="let artist of artists.edges"
-      [href]="'/user/' + artist.node.id"
+      routerLink="{{ '/user/' + artist.node.id }}"
     >
       <ng-container *ngIf="artist.node as artist">
         <img [src]="artist.profileImageURI" />

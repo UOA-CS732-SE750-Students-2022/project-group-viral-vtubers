@@ -5,4 +5,6 @@ import com.viralvtubers.graphql.data.ID
 
 interface AuthService {
     fun getUserId(ctx: Context): ID
+
+    fun getOptionalUserId(ctx: Context): ID?
 }

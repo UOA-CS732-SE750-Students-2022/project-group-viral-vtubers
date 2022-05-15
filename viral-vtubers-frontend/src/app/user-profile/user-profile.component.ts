@@ -144,8 +144,6 @@ export class UserProfileComponent implements OnInit {
       })
     );
 
-    console.log(next.id, prev.id);
-
     this.userService
       .editService({
         id: prev.id,
@@ -158,7 +156,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   remove(service: Service) {
-    console.log(service);
     this.services = this.services.filter((s) => s.id !== service.id);
 
     this.userService.deleteService(service.id).subscribe();
@@ -241,9 +238,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   editSelf() {
-    console.log('editSelf');
-
-    console.log(this.tagsRef);
     this.userService
       .editSelf({
         tagIds: this.tagsRef.tags.map((t) => t.id),

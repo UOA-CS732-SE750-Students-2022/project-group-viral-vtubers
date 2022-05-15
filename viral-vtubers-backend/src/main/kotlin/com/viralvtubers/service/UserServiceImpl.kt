@@ -38,13 +38,13 @@ class UserServiceImpl(
     }
 
     override suspend fun getUsers(
-        currentUserId: ID,
+        currentUserId: ID?,
         filter: UserFilter?,
         sort: UserSort?,
         cursor: String?,
         limit: Int?
     ): UserPagination {
-        val filterBson = getFilterBson(currentUserId.map(), filter)
+        val filterBson = getFilterBson(currentUserId?.map(), filter)
         val sortBson = getSortBson(sort)
 
         var userFlow = userRepository.getUsers(
@@ -94,13 +94,15 @@ class UserServiceImpl(
     }
 
     private fun getFilterBson(
-        userId: Id<DataUser>,
+        userId: Id<DataUser>?,
         filter: UserFilter?
     ): List<Bson> {
         filter ?: return java.util.ArrayList()
 
         val filterBson = java.util.ArrayList<Bson>()
-        filterBson.add(DataUser::_id ne userId) // remove self
+        if (userId != null) {
+            filterBson.add(DataUser::_id ne userId) // remove self
+        }
 
         filter.search?.let {
             filterBson.add(

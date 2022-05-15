@@ -16,10 +16,10 @@ export class ProductsGridComponent implements OnInit {
   ngOnInit(): void {}
 
   nagivateToProduct(id: string): void {
-    this.router.navigateByUrl(`marketplace/product/${id}`);
+    this.router.navigateByUrl(`/marketplace/product/${id}`);
   }
 
   getProductUrl(id: string): string {
-    return `marketplace/product/${id}`;
+    return `/marketplace/product/${id}`;
   }
 }

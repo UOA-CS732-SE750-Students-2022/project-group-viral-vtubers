@@ -23,12 +23,9 @@ fun SchemaBuilder.userSchema(
         property<Boolean>("isFollowing") {
             resolver { user, ctx: Context ->
                 description = "Get if current user if following this user"
-                try {
-                    val userId = authService.getUserId(ctx)
+                authService.getOptionalUserId(ctx)?.let { userId ->
                     userService.isFollowing(userId, user.id)
-                } catch (e: Exception) {
-                    false
-                }
+                } ?: false
             }
         }
 
@@ -171,7 +168,7 @@ fun SchemaBuilder.userSchema(
     query("users") {
         description = "Get all users"
         resolver { ctx: Context, filter: UserFilter?, sort: UserSort?, cursor: String?, limit: Int? ->
-            val userId = authService.getUserId(ctx)
+            val userId = authService.getOptionalUserId(ctx)
             userService.getUsers(userId, filter, sort, cursor, limit)
         }
     }

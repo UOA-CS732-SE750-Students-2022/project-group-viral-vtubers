@@ -15,7 +15,7 @@ interface UserService : KoinComponent {
     suspend fun getUserIds(userIds: List<ID>): List<User>
 
     suspend fun getUsers(
-        currentUserId: ID,
+        currentUserId: ID?,
         filter: UserFilter?,
         sort: UserSort?,
         cursor: String?,

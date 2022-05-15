@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { MainPageComponent } from './main-page/main-page.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { VrmCanvasComponent } from './shared/components/vrm-canvas/vrm-canvas.component';
+import { AuthGuard } from './shared/guard/auth.guard';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -23,7 +24,6 @@ export const routes: Routes = [
       import('./commissions/commissions.module').then(
         (m) => m.CommissionsModule
       ),
-    // canActivate: [AuthGuard],
   },
   {
     path: 'marketplace',
@@ -35,7 +35,7 @@ export const routes: Routes = [
   {
     path: 'me',
     loadChildren: () => import('./me/me.module').then((m) => m.MeModule),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'creator',
@@ -43,23 +43,22 @@ export const routes: Routes = [
       import('./creator-space/creator-space.module').then(
         (m) => m.CreatorSpaceModule
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'mail',
     loadChildren: () => import('./mail/mail.module').then((m) => m.MailModule),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   // Plain page components
   {
     path: 'user/:id',
     component: UserProfileComponent,
-    // canActivate: [AuthGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 
   {
@@ -81,7 +80,6 @@ export const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
-    // canActivate: [AuthGuard],
   },
   {
     path: '**',
