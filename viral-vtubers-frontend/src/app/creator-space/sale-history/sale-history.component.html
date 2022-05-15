@@ -1,57 +1,68 @@
-<div class="container">
-  <div class="history-container">
-    <h4>Sale History</h4>
-    <div class="title-underscore"></div>
-    <ng-container *ngIf="sales$ | async as sales; else loading">
-      <ng-container *ngIf="sales.length > 0; else empty">
-        <div class="sales-container">
-          <div class="sale-headers">
-            <h5 class="sale-heading product-col">Product</h5>
-            <h5 class="sale-heading buyer-col">Buyer</h5>
-            <h5 class="sale-heading date-col">Transaction Date</h5>
-            <h5 class="sale-heading price-col">Price</h5>
-          </div>
-          <hr class="divider" id="first-divider" />
+<h1>Purchase History</h1>
+<hr />
 
-          <ng-container *ngFor="let sale of sales">
-            <div class="sale-items" *ngFor="let item of sale.items">
-              <div class="sale-item">
-                <div class="product-col">
-                  <img [src]="item.product.titleImage" class="product-img" />
-                  <div class="item-names">
-                    <h5></h5>
-                    <h6>
-                      {{ item.product.description }}
-                    </h6>
-                  </div>
-                </div>
+<ng-container *ngIf="sales$ | async as sales; else loading">
+  <ng-container *ngIf="sales.length > 0; else empty">
+    <table>
+      <tr class="table-head">
+        <th class="product-col">Product</th>
+        <th class="buyer-col">Buyer</th>
+        <th class="date-col">Transaction Date</th>
+        <th class="price-col">Price</th>
+      </tr>
 
-                <div class="buyer buyer-col">
-                  <img [src]="sale.buyer.profileImageURI" />
-                  <h5>{{ sale.buyer.displayName }}</h5>
-                </div>
-                <h5 class="date-col">{{ toDate(sale.placed) }}</h5>
-                <h5 class="price-col">{{ item.price }}</h5>
+      <ng-container *ngFor="let purchase of sales">
+        <tr *ngFor="let item of purchase.items">
+          <td class="product-col">
+            <div class="product-container">
+              <img
+                src="{{ item.product.titleImage }}"
+                onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+              />
+              <div>
+                <h5>{{ item.product.name }}</h5>
+                <p>
+                  {{ item.fileName }}
+                </p>
               </div>
-              <hr class="divider" />
             </div>
-          </ng-container>
-        </div>
+          </td>
+          <td class="buyer-col">
+            <div class="buyer-container">
+              <img
+                src="{{ purchase.buyer.profileImageURI }}"
+                onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+              />
+              <p>{{ purchase.buyer.displayName }}</p>
+            </div>
+          </td>
+          <td class="date-col">
+            {{ purchase.placed }}
+          </td>
+          <td class="price-col">${{ item.price | number: "1.2-2" }}</td>
+        </tr>
       </ng-container>
-    </ng-container>
-  </div>
-</div>
+    </table>
+  </ng-container>
+</ng-container>
 
-<ng-template #empty>
-  <div class="empty">
-    <img src="assets/chibis/gwenny.png" />
-    <p>No sales yet...</p>
+<ng-template #loading>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        Vivi is working hard to load you some products...
+      </p></app-loading
+    >
   </div>
 </ng-template>
 
-<ng-template #loading>
-  <div class="empty">
-    <img src="assets/chibis/gwenny.png" />
-    <p>Loading...</p>
+<ng-template #empty>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        No sales yet... Let's
+        <a routerLink="/marketplace">start browsing</a>!
+      </p></app-loading
+    >
   </div>
 </ng-template>
