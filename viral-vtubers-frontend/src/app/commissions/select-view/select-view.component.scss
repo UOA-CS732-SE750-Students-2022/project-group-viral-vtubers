@@ -26,181 +26,24 @@ $input-width: 420px;
 
   .cloud-left {
     width: 535px;
-    transform: rotate(180deg);
-    left: -10vw;
-    top: -100px;
-
-    position: absolute;
+    transform: rotate(178deg) scaleX(-1);
+    left: -7vw;
+    top: -145px;
   }
 
   .cloud-mid {
-    display: none;
     transform: rotate(-3deg);
     width: 960px;
-    left: 30vw;
+    left: 22vw;
+    top: -380px;
   }
 
   .cloud-right {
-    display: none;
-
-    transform: rotate(-2deg);
+    transform: rotate(178deg);
 
     width: 655px;
-  }
-}
 
-.content-container {
-  width: 80%;
-  top: 50%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  max-height: 650px;
-
-  > h3 {
-    font-size: $font-size-h4;
-    font-family: $font-family-monospace;
-    text-transform: lowercase;
-    background-color: $color-background;
-    padding: 60px;
-    padding-top: 0;
-    z-index: 2;
-  }
-
-  .signin-container {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    border-top: solid 1px $color-grey-light;
-    margin-top: -105px;
-    min-width: 1100px;
-    box-sizing: border-box;
-
-    .half-container {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      > img {
-        z-index: 3;
-        margin: 30px;
-      }
-    }
-
-    .chibi-container {
-      border-right: solid 1px $color-grey-light;
-    }
-
-    .form-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      > input {
-        width: $input-width;
-        height: 40px;
-        border-radius: 3px;
-        border: solid 1px $color-grey-light;
-        margin-bottom: 30px;
-        font-size: $font-size-body-2;
-        font-family: $font-family-poppins;
-        padding: 0 15px;
-        box-sizing: border-box;
-
-        &:focus {
-          border-color: $color-primary;
-          outline: none;
-        }
-      }
-
-      .action-container > div {
-        width: $input-width;
-        display: flex;
-        justify-content: space-between;
-
-        .button {
-          width: 185px;
-          height: 38px;
-          text-decoration: none;
-          border: solid 1px $color-grey-light;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: $font-family-poppins;
-          font-size: $font-size-body-2;
-          text-transform: uppercase;
-          font-weight: 500;
-          border-radius: 3px;
-          cursor: pointer;
-          transition: $button-hover-animation;
-        }
-
-        > input {
-          background-color: $color-primary;
-          color: $color-background;
-
-          &:hover {
-            opacity: $button-coloured-hover-opacity;
-          }
-        }
-
-        > a {
-          color: $color-grey-dark;
-
-          &:hover {
-            background-color: $button-blank-hover-bg;
-          }
-        }
-      }
-
-      .action-container .actions {
-        margin-bottom: 5px;
-        align-items: center;
-        font-size: $font-size-body-3;
-        text-transform: capitalize;
-
-        > span {
-          display: flex;
-          align-items: center;
-
-          input {
-            margin: 0;
-            margin-right: 8px;
-            height: 14px;
-            width: 14px;
-          }
-        }
-
-        .remember-me {
-          color: $color-grey-dark;
-        }
-
-        .forgot-password {
-          color: $color-secondary;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-
-  > p {
-    height: 20px;
-    margin-top: 40px;
-    font-size: $font-size-body-3;
-    color: $color-grey-dark;
-    margin-bottom: 20px;
-    z-index: 5;
-
-    > a {
-      color: $color-primary;
-      text-decoration: none;
-      cursor: pointer;
-    }
+    right: -5vw;
+    top: -170px;
   }
 }
