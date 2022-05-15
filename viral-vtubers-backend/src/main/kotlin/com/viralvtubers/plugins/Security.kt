@@ -33,7 +33,7 @@ fun Application.configureSecurity() {
         jwt {
             verifier(
                 jwkProvider,
-                "https://securetoken.google.com/viral-vtubers"
+                "https://securetoken.google.com/viral-vtubers-6dbdf"
             )
             validate { credential ->
                 JWTPrincipal(credential.payload)

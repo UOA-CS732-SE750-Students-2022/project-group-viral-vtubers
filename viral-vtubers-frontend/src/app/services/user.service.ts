@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ThumbnailsMode } from 'ng-gallery';
 import { map, Observable } from 'rxjs';
 import {
   AccountGQL,
   AddServiceGQL,
   AddServiceInput,
-  ArtistFragmentFragment,
   ArtistPaginationFragmentFragment,
   ArtistsGQL,
   DeleteServiceGQL,

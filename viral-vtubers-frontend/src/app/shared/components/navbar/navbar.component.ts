@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
 import {
   NotificationFragmentFragment,
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit {
   firstCategoryBlurb = 'dress';
 
   isSubcategory = false;
+
+  search = '';
 
   @ViewChild('marketplace') marketplaceRef!: ElementRef;
   @ViewChild('dropdown') dropdownRef!: ElementRef;
@@ -134,7 +137,8 @@ export class NavbarComponent implements OnInit {
     private blurbService: BlurbService,
     private router: Router,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private searchService: SearchService
   ) {
     if (authService.isLoggedIn) {
       this.self$ = userService.getSelf().self$;
@@ -264,6 +268,10 @@ export class NavbarComponent implements OnInit {
     this.dropdownRef.nativeElement.style.visibility = 'hidden';
     this.showCategories();
     this.dressRef.nativeElement.style.backgroundColor = null;
+  }
+
+  async submitSearch() {
+    this.searchService.setSearch(this.search);
   }
 
   ngOnInit(): void {}

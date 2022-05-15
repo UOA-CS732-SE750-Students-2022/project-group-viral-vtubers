@@ -11,8 +11,12 @@
     <a routerLink="#" class="logo">Vlogo</a>
   </div>
   <div class="search">
-    <input placeholder="老师: 你这样会使得我很尴尬" />
-    <button>
+    <input
+      placeholder="老师: 你这样会使得我很尴尬"
+      [(ngModel)]="search"
+      (keyup.enter)="submitSearch()"
+    />
+    <button (click)="submitSearch()">
       <img class="search-icon" src="assets/icons/SearchIcon.svg" />
     </button>
   </div>
