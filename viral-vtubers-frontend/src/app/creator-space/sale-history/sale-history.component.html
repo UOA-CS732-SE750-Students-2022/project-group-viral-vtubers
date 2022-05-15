@@ -14,27 +14,34 @@
       <ng-container *ngFor="let purchase of sales">
         <tr *ngFor="let item of purchase.items">
           <td class="product-col">
-            <div class="product-container">
-              <img
-                src="{{ item.product.titleImage }}"
-                onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
-              />
-              <div>
-                <h5>{{ item.product.name }}</h5>
-                <p>
-                  {{ item.fileName }}
-                </p>
+            <a
+              class="link"
+              routerLink="/marketplace/product/{{ item.product.id }}"
+            >
+              <div class="product-container">
+                <img
+                  src="{{ item.product.titleImage }}"
+                  onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+                />
+                <div>
+                  <h5>{{ item.product.name }}</h5>
+                  <p>
+                    {{ item.fileName }}
+                  </p>
+                </div>
               </div>
-            </div>
+            </a>
           </td>
           <td class="buyer-col">
-            <div class="buyer-container">
-              <img
-                src="{{ purchase.buyer.profileImageURI }}"
-                onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
-              />
-              <p>{{ purchase.buyer.displayName }}</p>
-            </div>
+            <a class="link" routerLink="/user/{{ purchase.buyer.id }}">
+              <div class="buyer-container">
+                <img
+                  src="{{ purchase.buyer.profileImageURI }}"
+                  onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+                />
+                <p>{{ purchase.buyer.displayName }}</p>
+              </div>
+            </a>
           </td>
           <td class="date-col">
             {{ purchase.placed }}
