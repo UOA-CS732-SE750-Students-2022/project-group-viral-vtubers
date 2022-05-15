@@ -593,20 +593,3 @@ $margin-top: 10px;
     }
   }
 }
-
-.loading {
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    height: 70%;
-  }
-
-  p {
-    color: $color-grey-dark;
-    font-size: $font-size-body-2;
-  }
-}

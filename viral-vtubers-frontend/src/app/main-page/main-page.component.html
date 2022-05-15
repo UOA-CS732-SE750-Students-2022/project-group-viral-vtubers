@@ -106,18 +106,19 @@
         </ng-container>
 
         <ng-template #emptyProducts>
-          <div class="loading">
-            <img src="assets/chibis/vivi.png" />
-            <p>Gwenny found nothing... Let's look somewhere else!</p>
-          </div>
+          <app-loading
+            chibi="vivi"
+            height="300px"
+            text="Vivi found nothing... Let's look somewhere else!"
+          ></app-loading>
         </ng-template>
       </ng-container>
       <ng-template #loadingProducts>
-        <div class="loading">
-          <img src="assets/chibis/vivi.png" />
-
-          <p>Vivi is working hard to load some products for you...</p>
-        </div>
+        <app-loading
+          chibi="vivi"
+          height="300px"
+          text="Vivi is working hard to load some products for you..."
+        ></app-loading>
       </ng-template>
     </div>
     <div class="section">
@@ -142,21 +143,19 @@
           </div>
         </ng-container>
         <ng-template #emptyRequests>
-          <div class="loading">
-            <img src="assets/chibis/gwenny.png" />
-            <p>Gwenny found nothing... Let's look somewhere else!</p>
-          </div>
-          <app-loading></app-loading>
+          <app-loading
+            chibi="gwenny"
+            height="300px"
+            text="Gwenny found nothing... Let's look somewhere else!"
+          ></app-loading>
         </ng-template>
       </ng-container>
       <ng-template #loadingRequests>
-        <div class="loading">
-          <img src="assets/chibis/gwenny.png" />
-
-          <p>
-            Gwenny is working hard to load some commission requests for you...
-          </p>
-        </div>
+        <app-loading
+          chibi="gwenny"
+          height="300px"
+          text="Gwenny is working hard to load some commission requests for you..."
+        ></app-loading>
       </ng-template>
     </div>
   </div>
