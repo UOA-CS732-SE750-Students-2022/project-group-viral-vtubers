@@ -6,7 +6,7 @@
         <h2>Browse Assets</h2>
         <img
           class="gwenny-img"
-          src="assets/chibis/chibi_pink.png"
+          src="assets/chibis/gwenny.png"
           alt="Your gal Gwenny!"
         />
       </div>
@@ -19,7 +19,7 @@
         <h2>Commission Assets</h2>
         <img
           class="vivi-img"
-          src="assets/chibis/chibi_blue.png"
+          src="assets/chibis/vivi.png"
           alt="Your gal Vivi!"
         />
       </div>
@@ -107,14 +107,14 @@
 
         <ng-template #emptyProducts>
           <div class="loading">
-            <img src="assets/chibis/chibi_blue.png" />
+            <img src="assets/chibis/vivi.png" />
             <p>Gwenny found nothing... Let's look somewhere else!</p>
           </div>
         </ng-template>
       </ng-container>
       <ng-template #loadingProducts>
         <div class="loading">
-          <img src="assets/chibis/chibi_blue.png" />
+          <img src="assets/chibis/vivi.png" />
 
           <p>Vivi is working hard to load some products for you...</p>
         </div>
@@ -143,14 +143,15 @@
         </ng-container>
         <ng-template #emptyRequests>
           <div class="loading">
-            <img src="assets/chibis/chibi_pink.png" />
+            <img src="assets/chibis/gwenny.png" />
             <p>Gwenny found nothing... Let's look somewhere else!</p>
           </div>
+          <app-loading></app-loading>
         </ng-template>
       </ng-container>
       <ng-template #loadingRequests>
         <div class="loading">
-          <img src="assets/chibis/chibi_pink.png" />
+          <img src="assets/chibis/gwenny.png" />
 
           <p>
             Gwenny is working hard to load some commission requests for you...
