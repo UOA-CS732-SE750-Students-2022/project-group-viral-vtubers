@@ -155,23 +155,6 @@ class AuthServiceImplTest {
         assertEquals(uid, id?.value)
     }
 
-//    @Test
-//    fun testGetOptionalUserIdFirstTryFailureUserDoesntExist() {
-//        // Prepare
-//        val context = mockk<Context>()
-//        val jwtPrincipal = mockk<JWTPrincipal>()
-//        val uid = "123"
-//
-//        // Expect
-//        every { context.get<JWTPrincipal>()?.subject } returns uid
-//        every { context.get<JWTPrincipal>()?.get("userId") } returns null
-//        every { firebaseAuth.getUser(uid) } returns null
-//
-//        // Execute
-//        assertThrows<FirebaseAuthException> {
-//            authService.getOptionalUserId(context)
-//        }
-//    }
 
     @Test
     fun testGetOptionalUserIdFirstTryFailureUserDoesntExist() {
