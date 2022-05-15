@@ -24,8 +24,14 @@
   opacity: 0;
   transition: visibility 0.2s, opacity 0.2s linear;
 
-  font-family: $font-family-monospace;
+  left: 34%;
+  transform: translateX(-17%);
+
+  font-family: $font-family-poppins;
+  font-weight: 400;
   font-size: $font-size-body-1;
+
+  text-transform: capitalize;
 
   position: fixed;
   background-color: $color-background;
@@ -40,14 +46,14 @@
   margin-left: -2em;
 
   a:hover {
-    background-color: $color-grey-light;
+    background-color: #f3f3f3;
   }
 
   a {
     padding: 14px 35px;
     float: left;
     visibility: visible;
-    opacity: 1;
+    opacity: 1 !important;
     transition: visibility 0.2s, opacity 0.2s linear;
   }
 
@@ -59,11 +65,14 @@
 }
 
 .navbar-btn {
-  font-family: $font-family-monospace;
+  font-family: $font-family-poppins;
   font-size: $font-size-body-1;
+  text-transform: capitalize;
+
+  padding: 0 1%;
 
   :hover {
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -73,7 +82,18 @@
 
 .logo-btn {
   font-size: 26px;
-  margin: auto;
+
+  &:hover {
+    .logo > img {
+      transform: scale(1.05);
+    }
+  }
+
+  .logo > img {
+    width: 200px;
+
+    transition: $button-hover-animation;
+  }
 }
 
 .profile-img {
@@ -195,7 +215,7 @@
   }
 }
 
-@media (max-width: 1130px) {
+@media (max-width: 1400px) {
   .logo-btn {
     width: 0;
     visibility: hidden;
@@ -241,5 +261,16 @@
       background-color: rgb(246, 246, 246);
       color: $color-primary;
     }
+  }
+}
+
+.spacing-div {
+  width: 18%;
+}
+
+@media (max-width: 1400px) {
+  .dropdown-content {
+    left: 18%;
+    transform: translateX(-9%);
   }
 }
