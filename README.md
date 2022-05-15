@@ -74,7 +74,7 @@ export const environment = {
 2. Run `mvn install` to install all of the backend dependencies
 3. Once it has finished installing, run `mvn package` to generate a jar
 4. Now we can start up the docker image with the MongoDB database, run `docker-compose up` inside `/viral-vtubers-backend/`
-5. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` or `mvn exec:java`
+5. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory) or `mvn exec:java`(in backend directory)
   
 ### Data population
 
