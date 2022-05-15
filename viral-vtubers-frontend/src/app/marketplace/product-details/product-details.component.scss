@@ -386,3 +386,11 @@ $side-margin: 40px;
 .disabled-btn {
   background-color: $color-grey-dark !important;
 }
+
+.loading-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
