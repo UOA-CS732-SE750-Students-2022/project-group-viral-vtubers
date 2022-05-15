@@ -1,10 +1,9 @@
-
 # Part 1: Build the app using Maven
 FROM maven:3.8.5-openjdk-18
 
 # Secrets
-RUN --mount=type=secret,id=application.conf cat /src/main/resources/application.conf
-RUN --mount=type=secret,id=firebase-service-account.json cat /src/main/resources/firebase-service-account.json
+RUN --mount=type=secret,id=application_conf,dst=/etc/secrets/application.conf cat src/main/resources/application.conf
+RUN --mount=type=secret,id=firebase-service-account_json,dst=/etc/secrets/firebase-service-account.json cat src/main/resources/firebase-service-account.json
 
 ## download dependencies
 ADD pom.xml /
@@ -24,4 +23,3 @@ COPY --from=0 /target/*-jar-with-dependencies.jar app.jar
 EXPOSE 8080:8080
 
 ENTRYPOINT ["java","-jar","./app.jar"]
-
