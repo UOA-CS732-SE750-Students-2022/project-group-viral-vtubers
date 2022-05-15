@@ -126,6 +126,8 @@
   text-transform: uppercase;
   font-size: $font-size-body-3;
 
+  white-space: nowrap;
+
   &:hover {
     transform: scale(1.05);
   }
