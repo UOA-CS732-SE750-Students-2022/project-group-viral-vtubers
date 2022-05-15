@@ -6,8 +6,12 @@ import com.viralvtubers.graphql.data.ID
 import io.ktor.server.auth.jwt.*
 
 class AuthServiceImpl : AuthService {
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuth: FirebaseAuth
     private val cacheUserId = HashMap<String, ID>()
+
+    constructor(firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()) {
+        this.firebaseAuth = firebaseAuth
+    }
 
     override fun getUserId(ctx: Context): ID {
         val uid = ctx.get<JWTPrincipal>()?.subject
