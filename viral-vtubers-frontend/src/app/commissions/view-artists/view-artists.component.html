@@ -10,49 +10,63 @@
     <img src="assets/banners/default.png" />
   </div>
   <div class="artist-section" *ngIf="artists$ | async as artists; else loading">
-    <a
-      class="artist"
-      *ngFor="let artist of artists.edges"
-      routerLink="{{ '/user/' + artist.node.id }}"
-    >
-      <ng-container *ngIf="artist.node as artist">
-        <img [src]="artist.profileImageURI" />
-        <div>
-          <h5>{{ artist.displayName }}</h5>
-          <div class="artist-status">
-            <p class="status">Dancing in the rain hehe~</p>
-            <button
-              *ngIf="!artist.isFollowing"
-              (click)="follow($event, artist.id)"
-            >
-              Follow
-            </button>
-            <button
-              *ngIf="artist.isFollowing"
-              class="unfollow-btn"
-              (click)="unfollow($event, artist.id)"
-            >
-              Following
-            </button>
+    <ng-container *ngIf="artists.edges.length > 0; else empty">
+      <a
+        class="artist"
+        *ngFor="let artist of artists.edges"
+        routerLink="{{ '/user/' + artist.node.id }}"
+      >
+        <ng-container *ngIf="artist.node as artist">
+          <img [src]="artist.profileImageURI" />
+          <div>
+            <h5>{{ artist.displayName }}</h5>
+            <div class="artist-status">
+              <p class="status">Dancing in the rain hehe~</p>
+              <button
+                *ngIf="!artist.isFollowing"
+                (click)="follow($event, artist.id)"
+              >
+                Follow
+              </button>
+              <button
+                *ngIf="artist.isFollowing"
+                class="unfollow-btn"
+                (click)="unfollow($event, artist.id)"
+              >
+                Following
+              </button>
+            </div>
+            <p>
+              Completed <b> {{ artist.numCompletedCommissions }}</b> commissions
+            </p>
+            <p>
+              <span>
+                <img src="assets/icons/hearts/heart-filled-secondary.svg" />
+                <b> {{ artist.numLikes }} </b> Total Likes
+              </span>
+            </p>
+            <ng-container (click)="preventDefault($event)">
+              <app-tags class="app-tags" [isEdit]="false"></app-tags>
+            </ng-container>
           </div>
-          <p>
-            Completed <b> {{ artist.numCompletedCommissions }}</b> commissions
-          </p>
-          <p>
-            <span>
-              <img src="assets/icons/hearts/heart-filled-secondary.svg" />
-              <b> {{ artist.numLikes }} </b> Total Likes
-            </span>
-          </p>
-          <ng-container (click)="preventDefault($event)">
-            <app-tags class="app-tags" [isEdit]="false"></app-tags>
-          </ng-container>
-        </div>
-      </ng-container>
-    </a>
+        </ng-container>
+      </a>
+    </ng-container>
   </div>
 </div>
 
 <ng-template #loading>
-  <div>Loading ...</div>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>Vivi is working hard to load some artists for you!</p>
+    </app-loading>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="loading-container">
+    <app-loading chibi="gwenny" height="300px" fontSize="large">
+      <p text>Vivi found no artists... Let's check again later!</p>
+    </app-loading>
+  </div>
 </ng-template>

@@ -54,18 +54,23 @@
   </ng-container>
 </ng-container>
 
-<ng-template #empty>
-  <div class="empty">
-    <img src="assets/chibis/chibi_blue.png" />
-    <p>
-      No purchases yet... Let's <a routerLink="/marketplace">start browsing</a>!
-    </p>
+<ng-template #loading>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        Vivi is working hard to load you some products...
+      </p></app-loading
+    >
   </div>
 </ng-template>
 
-<ng-template #loading>
-  <div class="empty">
-    <img src="assets/chibis/chibi_blue.png" />
-    <p>Loading...</p>
+<ng-template #empty>
+  <div class="loading-container">
+    <app-loading chibi="vivi" height="300px" fontSize="large"
+      ><p text>
+        No purchases yet... Let's
+        <a routerLink="/marketplace">start browsing</a>!
+      </p></app-loading
+    >
   </div>
 </ng-template>

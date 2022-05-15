@@ -13,33 +13,35 @@
     class="request-selection"
     *ngIf="requests$ | async as requests; else loading"
   >
-    <ng-container *ngFor="let request of requests.edges">
-      <div
-        class="request"
-        *ngIf="request.node as request"
-        (click)="setSelectedOrder(request)"
-      >
-        <img [src]="request.image" />
-        <div class="request-content">
-          <h5>{{ request.name }}</h5>
-          <div class="request-description">
-            <p class="description">{{ request.description }}</p>
-            <div class="request-bounty">
-              <img src="assets/icons/bounty.svg" />
-              <span> ${{ request.bounty | number: "1.2-2" }} </span>
+    <ng-container *ngIf="requests.edges.length > 0; else empty">
+      <ng-container *ngFor="let request of requests.edges">
+        <div
+          class="request"
+          *ngIf="request.node as request"
+          (click)="setSelectedOrder(request)"
+        >
+          <img [src]="request.image" />
+          <div class="request-content">
+            <h5>{{ request.name }}</h5>
+            <div class="request-description">
+              <p class="description">{{ request.description }}</p>
+              <div class="request-bounty">
+                <img src="assets/icons/bounty.svg" />
+                <span> ${{ request.bounty | number: "1.2-2" }} </span>
+              </div>
             </div>
+            <ng-container (click)="preventDefault($event)">
+              <div class="tag-container">
+                <app-tags
+                  class="app-tags"
+                  [isEdit]="false"
+                  [tags]="request.tags"
+                ></app-tags>
+              </div>
+            </ng-container>
           </div>
-          <ng-container (click)="preventDefault($event)">
-            <div class="tag-container">
-              <app-tags
-                class="app-tags"
-                [isEdit]="false"
-                [tags]="request.tags"
-              ></app-tags>
-            </div>
-          </ng-container>
         </div>
-      </div>
+      </ng-container>
     </ng-container>
   </div>
 </div>
@@ -87,5 +89,17 @@
 </div>
 
 <ng-template #loading>
-  <div>Loading ...</div>
+  <div class="loading-container">
+    <app-loading chibi="gwenny" height="300px" fontSize="large"
+      ><p text>Gwenny is working hard to load some requests for you!</p>
+    </app-loading>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="loading-container">
+    <app-loading chibi="gwenny" height="300px" fontSize="large">
+      <p text>Gwenny found no requests... Let's check again later!</p>
+    </app-loading>
+  </div>
 </ng-template>

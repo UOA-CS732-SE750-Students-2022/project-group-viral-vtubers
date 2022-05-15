@@ -6,7 +6,7 @@
         <h2>Browse Assets</h2>
         <img
           class="gwenny-img"
-          src="assets/chibis/chibi_pink.png"
+          src="assets/chibis/gwenny.png"
           alt="Your gal Gwenny!"
         />
       </div>
@@ -19,7 +19,7 @@
         <h2>Commission Assets</h2>
         <img
           class="vivi-img"
-          src="assets/chibis/chibi_blue.png"
+          src="assets/chibis/vivi.png"
           alt="Your gal Vivi!"
         />
       </div>
@@ -106,18 +106,19 @@
         </ng-container>
 
         <ng-template #emptyProducts>
-          <div class="loading">
-            <img src="assets/chibis/chibi_blue.png" />
-            <p>Gwenny found nothing... Let's look somewhere else!</p>
-          </div>
+          <app-loading chibi="vivi" height="300px">
+            <p text>
+              Vivi found nothing... Let's look somewhere else!
+            </p></app-loading
+          >
         </ng-template>
       </ng-container>
       <ng-template #loadingProducts>
-        <div class="loading">
-          <img src="assets/chibis/chibi_blue.png" />
-
-          <p>Vivi is working hard to load some products for you...</p>
-        </div>
+        <app-loading chibi="vivi" height="300px">
+          <p text>
+            Vivi is working hard to load some products for you...
+          </p></app-loading
+        >
       </ng-template>
     </div>
     <div class="section">
@@ -142,20 +143,19 @@
           </div>
         </ng-container>
         <ng-template #emptyRequests>
-          <div class="loading">
-            <img src="assets/chibis/chibi_pink.png" />
-            <p>Gwenny found nothing... Let's look somewhere else!</p>
-          </div>
+          <app-loading chibi="gwenny" height="300px">
+            <p text>
+              Gwenny found nothing... Let's look somewhere else!
+            </p></app-loading
+          >
         </ng-template>
       </ng-container>
       <ng-template #loadingRequests>
-        <div class="loading">
-          <img src="assets/chibis/chibi_pink.png" />
-
-          <p>
+        <app-loading chibi="gwenny" height="300px">
+          <p text>
             Gwenny is working hard to load some commission requests for you...
           </p>
-        </div>
+        </app-loading>
       </ng-template>
     </div>
   </div>

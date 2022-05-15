@@ -1,0 +1,8 @@
+<div class="container" [ngStyle]="{ height: height }">
+  <img
+    src="assets/chibis/{{ chibi }}.png"
+    [ngClass]="{ flipped: isFlipped, 'font-size': fontSize }"
+  />
+
+  <p><ng-content select="[text]"></ng-content></p>
+</div>

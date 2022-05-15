@@ -1,0 +1,44 @@
+@import "../../../variables";
+
+:host {
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 70%;
+  }
+
+  .flipped {
+    transform: scaleX(-1);
+  }
+
+  p {
+    color: $color-grey-dark;
+
+    &.smol {
+      font-size: $font-size-body-3;
+    }
+
+    &.medium {
+      font-size: $font-size-body-2;
+    }
+
+    &.large {
+      font-size: $font-size-body-1;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-primary;
+    }
+  }
+}

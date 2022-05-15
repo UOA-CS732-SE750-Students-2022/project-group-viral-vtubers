@@ -7,6 +7,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductsGridComponent } from './components/products-grid/products-grid.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { VrmCanvasComponent } from './components/vrm-canvas/vrm-canvas.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { VrmCanvasComponent } from './components/vrm-canvas/vrm-canvas.component
     TagsComponent,
     ProductsGridComponent,
     VrmCanvasComponent,
+    LoadingComponent,
   ],
   imports: [CommonModule, RouterModule],
   exports: [
@@ -23,6 +25,7 @@ import { VrmCanvasComponent } from './components/vrm-canvas/vrm-canvas.component
     FooterComponent,
     ProductsGridComponent,
     VrmCanvasComponent,
+    LoadingComponent,
   ],
 })
 export class SharedModule {}

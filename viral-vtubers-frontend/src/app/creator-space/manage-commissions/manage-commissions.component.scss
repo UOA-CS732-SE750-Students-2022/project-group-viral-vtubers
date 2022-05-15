@@ -43,6 +43,10 @@ h3 {
   width: 100%;
   display: flex;
   column-gap: 30px;
+
+  .won-commissions-container {
+    flex: 1;
+  }
 }
 
 .row {
@@ -462,4 +466,13 @@ table {
       }
     }
   }
+}
+
+.emptyPastCommissions {
+  width: 100%;
+
+  margin-top: 30px;
+
+  color: $color-grey-dark;
+  font-size: $font-size-body-3;
 }
