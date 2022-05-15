@@ -1,4 +1,7 @@
 <nav class="navbar">
+  <div class="navbar-btn logo-btn">
+    <a routerLink="/" class="logo"><img src="assets/logo.svg" /></a>
+  </div>
   <div #marketplace class="navbar-btn marketplace-btn">
     <a routerLink="/marketplace" class="logo" (mouseover)="marketplaceShow()"
       >marketplace</a
@@ -7,9 +10,7 @@
   <div class="navbar-btn">
     <a routerLink="/commissions" class="logo">commission</a>
   </div>
-  <div class="navbar-btn logo-btn">
-    <a routerLink="/" class="logo">Vlogo</a>
-  </div>
+  <div class="spacing-div"></div>
   <div class="search">
     <input
       placeholder="老师: 你这样会使得我很尴尬"
