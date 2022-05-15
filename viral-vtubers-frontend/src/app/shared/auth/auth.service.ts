@@ -105,7 +105,7 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: firebase.User | null) => u?.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email']);
+        this.router.navigate(['/']);
       });
   }
 
