@@ -1,0 +1,32 @@
+// Sourced from https://booth.pm/en/items/3252305
+{
+  "_id": "627fca55a4dfb74915eeea15",
+  "name": "Black Short Hair",
+  "artistId": "627fc8e825bd00f452fc3f31",
+  "tags": [
+  ],
+  "description": "❁ Product includes:-\n- Texture File (.PNG)\n- VROID hair preset.\n\n❁ Product details:-\n- Copy the hair preset file into this Directory\n\"C:\\Users\\Yourname\\AppData\\LocalLow\\pixiv\\VRoidStudio\\hair_presets\"\n\nFor any inquiry feel free to message.\n\nKeep note no refund available for digital items. However, if any issue occurs with the item feel free to message to get it fixed.\n\n⚠️ Do not resell or distribute.",
+  "titleImage": "https://booth.pximg.net/e118a8ff-6c1c-459b-8bc0-2cd9978dcffc/i/3252305/48b1912c-af2f-4806-978d-3e39af9eade6.png",
+  "subcategory": "6276e191547ce5a4451ba997",
+  "images": [
+  ],
+  "vrm": "",
+  "numLikes": 68,
+  "variants": [
+    {
+      "_id": "627fcba81805d2ed5aee8394",
+      "productId": "627fca55a4dfb74915eeea15",
+      "price": 0,
+      "name": "Preset 7",
+      "file": "preset7.rar",
+      "fileName": "preset7",
+      "fileTypes": ["png"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

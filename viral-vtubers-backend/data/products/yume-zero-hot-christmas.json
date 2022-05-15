@@ -1,0 +1,32 @@
+// Sourced from https://zeros-shop.booth.pm/items/3475124
+{
+  "_id": "627fa63c19ec12b3e5c7d8af",
+  "name": "Hot Christmas Outfit [vroid]",
+  "artistId": "627f9fe88b3bec2852c36622",
+  "tags": [
+  ],
+  "description": "Hot Christmas lingerie",
+  "titleImage": "https://booth.pximg.net/02b54021-0386-4e80-8fd5-13ecb7564050/i/3475124/3b1242b0-a158-4c0d-853d-145b20a55e1a.png",
+  "subcategory": "6276e1a4142753f1de2bc414",
+  "images": [
+  ],
+  "vrm": "",
+  "numLikes": 69,
+  "variants": [
+    {
+      "_id": "627fa63c19ec12b3e5c7d8af",
+      "productId": "627faadb88933f7a3bfb90f3",
+      "price": 0,
+      "name": "Free Download",
+      "file": "lewd_christmas.png",
+      "fileName": "lewd-christmas",
+      "fileTypes": ["png"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": true,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}
