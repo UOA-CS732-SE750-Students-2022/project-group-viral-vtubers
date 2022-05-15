@@ -21,7 +21,6 @@ import { SharedModule } from './shared/shared.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     SignUpComponent,
     NotFoundComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent,
     MainPageComponent,
   ],
   imports: [
