@@ -294,6 +294,7 @@ export class CreateProductComponent implements OnInit, AfterViewChecked {
         progressAnimation: 'decreasing',
         progressBar: true,
       });
+      return;
     }
     if (this.productId == '') {
       productId =
