@@ -67,9 +67,11 @@
 </ng-template>
 
 <ng-template #empty>
-  <app-loading>
-    <p text>
-      No item yet... Let's <a routerLink="/marketplace">start shopping</a>!
-    </p>
-  </app-loading>
+  <div class="loading-container">
+    <app-loading>
+      <p text>
+        No item yet... Let's <a routerLink="/marketplace">start shopping</a>!
+      </p>
+    </app-loading>
+  </div>
 </ng-template>
