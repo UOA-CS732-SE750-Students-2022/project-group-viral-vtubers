@@ -7,6 +7,7 @@ import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -45,6 +46,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     HttpClientModule,
     BrowserAnimationsModule,
     DragDropModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
   ],
   providers: [AuthService, { provide: PERSISTENCE, useValue: 'local' }],
   bootstrap: [AppComponent],

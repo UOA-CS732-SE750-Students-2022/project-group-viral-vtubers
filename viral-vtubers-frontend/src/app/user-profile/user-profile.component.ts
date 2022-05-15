@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import {
   PriceEnum,
@@ -72,7 +73,8 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
     private route: ActivatedRoute,
     private authService: AuthService,
     private productService: ProductService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private toasterService: ToastrService
   ) {
     userService.getSelf().self$.subscribe((self) => {
       this.selfId = self.id;
@@ -161,6 +163,10 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
     this.services = this.services.filter((s) => s.id !== service.id);
 
     this.userService.deleteService(service.id).subscribe();
+    this.toasterService.success('Service removed', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
   }
 
   openNewService() {
@@ -217,6 +223,10 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
         price: this.servicePrice,
       })
       .subscribe();
+    this.toasterService.success('New service added', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.closeNewService();
   }
@@ -235,6 +245,10 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
         price: this.servicePrice,
       })
       .subscribe();
+    this.toasterService.success('Service edited', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.closeNewService();
   }
@@ -248,6 +262,10 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
         profileImageURI: this.userProfileURI,
       })
       .subscribe();
+    this.toasterService.success('Profile edited', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
 
     this.showEditProfile = false;
   }

@@ -4,6 +4,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poppins:wght@300;400;500;600&display=swap");
 @import "./variables";
 
+@import "~ngx-toastr/toastr";
+
 // global styles
 html,
 body {
@@ -12,4 +14,16 @@ body {
   font-size: 16px;
   margin: 0;
   height: 100%;
+}
+
+.toast-container .ngx-toastr {
+  box-shadow: none;
+  font-family: $font-family-poppins;
+  width: 300px;
+  height: 75px;
+
+  &:hover {
+    box-shadow: none;
+    opacity: $button-coloured-hover-opacity !important;
+  }
 }

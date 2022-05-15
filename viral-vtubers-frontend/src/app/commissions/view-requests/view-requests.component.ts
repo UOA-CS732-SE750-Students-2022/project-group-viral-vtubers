@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
@@ -34,7 +35,8 @@ export class ViewRequestsComponent implements OnInit {
   constructor(
     private router: Router,
     private orderService: OrderService,
-    private userService: UserService
+    private userService: UserService,
+    private toasterService: ToastrService
   ) {
     this.requests$ = orderService.getAllOrders().allOrders$;
     userService.getSelf().self$.subscribe((self) => {
@@ -56,7 +58,10 @@ export class ViewRequestsComponent implements OnInit {
     event.preventDefault();
     this.orderService.applyOrder(commissionId).subscribe();
     this.selectedOrder = undefined;
-    alert('Thank you for Applying, pls wait');
+    this.toasterService.success('Thank you for Applying', 'Success', {
+      progressAnimation: 'decreasing',
+      progressBar: true,
+    });
   }
 
   preventDefault(event: Event): void {
