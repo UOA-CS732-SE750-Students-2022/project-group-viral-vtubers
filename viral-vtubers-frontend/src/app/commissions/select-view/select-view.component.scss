@@ -3,14 +3,8 @@
 $header-bg-height: 220px;
 $input-width: 420px;
 
-.page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100% - $header-bg-height - $footer-height);
-  width: 100%;
-  background-color: $color-background;
+:host {
+  display: block;
 }
 
 .header-bg {
@@ -45,5 +39,44 @@ $input-width: 420px;
 
     right: -5vw;
     top: -170px;
+  }
+}
+
+.page-container {
+  margin-top: 160px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+
+  > h1 {
+    font-size: $font-size-h4;
+    font-weight: 400;
+
+    margin: 0;
+
+    margin-bottom: 30px;
+  }
+
+  .options-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+    justify-content: space-evenly;
+
+    padding-bottom: 80px;
+
+    .option {
+      height: 55vh;
+      min-height: 500px;
+      aspect-ratio: 55/62;
+
+      background-color: $color-background;
+    }
   }
 }
