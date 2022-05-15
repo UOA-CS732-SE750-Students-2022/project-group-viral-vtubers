@@ -114,6 +114,11 @@ $card-padding: 75px;
       color: $color-primary;
       cursor: pointer;
 
+      a {
+        color: $color-primary;
+        text-decoration: none;
+      }
+
       &:hover {
         opacity: $button-coloured-hover-opacity;
       }
