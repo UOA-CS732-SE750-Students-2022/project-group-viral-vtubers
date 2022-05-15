@@ -17,21 +17,24 @@
         routerLink="{{ '/user/' + artist.node.id }}"
       >
         <ng-container *ngIf="artist.node as artist">
-          <img [src]="artist.profileImageURI" />
+          <img
+            [src]="artist.profileImageURI"
+            onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+          />
           <div>
             <h5>{{ artist.displayName }}</h5>
             <div class="artist-status">
               <p class="status">Dancing in the rain hehe~</p>
               <button
                 *ngIf="!artist.isFollowing"
-                (click)="follow($event, artist.id)"
+                (click)="follow($event, artist.id); $event.stopPropagation()"
               >
                 Follow
               </button>
               <button
                 *ngIf="artist.isFollowing"
                 class="unfollow-btn"
-                (click)="unfollow($event, artist.id)"
+                (click)="unfollow($event, artist.id); $event.stopPropagation()"
               >
                 Following
               </button>
