@@ -18,7 +18,10 @@
       <hr />
       <div class="list">
         <div *ngFor="let person of account.followers" class="list-item">
-          <img src="{{ person.profileImageURI }}" />
+          <img
+            src="{{ person.profileImageURI }}"
+            onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+          />
 
           <div class="person-info">
             <h6>{{ person.displayName }}</h6>
@@ -32,7 +35,10 @@
       <hr />
       <div class="list">
         <div *ngFor="let person of account.following" class="list-item">
-          <img src="{{ person.profileImageURI }}" />
+          <img
+            src="{{ person.profileImageURI }}"
+            onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+          />
           <div class="person-info">
             <h6>{{ person.displayName }}</h6>
             <p>{{ person.status }}</p>

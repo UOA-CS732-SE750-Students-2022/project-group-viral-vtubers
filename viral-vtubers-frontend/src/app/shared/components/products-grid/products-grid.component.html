@@ -4,7 +4,11 @@
     class="product-item"
     routerLink="{{ getProductUrl(product.id) }}"
   >
-    <img src="{{ product.titleImage }}" alt="waifu" />
+    <img
+      src="{{ product.titleImage }}"
+      alt="waifu"
+      onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+    />
     <div>
       <div class="product-info">
         <h4>{{ product.name }}</h4>

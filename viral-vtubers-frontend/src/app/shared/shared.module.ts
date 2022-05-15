@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { FooterComponent } from './components/footer/footer.component';
+import { LoadingComponent } from './components/loading/loading.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductsGridComponent } from './components/products-grid/products-grid.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { VrmCanvasComponent } from './components/vrm-canvas/vrm-canvas.component';
-import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [

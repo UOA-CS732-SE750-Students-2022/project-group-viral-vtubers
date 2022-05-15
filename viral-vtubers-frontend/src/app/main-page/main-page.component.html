@@ -82,12 +82,19 @@
       <ng-container *ngIf="products$ | async as products; else loadingProducts">
         <ng-container *ngIf="products.length > 0; else emptyProducts">
           <div class="section-content products">
-            <div *ngFor="let product of products" class="products-content">
+            <div
+              *ngFor="let product of products | slice: 0:10"
+              class="products-content"
+            >
               <a
                 class="product-item"
                 routerLink="/marketplace/product/{{ product.id }}"
               >
-                <img src="{{ product.titleImage }}" alt="waifu" />
+                <img
+                  src="{{ product.titleImage }}"
+                  alt="waifu"
+                  onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+                />
                 <div>
                   <div class="product-info">
                     <h4>{{ product.name }}</h4>
@@ -130,7 +137,10 @@
           <div class="section-content commission-requests">
             <div *ngFor="let order of requests" class="request-container">
               <a class="product-item" routerLink="/commissions/requests">
-                <img src="{{ order.image }}" />
+                <img
+                  src="{{ order.image }}"
+                  onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+                />
                 <div class="info-container">
                   <h4>{{ order.name }}</h4>
                   <div class="description-container">
