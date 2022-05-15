@@ -1,21 +1,28 @@
-<div class="container">
-  <div routerLink="requests" class="request box">
-    <div class="background">
-      <p class="backgroundText">View <br /></p>
-      <p class="requestText backgroundText">Request</p>
+<div class="header-bg">
+  <img class="cloud cloud-left" src="../../../assets/clouds/cloud_smol.svg" />
+  <img class="cloud cloud-mid" src="../../../assets/clouds/cloud_big.svg" />
+  <img class="cloud cloud-right" src="../../../assets/clouds/cloud_big.svg" />
+  <div class="page-container">
+    <h1>What brings you here?</h1>
+    <div class="options-container">
+      <div class="option artist">
+        <img src="assets/chibis/chibi-artist.png" />
+        <h3>I'm an Artist</h3>
+        <p>
+          Come with Gwenny! I'll show you some <br />commission requests that
+          you may be interested in!
+        </p>
+        <a routerLink="requests"><button>View commission requests</button></a>
+      </div>
+      <div class="option requester">
+        <img src="assets/chibis/chibi-order.png" />
+        <h3>I'm a Requester</h3>
+        <p>
+          Come with Vivi! I'll show you some awesome <br />artists who can help
+          you make your dream Vtuber!
+        </p>
+        <a routerLink="artists"><button>View available artists</button></a>
+      </div>
     </div>
-    <p>View Commission Requests</p>
-    <img src="assets/chibis/chibi-order.png" />
-  </div>
-  <div routerLink="artists" class="artist box">
-    <div class="background">
-      <p class="backgroundText">
-        View <br />
-        Artist
-      </p>
-    </div>
-
-    <p>View Available Artists</p>
-    <img src="assets/chibis/chibi-artist.png" />
   </div>
 </div>
