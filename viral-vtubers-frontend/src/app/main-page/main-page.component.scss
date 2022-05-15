@@ -159,7 +159,7 @@ $margin-top: 10px;
   }
 
   button {
-    width: 200px;
+    width: 220px;
     height: 40px;
 
     background-color: $color-primary;
@@ -169,6 +169,7 @@ $margin-top: 10px;
     border: none;
 
     font-family: $font-family-poppins;
+    font-size: $font-size-body-2;
     font-weight: 500;
 
     text-transform: uppercase;
