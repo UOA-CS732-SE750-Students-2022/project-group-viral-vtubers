@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -65,6 +66,7 @@ export class CreateRequestComponent implements OnInit {
     private productService: ProductService,
     private orderSerivce: OrderService,
     private uploadService: UploadService,
+    private toasterService: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -174,6 +176,10 @@ export class CreateRequestComponent implements OnInit {
           tagIds: this.tagsRef.tags.map((tag) => tag.id),
         })
       );
+      this.toasterService.success('Created new Commission', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     } else {
       await firstValueFrom(
         this.orderSerivce.editOrder({
@@ -188,6 +194,10 @@ export class CreateRequestComponent implements OnInit {
           tagIds: this.tagsRef.tags.map((tag) => tag.id),
         })
       );
+      this.toasterService.success('Edited Commission', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     }
 
     this.router.navigateByUrl('/me/orders');

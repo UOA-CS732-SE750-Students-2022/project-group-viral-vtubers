@@ -255,9 +255,6 @@
       <button
         class="save-publish-button"
         (click)="handleSubmit(displayName.value, description.value, false)"
-        [disabled]="
-          !checkSubmit(variants, images, selectedCategory, selectedSubcategory)
-        "
       >
         {{ productId === "" ? "UPLOAD" : "SAVE" }}
       </button>
