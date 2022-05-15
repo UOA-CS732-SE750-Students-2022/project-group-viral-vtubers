@@ -97,7 +97,8 @@
             >
               <img src="assets/icons/check-outline.svg" />
               <div>
-                <h4>remove from cart</h4>
+                <h4>already in cart</h4>
+                <p data-test-id="file">{{ i.fileName }}</p>
               </div>
             </button>
             <a class="download-btn" *ngIf="userId !== selfId && i.isPurchased">
