@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
   FieldFunctionOptions,
@@ -7,17 +6,14 @@ import {
   StoreObject,
 } from '@apollo/client/cache';
 import { ReadFieldFunction } from '@apollo/client/cache/core/types/common';
-import {
-  ApolloClientOptions,
-  ApolloLink,
-  from,
-  InMemoryCache,
-  ServerError,
-} from '@apollo/client/core';
-import { onError } from '@apollo/client/link/error';
-import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { from, InMemoryCache } from '@apollo/client/core';
+import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
+import { createAuthLink } from 'src/graphql/middleware/auth';
+import { errorLink } from 'src/graphql/middleware/error';
 import { ProductPagination } from 'src/schema/type';
+
+import { AuthService } from './shared/auth/auth.service';
 
 const uri = 'http://localhost:8080/graphql'; // <-- add the URL of the GraphQL server here
 
@@ -99,54 +95,18 @@ function offsetFromCursor(
   return -1;
 }
 
-export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
-  const middleware = new ApolloLink((operation, forward) => {
-    operation.setContext({
-      headers: new HttpHeaders().set(
-        'Authorization',
-        `Bearer ${localStorage.getItem('token') || null}`
-      ),
-    });
-    return forward(operation);
-  });
-
-  const errorLink = onError(({ graphQLErrors, networkError = {} as any }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
-
-    if (networkError) {
-      console.log(`[Network error]: ${JSON.stringify(networkError)}`);
-      if (networkError.status && networkError.status === 401) {
-        console.log(`[Network error]: ${networkError}`);
-        localStorage.removeItem('token');
-        if (window.location.pathname !== '/signin') {
-          window.location.reload();
-          window.location.href = '/signin';
-        }
-      }
-    }
-  });
-
-  const link = middleware.concat(httpLink.create({ uri }));
-
-  return {
-    link: from([errorLink, link]),
-    cache: cache,
-  };
-}
-
 @NgModule({
   exports: [ApolloModule],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
-      deps: [HttpLink],
-    },
-  ],
 })
-export class GraphQLModule {}
+export class GraphQLModule {
+  constructor(apollo: Apollo, authService: AuthService, httpLink: HttpLink) {
+    const authLink = createAuthLink(authService);
+
+    const link = httpLink.create({ uri });
+
+    apollo.create({
+      link: from([errorLink, authLink, link]),
+      cache: cache,
+    });
+  }
+}

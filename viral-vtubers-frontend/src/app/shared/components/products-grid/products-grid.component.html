@@ -2,7 +2,7 @@
   <a
     *ngFor="let product of products"
     class="product-item"
-    [href]="getProductUrl(product.id)"
+    routerLink="{{ getProductUrl(product.id) }}"
   >
     <img src="{{ product.titleImage }}" alt="waifu" />
     <div>

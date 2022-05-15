@@ -7,7 +7,7 @@
     [style.background]="tag.backgroundColor"
     [@inOutAnimation]
   >
-    <a *ngIf="!isEdit" [style.color]="tag.color" href="#{{ tag.name }}">
+    <a *ngIf="!isEdit" [style.color]="tag.color" routerLink="#{{ tag.name }}">
       <p
         [style.textDecoration]="isEdit ? null : 'none'"
         data-test-id="tag-name"

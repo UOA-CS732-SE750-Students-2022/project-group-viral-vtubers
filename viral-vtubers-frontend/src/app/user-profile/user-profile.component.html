@@ -90,7 +90,7 @@
         <a
           *ngFor="let product of user.products"
           class="product-item"
-          href="/marketplace/product/{{ product.id }}"
+          routerLink="/marketplace/product/{{ product.id }}"
         >
           <img src="{{ product.titleImage }}" alt="waifu" />
           <div>

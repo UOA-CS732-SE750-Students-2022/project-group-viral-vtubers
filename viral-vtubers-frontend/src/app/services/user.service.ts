@@ -16,6 +16,8 @@ import {
   FollowGQL,
   LoginGQL,
   MyUploadedProductsGQL,
+  NotificationFragmentFragment,
+  NotificationGQL,
   ProductBlurbFragmentFragment,
   SelfGQL,
   UserAccountFragmentFragment,
@@ -42,6 +44,8 @@ export class UserService {
 
   uploadedProducts$?: Observable<ProductBlurbFragmentFragment[]>;
 
+  notification$?: Observable<NotificationFragmentFragment>;
+
   constructor(
     private userProfileGQL: UserProfileGQL,
     private selfGQL: SelfGQL,
@@ -55,14 +59,25 @@ export class UserService {
     private myUploadsGQL: MyUploadedProductsGQL,
     private addServiceGQL: AddServiceGQL,
     private editServiceGQL: EditServiceGQL,
-    private deleteServiceGQL: DeleteServiceGQL
+    private deleteServiceGQL: DeleteServiceGQL,
+    private notificationGQL: NotificationGQL
   ) {}
 
   getSelf() {
-    this.self$ = this.selfGQL
-      .watch()
-      .valueChanges.pipe(map((res) => res.data.self));
+    if (!this.self$) {
+      this.self$ = this.selfGQL
+        .watch()
+        .valueChanges.pipe(map((res) => res.data.self));
+    }
+
     return { query: this.selfGQL, self$: this.self$ };
+  }
+
+  getNotification() {
+    this.notification$ = this.notificationGQL
+      .watch()
+      .valueChanges.pipe(map((res) => res.data.notification));
+    return { query: this.notificationGQL, notification$: this.notification$ };
   }
 
   getUserProfile(userId: string) {

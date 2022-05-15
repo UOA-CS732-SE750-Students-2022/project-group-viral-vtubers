@@ -48,7 +48,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     BrowserAnimationsModule,
     DragDropModule,
   ],
-  providers: [AuthService, { provide: PERSISTENCE, useValue: 'session' }],
+  providers: [AuthService, { provide: PERSISTENCE, useValue: 'local' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

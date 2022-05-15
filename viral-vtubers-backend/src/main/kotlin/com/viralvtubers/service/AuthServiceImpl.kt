@@ -29,4 +29,24 @@ class AuthServiceImpl : AuthService {
             return ID(it)
         } ?: throw error("user not found")
     }
+
+    override fun getOptionalUserId(ctx: Context): ID? {
+        val uid = ctx.get<JWTPrincipal>()?.subject ?: return null
+
+        // it exists now
+        ctx.get<JWTPrincipal>()?.get("userId")?.let {
+            cacheUserId.remove(uid)
+            return ID(it)
+        }
+
+        // check cache if it exists
+        if (cacheUserId.contains(uid)) {
+            return cacheUserId[uid]!!
+        }
+
+        firebaseAuth.getUser(uid).customClaims["userId"]?.let {
+            cacheUserId[uid] = ID(it as String)
+            return ID(it)
+        } ?: return null
+    }
 }

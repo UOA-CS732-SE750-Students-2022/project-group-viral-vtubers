@@ -1,6 +1,6 @@
 <div>
   <h3>Thank you for Registering</h3>
-  <div *ngIf="authService.userData as user">
+  <div *ngIf="authService.getUserData() as user">
     <p>
       We have send a confirmation email to <strong>{{ user.email }}</strong>
     </p>

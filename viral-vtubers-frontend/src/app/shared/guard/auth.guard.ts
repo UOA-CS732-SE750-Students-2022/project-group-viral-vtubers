@@ -14,13 +14,13 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean {
-    if (this._authService.isLoggedIn !== true) {
-      this._router.navigate(['signin']);
+    if (this.authService.isLoggedIn !== true) {
+      this.router.navigate(['signin']);
     }
     return true;
   }

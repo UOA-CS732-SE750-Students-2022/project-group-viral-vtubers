@@ -1,44 +1,61 @@
 <nav class="navbar">
-  <div #marketplace class="navbarBtn marketplaceBtn">
-    <a href="/marketplace" class="logo" (mouseover)="marketplaceShow()"
+  <div #marketplace class="navbar-btn marketplace-btn">
+    <a routerLink="/marketplace" class="logo" (mouseover)="marketplaceShow()"
       >marketplace</a
     >
   </div>
-  <div class="navbarBtn">
-    <a href="/commissions" class="logo">commission</a>
+  <div class="navbar-btn">
+    <a routerLink="/commissions" class="logo">commission</a>
   </div>
-  <div class="navbarBtn logoBtn">
-    <a href="#" class="logo">Vlogo</a>
+  <div class="navbar-btn logo-btn">
+    <a routerLink="#" class="logo">Vlogo</a>
   </div>
   <div class="search">
     <input placeholder="老师: 你这样会使得我很尴尬" />
     <button>
-      <img class="searchIcon" src="assets/icons/SearchIcon.svg" />
+      <img class="search-icon" src="assets/icons/SearchIcon.svg" />
     </button>
   </div>
-  <a href="me">
-    <div class="profileImg">
+  <a *ngIf="self$ !== undefined">
+    <div class="profile-img profile-dropdown" *ngIf="self$ | async as self">
       <img
         [src]="
-          !(self$ | async)?.profileImageURI &&
-          (self$ | async)?.profileImageURI !== ''
-            ? (self$ | async)?.profileImageURI
+          self?.profileImageURI && self?.profileImageURI !== ''
+            ? self?.profileImageURI
             : 'assets/chibis/chibi-profile.png'
         "
       />
+      <div class="profile-dropdown-content">
+        <a routerLink="/me">Account</a>
+        <a routerLink="/user/{{ self.id }}">Profile</a>
+      </div>
     </div>
   </a>
-  <div class="iconBtns">
-    <a href="cart">
-      <img class="iconImg" src="assets/icons/CartIcon.svg" />
+
+  <div class="icon-btns">
+    <a routerLink="cart">
+      <img class="icon-img" src="assets/icons/CartIcon.svg" />
     </a>
-    <div class="notify">1</div>
-    <a href="mail">
-      <img class="iconImg" src="assets/icons/MailIcon.svg" />
+    <div
+      class="notify"
+      [ngStyle]="{ opacity: notification.numCart !== 0 ? 1 : 0 }"
+      *ngIf="notification$ | async as notification"
+    >
+      {{ notification.numCart }}
+    </div>
+    <a routerLink="mail">
+      <img class="icon-img" src="assets/icons/MailIcon.svg" />
     </a>
+    <div
+      class="notify"
+      [ngStyle]="{ opacity: notification.numMail !== 0 ? 1 : 0 }"
+      *ngIf="notification$ | async as notification"
+    >
+      {{ notification.numMail }}
+    </div>
   </div>
 
-  <a routerLink="/creator" href="/creator">
+  <a routerLink="/creator" routerLink="/creator">
     <button class="submit-button">+ Submit</button>
   </a>
   <div

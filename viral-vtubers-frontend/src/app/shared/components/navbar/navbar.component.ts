@@ -8,8 +8,12 @@ import {
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
-import { UserFragmentFragment } from 'src/schema/type';
+import {
+  NotificationFragmentFragment,
+  UserFragmentFragment,
+} from 'src/schema/type';
 
+import { AuthService } from '../../auth/auth.service';
 import { BlurbService } from '../../blurb/blurb.service';
 
 @Component({
@@ -37,8 +41,8 @@ export class NavbarComponent implements OnInit {
 
   @ViewChildren('subcategory') subcategories!: ElementRef[];
 
-  self$: Observable<UserFragmentFragment>;
-
+  self$?: Observable<UserFragmentFragment>;
+  notification$?: Observable<NotificationFragmentFragment>;
   categoryFilters: CategoryItem[] = [
     {
       id: '6276deb5fbc3a8262a1448e3',
@@ -129,13 +133,24 @@ export class NavbarComponent implements OnInit {
   constructor(
     private blurbService: BlurbService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
-    this.self$ = userService.getSelf().self$;
+    if (authService.isLoggedIn) {
+      this.self$ = userService.getSelf().self$;
+      this.notification$ = userService.getNotification().notification$;
+    }
+
+    authService.getUser().subscribe((user) => {
+      if (user !== null) {
+        this.self$ = userService.getSelf().self$;
+      } else {
+        this.self$ = undefined;
+      }
+    });
   }
 
   marketplaceShow() {
-    console.log('show');
     this.dropdownRef.nativeElement.style.visibility = 'visible';
     this.dropdownRef.nativeElement.style.opacity = '0.9';
     this.dressRef.nativeElement.style.backgroundColor = undefined;
@@ -245,7 +260,6 @@ export class NavbarComponent implements OnInit {
 
   async marketplaceHide() {
     this.hideSubcategories();
-    console.log('hide');
     this.dropdownRef.nativeElement.style.opacity = '0';
     this.dropdownRef.nativeElement.style.visibility = 'hidden';
     this.showCategories();

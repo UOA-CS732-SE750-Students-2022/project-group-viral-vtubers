@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { MailService } from 'src/app/services/mail.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -34,7 +34,6 @@ export class NewMailComponent implements OnInit {
   }
 
   async sendMail(receiverName: string, body: string, subject: string) {
-    console.log(receiverName, body, subject);
     if (!(await this.checkUser(receiverName))) {
       return;
     }
@@ -45,8 +44,7 @@ export class NewMailComponent implements OnInit {
         receiverUserId: receiverName,
         title: subject,
       })
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe(() => {
         this.router.navigateByUrl('/mail/sent');
       });
   }
