@@ -1,0 +1,32 @@
+// Sourced from
+{
+  "_id": "",
+  "name": "",
+  "artistId": "",
+  "tags": [
+  ],
+  "description": "",
+  "titleImage": "",
+  "subcategory": "",
+  "images": [
+  ],
+  "vrm": "",
+  "numLikes": 69,
+  "variants": [
+    {
+      "_id": "",
+      "productId": "",
+      "price": 0,
+      "name": "",
+      "file": "",
+      "fileName": "",
+      "fileTypes": []
+    }
+  ],
+  "minPrice": 0,
+  "isMature": true,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

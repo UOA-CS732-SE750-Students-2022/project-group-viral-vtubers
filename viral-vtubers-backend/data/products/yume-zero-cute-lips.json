@@ -1,0 +1,42 @@
+// Sourced from https://booth.pm/en/items/3039257
+{
+  "_id": "627eea59ffda7563947c0403",
+  "name": "Cute Lips",
+  "artistId": "627f9fe88b3bec2852c36622",
+  "tags": [
+  ],
+  "description": "Softer and Darker lips for stable vroid\ncan use vroid's color changer to alter lip color",
+  "titleImage": "https://booth.pximg.net/02b54021-0386-4e80-8fd5-13ecb7564050/i/3759590/2e5930e2-b27e-485f-94d3-c44814802298.png",
+  "subcategory": "6276e194853d95e5f129867c",
+  "images": [
+    "https://booth.pximg.net/02b54021-0386-4e80-8fd5-13ecb7564050/i/3759590/4700ac6f-4273-4b28-bd90-6fcc00d6488a.png"
+  ],
+  "vrm": "",
+  "numLikes": 168,
+  "variants": [
+    {
+      "_id": "627fa62df930ac810450aabf",
+      "productId": "627fa2ad3356e64318d73b23",
+      "price": 0,
+      "name": "Dark Lips",
+      "file": "dark_lips.png",
+      "fileName": "dark_lips",
+      "fileTypes": ["png"]
+    },
+    {
+      "_id": "627fa63c19ec12b3e5c7d8af",
+      "productId": "627fa2ad3356e64318d73b23",
+      "price": 0,
+      "name": "Soft Lips",
+      "file": "soft_lips.png",
+      "fileName": "soft_lips",
+      "fileTypes": ["png"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

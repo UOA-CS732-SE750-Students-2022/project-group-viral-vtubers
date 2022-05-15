@@ -1,0 +1,33 @@
+// Sourced from https://zeros-shop.booth.pm/items/3554901
+{
+  "_id": "627fbe5cc9efde58341b9163",
+  "name": "Galaxy Dress [vroid]",
+  "artistId": "627f9fe88b3bec2852c36622",
+  "tags": [
+  ],
+  "description": "Lace galaxy dress\ndon't claim as your own\n",
+  "titleImage": "https://booth.pximg.net/02b54021-0386-4e80-8fd5-13ecb7564050/i/3554901/9bbdb8ce-b522-4367-8c47-f4fd453995c4.png",
+  "subcategory": "6276e19ad8adca914945452b",
+  "images": [
+    "https://booth.pximg.net/02b54021-0386-4e80-8fd5-13ecb7564050/i/3554901/58eca7b7-44db-4d5c-99b2-9c0f7f01d9c3.png"
+  ],
+  "vrm": "",
+  "numLikes": 69,
+  "variants": [
+    {
+      "_id": "627fbe022dc6d7ab9e5ba36a",
+      "productId": "627fbe5cc9efde58341b9163",
+      "price": 0,
+      "name": "Free Download",
+      "file": "cute_lol_2.png",
+      "fileName": "cute_lol_2",
+      "fileTypes": ["png"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

@@ -110,7 +110,7 @@ export class BrowseProductsComponent implements OnInit {
           name: 'Whole Model',
         },
         {
-          id: '6276e760a2e6d3b9f72167af',
+          id: '6276e191547ce5a4451ba997',
           name: 'Hair',
         },
         {

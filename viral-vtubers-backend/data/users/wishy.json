@@ -1,0 +1,36 @@
+{
+  "_id": "627fc8e825bd00f452fc3f31",
+  "firebaseUid": "40",
+  "displayName": "Wishy",
+  "email": "wishy@gmail.com",
+  "bio": "",
+  "numCompletedCommissions": 9,
+  "numLikes": 2,
+  "status": "",
+  "profileImageURI": "https://booth.pximg.net/c/128x128/users/10067049/icon_image/20063599-79e9-42c0-970b-08f354992ec9_base_resized.jpg",
+  "tags": [],
+  "services": [
+    {
+      "_id": "627fc921647f8ad8b655ae02",
+      "name": "Costume Creation",
+      "priceValue": 19,
+      "pricePerUnit": "PoA",
+      "description": "I can make any type of costumes your heart desires."
+    },
+    {
+      "_id": "627fc929027f9feed1832468",
+      "name": "Hair modding",
+      "priceValue": 19,
+      "pricePerUnit": "Each",
+      "description": "Give me an existing hair file and I'll glamour it up!"
+    },
+    {
+      "_id": "627fc9430660641daf030836",
+      "name": "Character from scratch",
+      "priceValue": 19,
+      "pricePerUnit": "Hour",
+      "description": "Bring your character to life! I am just gonna type normally now, it's my new lorem ipsum."
+    }
+  ]
+}
+

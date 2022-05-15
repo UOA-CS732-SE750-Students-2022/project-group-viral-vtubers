@@ -1,0 +1,32 @@
+// Sourced from https://booth.pm/en/items/2983094
+{
+  "_id": "627fcd0904d6b15055b19401",
+  "name": "Green Short Hair",
+  "artistId": "627fc8e825bd00f452fc3f31",
+  "tags": [
+  ],
+  "description": "❁ Product includes:-\n- Texture File (.PNG)\n- VROID hair preset.\n\n❁ Product details:-\n- Copy the hair preset file into this Directory\n\"C:\\Users\\Yourname\\AppData\\LocalLow\\pixiv\\VRoidStudio\\hair_presets\"\n\nFor any inquiry feel free to message.\n\nKeep note no refund available for digital items. However, if any issue occurs with the item feel free to message to get it fixed.\n\n⚠️ Do not resell or distribute.",
+  "titleImage": "https://booth.pximg.net/e118a8ff-6c1c-459b-8bc0-2cd9978dcffc/i/2983094/5410084e-1efb-42ac-94a6-bbdffaa54d18.png",
+  "subcategory": "6276e191547ce5a4451ba997",
+  "images": [
+  ],
+  "vrm": "",
+  "numLikes": 30,
+  "variants": [
+    {
+      "_id": "627fcd1d2f56eee2c0f94e82",
+      "productId": "627fcd0904d6b15055b19401",
+      "price": 0,
+      "name": "Short Hair",
+      "file": "short_hair.rar",
+      "fileName": "short_hair",
+      "fileTypes": ["png", "vroid"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}

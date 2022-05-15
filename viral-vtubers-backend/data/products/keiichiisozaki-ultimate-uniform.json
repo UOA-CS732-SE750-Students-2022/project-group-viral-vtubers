@@ -1,0 +1,33 @@
+// Sourced from https://keiichiisozaki.booth.pm/items/3862393
+{
+  "_id": "627fc36226d688b3dc83e379",
+  "name": "Ultimate Uniform",
+  "artistId": "627fc0e1074a3574a3ceb06d",
+  "tags": [
+  ],
+  "description": "This is UltimateKissMa in Uniform.\n=======================\nIncludes 6 VRMs.\nNo muffler.\nThe dynamics of the skirt is incomplete.\n=======================\nThe whole thing for VRM, including body and hair.\nThe height is adjusted to 1.2 times of the VRC version.\nEars are shaking objects and cannot be moved.\n=======================\nYou can use for gameplay, VTuber and others.\nNo need to credit or as you like.\n",
+  "titleImage": "https://booth.pximg.net/2c107679-bd18-493f-84fd-2cb1013e3b27/i/3862393/8ea4af15-be20-46f5-a626-d8808cbbd20c.png",
+  "subcategory": "6276e19ad8adca914945452b",
+  "images": [
+    "https://booth.pximg.net/2c107679-bd18-493f-84fd-2cb1013e3b27/i/3862393/45bfb938-155f-4302-9770-b56260b09f46.png"
+  ],
+  "vrm": "",
+  "numLikes": 82,
+  "variants": [
+    {
+      "_id": "627fc3ddb58ce3c9b5393267",
+      "productId": "627fc36226d688b3dc83e379",
+      "price": 3.9,
+      "name": "Ultimate Uniform",
+      "file": "ultimate-uniform.vrm",
+      "fileName": "ultimate-uniform",
+      "fileTypes": ["vrm"]
+    }
+  ],
+  "minPrice": 0,
+  "isMature": false,
+  "createdDate": "0",
+  "modifiedDate": "2000",
+  "isComment": false,
+  "isDraft": false
+}
