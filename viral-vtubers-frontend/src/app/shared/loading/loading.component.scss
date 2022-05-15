@@ -1,5 +1,9 @@
 @import "../../../variables";
 
+:host {
+  width: 100%;
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -19,6 +23,17 @@
 
   p {
     color: $color-grey-dark;
-    font-size: $font-size-body-2;
+
+    &.smol {
+      font-size: $font-size-body-3;
+    }
+
+    &.medium {
+      font-size: $font-size-body-2;
+    }
+
+    &.large {
+      font-size: $font-size-body-1;
+    }
   }
 }

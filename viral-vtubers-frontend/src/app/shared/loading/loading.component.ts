@@ -18,6 +18,9 @@ export class LoadingComponent implements OnInit {
   @Input()
   height: string = '300px';
 
+  @Input()
+  fontSize: string = 'medium';
+
   constructor() {}
 
   ngOnInit(): void {}

@@ -1,4 +1,7 @@
 <div class="container" [ngStyle]="{ height: height }">
-  <img src="assets/chibis/{{ chibi }}.png" [ngClass]="{ flipped: isFlipped }" />
+  <img
+    src="assets/chibis/{{ chibi }}.png"
+    [ngClass]="{ flipped: isFlipped, 'font-size': fontSize }"
+  />
   <p>{{ text }}</p>
 </div>
