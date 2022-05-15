@@ -7,6 +7,8 @@ data class Config(
     val mongodb: MongoDatabase.Config,
     val storageBucket: String,
     val development: Boolean,
+    val host: String,
+    val jwtIssuer: String,
 )
 
 fun Application.config() = environment.config.run {
@@ -25,5 +27,7 @@ fun Application.config() = environment.config.run {
         ),
         storageBucket = property("gcp.bucket").getString(),
         development = property("ktor.development").getString().toBoolean(),
+        host = property("ktor.jwt.host").getString(),
+        jwtIssuer = property("ktor.jwt.issuer").getString(),
     )
 }
