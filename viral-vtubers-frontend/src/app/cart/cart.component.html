@@ -61,15 +61,12 @@
 </div>
 
 <ng-template #loading>
-  <div>Loading ...</div>
+  <app-loading>
+    <p text>Loading your cart...</p>
+  </app-loading>
 </ng-template>
 
 <ng-template #empty>
-  <div class="empty">
-    <img src="assets/chibis/vivi.png" />
-    <p>No item yet... Let's <a routerLink="/marketplace">start shopping</a>!</p>
-  </div>
-
   <app-loading>
     <p text>
       No item yet... Let's <a routerLink="/marketplace">start shopping</a>!
