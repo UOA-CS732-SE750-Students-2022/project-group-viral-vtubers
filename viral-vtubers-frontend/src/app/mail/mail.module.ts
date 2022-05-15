@@ -39,6 +39,7 @@ export const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
     ToastrModule.forRoot(),
   ],
