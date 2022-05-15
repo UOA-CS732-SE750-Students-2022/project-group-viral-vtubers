@@ -44,7 +44,10 @@
                     class="request-container"
                     (click)="setSelectedOrder(order)"
                   >
-                    <img src="{{ order.image }}" />
+                    <img
+                      src="{{ order.image }}"
+                      onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+                    />
                     <div>
                       <h5>{{ order.name }}</h5>
                       <p>
@@ -58,7 +61,11 @@
                     class="requester-container"
                     (click)="navigateToUser(order.artist?.id)"
                   >
-                    <img src="{{ order.artist?.profileImageURI }}" />
+                    <img
+                      src="{{ order.artist?.profileImageURI }}"
+                      onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+                    />
+
                     <p>{{ order.artist?.displayName }}</p>
                   </div>
                 </td>
@@ -88,7 +95,10 @@
                     class="request-container"
                     (click)="setSelectedOrder(order)"
                   >
-                    <img src="{{ order.image }}" />
+                    <img
+                      src="{{ order.image }}"
+                      onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+                    />
                     <div>
                       <h5>{{ order.name }}</h5>
                       <p>
@@ -102,7 +112,10 @@
                     class="requester-container"
                     (click)="navigateToUser(order.artist?.id)"
                   >
-                    <img src="{{ order.artist?.profileImageURI }}" />
+                    <img
+                      src="{{ order.artist?.profileImageURI }}"
+                      onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+                    />
                     <p>{{ order.artist?.displayName }}</p>
                   </div>
                 </td>
@@ -140,7 +153,10 @@
       </div>
     </div>
     <div class="image-description-container">
-      <img src="{{ selectedOrder.image }}" />
+      <img
+        src="{{ selectedOrder.image }}"
+        onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+      />
       <p class="description-container">{{ selectedOrder.description }}</p>
     </div>
     <div class="button-container" *ngIf="!selectedOrder.artist">

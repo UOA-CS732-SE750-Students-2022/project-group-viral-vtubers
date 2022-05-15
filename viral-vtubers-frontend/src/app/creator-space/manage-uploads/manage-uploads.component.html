@@ -12,7 +12,11 @@
             class="product-item draft-item"
             (click)="editProduct(product.id); $event.stopPropagation()"
           >
-            <img src="{{ product.titleImage }}" alt="waifu" />
+            <img
+              src="{{ product.titleImage }}"
+              alt="waifu"
+              onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+            />
             <div>
               <div class="product-info">
                 <h4 *ngIf="product.name; else noName">{{ product.name }}</h4>
@@ -42,7 +46,11 @@
             class="product-item upload-item"
             routerLink="{{ '/marketplace/product/' + product.id }}"
           >
-            <img src="{{ product.titleImage }}" alt="waifu" />
+            <img
+              src="{{ product.titleImage }}"
+              alt="waifu"
+              onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+            />
             <div>
               <div class="product-info">
                 <h4>{{ product.name }}</h4>

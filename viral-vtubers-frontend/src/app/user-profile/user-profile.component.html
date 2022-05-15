@@ -1,7 +1,11 @@
 <div class="container" *ngIf="user$ | async as user; else loading">
   <div class="profile-panel">
     <div class="profile-img">
-      <img src="{{ user.profileImageURI }}" alt="waifu" />
+      <img
+        src="{{ user.profileImageURI }}"
+        onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+        alt="waifu"
+      />
       <div class="edit-icon" (click)="openEditProfile()" *ngIf="isEdit">
         <img src="assets/icons/EditIcon.svg" />
       </div>
@@ -92,7 +96,11 @@
           class="product-item"
           routerLink="/marketplace/product/{{ product.id }}"
         >
-          <img src="{{ product.titleImage }}" alt="waifu" />
+          <img
+            src="{{ product.titleImage }}"
+            onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+            alt="waifu"
+          />
           <div>
             <div class="product-info">
               <h4>{{ product.name }}</h4>

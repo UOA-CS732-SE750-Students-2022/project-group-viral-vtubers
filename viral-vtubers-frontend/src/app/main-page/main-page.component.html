@@ -87,7 +87,11 @@
                 class="product-item"
                 routerLink="/marketplace/product/{{ product.id }}"
               >
-                <img src="{{ product.titleImage }}" alt="waifu" />
+                <img
+                  src="{{ product.titleImage }}"
+                  alt="waifu"
+                  onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+                />
                 <div>
                   <div class="product-info">
                     <h4>{{ product.name }}</h4>
@@ -130,7 +134,10 @@
           <div class="section-content commission-requests">
             <div *ngFor="let order of requests" class="request-container">
               <a class="product-item" routerLink="/commissions/requests">
-                <img src="{{ order.image }}" />
+                <img
+                  src="{{ order.image }}"
+                  onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+                />
                 <div class="info-container">
                   <h4>{{ order.name }}</h4>
                   <div class="description-container">

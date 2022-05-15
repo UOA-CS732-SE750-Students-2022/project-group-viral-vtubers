@@ -19,7 +19,10 @@
               class="product-container"
               (click)="navigateToProduct(item.product.id)"
             >
-              <img src="{{ item.product.titleImage }}" />
+              <img
+                src="{{ item.product.titleImage }}"
+                onerror="if (this.src != 'assets/placeholder.png') this.src = 'assets/placeholder.png';"
+              />
               <div>
                 <h5>{{ item.product.name }}</h5>
                 <p>
@@ -33,7 +36,10 @@
               class="artist-container"
               (click)="navigateToUser(item.product.id)"
             >
-              <img src="{{ purchase.seller.profileImageURI }}" />
+              <img
+                src="{{ purchase.seller.profileImageURI }}"
+                onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+              />
               <p>{{ purchase.seller.displayName }}</p>
             </div>
           </td>
