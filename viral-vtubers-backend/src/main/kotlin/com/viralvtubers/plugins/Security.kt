@@ -5,6 +5,7 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.storage.StorageOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
+import com.viralvtubers.config
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -12,6 +13,7 @@ import io.ktor.server.engine.*
 import java.util.concurrent.TimeUnit
 
 fun Application.configureSecurity() {
+    val config = config()
     val firebaseConfig = applicationEngineEnvironment { }.classLoader
         .getResourceAsStream("firebase-service-account.json")
 
@@ -23,7 +25,7 @@ fun Application.configureSecurity() {
 
     FirebaseApp.initializeApp(firebaseOptions)
 
-    val issuer = "http://localhost:8080"
+    val issuer = config.host
     val jwkProvider = JwkProviderBuilder(issuer)
         .cached(10, 24, TimeUnit.HOURS)
         .rateLimited(10, 1, TimeUnit.MINUTES)
@@ -33,7 +35,7 @@ fun Application.configureSecurity() {
         jwt {
             verifier(
                 jwkProvider,
-                "https://securetoken.google.com/viral-vtubers-6dbdf"
+                config.jwtIssuer
             )
             validate { credential ->
                 JWTPrincipal(credential.payload)
