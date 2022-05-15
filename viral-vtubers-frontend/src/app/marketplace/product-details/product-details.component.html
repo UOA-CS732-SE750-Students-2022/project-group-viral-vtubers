@@ -15,7 +15,7 @@
     <div class="details-container">
       <div class="creator-info">
         <span>
-          <a [href]="'/user/' + productDetails.artist.id">
+          <a routerLink="{{ '/user/' + productDetails.artist.id }}">
             <img
               src="{{ productDetails.artist.profileImageURI }}"
               data-test-id="profileImage"

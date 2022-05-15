@@ -290,7 +290,6 @@ export class BrowseProductsComponent implements OnInit {
       return;
     }
     if (subcategoryBlurb && categoryBlurb) {
-      console.log(subcategoryBlurb, categoryBlurb);
       const productsSubCategory = this.productService.getProductsSubcategory(
         this.blurbService.getSubcategoryId(categoryBlurb, subcategoryBlurb),
         filter,
@@ -394,7 +393,6 @@ export class BrowseProductsComponent implements OnInit {
   }
 
   onPriceChange(price: ChangeContext) {
-    console.log(price);
     const filter: ProductFilter = this.filter ?? {};
 
     filter.minPrice = price.value;

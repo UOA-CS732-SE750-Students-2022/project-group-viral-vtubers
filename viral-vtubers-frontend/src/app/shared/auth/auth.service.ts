@@ -2,14 +2,19 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData?: firebase.User;
+  private user: Observable<firebase.User | null>;
+  private userData: firebase.User | null = (() => {
+    const data = localStorage.getItem('user');
+    if (data) return JSON.parse(data) as firebase.User;
+    return null;
+  })();
 
   constructor(
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -17,69 +22,82 @@ export class AuthService {
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private userService: UserService
   ) {
+    this.user = afAuth.authState;
+
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(async (user) => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', await user.getIdToken());
+        localStorage.setItem('user', JSON.stringify(user));
       } else {
-        this.userData = undefined;
-        localStorage.removeItem('user');
+        this.userData = null;
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
     });
+  }
+
+  getUserData(): firebase.User | null {
+    return this.userData;
+  }
+
+  getUser(): Observable<firebase.User | null> {
+    return this.user;
   }
 
   async getToken(): Promise<string> {
     const user = await this.afAuth.currentUser;
 
     if (!user) {
-      return '';
+      return localStorage.getItem('token') ?? '';
     }
 
     return user.getIdToken();
   }
 
   // Sign in with email/password
-  signIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(async ({ user }) => {
-        if (!user) {
-          window.alert('No user found');
-          return;
-        }
-        this.ngZone.run(() => {
-          this.router.navigate(['/']);
-        });
-        await firstValueFrom(this.userService.login());
-      })
-      .catch((error) => {
-        window.alert(error.message);
+  async signIn(email: string, password: string) {
+    try {
+      const { user } = await this.afAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+
+      if (!user) {
+        window.alert('No user found');
+        return;
+      }
+      this.ngZone.run(() => {
+        this.router.navigate(['/']);
       });
+      await firstValueFrom(this.userService.login());
+    } catch (error: any) {
+      window.alert(error.message);
+    }
   }
 
   // Sign up with email/password
-  signUp(email: string, password: string, displayName: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then(async ({ user }) => {
-        if (!user) {
-          window.alert('No user found');
-          return;
-        }
-        // send Verification Mail, update profile with displayName, and set userData
-        this.sendVerificationMail();
-        await user.updateProfile({
-          displayName: displayName,
-        });
-        await firstValueFrom(this.userService.login());
-      })
-      .catch((error) => {
-        window.alert(error.message);
+  async signUp(email: string, password: string, displayName: string) {
+    try {
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (!user) {
+        window.alert('No user found');
+        return;
+      }
+      // send Verification Mail, update profile with displayName, and set userData
+      this.sendVerificationMail();
+      await user.updateProfile({
+        displayName: displayName,
       });
+      await firstValueFrom(this.userService.login());
+    } catch (error: any) {
+      window.alert(error.message);
+    }
   }
 
   // Send email verification when new user signs up
@@ -105,13 +123,7 @@ export class AuthService {
 
   // Returns true when user is logged in and email is verified
   get isLoggedIn(): boolean {
-    const userData = localStorage.getItem('user');
-    if (!userData) {
-      return false;
-    }
-
-    const user = JSON.parse(userData);
-    if (!user) {
+    if (!this.userData) {
       return false;
     }
     return true;
@@ -120,9 +132,7 @@ export class AuthService {
   // Sign out
   signOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      this.userData = undefined;
+      this.userData = null;
       this.router.navigate(['signin']);
     });
   }

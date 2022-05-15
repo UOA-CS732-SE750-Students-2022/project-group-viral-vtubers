@@ -40,7 +40,7 @@
           <a
             *ngFor="let product of uploads"
             class="product-item upload-item"
-            [href]="'/marketplace/product/' + product.id"
+            routerLink="{{ '/marketplace/product/' + product.id }}"
           >
             <img src="{{ product.titleImage }}" alt="waifu" />
             <div>

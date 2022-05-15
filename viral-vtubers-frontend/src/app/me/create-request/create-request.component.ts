@@ -118,7 +118,6 @@ export class CreateRequestComponent implements OnInit {
   }
 
   setPrice(event: any) {
-    console.log(event.target.value);
     if ('PRICE' === (event.target.value as string)) {
       this.requestBounty = 1;
       this.requestPriceDisable = false;
