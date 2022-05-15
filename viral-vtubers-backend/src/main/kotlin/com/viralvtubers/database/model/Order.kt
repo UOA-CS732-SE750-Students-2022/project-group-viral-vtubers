@@ -1,25 +1,25 @@
 package com.viralvtubers.database.model
 
 import com.viralvtubers.database.serializer.DateSerializer
-import com.viralvtubers.graphql.data.Subcategory
 import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import org.litote.kmongo.Id
 import org.litote.kmongo.newId
 import java.util.*
 
-@kotlinx.serialization.Serializable(with = DateSerializer::class)
+@Serializable
 data class Order(
     @Contextual override val _id: Id<Order> = newId(),
-    val subcategoryId: Id<Subcategory>,
+    val subcategoryId: @Contextual Id<Subcategory>,
     val name: String,
     val description: String,
     val bounty: Double,
     val isDraft: Boolean,
     val isComment: Boolean,
     val image: String,
-    val tags: List<Id<User>>,
-    val applications: List<Id<User>>,
-    val ownerId: Id<User>,
-    val artistId: Id<User>?,
-    val createdDate: Date,
+    val tags: List<@Contextual Id<User>>,
+    val applications: List<@Contextual Id<User>>,
+    val ownerId: @Contextual Id<User>,
+    val artistId: @Contextual Id<User>?,
+    val createdDate: @Serializable(with = DateSerializer::class) Date,
 ) : Model<Order>
