@@ -1,6 +1,6 @@
 # Viral Vtubers
 
-## INSERT LOGO
+![viral-vtubers logo](https://github.com/UOA-CS732-SE750-Students-2022/project-group-viral-vtubers/blob/main/viral-vtubers-frontend/src/assets/logo.svg "Viral Vtubers Logo)
 
 ## Project Structure
 
