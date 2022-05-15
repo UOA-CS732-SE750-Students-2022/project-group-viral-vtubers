@@ -883,7 +883,7 @@ export type EditSelfMutationVariables = Exact<{
 }>;
 
 
-export type EditSelfMutation = { __typename?: 'Mutation', editSelf: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } };
+export type EditSelfMutation = { __typename?: 'Mutation', editSelf: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, numLikes: number, profileImageURI: string, isFollowing: boolean, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, services: Array<{ __typename?: 'Service', description: string, id: string, name: string, price: number, priceType: PriceEnum }>, products: Array<{ __typename?: 'Product', id: string, name: string, minPrice: number, titleImage: string, variants: Array<{ __typename?: 'ProductVariant', id: string, name: string, price: number }> }> } };
 
 export type AddServiceMutationVariables = Exact<{
   input: AddServiceInput;
@@ -958,6 +958,11 @@ export type MyCommissionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MyCommissionsQuery = { __typename?: 'Query', myCommissions: { __typename?: 'MyCommission', lost: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, pending: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }>, won: Array<{ __typename?: 'Order', bounty: number, description: string, id: string, image: string, isDraft: boolean, name: string, subcategory: { __typename?: 'Subcategory', id: string, name: string, category: { __typename?: 'Category', id: string, name: string } }, owner: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }, artist?: { __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, color: string, backgroundColor: string }>, applications: Array<{ __typename?: 'User', id: string, bio: string, status: string, numCompletedCommissions: number, displayName: string, email: string, numLikes: number, profileImageURI: string, isFollowing: boolean }> }> } };
+
+export type MyProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyProductsQuery = { __typename?: 'Query', self: { __typename?: 'User', products: Array<{ __typename?: 'Product', id: string, name: string, isLiked: boolean, isDraft: boolean, numLikes: number, titleImage: string, minPrice: number }> } };
 
 export type CategoryQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -1711,10 +1716,10 @@ export const EditProductVariantDocument = gql`
 export const EditSelfDocument = gql`
     mutation EditSelf($input: EditSelfInput!) {
   editSelf(input: $input) {
-    ...UserFragment
+    ...UserProfileFragment
   }
 }
-    ${UserFragmentFragmentDoc}`;
+    ${UserProfileFragmentFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'
@@ -1955,6 +1960,26 @@ export const MyCommissionsDocument = gql`
   })
   export class MyCommissionsGQL extends Apollo.Query<MyCommissionsQuery, MyCommissionsQueryVariables> {
     override document = MyCommissionsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const MyProductsDocument = gql`
+    query MyProducts {
+  self {
+    products {
+      ...ProductBlurbFragment
+    }
+  }
+}
+    ${ProductBlurbFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class MyProductsGQL extends Apollo.Query<MyProductsQuery, MyProductsQueryVariables> {
+    override document = MyProductsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

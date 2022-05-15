@@ -21,10 +21,26 @@ suspend fun main(args: Array<String>) {
     val users = mutableListOf<User>()
     val products = mutableListOf<Product>()
     val populators = listOf(
-        produceRepositoryPopulator(json, "tags", mongoDatabase.asTagRepository()),
-        produceRepositoryPopulator(json, "products", mongoDatabase.asProductRepository()) { products.add(it) },
-        produceRepositoryPopulator(json, "users", mongoDatabase.asUserRepository()) { users.add(it) },
-        produceRepositoryPopulator(json, "orders", mongoDatabase.asOrderRepository()),
+        produceRepositoryPopulator(
+            json,
+            "tags",
+            mongoDatabase.asTagRepository()
+        ),
+        produceRepositoryPopulator(
+            json,
+            "products",
+            mongoDatabase.asProductRepository()
+        ) { products.add(it) },
+        produceRepositoryPopulator(
+            json,
+            "users",
+            mongoDatabase.asUserRepository()
+        ) { users.add(it) },
+        produceRepositoryPopulator(
+            json,
+            "orders",
+            mongoDatabase.asOrderRepository()
+        ),
     )
     File("data").walkTopDown()
         .filter { !it.nameWithoutExtension.startsWith("template") }
@@ -41,7 +57,7 @@ suspend fun main(args: Array<String>) {
         users.map { user ->
             if (Math.random() >= 0.5) {
                 likeRepository.add(
-                    Like (
+                    Like(
                         currentId = user._id,
                         productId = product._id,
                         artistId = product.artistId,
@@ -57,9 +73,10 @@ inline fun <reified T : Model<*>> produceRepositoryPopulator(
     json: Json,
     category: String,
     repository: Repository<T>,
-    crossinline handler: (T) -> Unit = {})
-: suspend (File) -> Boolean
-    = { file -> populateRepository(json, category, repository, file, handler) }
+    crossinline handler: (T) -> Unit = {}
+)
+        : suspend (File) -> Boolean =
+    { file -> populateRepository(json, category, repository, file, handler) }
 
 suspend inline fun <reified T : Model<*>> populateRepository(
     json: Json,
@@ -68,11 +85,11 @@ suspend inline fun <reified T : Model<*>> populateRepository(
     file: File,
     handler: (T) -> Unit
 ): Boolean {
-    if (file.parent?.endsWith("/$category", true) != true) {
+    if (file.parent?.endsWith("$category", true) != true) {
         return false;
     }
     val text = file.readLines()
-        .dropWhile{ it.startsWith("//") }
+        .dropWhile { it.startsWith("//") }
         .joinToString(separator = "\n")
     println("Decoding ${file.name} ...")
     val data: T = json.decodeFromString(text)

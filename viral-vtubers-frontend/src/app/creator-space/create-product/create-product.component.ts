@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -38,7 +38,7 @@ type SubcategoryType = {
     ]),
   ],
 })
-export class CreateProductComponent implements OnInit {
+export class CreateProductComponent implements OnInit, AfterViewChecked {
   @ViewChild('appTags')
   tagsRef!: TagsComponent;
 
@@ -143,12 +143,22 @@ export class CreateProductComponent implements OnInit {
           ];
           this.freeToggles = Array(this.variants.length);
           this.images = [product.titleImage, ...product.images];
-          this.tagsRef.tags = product.tags;
+
           this.title = product.name;
           this.descriptionString = product.description;
           this.comment = product.isComment;
         });
     });
+  }
+
+  ngAfterViewChecked(): void {
+    this.setTag(this.product?.tags ?? []);
+  }
+
+  setTag(tags: TagFragmentFragment[]) {
+    if (this.tagsRef && this.tagsRef.tags.length === 0) {
+      this.tagsRef.tags = Object.assign([], tags);
+    }
   }
 
   getSafeUrl(url: string) {

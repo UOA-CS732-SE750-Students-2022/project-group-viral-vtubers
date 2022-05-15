@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import {
   AccountGQL,
@@ -22,8 +23,11 @@ import {
   UserByNameGQL,
   UserFragmentFragment,
   UserLikedProductGQL,
+  UserProfileDocument,
   UserProfileFragmentFragment,
+  UserProfileFragmentFragmentDoc,
   UserProfileGQL,
+  UserProfileQuery,
 } from 'src/schema/type';
 
 @Injectable({

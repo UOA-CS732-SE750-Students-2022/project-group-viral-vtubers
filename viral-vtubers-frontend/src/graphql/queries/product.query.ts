@@ -5,10 +5,22 @@ import {
   SubcategoryFragment,
 } from '../fragments/category.fragment';
 import {
+  ProductBlurbFragment,
   ProductDetailFragment,
   ProductPaginationFragment,
 } from '../fragments/product.fragment';
 
+export const myProductsQuery = gql`
+  query MyProducts {
+    self {
+      products {
+        ...ProductBlurbFragment
+      }
+    }
+  }
+
+  ${ProductBlurbFragment}
+`;
 export const categoryQuery = gql`
   query Category($id: ID!) {
     category(id: $id) {

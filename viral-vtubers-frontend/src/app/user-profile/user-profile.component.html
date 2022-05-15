@@ -149,7 +149,11 @@
         </div>
       </div>
       <div class="profile-img">
-        <img [src]="userProfileURI" alt="waifu" />
+        <img
+          [src]="userProfileURI"
+          alt="waifu"
+          onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
+        />
         <input
           type="file"
           #profileImg
