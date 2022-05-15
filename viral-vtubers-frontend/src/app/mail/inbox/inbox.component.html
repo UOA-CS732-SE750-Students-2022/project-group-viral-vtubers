@@ -17,9 +17,14 @@
       </p>
       <p class="mail-content">{{ mail.body }}</p>
       <div class="actions-container">
-        <button>Reply</button>
-        <button>Mark unread</button>
-        <button>Delete</button>
+        <button routerLink="/mail/new">Reply</button>
+        <button *ngIf="mail.isRead" (click)="markAsUnread(mail.id)">
+          Mark unread
+        </button>
+        <button *ngIf="!mail.isRead" (click)="markAsRead(mail.id)">
+          Mark read
+        </button>
+        <button (click)="delete(mail.id)">Delete</button>
       </div>
     </div>
   </ng-container>

@@ -23,11 +23,8 @@ import {
   UserByNameGQL,
   UserFragmentFragment,
   UserLikedProductGQL,
-  UserProfileDocument,
   UserProfileFragmentFragment,
-  UserProfileFragmentFragmentDoc,
   UserProfileGQL,
-  UserProfileQuery,
 } from 'src/schema/type';
 
 @Injectable({

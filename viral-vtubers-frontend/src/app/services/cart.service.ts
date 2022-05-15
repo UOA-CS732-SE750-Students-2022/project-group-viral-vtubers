@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { cartQuery } from 'src/graphql/queries/cart.query';
 import { productQuery } from 'src/graphql/queries/product.query';
+import { notificationQuery } from 'src/graphql/queries/self.query';
 import {
   AddToCartGQL,
   CartFragmentFragment,
@@ -59,6 +60,7 @@ export class CartService {
     return this.addToCartGQL.mutate(
       { productId, variantId },
       {
+        refetchQueries: [{ query: cartQuery }, { query: notificationQuery }],
         update: (store) => {
           const product: ProductDetailFragmentFragment = (
             store.readQuery({
@@ -108,6 +110,7 @@ export class CartService {
           {
             query: cartQuery,
           },
+          { query: notificationQuery },
         ],
         update: (store) => {
           const product: ProductDetailFragmentFragment = (
@@ -154,11 +157,7 @@ export class CartService {
     return this.emptyCartGQL.mutate(
       { sellerId },
       {
-        refetchQueries: [
-          {
-            query: cartQuery,
-          },
-        ],
+        refetchQueries: [{ query: cartQuery }, { query: notificationQuery }],
       }
     );
   }
@@ -167,11 +166,7 @@ export class CartService {
     return this.checkoutGQL.mutate(
       { sellerId },
       {
-        refetchQueries: [
-          {
-            query: cartQuery,
-          },
-        ],
+        refetchQueries: [{ query: cartQuery }, { query: notificationQuery }],
       }
     );
   }
