@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 
 import { SharedModule } from '../shared/shared.module';
 import { CreateProductComponent } from './create-product/create-product.component';
@@ -54,6 +55,7 @@ export const routes: Routes = [
     DragDropModule,
     FormsModule,
     RouterModule.forChild(routes),
+    ToastrModule.forRoot(),
   ],
 })
 export class CreatorSpaceModule {}

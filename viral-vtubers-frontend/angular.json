@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": ["scss", "node_modules/ngx-toastr/toastr.css"]
         },
         "@schematics/angular:application": {
           "strict": true

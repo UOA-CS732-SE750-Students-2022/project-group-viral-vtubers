@@ -16096,6 +16096,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ngx-toastr@npm:^14.3.0":
+  version: 14.3.0
+  resolution: "ngx-toastr@npm:14.3.0"
+  dependencies:
+    tslib: ^2.3.0
+  peerDependencies:
+    "@angular/common": ">=12.0.0-0"
+    "@angular/core": ">=12.0.0-0"
+    "@angular/platform-browser": ">=12.0.0-0"
+  checksum: 9f20e3d5754ddee3468c9eceba57a9a9c35a2763876acc0bdf00e53d210a18a9c0c72ee8ccd5cdc505cf33c9e271ce9fba7b76a383bc38020646b86f46dbc099
+  languageName: node
+  linkType: hard
+
 "nice-napi@npm:^1.0.2":
   version: 1.0.2
   resolution: "nice-napi@npm:1.0.2"
@@ -21968,6 +21981,7 @@ __metadata:
     mmd-parser: ^1.0.4
     moment: ^2.29.3
     ng-gallery: ^6.0.1
+    ngx-toastr: ^14.3.0
     prettier: ^2.6.1
     rxjs: ~7.5.0
     three: 0.140.2

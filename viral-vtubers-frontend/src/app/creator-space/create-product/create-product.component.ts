@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -96,6 +97,7 @@ export class CreateProductComponent implements OnInit, AfterViewChecked {
     private uploadService: UploadService,
     private productService: ProductService,
     private userService: UserService,
+    private toasterService: ToastrService,
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer
@@ -298,6 +300,10 @@ export class CreateProductComponent implements OnInit, AfterViewChecked {
             })
           )
         ).data?.addProduct.id ?? '';
+      this.toasterService.success('Created new Product', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     } else {
       await firstValueFrom(
         this.productService.editProduct({
@@ -314,6 +320,10 @@ export class CreateProductComponent implements OnInit, AfterViewChecked {
           vrm: this.vrm ?? '',
         })
       );
+      this.toasterService.success('Edited Product', 'Success', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
     }
 
     if (productId === '') {

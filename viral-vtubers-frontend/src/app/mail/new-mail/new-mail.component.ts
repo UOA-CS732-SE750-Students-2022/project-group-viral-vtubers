@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
 import { MailService } from 'src/app/services/mail.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,6 +19,7 @@ export class NewMailComponent implements OnInit {
   constructor(
     private mailService: MailService,
     private userService: UserService,
+    private toasterService: ToastrService,
     private router: Router
   ) {}
 
@@ -46,6 +48,10 @@ export class NewMailComponent implements OnInit {
       })
       .subscribe(() => {
         this.router.navigateByUrl('/mail/sent');
+        this.toasterService.success('Mail Sent', 'Success', {
+          progressAnimation: 'decreasing',
+          progressBar: true,
+        });
       });
   }
 
