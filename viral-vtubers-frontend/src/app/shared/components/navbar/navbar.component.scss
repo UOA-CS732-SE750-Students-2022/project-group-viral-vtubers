@@ -34,13 +34,13 @@
   text-transform: capitalize;
 
   position: fixed;
-  background-color: $color-background;
   margin-top: 90px;
   height: 40px;
   width: 100%;
   z-index: 1;
 
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
 
   margin-left: -2em;
