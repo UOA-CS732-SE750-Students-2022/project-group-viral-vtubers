@@ -15,23 +15,15 @@ export class ManageUploadsComponent implements OnInit {
 
   constructor(private router: Router, private productService: ProductService) {
     this.drafts$ = this.productService
-      .getProducts()
-      .products$.pipe(
-        map((products) =>
-          products.edges
-            .filter((product) => product.node.isDraft)
-            .map((product) => product.node)
-        )
+      .getMyProducts()
+      .myProducts$.pipe(
+        map((product) => product.filter((product) => product.isDraft))
       );
 
     this.uploads$ = this.productService
-      .getProducts()
-      .products$.pipe(
-        map((products) =>
-          products.edges
-            .filter((product) => !product.node.isDraft)
-            .map((product) => product.node)
-        )
+      .getMyProducts()
+      .myProducts$.pipe(
+        map((product) => product.filter((product) => !product.isDraft))
       );
   }
 

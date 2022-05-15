@@ -5,7 +5,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SearchService } from 'src/app/services/search.service';
 import { UserService } from 'src/app/services/user.service';
@@ -272,6 +272,10 @@ export class NavbarComponent implements OnInit {
 
   async submitSearch() {
     this.searchService.setSearch(this.search);
+
+    if (this.search !== '' && !this.router.url.includes('/marketplace')) {
+      this.router.navigate(['/marketplace/all/']);
+    }
   }
 
   ngOnInit(): void {}

@@ -14,6 +14,8 @@ interface ProductService : KoinComponent {
 
     suspend fun getProductsByUserId(userId: ID): List<Product>
 
+    suspend fun getProductsByUserIdNoDraft(userId: ID): List<Product>
+
     suspend fun getAllProducts(): List<Product>
 
     suspend fun getSearch(

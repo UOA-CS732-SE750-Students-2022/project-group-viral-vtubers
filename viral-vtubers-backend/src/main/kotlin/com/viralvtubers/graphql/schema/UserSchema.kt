@@ -37,9 +37,15 @@ fun SchemaBuilder.userSchema(
         }
 
         property<List<Product>>("products") {
-            resolver { user ->
+            resolver { user, ctx: Context ->
                 description = "Get user products"
-                productService.getProductsByUserId(user.id)
+                authService.getOptionalUserId(ctx)?.let { userId ->
+                    if (userId == user.id) {
+                        productService.getProductsByUserId(user.id)
+                    } else {
+                        null
+                    }
+                } ?: productService.getProductsByUserIdNoDraft(user.id)
             }
         }
 
