@@ -280,6 +280,21 @@ export class CreateProductComponent implements OnInit, AfterViewChecked {
 
   async handleSubmit(name: string, description: string, draft: boolean) {
     let productId: string = this.productId;
+
+    if (
+      !this.checkSubmit(
+        this.variants,
+        this.images,
+        this.selectedCategory,
+        this.selectedSubcategory
+      ) &&
+      !draft
+    ) {
+      this.toasterService.error('Missing field(s)', 'Error', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
+    }
     if (this.productId == '') {
       productId =
         (

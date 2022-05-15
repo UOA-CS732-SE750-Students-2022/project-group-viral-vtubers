@@ -37,6 +37,10 @@ export class NewMailComponent implements OnInit {
 
   async sendMail(receiverName: string, body: string, subject: string) {
     if (!(await this.checkUser(receiverName))) {
+      this.toasterService.error('Receiver name not found', 'Error', {
+        progressAnimation: 'decreasing',
+        progressBar: true,
+      });
       return;
     }
 
