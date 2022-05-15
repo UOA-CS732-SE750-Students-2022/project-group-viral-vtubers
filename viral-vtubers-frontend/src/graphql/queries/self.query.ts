@@ -23,12 +23,13 @@ export const accountQuery = gql`
 `;
 
 export const notificationQuery = gql`
-query Notification {
-  notification {
-    ...NotificationFragment
+  query Notification {
+    notification {
+      ...NotificationFragment
+    }
   }
   ${NotificationFragment}
-}`;
+`;
 
 export const userUploadedProducts = gql`
   query MyUploadedProducts {

@@ -814,6 +814,13 @@ export type SendMailMutationVariables = Exact<{
 
 export type SendMailMutation = { __typename?: 'Mutation', sendMail: { __typename?: 'Mail', body: string, date: any, id: string, title: string, receiver: { __typename?: 'User', id: string, displayName: string } } };
 
+export type EditMailMutationVariables = Exact<{
+  input: EditMailInput;
+}>;
+
+
+export type EditMailMutation = { __typename?: 'Mutation', editMail: Array<{ __typename?: 'Mail', body: string, date: any, id: string, isRead: boolean, title: string, sender: { __typename?: 'User', id: string, displayName: string } }> };
+
 export type AddOrderMutationVariables = Exact<{
   input: AddOrderInput;
 }>;
@@ -1546,6 +1553,24 @@ export const SendMailDocument = gql`
   })
   export class SendMailGQL extends Apollo.Mutation<SendMailMutation, SendMailMutationVariables> {
     override document = SendMailDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const EditMailDocument = gql`
+    mutation EditMail($input: EditMailInput!) {
+  editMail(input: $input) {
+    ...MailInboxFragment
+  }
+}
+    ${MailInboxFragmentFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class EditMailGQL extends Apollo.Mutation<EditMailMutation, EditMailMutationVariables> {
+    override document = EditMailDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
