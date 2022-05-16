@@ -23,7 +23,7 @@
 - [Maven](https://maven.apache.org/)
 - [Firebase](https://firebase.google.com/) (used for authentication handling, you will need to create a Firebase project, from there you can create a service account and get a key)
 - [Docker](https://www.docker.com/)
-- Java JDK 11+
+- Java JDK 17+
 
 
 ### (Optional) Prerequisites
