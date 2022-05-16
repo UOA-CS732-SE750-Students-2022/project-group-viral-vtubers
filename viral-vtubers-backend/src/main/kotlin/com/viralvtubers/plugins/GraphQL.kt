@@ -12,7 +12,10 @@ import io.ktor.server.auth.jwt.*
 
 fun Application.configureGraphQL() {
     val config = config()
-    val database = MongoDatabase(config.mongodb)
+    val database = MongoDatabase(
+        config.mongodbConnectionString,
+        config.mongodbDatabaseName
+    )
     val categoryService = CategoryServiceImpl(
         database.asCategoryRepository(),
         database.asSubcategoryRepository()

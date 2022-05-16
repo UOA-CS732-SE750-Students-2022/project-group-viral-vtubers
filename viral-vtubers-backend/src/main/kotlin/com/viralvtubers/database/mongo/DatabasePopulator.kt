@@ -12,7 +12,11 @@ import java.io.File
 import java.util.*
 
 suspend fun main() {
-    val mongoDatabase = MongoDatabase()
+    val connectionString =
+        "mongodb://admin:password@localhost:27017"
+    val databaseName = "viral-vtubers"
+    val mongoDatabase = MongoDatabase(connectionString, databaseName)
+
     val json = Json {
         serializersModule = IdKotlinXSerializationModule
     }
