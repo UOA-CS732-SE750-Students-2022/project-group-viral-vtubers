@@ -101,6 +101,8 @@ h1 + hr {
     .list-item {
       display: flex;
       flex-direction: row;
+      text-decoration: none;
+      color: $color-kneegrow;
 
       cursor: pointer;
 

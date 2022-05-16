@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { GalleryModule } from 'ng-gallery';
+import { DisqusModule } from 'ngx-disqus';
 
 import { SharedModule } from '../shared/shared.module';
 import { BrowseProductsComponent } from './browse-products/browse-products.component';
@@ -39,6 +40,7 @@ export const routes: Routes = [
     NgxSliderModule,
     FormsModule,
     RouterModule.forChild(routes),
+    DisqusModule,
   ],
 })
 export class MarketplaceModule {}

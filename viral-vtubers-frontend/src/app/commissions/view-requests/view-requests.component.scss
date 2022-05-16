@@ -197,13 +197,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: $color-background;
+    max-height: calc(100% - 150px);
     border-radius: 8px;
     padding: 50px;
-    height: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     transition: opacity 500ms;
     visibility: visible;
     opacity: 1;
+    overflow-y: auto;
 
     h4 {
       font-size: $font-size-h6;
@@ -466,4 +467,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.comment-container {
+  margin-top: 30px;
 }

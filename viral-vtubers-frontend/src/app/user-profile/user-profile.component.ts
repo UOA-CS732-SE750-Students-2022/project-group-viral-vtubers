@@ -280,6 +280,8 @@ export class UserProfileComponent implements OnInit, AfterViewChecked {
   }
 
   openEditService(service: Service) {
+    if (!this.isEdit) return;
+
     this.serviceId = service.id;
     this.serviceTitle = service.name;
     this.serviceDescription = service.description;

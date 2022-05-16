@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { mockActivatedRoute } from '../../../../test/activated-route';
+import { ProductVariant } from '../../../schema/type';
 import { mockProductService } from '../../services/product.service.mock';
 import { mockUserService } from '../../services/user.service.mock';
-import { ProductVariant } from '../../../schema/type';
 import { ProductDetailsComponent } from './product-details.component';
 
 describe('ProductDetailsComponent', () => {

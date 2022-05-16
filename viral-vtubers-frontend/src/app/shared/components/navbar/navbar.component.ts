@@ -148,6 +148,7 @@ export class NavbarComponent implements OnInit {
     authService.getUser().subscribe((user) => {
       if (user !== null) {
         this.self$ = userService.getSelf().self$;
+        this.self$.subscribe();
       } else {
         this.self$ = undefined;
       }

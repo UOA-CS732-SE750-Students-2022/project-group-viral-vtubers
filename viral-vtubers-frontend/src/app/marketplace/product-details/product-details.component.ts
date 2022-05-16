@@ -13,8 +13,10 @@ import { ProductDetailFragmentFragment } from 'src/schema/type';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
+  productId?: string;
   selfId?: string;
   userId?: string;
+  isComment = false;
 
   images$?: Observable<GalleryItem[]>;
 
@@ -38,33 +40,37 @@ export class ProductDetailsComponent implements OnInit {
       if (!id) {
         return;
       }
+      this.productId = id;
 
       const product = this.productService.getProduct(id);
       this.productDetails$ = product.product$;
 
-      this.productDetails$.subscribe(({ titleImage, images, vrm, artist }) => {
-        const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-        galleryRef.reset();
-        if (vrm !== '' && !!vrm) {
-          galleryRef.addIframe({
-            src: '/vrm?vrm=' + encodeURIComponent(vrm),
-            thumb: 'assets/icons/vrm-preview.svg',
+      this.productDetails$.subscribe(
+        ({ titleImage, images, vrm, artist, isComment }) => {
+          const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+          galleryRef.reset();
+          if (vrm !== '' && !!vrm) {
+            galleryRef.addIframe({
+              src: '/vrm?vrm=' + encodeURIComponent(vrm),
+              thumb: 'assets/icons/vrm-preview.svg',
+            });
+          }
+
+          this.userId = artist.id;
+          this.isComment = isComment;
+
+          galleryRef.addImage({
+            src: titleImage,
+            thumb: titleImage,
+          });
+          images.forEach((image) => {
+            galleryRef.addImage({
+              src: image,
+              thumb: image,
+            });
           });
         }
-
-        this.userId = artist.id;
-
-        galleryRef.addImage({
-          src: titleImage,
-          thumb: titleImage,
-        });
-        images.forEach((image) => {
-          galleryRef.addImage({
-            src: image,
-            thumb: image,
-          });
-        });
-      });
+      );
     });
   }
 

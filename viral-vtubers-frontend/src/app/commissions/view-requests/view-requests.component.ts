@@ -30,6 +30,7 @@ import {
 export class ViewRequestsComponent implements OnInit {
   requests$: Observable<OrderPaginationFragmentFragment>;
   userId = '';
+  isComment = false;
 
   selectedOrder?: OrderFragmentFragment;
   constructor(
@@ -52,6 +53,9 @@ export class ViewRequestsComponent implements OnInit {
 
   setSelectedOrder(order?: OrderFragmentFragment) {
     this.selectedOrder = order;
+    if (order !== undefined) {
+      this.isComment = order.isComment;
+    }
   }
 
   async apply(event: Event, commissionId: string): Promise<void> {

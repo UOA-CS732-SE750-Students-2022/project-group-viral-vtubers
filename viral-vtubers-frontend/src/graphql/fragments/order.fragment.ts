@@ -14,6 +14,7 @@ export const OrderFragment = gql`
     }
     image
     isDraft
+    isComment
     name
     owner {
       ...UserFragment
