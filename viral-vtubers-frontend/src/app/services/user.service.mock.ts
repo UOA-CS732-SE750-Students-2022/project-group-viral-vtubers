@@ -6,7 +6,10 @@ export const mockUserService = () => ({
   provide: UserService,
   useValue: {
     getUserLikedProjects: () => from([]),
-    getSelf: () => from([{ id: '2132' }]),
+    getSelf: () => ({
+      self$: from([{ id: '2132' }]),
+    }),
     getAccount: () => ({ account: from([]) }),
+    getArtists: () => ({ query: null, artists$: from([{}]) }),
   } as unknown as UserService,
 });

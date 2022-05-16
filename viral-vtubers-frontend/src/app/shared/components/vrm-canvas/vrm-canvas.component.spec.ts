@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockActivatedRoute } from '../../../../../test/activated-route';
 import { VrmCanvasComponent } from './vrm-canvas.component';
 
 describe('VrmCanvasComponent', () => {
@@ -9,6 +10,7 @@ describe('VrmCanvasComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VrmCanvasComponent],
+      providers: [mockActivatedRoute()],
     }).compileComponents();
   });
 

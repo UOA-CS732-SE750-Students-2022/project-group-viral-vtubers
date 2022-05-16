@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockCartServiceProvider } from '../../services/cart.service.mock';
 import { SaleHistoryComponent } from './sale-history.component';
 
 describe('SaleHistoryComponent', () => {
@@ -8,9 +9,9 @@ describe('SaleHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaleHistoryComponent ]
-    })
-    .compileComponents();
+      declarations: [SaleHistoryComponent],
+      providers: [mockCartServiceProvider({})],
+    }).compileComponents();
   });
 
   beforeEach(() => {

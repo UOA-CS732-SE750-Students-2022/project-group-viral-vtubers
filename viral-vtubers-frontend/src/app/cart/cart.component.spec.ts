@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { from } from 'rxjs';
 
+import { mockToastrServiceProvider } from '../../../test/toastr-service';
+import { UserFragmentFragment } from '../../schema/type';
+import { mockCartServiceProvider } from '../services/cart.service.mock';
+import { mockCategoryServiceProvider } from '../services/category.service.mock';
 import { CartComponent } from './cart.component';
-import { CartService } from "../services/cart.service";
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -10,7 +14,13 @@ describe('CartComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CartComponent],
-      providers: [CartService],
+      providers: [
+        mockCartServiceProvider({}),
+        mockCategoryServiceProvider({
+          categories: from([[{ id: 'id' } as UserFragmentFragment]]),
+        }),
+        mockToastrServiceProvider({}),
+      ],
     }).compileComponents();
   });
 

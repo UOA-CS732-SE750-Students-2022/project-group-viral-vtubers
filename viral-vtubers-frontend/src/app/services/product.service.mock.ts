@@ -10,5 +10,14 @@ export const mockProductService = (product?: Observable<Product>) => ({
       query: null as unknown as ProductGQL,
       product$: product || from([{ productId: '3' }]),
     }),
+    getProducts: () => ({
+      query: null as unknown as ProductGQL,
+      products$: product || from([[{ productId: '3' }]]),
+    }),
+    getTags: () => from([{}]),
+    getMyProducts: () => ({
+      query: null,
+      myProducts$: from([[{}]]),
+    }),
   },
 });

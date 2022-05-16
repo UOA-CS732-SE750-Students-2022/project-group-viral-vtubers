@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockMailServiceProvider } from '../../services/mail.service.mock';
 import { InboxComponent } from './inbox.component';
 
 describe('InboxComponent', () => {
@@ -9,6 +10,7 @@ describe('InboxComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InboxComponent],
+      providers: [mockMailServiceProvider({})],
     }).compileComponents();
   });
 

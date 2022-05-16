@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Subject } from 'rxjs';
+
 import { mockActivatedRoute } from '../../../../test/activated-route';
-import { ProductVariant } from '../../../schema/type';
+import { mockGalleryServiceMock } from '../../../../test/gallery.service.mock';
+import { Product, ProductVariant } from '../../../schema/type';
+import { mockCartServiceProvider } from '../../services/cart.service.mock';
+import { mockCategoryServiceProvider } from '../../services/category.service.mock';
 import { mockProductService } from '../../services/product.service.mock';
 import { mockUserService } from '../../services/user.service.mock';
-import { Product, ProductVariant } from '../../../schema/type';
 import { ProductDetailsComponent } from './product-details.component';
-import { Subject } from 'rxjs';
-import { mockRouter } from "../../../../test/router";
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
@@ -21,8 +23,10 @@ describe('ProductDetailsComponent', () => {
       providers: [
         mockProductService(product),
         mockUserService(),
-        mockRouter(),
+        mockCategoryServiceProvider({}),
         mockActivatedRoute(),
+        mockGalleryServiceMock({}),
+        mockCartServiceProvider({}),
       ],
     }).compileComponents();
   });
@@ -34,7 +38,7 @@ describe('ProductDetailsComponent', () => {
   });
 
   const testElement = (id: string, root: Element = fixture.nativeElement) =>
-    root.querySelector(`*[data-test-id="${id}"]`)!;
+    root.querySelector(`[data-test-id="${id}"]`)!;
 
   it('should create', () => {
     expect(component).toBeTruthy();

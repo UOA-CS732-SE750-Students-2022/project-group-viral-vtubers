@@ -10,7 +10,7 @@ describe('AccountComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AccountComponent],
-      imports: [mockUserService()],
+      providers: [mockUserService()],
     }).compileComponents();
   });
 

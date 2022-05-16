@@ -3,5 +3,5 @@ import { from } from 'rxjs';
 
 export const mockActivatedRoute = () => ({
   provide: ActivatedRoute,
-  useValue: { paramMap: from([] as ParamMap[]) },
+  useValue: { paramMap: from([] as ParamMap[]), queryParams: from([{}]) },
 });

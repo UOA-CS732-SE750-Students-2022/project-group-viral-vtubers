@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockRouter } from '../../../../test/router';
+import { mockToastrServiceProvider } from '../../../../test/toastr-service';
+import { mockOrderServiceProvider } from '../../services/order.service.mock';
 import { CommissionRequestsComponent } from './commission-requests.component';
 
 describe('CommissionRequestsComponent', () => {
@@ -9,6 +12,11 @@ describe('CommissionRequestsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CommissionRequestsComponent],
+      providers: [
+        mockRouter(),
+        mockOrderServiceProvider({}),
+        mockToastrServiceProvider({}),
+      ],
     }).compileComponents();
   });
 

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { mockAuthService } from './shared/auth/auth.service.mock';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
+      providers: [mockAuthService({})],
     }).compileComponents();
   });
 

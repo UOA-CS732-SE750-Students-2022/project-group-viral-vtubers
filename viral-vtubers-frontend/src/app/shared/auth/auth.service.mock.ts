@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+
 import { AuthService } from './auth.service';
 
 export function mockAuthService({
@@ -8,9 +10,12 @@ export function mockAuthService({
   return {
     provide: AuthService,
     useValue: {
-      userData: {
-        email,
-      },
+      getUser: () =>
+        from([
+          {
+            email,
+          },
+        ]),
       SignIn: signIn,
       sendVerificationMail,
     } as unknown as AuthService,
