@@ -24,6 +24,7 @@
 - [Firebase](https://firebase.google.com/) (used for authentication handling, you will need to create a Firebase project, from there you can create a service account and get a key)
 - [Docker](https://www.docker.com/)
 - Java JDK 17+
+- [GNU Make](https://www.gnu.org/software/make/) >= 4.0
 
 
 ### (Optional) Prerequisites
@@ -62,26 +63,20 @@ export const environment = {
 
 #### Frontend
 
-1. Go into the frontend directory in a terminal `cd ./viral-vtubers-frontend` 
-2. Run `yarn install` to get all the project dependencies
-3. Run `yarn run` to run through the steps of setting up all the needed stages for the frontend
-4. Run `ng serve` to run a development server to host the frontend
-4. Visit `http://localhost:4200/` to visit the frontend site
+1. Run `make frontend-install` to get all the project dependencies
+2. Run `make frontend-start` to run a development server to host the frontend
+3. Visit `http://localhost:4200/` to visit the frontend site
 
 #### Backend
 
-1. Go into the backend directory in a terminal `cd ./viral-vtubers-backend`
-2. Run `mvn install` to install all of the backend dependencies
-3. Once it has finished installing, run `mvn package` to generate a jar
-4. Now we can start up the docker image with the MongoDB database, run `docker-compose up` inside `/viral-vtubers-backend/`
-5. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory) or `mvn exec:java`(in backend directory)
-6. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application, this requires having a java runtime environment of at least jdk 17, and then it can just be started from in the ide
+1. Run `make backend-install` to install all of the backend dependencies
+2. Now we can start up the docker image with the MongoDB database, run `make backend-db-up`
+3. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory), `mvn exec:java`(in backend directory), or `make backend-start` (in the root directory)
+4. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application, this requires having a java runtime environment of at least jdk 17, and then it can just be started from in the ide
   
 ### Data population
 
-I would strongly recommend that you populate data into the database, this can easily be done, by opening the project in intellij idea, and navigating to `viral-vtubers-backend/src/test/kotlin/com.viralvtubers/database.mongo/population/DatabasePopulator.kt` (as shown in the screenshot), if you run this class you will populate the database with data, that makes the application much easier to navigate and see the functionality
-
-![image](https://user-images.githubusercontent.com/66896513/168471490-ccc99507-436b-4554-b990-a7c4acd7c55b.png)
+I would strongly recommend that you populate data into the database, this can easily be done, by running `make backend-populate`, if you run this class you will populate the database with data, that makes the application much easier to navigate and see the functionality
 
 
 ### Served Content
@@ -90,7 +85,7 @@ I would strongly recommend that you populate data into the database, this can ea
 - GraphQL Schema (Backend): [localhost:8080/graphql](http://localhost:8080/graphql)
 
 ### Testing
-- To run all the frontend unit tests run `yarn test` in the frontend directory
-- To run all the backend unit tests `mvn test` in the backend directory
+- To run all the frontend unit tests run `make frontend-test` in the frontend directory
+- To run all the backend unit tests `make backend-test` in the backend directory
 
 ### Troubleshooting
