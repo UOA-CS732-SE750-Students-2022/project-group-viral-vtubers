@@ -116,7 +116,6 @@
             <groupId>org.litote.kmongo</groupId>
             <artifactId>kmongo-id-serialization</artifactId>
             <version>4.5.1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
