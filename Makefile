@@ -16,6 +16,12 @@ backend-db-down:
 backend-populate:
 	cd viral-vtubers-backend && mvn -Dmain.class=com.viralvtubers.database.mongo.DatabasePopulatorKt exec:java
 
+backend-test:
+	cd viral-vtubers-backend && mvn verify
+
+backend-build:
+	cd viral-vtubers-backend && mvn package
+
 frontend-install:
 	cd viral-vtubers-frontend && yarn
 
@@ -24,3 +30,6 @@ frontend-start:
 
 frontend-test:
 	cd viral-vtubers-frontend && yarn test
+
+frontend-build:
+	cd viral-vtubers-frontend && yarn build
