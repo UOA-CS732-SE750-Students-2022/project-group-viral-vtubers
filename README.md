@@ -75,7 +75,7 @@ export const environment = {
 3. Once it has finished installing, run `mvn package` to generate a jar
 4. Now we can start up the docker image with the MongoDB database, run `docker-compose up` inside `/viral-vtubers-backend/`
 5. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory) or `mvn exec:java`(in backend directory)
-6. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application, this requires having a java runtime environment of at least jdk 11, and then it can just be started from in the ide
+6. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application, this requires having a java runtime environment of at least jdk 17, and then it can just be started from in the ide
   
 ### Data population
 
