@@ -44,7 +44,13 @@
         {{ productDetails.subcategory.category.name }} >
         {{ productDetails.subcategory.name }}
       </p>
-      <app-tags [isEdit]="false" [tags]="productDetails.tags"></app-tags>
+      <div class="tags-container">
+        <app-tags
+          class="tags"
+          [isEdit]="false"
+          [tags]="productDetails.tags"
+        ></app-tags>
+      </div>
       <button
         class="heart-button"
         (click)="like(productDetails.id, productDetails.isLiked)"
@@ -117,6 +123,9 @@
     <p data-test-id="description">
       {{ productDetails.description }}
     </p>
+  </div>
+  <div *ngIf="productId !== undefined && isComment" class="comment-container">
+    <disqus [identifier]="'/marketplace/product/' + productId"></disqus>
   </div>
 </div>
 

@@ -7,6 +7,7 @@ import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DisqusModule } from 'ngx-disqus';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
@@ -51,6 +52,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
+    DisqusModule.forRoot('viral-vtubers'),
   ],
   providers: [AuthService, { provide: PERSISTENCE, useValue: 'local' }],
   bootstrap: [AppComponent],

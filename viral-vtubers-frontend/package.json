@@ -39,6 +39,7 @@
     "mmd-parser": "^1.0.4",
     "moment": "^2.29.3",
     "ng-gallery": "^6.0.1",
+    "ngx-disqus": "^2.4.3",
     "ngx-toastr": "^14.3.0",
     "rxjs": "~7.5.0",
     "three": "0.140.2",

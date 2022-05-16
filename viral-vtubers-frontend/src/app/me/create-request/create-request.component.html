@@ -92,7 +92,12 @@
         </div>
       </div>
       <p class="title-tags">Tags</p>
-      <app-tags #appTags class="tags"></app-tags>
+      <app-tags
+        #appTags
+        class="tags"
+        *ngIf="allTags$ | async as allTags"
+        [allTags]="allTags"
+      ></app-tags>
     </div>
   </div>
   <textarea

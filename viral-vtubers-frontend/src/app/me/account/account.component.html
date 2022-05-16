@@ -17,7 +17,11 @@
       <h2>Followers</h2>
       <hr />
       <div class="list">
-        <div *ngFor="let person of account.followers" class="list-item">
+        <a
+          [routerLink]="'/user/' + person.id"
+          *ngFor="let person of account.followers"
+          class="list-item"
+        >
           <img
             src="{{ person.profileImageURI }}"
             onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
@@ -27,14 +31,18 @@
             <h6>{{ person.displayName }}</h6>
             <p>{{ person.status }}</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
     <div class="follow-wrapper">
       <h2>Following</h2>
       <hr />
       <div class="list">
-        <div *ngFor="let person of account.following" class="list-item">
+        <a
+          [routerLink]="'/user/' + person.id"
+          *ngFor="let person of account.following"
+          class="list-item"
+        >
           <img
             src="{{ person.profileImageURI }}"
             onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
@@ -43,7 +51,7 @@
             <h6>{{ person.displayName }}</h6>
             <p>{{ person.status }}</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>

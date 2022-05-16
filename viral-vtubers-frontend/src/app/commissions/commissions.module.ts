@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { DisqusModule } from 'ngx-disqus';
 import { ToastrModule } from 'ngx-toastr';
 
 import { CreateRequestComponent } from '../me/create-request/create-request.component';
@@ -29,6 +30,7 @@ export const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),
     ToastrModule.forRoot(),
+    DisqusModule,
   ],
 })
 export class CommissionsModule {}

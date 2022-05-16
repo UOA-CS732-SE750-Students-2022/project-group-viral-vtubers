@@ -20,7 +20,10 @@
           *ngIf="request.node as request"
           (click)="setSelectedOrder(request)"
         >
-          <img [src]="request.image" />
+          <img
+            [src]="request.image"
+            onerror="if (this.src != 'assets/placeholder.jpg') this.src = 'assets/placeholder.jpg';"
+          />
           <div class="request-content">
             <h5>{{ request.name }}</h5>
             <div class="request-description">
@@ -87,6 +90,11 @@
       >
         Apply
       </button>
+    </div>
+    <div class="comment-container" *ngIf="isComment">
+      <disqus
+        [identifier]="'/commissions/requests/' + selectedOrder.id"
+      ></disqus>
     </div>
   </div>
 </div>

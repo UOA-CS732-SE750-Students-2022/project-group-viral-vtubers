@@ -32,6 +32,8 @@ export class CommissionRequestsComponent implements OnInit {
 
   selectedOrder?: OrderFragmentFragment;
 
+  isComment = false;
+
   constructor(
     private router: Router,
     private orderService: OrderService,
@@ -48,6 +50,9 @@ export class CommissionRequestsComponent implements OnInit {
 
   setSelectedOrder(order?: OrderFragmentFragment) {
     this.selectedOrder = order;
+    if (order !== undefined) {
+      this.isComment = order.isComment;
+    }
   }
 
   handleAcceptApplication(application: UserFragmentFragment) {

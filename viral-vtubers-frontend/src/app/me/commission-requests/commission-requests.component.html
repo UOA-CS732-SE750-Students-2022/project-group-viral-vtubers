@@ -129,6 +129,11 @@
         </div>
       </div>
     </div>
+    <div class="comment-container" *ngIf="isComment">
+      <disqus
+        [identifier]="'/commissions/requests/' + selectedOrder.id"
+      ></disqus>
+    </div>
 
     <ng-template #noArtist>
       <div class="applicants-container">

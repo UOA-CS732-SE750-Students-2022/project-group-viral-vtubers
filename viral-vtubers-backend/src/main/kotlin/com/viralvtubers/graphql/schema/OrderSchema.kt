@@ -33,8 +33,12 @@ fun SchemaBuilder.orderSchema(
         property<User?>("artist") {
             resolver { order ->
                 description = "Get owner of the Order"
-                order.artistId?.let {
-                    userService.getUserId(order.ownerId)
+                try {
+                    order.artistId?.let {
+                        userService.getUserId(order.ownerId)
+                    } ?: null
+                } catch (e: Exception) {
+                    null
                 }
             }
         }

@@ -56,6 +56,7 @@
             <div
               class="inner"
               (click)="openEditService(service)"
+              [ngStyle]="{ 'background-color': !isEdit ? '#FFF' : null }"
               cdkDrag
               [cdkDragDisabled]="!isEdit"
               [class.drag]="isEdit"
@@ -127,6 +128,9 @@
       <ng-template #noProducts>
         <p class="empty">No products right now!</p>
       </ng-template>
+    </div>
+    <div *ngIf="userId !== undefined" class="comment">
+      <disqus [identifier]="'/user/' + userId"></disqus>
     </div>
   </div>
 </div>

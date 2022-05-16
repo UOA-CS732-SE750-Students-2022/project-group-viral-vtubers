@@ -42,6 +42,15 @@ export class InboxComponent implements OnInit {
     this.deleted.push(id);
     localStorage.setItem('deletedMail', JSON.stringify(this.deleted));
     this.mailService.editMail({ id, isRead: true }).subscribe();
+    this.mails$ = this.mailService
+      .getInbox()
+      .inbox$.pipe(
+        map((mails) =>
+          mails
+            .map((mail) => ({ ...mail, date: moment(mail.date).fromNow() }))
+            .filter((mail) => !this.deleted.includes(mail.id))
+        )
+      );
   }
 
   ngOnInit(): void {}

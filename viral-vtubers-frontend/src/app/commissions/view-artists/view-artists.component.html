@@ -18,7 +18,7 @@
       >
         <ng-container *ngIf="artist.node as artist">
           <img
-            [src]="artist.profileImageURI"
+            src="{{ artist.profileImageURI }}"
             onerror="if (this.src != 'assets/profile-placeholder.png') this.src = 'assets/profile-placeholder.png';"
           />
           <div>

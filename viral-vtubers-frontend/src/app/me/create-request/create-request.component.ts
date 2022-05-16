@@ -70,8 +70,8 @@ export class CreateRequestComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.allTags$ = productService.getTags().tags$;
-    this.categories$ = categoryService.getCategories().categories$;
+    this.allTags$ = this.productService.getTags().tags$;
+    this.categories$ = this.categoryService.getCategories().categories$;
     this.categories$.subscribe((categories) => {
       this.categories = categories;
       if (this.order) {

@@ -16096,6 +16096,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ngx-disqus@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "ngx-disqus@npm:2.4.3"
+  dependencies:
+    tslib: ^1.9.0
+  peerDependencies:
+    "@angular/common": ">=5.0.0"
+    "@angular/core": ">=5.0.0"
+  checksum: 401ca2f5afe498606e76b28b0cc96191305c1be8f611d6f604bba95c84e12790d58282d617606ddb0c5af0e3056b45ed15bc9022a483c466accf3312b0a6c474
+  languageName: node
+  linkType: hard
+
 "ngx-toastr@npm:^14.3.0":
   version: 14.3.0
   resolution: "ngx-toastr@npm:14.3.0"
@@ -21981,6 +21993,7 @@ __metadata:
     mmd-parser: ^1.0.4
     moment: ^2.29.3
     ng-gallery: ^6.0.1
+    ngx-disqus: ^2.4.3
     ngx-toastr: ^14.3.0
     prettier: ^2.6.1
     rxjs: ~7.5.0
