@@ -9,13 +9,14 @@ import { ReadFieldFunction } from '@apollo/client/cache/core/types/common';
 import { from, InMemoryCache } from '@apollo/client/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
+import { environment } from 'src/environments/environment';
 import { createAuthLink } from 'src/graphql/middleware/auth';
 import { errorLink } from 'src/graphql/middleware/error';
 import { ProductPagination } from 'src/schema/type';
 
 import { AuthService } from './shared/auth/auth.service';
 
-const uri = 'http://localhost:8080/graphql'; // <-- add the URL of the GraphQL server here
+const uri = environment.graphql; // <-- add the URL of the GraphQL server here
 
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 

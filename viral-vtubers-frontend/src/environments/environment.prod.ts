@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  graphql: 'https://viral-vtubers-graphql.onrender.com/graphql',
   firebaseConfig: {
     apiKey: 'AIzaSyCodihd_xZa5OordbO8KUZN6HEPVhHUONc',
     authDomain: 'viral-vtubers-6dbdf.firebaseapp.com',

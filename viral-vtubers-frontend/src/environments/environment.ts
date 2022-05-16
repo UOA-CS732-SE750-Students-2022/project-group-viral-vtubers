@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  graphql: 'http://localhost:8080/graphql',
   firebaseConfig: {
     apiKey: 'AIzaSyCodihd_xZa5OordbO8KUZN6HEPVhHUONc',
     authDomain: 'viral-vtubers-6dbdf.firebaseapp.com',
