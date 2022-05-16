@@ -1,10 +1,9 @@
-package com.viralvtubers.database.mongo.population
+package com.viralvtubers.database.mongo
 
 import com.viralvtubers.database.model.Like
 import com.viralvtubers.database.model.Model
 import com.viralvtubers.database.model.Product
 import com.viralvtubers.database.model.User
-import com.viralvtubers.database.mongo.MongoDatabase
 import com.viralvtubers.database.mongo.repositories.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -12,7 +11,7 @@ import org.litote.kmongo.id.serialization.IdKotlinXSerializationModule
 import java.io.File
 import java.util.*
 
-suspend fun main(args: Array<String>) {
+suspend fun main() {
     val mongoDatabase = MongoDatabase()
     val json = Json {
         serializersModule = IdKotlinXSerializationModule
