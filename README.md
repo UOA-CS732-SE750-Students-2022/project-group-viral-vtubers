@@ -93,8 +93,8 @@ Any of these methods will populate the database with data, that makes the applic
 - GraphQL Schema (Backend): [localhost:8080/graphql](http://localhost:8080/graphql)
 
 ### Testing
-- To run all the frontend unit tests run `make frontend-test` in the frontend directory
-- To run all the backend unit tests `make backend-test` in the backend directory
+- To run all the frontend unit tests run `yarn test` in the frontend directory
+- To run all the backend unit tests `mvn verify` in the backend directory
 
 ### Troubleshooting
 
