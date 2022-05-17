@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockRouter } from '../../../../test/router';
+import { mockToastrServiceProvider } from '../../../../test/toastr-service';
+import { mockMailServiceProvider } from '../../services/mail.service.mock';
+import { mockUserService } from '../../services/user.service.mock';
 import { NewMailComponent } from './new-mail.component';
 
 describe('NewMailComponent', () => {
@@ -9,6 +13,12 @@ describe('NewMailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NewMailComponent],
+      providers: [
+        mockMailServiceProvider({}),
+        mockUserService(),
+        mockToastrServiceProvider({}),
+        mockRouter(),
+      ],
     }).compileComponents();
   });
 

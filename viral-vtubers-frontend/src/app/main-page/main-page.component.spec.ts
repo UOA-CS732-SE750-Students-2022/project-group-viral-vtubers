@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { mockRouter } from '../../../test/router';
+import { mockOrderServiceProvider } from '../services/order.service.mock';
+import { mockProductService } from '../services/product.service.mock';
 import { MainPageComponent } from './main-page.component';
 
 describe('MainPageComponent', () => {
@@ -8,9 +11,13 @@ describe('MainPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ]
-    })
-    .compileComponents();
+      declarations: [MainPageComponent],
+      providers: [
+        mockRouter(),
+        mockProductService(),
+        mockOrderServiceProvider({}),
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

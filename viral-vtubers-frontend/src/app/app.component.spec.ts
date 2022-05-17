@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ActivityFeedComponent } from './activity-feed/activity-feed.component';
 import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
-import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { mockAuthService } from './shared/auth/auth.service.mock';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -15,6 +14,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
+      providers: [mockAuthService({})],
     }).compileComponents();
   });
 
@@ -32,16 +32,6 @@ describe('AppComponent', () => {
 
   it('should contain route for /user/:id', () => {
     const expectedRoute = { path: 'user/:id', component: UserProfileComponent };
-    expect(routes).toContain(expectedRoute);
-  });
-
-  it('should contain route for /cart', () => {
-    const expectedRoute = { path: 'cart', component: CartComponent };
-    expect(routes).toContain(expectedRoute);
-  });
-
-  it('should contain route for /feed', () => {
-    const expectedRoute = { path: 'feed', component: ActivityFeedComponent };
     expect(routes).toContain(expectedRoute);
   });
 

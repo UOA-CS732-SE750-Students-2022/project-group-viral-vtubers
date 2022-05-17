@@ -55,8 +55,16 @@ describe('BrowseProductsComponent', () => {
   ].forEach((filters) => {
     it('should populate category filters ' + filters, () => {
       const FILTERS = [
-        { id: 'clothing', name: 'Clothing' },
-        { id: 'all', name: 'All' },
+        {
+          id: 'clothing',
+          name: 'Clothing',
+          subcategories: [{ id: 'none', name: 'name' }],
+        },
+        {
+          id: 'all',
+          name: 'All',
+          subcategories: [],
+        },
       ];
 
       // Check initial state

@@ -1,8 +1,10 @@
 import { Router } from '@angular/router';
+import { from, Observable } from "rxjs";
 
-export const mockRouter = () => ({
+export const mockRouter = (events?: Observable<Event>) => ({
   provide: Router,
   useValue: {
     navigateByUrl: (url: string) => {},
-  } as Router,
+    events: events || from([]),
+  } as unknown as Router,
 });

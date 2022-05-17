@@ -1,23 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 
+import { mockRouter } from '../../../test/router';
+import { mockToastrServiceProvider } from '../../../test/toastr-service';
+import { mockAuthService } from '../shared/auth/auth.service.mock';
 import { MeComponent } from './me.component';
 
 describe('MeComponent', () => {
   let component: MeComponent;
   let fixture: ComponentFixture<MeComponent>;
-  let router: Router;
 
   beforeEach(async () => {
-    router = {
-      url: 'foo@bar',
-      events: {
-        subscribe: () => {},
-      },
-    } as Router;
     await TestBed.configureTestingModule({
       declarations: [MeComponent],
-      providers: [{ provide: Router, useValue: router }],
+      providers: [
+        mockRouter(),
+        mockAuthService(),
+        mockToastrServiceProvider({}),
+      ],
     }).compileComponents();
   });
 
