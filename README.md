@@ -24,17 +24,18 @@
 - [Firebase](https://firebase.google.com/) (used for authentication handling, you will need to create a Firebase project, from there you can create a service account and get a key)
 - [Docker](https://www.docker.com/)
 - Java JDK 17+
-- [GNU Make](https://www.gnu.org/software/make/) >= 4.0
+
 
 
 ### (Optional) Prerequisites
-- Visual Studio Code IDE, used for front-end development
+- Visual Studio Code IDE, used for front-end development with some suggested extensions
   -   [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template)
   -   [Apollo GraphQL](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo)
   -   [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql)
   -   [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
   -   [GraphQL for VSCode](https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode)
 - Intellij IDEA IDE, used for back-end development, and streamlining the running process
+- [GNU Make](https://www.gnu.org/software/make/) >= 4.0, for alternate setup method
 
 
 
@@ -42,7 +43,7 @@
 
 1. Ensure all prerequisites have been installed
 2. Start by cloning the github repository into a suitable location
-3. Create a new firebase project, and get a [firebase api key from a service account](https://firebase.google.com/docs/auth/web/custom-auth)
+3. Create a new firebase project, and get a [firebase api key from a service account](https://firebase.google.com/docs/auth/web/custom-auth) and save it to your computer
 4. Once you have got this key, save it as `firebase-service-account.json`, and place it in `/viral-vtubers-backend/src/main/resources/`
 5. Also please visit the following environment config files at `/viral-vtubers-frontend/src/environments/`, there should be two files `environment.ts` and `environment.prod.ts` for both of these add the firebase config for the firebase project you have setup, and ensure the production value is true for the prod.ts, and false for the normal environment.ts 
 ```javascript 
@@ -60,23 +61,24 @@ export const environment = {
 6. You will also need to manually change some of the values within `/viral-vtubers-backend/src/main/resources/application.conf`, once you have created your own firebase project, all you need to do is replace `jwt.issuer` with your project id subsituted into the value `https://securetoken.google.com/{YOUR PROJECT ID}` and `gcp.bucket` with `{YOUR_PROJECT_ID}.appspot.com`, examples are shown in the following screenshot
   ![image](https://user-images.githubusercontent.com/66896513/168470984-c9bbe339-d667-4d92-8805-df482c417d47.png)
 
+If you have gnu-make, then you can follow these instructions instead [setup with make](https://github.com/UOA-CS732-SE750-Students-2022/project-group-viral-vtubers/wiki/Project-Setup:-Make)
 
 #### Frontend
 
-1. Run `make frontend-install` to get all the project dependencies
-2. Run `make frontend-start` to run a development server to host the frontend
+1. Run `yarn install` to get all the project dependencies
+2. Run `ng serve` to run a development server to host the frontend
 3. Visit `http://localhost:4200/` to visit the frontend site
 
 #### Backend
-
-1. Run `make backend-install` to install all of the backend dependencies
-2. Now we can start up the docker image with the MongoDB database, run `make backend-db-up`
-3. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory), `mvn exec:java`(in backend directory), or `make backend-start` (in the root directory)
-4. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application, this requires having a java runtime environment of at least jdk 17, and then it can just be started from in the ide
+1. Start up the docker image with the MongoDB database, run `docker compose up`
+2. Run `mvn install` to install all of the backend dependencies
+3. Run either `java -jar viral-vtubers-backend-0.0.1-jar-with-dependencies.jar` (in target directory), `mvn exec:java`(in backend directory)
+4. Alternately for the easiest way to run it, is to load the project in intellij, and setup a config for running the main application file, this requires having a java runtime environment of at least jdk 17, and then it can just be started from in the ide
   
 ### Data population
 
-I would strongly recommend that you populate data into the database, this can easily be done, by running `make backend-populate`, if you run this class you will populate the database with data, that makes the application much easier to navigate and see the functionality
+I would strongly recommend that you populate data into the database, this can easily be done, by either running `make backend-populate` in the root, or the other way is if you have the project setup in intellij, you can go into `viral-vtubers-backend/src/main/kotlin/com/viralvtubers/database/mongo/DatabasePopulator.kt` and you can run this main function (click the green arrow) and it will populate the database with data, that makes the application much easier to navigate and see the functionality. (please ensure the database is running when this is done)
+![image](https://user-images.githubusercontent.com/66896513/168790409-708f53d4-7ca4-48d2-971e-02fc58af93e5.png)
 
 
 ### Served Content
