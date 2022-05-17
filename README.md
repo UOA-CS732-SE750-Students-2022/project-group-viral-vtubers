@@ -43,9 +43,6 @@ Note: The backend is hosted on render using the serverless option, as a result i
 - Intellij IDEA IDE, used for back-end development, and streamlining the running process
 - [GNU Make](https://www.gnu.org/software/make/) >= 4.0, for alternate setup method
 
-### Deployed Site
-You can view the site at [https://www.viralvtubers.com/](https://www.viralvtubers.com/), but please note it is serverless, and may take up to ~10 minutes to startup, after a request if it has not had any requests for quite a while. Feel free to check this site out for functionality, as it already has the data loaded. 
-
 ### Setup
 
 1. Ensure all prerequisites have been installed
