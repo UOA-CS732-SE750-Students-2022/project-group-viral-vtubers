@@ -89,3 +89,19 @@ I would strongly recommend that you populate data into the database, this can ea
 - To run all the backend unit tests `make backend-test` in the backend directory
 
 ### Troubleshooting
+
+If you get an error that starts like the following for the backend, it means that the `firebase-service-account.json` is not in the correct location `viral-vtubers-backend/src/main/resources/`
+```
+java.lang.NullPointerException
+        at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:892)
+        at com.google.api.client.util.Preconditions.checkNotNull(Preconditions.java:125)
+        at com.google.auth.oauth2.GoogleCredentials.fromStream(GoogleCredentials.java:151)
+        at com.google.auth.oauth2.GoogleCredentials.fromStream(GoogleCredentials.java:134)
+        at com.viralvtubers.plugins.SecurityKt.configureSecurity(Security.kt:21)
+        at com.viralvtubers.ApplicationKt.module(Application.kt:19)  
+```
+
+If the error is like the following, than you need to check and make sure the docker container with the database has started up correctly
+```
+MongoTimeout Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+```
