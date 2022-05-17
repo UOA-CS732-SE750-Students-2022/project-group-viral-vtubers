@@ -15,6 +15,12 @@
 | [viral-vtubers-backend](https://github.com/UOA-CS732-SE750-Students-2022/project-group-viral-vtubers/tree/main/viral-vtubers-backend) | Contains all the backend code |
 | [viral-vtubers-frontend](https://github.com/UOA-CS732-SE750-Students-2022/project-group-viral-vtubers/tree/main/viral-vtubers-frontend) | Contains all the frontend code|
 
+## Hosting
+
+The project is currently hosted at https://viralvtubers.com . The project is hosted on https://render.com
+
+Note: The backend is hosted on render using the serverless option, as a result it takes approx ~5 min for cold boot. Please expect long boot wait time for the first retrieve of data from the backend.
+
 ## Project Setup
 
 ### Prerequisites
@@ -114,3 +120,6 @@ If the error is like the following, than you need to check and make sure the doc
 ```
 MongoTimeout Timed out after 30000 ms while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
 ```
+## Wiki 
+
+For more information about the project check our [wiki](/wiki)
