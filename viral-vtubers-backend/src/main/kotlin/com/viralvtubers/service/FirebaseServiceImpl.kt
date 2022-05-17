@@ -5,8 +5,7 @@ import com.google.firebase.auth.UserRecord
 import com.viralvtubers.graphql.data.ID
 
 
-class FirebaseServiceImpl : FirebaseService {
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+class FirebaseServiceImpl(private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()) : FirebaseService {
 
     override fun getUser(uid: String): UserRecord {
         return firebaseAuth.getUser(uid)
