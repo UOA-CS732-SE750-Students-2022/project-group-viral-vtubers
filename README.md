@@ -43,7 +43,7 @@ Note: The backend is hosted on render using the serverless option, as a result i
 - Intellij IDEA IDE, used for back-end development, and streamlining the running process
 - [GNU Make](https://www.gnu.org/software/make/) >= 4.0, for alternate setup method
 
-### Setup
+## Setup
 
 1. Ensure all prerequisites have been installed
 2. Start by cloning the github repository into a suitable location
@@ -91,16 +91,16 @@ I would strongly recommend that you populate data into the database, this can ea
 Any of these methods will populate the database with data, that makes the application much easier to navigate and see the functionality. (please ensure the database is running when this is done)
 
 
-### Served Content
+## Served Content
 
 - Frontend: [localhost:4200/](http://localhost:4200/)
 - GraphQL Schema (Backend): [localhost:8080/graphql](http://localhost:8080/graphql)
 
-### Testing
+## Testing
 - To run all the frontend unit tests run `yarn test` in the frontend directory
 - To run all the backend unit tests `mvn verify` in the backend directory
 
-### Troubleshooting
+## Troubleshooting
 
 If you get an error that starts like the following for the backend, it means that the `firebase-service-account.json` is not in the correct location `viral-vtubers-backend/src/main/resources/`
 ```
