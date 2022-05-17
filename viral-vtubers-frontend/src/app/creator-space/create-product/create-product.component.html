@@ -8,7 +8,7 @@
         <p>Product Title</p>
         <input
           class="title-input"
-          placeholder="Loli Gyaru"
+          placeholder="Please enter a name"
           #displayName
           [(ngModel)]="title"
         />
@@ -176,14 +176,14 @@
         <p>Product variant name</p>
         <input
           class="name-input"
-          placeholder="VRM + VROID - Shogun/Genshin Impact"
+          placeholder="Variant name"
           (change)="changeVariantName(i, $event)"
           [value]="variant.name"
         />
         <p>File type(s) included (e.g ".vrm .vroid")</p>
         <input
           class="vrm-input"
-          placeholder="Loli Gyaru"
+          placeholder="File type"
           [value]="variant.fileTypes[0]"
           (change)="changeVariantFileType(i, $event)"
         />
