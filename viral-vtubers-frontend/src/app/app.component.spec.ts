@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
-import { CartComponent } from './cart/cart.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { mockAuthService } from './shared/auth/auth.service.mock';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -33,11 +32,6 @@ describe('AppComponent', () => {
 
   it('should contain route for /user/:id', () => {
     const expectedRoute = { path: 'user/:id', component: UserProfileComponent };
-    expect(routes).toContain(expectedRoute);
-  });
-
-  it('should contain route for /cart', () => {
-    const expectedRoute = { path: 'cart', component: CartComponent };
     expect(routes).toContain(expectedRoute);
   });
 
