@@ -77,8 +77,14 @@ If you have gnu-make, then you can follow these instructions instead [setup with
   
 ### Data population
 
-I would strongly recommend that you populate data into the database, this can easily be done, by either running `make backend-populate` in the root, or the other way is if you have the project setup in intellij, you can go into `viral-vtubers-backend/src/main/kotlin/com/viralvtubers/database/mongo/DatabasePopulator.kt` and you can run this main function (click the green arrow) and it will populate the database with data, that makes the application much easier to navigate and see the functionality. (please ensure the database is running when this is done)
+I would strongly recommend that you populate data into the database, this can easily be done, by either running: 
+- `make backend-populate` in the root, or 
+- `mvn -Dmain.class=com.viralvtubers.database.mongo.DatabasePopulatorKt exec:java` in `/viral-vtubers-backend/`, or
+- if you have the project setup in intellij, you can go into `viral-vtubers-backend/src/main/kotlin/com/viralvtubers/database/mongo/DatabasePopulator.kt` and you can run this main function (click the green arrow) 
+  
 ![image](https://user-images.githubusercontent.com/66896513/168790409-708f53d4-7ca4-48d2-971e-02fc58af93e5.png)
+  
+Any of these methods will populate the database with data, that makes the application much easier to navigate and see the functionality. (please ensure the database is running when this is done)
 
 
 ### Served Content
